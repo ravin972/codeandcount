@@ -145,7 +145,7 @@ const InfiniteScrollerWithMouseFollower: React.FC = () => {
       </div>
       <div
         ref={mouseFollowerRef}
-        className="fixed top-0 left-0 w-5 h-5 bg-white rounded-full pointer-events-none z-[9999] hidden md:block"
+        className="fixed top-0 left-0 w-5 h-5 bg-white rounded-full pointer-events-none z-[9999] hidden md:block opacity-75"
         style={{ mixBlendMode: 'difference' }}
       ></div>
     </section>
