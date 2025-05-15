@@ -18,7 +18,7 @@ export function BackToTopButton({ className }: { className?: string }) {
       type="button"
       onClick={scrollToTop}
       className={cn(
-        'p-3 rounded-lg shadow-lg flex items-center space-x-2 transition-all duration-300 ease-in-out',
+        'p-3 rounded-full shadow-lg flex items-center space-x-2 transition-all duration-300 ease-in-out', // Changed rounded-lg to rounded-full
         'bg-neutral-800 text-neutral-200 hover:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-neutral-900',
         className // Positioning classes will be passed from parent
       )}
