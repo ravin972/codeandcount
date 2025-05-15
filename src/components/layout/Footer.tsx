@@ -76,7 +76,7 @@ export function Footer() {
         {/* Social Media Bar - Absolute Positioned */}
         <div
           className={cn(
-            "absolute top-16 md:top-24 left-6 z-10 flex-col space-y-3",
+            "absolute top-16 md:top-2 left-6 z-10 flex-col space-y-3", // Changed md:top-24 to md:top-2
             "hidden md:flex"
           )}
         >
@@ -96,7 +96,7 @@ export function Footer() {
         </div>
 
         {/* Back To Top Button - Absolute Positioned */}
-        <BackToTopButton className="absolute top-16 md:top-24 right-6 z-10 hidden md:flex" />
+        <BackToTopButton className="absolute top-16 md:top-2 right-6 z-10 hidden md:flex" /> {/* Changed md:top-24 to md:top-2 */}
 
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
