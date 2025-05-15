@@ -79,14 +79,14 @@ export default function WorkPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {portfolioItems.map((item) => (
-              <Card key={item.id} className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col group">
+              <Card key={item.id} className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out flex flex-col group hover:-translate-y-1">
                 <div className="relative overflow-hidden">
                   <Image 
                     src={item.imageUrl} 
                     alt={item.title} 
                     width={600} 
                     height={450} 
-                    className="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="w-full h-72 object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
                     data-ai-hint={item.dataAiHint} 
                   />
                 </div>

@@ -98,7 +98,7 @@ export default function HomePage() {
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service) => (
-              <Card key={service.name} className="shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <Card key={service.name} className="shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out hover:-translate-y-1">
                 <CardHeader>
                   {service.icon}
                   <CardTitle className="text-2xl font-semibold">{service.name}</CardTitle>
@@ -118,7 +118,7 @@ export default function HomePage() {
           <h2 className="text-3xl font-bold text-center text-foreground mb-10">Trusted by Industry Leaders</h2>
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
             {clientLogos.map((logo) => (
-              <div key={logo.name} title={logo.name} className="opacity-70 hover:opacity-100 transition-opacity">
+              <div key={logo.name} title={logo.name} className="opacity-70 hover:opacity-100 transition-opacity duration-300 ease-in-out transform hover:scale-105">
                 <Image src={logo.src} alt={logo.name} width={150} height={60} data-ai-hint={logo.dataAiHint} />
               </div>
             ))}
@@ -135,8 +135,8 @@ export default function HomePage() {
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {caseStudies.map((study) => (
-              <Card key={study.id} className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col">
-                <Image src={study.imageUrl} alt={study.title} width={600} height={400} className="w-full h-64 object-cover" data-ai-hint={study.dataAiHint} />
+              <Card key={study.id} className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out flex flex-col group hover:-translate-y-1">
+                <Image src={study.imageUrl} alt={study.title} width={600} height={400} className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out" data-ai-hint={study.dataAiHint} />
                 <CardHeader>
                   <CardTitle className="text-2xl font-semibold">{study.title}</CardTitle>
                   <CardDescription>{study.category}</CardDescription>
@@ -173,7 +173,7 @@ export default function HomePage() {
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {testimonials.map((testimonial) => (
-              <Card key={testimonial.name} className="shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <Card key={testimonial.name} className="shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out hover:-translate-y-1">
                 <CardContent className="pt-6">
                   <div className="flex items-start space-x-4 mb-4">
                     <Avatar className="h-16 w-16">

@@ -48,7 +48,7 @@ export default function AboutPage() {
                 alt="CodeAndCount.com Team Working" 
                 width={600} 
                 height={400} 
-                className="rounded-lg shadow-xl"
+                className="rounded-lg shadow-xl transition-transform duration-300 ease-in-out hover:scale-105"
                 data-ai-hint="team collaboration office"
               />
             </div>
@@ -62,7 +62,7 @@ export default function AboutPage() {
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Our Core Values</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             {values.map((value) => (
-              <Card key={value.title} className="text-center shadow-lg hover:shadow-xl transition-shadow">
+              <Card key={value.title} className="text-center shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out hover:-translate-y-1">
                 <CardHeader>
                   <div className="mx-auto bg-primary/10 p-3 rounded-full w-fit mb-4">
                     {value.icon}
@@ -84,8 +84,8 @@ export default function AboutPage() {
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Meet Our Experts</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {teamMembers.map((member) => (
-              <Card key={member.name} className="text-center shadow-lg hover:shadow-xl transition-shadow p-6">
-                <Avatar className="w-24 h-24 mx-auto mb-4 border-4 border-primary">
+              <Card key={member.name} className="text-center shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out p-6 hover:-translate-y-1">
+                <Avatar className="w-24 h-24 mx-auto mb-4 border-4 border-primary transform transition-transform duration-300 ease-in-out hover:scale-110">
                   <AvatarImage src={member.avatarSrc} alt={member.name} data-ai-hint={member.dataAiHint} />
                   <AvatarFallback>{member.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
                 </Avatar>
