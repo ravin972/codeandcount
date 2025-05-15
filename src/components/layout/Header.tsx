@@ -4,14 +4,14 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, Briefcase, Users, Rss, Mail, Sparkles, ArrowUpRight } from 'lucide-react'; // Added ArrowUpRight
-import { usePathname, useRouter } from 'next/navigation'; // Added useRouter
+import { Menu, Briefcase, Users, Rss, Mail, Sparkles, ArrowUpRight } from 'lucide-react';
+import { usePathname, useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import React from 'react';
 import { ThemeToggle } from '@/components/ThemeToggle';
 
 const navLinks = [
-  { href: '/services', label: 'Services', icon: <Briefcase className="h-5 w-5" />, badgeText: '13' }, // Added badgeText
+  { href: '/services', label: 'Services', icon: <Briefcase className="h-5 w-5" />, badgeText: '13' },
   { href: '/work', label: 'Work', icon: <Sparkles className="h-5 w-5" /> },
   { href: '/about', label: 'About', icon: <Users className="h-5 w-5" /> },
   { href: '/blog', label: 'Blog', icon: <Rss className="h-5 w-5" /> },
@@ -20,18 +20,19 @@ const navLinks = [
 
 const NAVBAR_VISIBILITY_OFFSET = 60; 
 const SCROLL_DELTA_THRESHOLD = 5;    
-const SERVICES_SECTION_HIDE_THRESHOLD = 500; 
+const DEFAULT_HIDE_THRESHOLD = 500; // Renamed from SERVICES_SECTION_HIDE_THRESHOLD
 const CONDENSE_THRESHOLD = 100; 
 
 export function Header() {
   const pathname = usePathname();
-  const router = useRouter(); // Added router
+  const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   
   const [isNavVisible, setIsNavVisible] = React.useState(true);
   const [isCondensed, setIsCondensed] = React.useState(false);
   const lastScrollYRef = React.useRef(0);
 
+  // Refs to hold the current state to avoid stale closures in event listeners
   const isNavVisibleRef = React.useRef(isNavVisible);
   const isCondensedRef = React.useRef(isCondensed);
 
@@ -44,73 +45,97 @@ export function Header() {
   }, [isCondensed]);
 
   React.useEffect(() => {
+    const getDynamicHideThreshold = () => {
+      if (pathname === '/') {
+        const trustedSection = document.getElementById('trusted-by-leaders');
+        if (trustedSection && typeof window !== 'undefined') {
+          const sectionTop = trustedSection.offsetTop;
+          const sectionHeight = trustedSection.offsetHeight;
+          // Calculate scrollY for when the center of the section aligns with the center of the viewport
+          const calculatedThreshold = sectionTop + (sectionHeight / 2) - (window.innerHeight / 2);
+          return Math.max(NAVBAR_VISIBILITY_OFFSET + 50, calculatedThreshold); // Ensure it's not too small
+        }
+      }
+      return DEFAULT_HIDE_THRESHOLD;
+    };
+    
     const handleScroll = () => {
       if (typeof window === 'undefined') return;
 
       const currentScrollY = window.scrollY;
       const previousScrollY = lastScrollYRef.current;
-      
-      const scrollDirection = (currentScrollY > previousScrollY) ? 'down' : 'up';
+      const scrollDirection = currentScrollY > previousScrollY ? 'down' : 'up';
+      const scrollDelta = Math.abs(currentScrollY - previousScrollY);
 
-      if (Math.abs(currentScrollY - previousScrollY) < SCROLL_DELTA_THRESHOLD && currentScrollY > NAVBAR_VISIBILITY_OFFSET) {
-        // Not enough scroll
-      }
+      const hideThreshold = getDynamicHideThreshold();
 
-      let shouldBeVisibleState: boolean;
-      let shouldBeCondensedState: boolean;
-
-      if (currentScrollY > SERVICES_SECTION_HIDE_THRESHOLD) {
-        shouldBeVisibleState = false; 
-      } else if (currentScrollY <= NAVBAR_VISIBILITY_OFFSET) {
-        shouldBeVisibleState = true;  
+      let shouldBeVisible: boolean;
+      if (currentScrollY <= NAVBAR_VISIBILITY_OFFSET) {
+        shouldBeVisible = true; // Always show at the very top
+      } else if (currentScrollY > hideThreshold) {
+        shouldBeVisible = false; // Hide if scrolled past the determined threshold
       } else {
-        shouldBeVisibleState = (scrollDirection === 'up');
+        // Between top offset and hide threshold
+        if (scrollDelta < SCROLL_DELTA_THRESHOLD) {
+          shouldBeVisible = isNavVisibleRef.current; // Not enough scroll, maintain current state
+        } else {
+          shouldBeVisible = (scrollDirection === 'up'); // Show on scroll up, hide on scroll down
+        }
       }
       
-      if (shouldBeVisibleState && currentScrollY > CONDENSE_THRESHOLD && currentScrollY < SERVICES_SECTION_HIDE_THRESHOLD) {
-        shouldBeCondensedState = true;
+      let shouldBeCondensed: boolean;
+      if (shouldBeVisible && currentScrollY > CONDENSE_THRESHOLD && currentScrollY < hideThreshold) {
+        shouldBeCondensed = true;
       } else {
-        shouldBeCondensedState = false;
+        shouldBeCondensed = false;
       }
 
-      if (shouldBeVisibleState !== isNavVisibleRef.current) {
-        setIsNavVisible(shouldBeVisibleState);
+      if (shouldBeVisible !== isNavVisibleRef.current) {
+        setIsNavVisible(shouldBeVisible);
       }
-      if (shouldBeCondensedState !== isCondensedRef.current) {
-        setIsCondensed(shouldBeCondensedState);
+      if (shouldBeCondensed !== isCondensedRef.current) {
+        setIsCondensed(shouldBeCondensed);
       }
 
       lastScrollYRef.current = currentScrollY;
     };
     
-    if (typeof window !== 'undefined') {
+    const setInitialState = () => {
+        if (typeof window === 'undefined') return;
         const initialScrollY = window.scrollY;
         lastScrollYRef.current = initialScrollY;
-        
+
+        const hideThreshold = getDynamicHideThreshold();
+
         let initialVisibleState: boolean;
-        if (initialScrollY > SERVICES_SECTION_HIDE_THRESHOLD) {
-            initialVisibleState = false;
-        } else if (initialScrollY <= NAVBAR_VISIBILITY_OFFSET) {
+        if (initialScrollY <= NAVBAR_VISIBILITY_OFFSET) {
             initialVisibleState = true;
+        } else if (initialScrollY > hideThreshold) {
+            initialVisibleState = false;
         } else {
-            initialVisibleState = true; 
+            initialVisibleState = true; // Default to visible in the dynamic zone on load
         }
         setIsNavVisible(initialVisibleState);
 
         let initialCondensedState: boolean;
-        if (initialVisibleState && initialScrollY > CONDENSE_THRESHOLD && initialScrollY < SERVICES_SECTION_HIDE_THRESHOLD) {
+        if (initialVisibleState && initialScrollY > CONDENSE_THRESHOLD && initialScrollY < hideThreshold) {
             initialCondensedState = true;
         } else {
             initialCondensedState = false;
         }
         setIsCondensed(initialCondensedState);
-    }
+    };
+
+    setInitialState(); // Call on mount and pathname change
 
     window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('resize', setInitialState, { passive: true }); // Recalculate on resize
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', setInitialState);
     };
-  }, []); 
+  }, [pathname]); 
 
   return (
     <header
@@ -139,7 +164,7 @@ export function Header() {
                 key={link.href}
                 href={link.href}
                 className={cn(
-                  "text-sm font-medium transition-all duration-300 ease-in-out hover:text-primary rounded-md relative", // Added relative for badge
+                  "text-sm font-medium transition-all duration-300 ease-in-out hover:text-primary rounded-md relative",
                   isCondensed ? "px-2 py-1" : "px-2.5 py-1.5",
                   pathname === link.href ? "text-primary bg-primary/10" : "text-foreground/80 hover:bg-accent/50"
                 )}
@@ -148,8 +173,8 @@ export function Header() {
                 {link.badgeText && (
                   <span className={cn(
                     "absolute bg-primary text-primary-foreground text-[10px] font-bold rounded-full leading-none flex items-center justify-center",
-                    "h-4 w-4 min-w-[1rem]", // Consistent size for badge
-                    isCondensed ? "-top-1 -right-1.5" : "-top-1.5 -right-2.5" // Adjusted positioning
+                    "h-4 w-4 min-w-[1rem]", 
+                    isCondensed ? "-top-1 -right-1.5" : "-top-1.5 -right-2.5" 
                   )}>
                     {link.badgeText}
                   </span>
@@ -163,11 +188,11 @@ export function Header() {
             isCondensed ? "space-x-2 lg:space-x-2" : "space-x-3 lg:space-x-4"
             )}>
             <Button
-              variant="default" // Ensure it picks up primary color
+              variant="default" 
               size="sm" 
               className={cn(
-                "rounded-full relative", // Added relative for icon positioning
-                isCondensed ? "pl-3 pr-8 py-1 text-xs h-8" : "pl-4 pr-10 h-9" // Adjusted padding for icon
+                "rounded-full relative", 
+                isCondensed ? "pl-3 pr-8 py-1 text-xs h-8" : "pl-4 pr-10 h-9" 
               )}
               onClick={() => router.push('/contact#start-project')}
             >
@@ -222,7 +247,6 @@ export function Header() {
                     className="w-full rounded-full" 
                     onClick={() => {
                       setIsMobileMenuOpen(false);
-                      // router.push('/contact#start-project') // Already an <Link>
                     }}
                   >
                     <Link href="/contact#start-project" className="flex items-center justify-center">

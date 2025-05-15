@@ -113,7 +113,7 @@ export default function HomePage() {
       </section>
 
       {/* Client Logos Section */}
-      <section className="py-16">
+      <section id="trusted-by-leaders" className="py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center text-foreground mb-10">Trusted by Industry Leaders</h2>
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
