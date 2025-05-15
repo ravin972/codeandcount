@@ -55,7 +55,7 @@ const testimonials = [
     title: 'CEO, Alpha Corp',
     avatar: 'https://placehold.co/100x100.png?text=JD',
     dataAiHint: 'person portrait',
-    quote: "Apex Agency transformed our online presence. Their team is professional, creative, and delivered outstanding results. We couldn't be happier!",
+    quote: "CodeAndCount.com transformed our online presence. Their team is professional, creative, and delivered outstanding results. We couldn't be happier!",
     videoUrl: 'https://vimeo.com/placeholder', // Placeholder
   },
   {
@@ -63,7 +63,7 @@ const testimonials = [
     title: 'Founder, Beta Solutions',
     avatar: 'https://placehold.co/100x100.png?text=JS',
     dataAiHint: 'man smiling',
-    quote: 'Working with Apex was a game-changer. Their insights into branding and web development are unparalleled. Highly recommended!',
+    quote: 'Working with CodeAndCount.com was a game-changer. Their insights into branding and web development are unparalleled. Highly recommended!',
     videoUrl: 'https://vimeo.com/placeholder', // Placeholder
   },
 ];
@@ -78,7 +78,7 @@ export default function HomePage() {
             Crafting <span className="text-primary">Digital Excellence</span>.
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-10">
-            Apex Agency is a design and branding powerhouse, dedicated to building impactful digital experiences that drive growth and elevate brands across industries.
+            CodeAndCount.com is a web and app development powerhouse, dedicated to building impactful digital experiences that drive growth and elevate brands across industries.
           </p>
           <Button size="lg" asChild>
             <Link href="/contact#start-project">
@@ -205,7 +205,7 @@ export default function HomePage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl font-bold mb-6">Ready to Elevate Your Brand?</h2>
           <p className="text-lg md:text-xl max-w-2xl mx-auto mb-10">
-            Let's discuss how Apex Agency can help you achieve your business goals.
+            Let's discuss how CodeAndCount.com can help you achieve your business goals.
             We partner with clients of all sizes, across diverse industries, to deliver exceptional results.
           </p>
           <Button size="lg" variant="secondary" asChild>

@@ -39,8 +39,8 @@ export default function ContactPage() {
                   </div>
                   <div className="ml-4">
                     <h3 className="text-lg font-semibold text-foreground">Email Us</h3>
-                    <a href="mailto:hello@apexagency.example" className="text-muted-foreground hover:text-primary transition-colors">
-                      hello@apexagency.example
+                    <a href="mailto:hello@codeandcount.com" className="text-muted-foreground hover:text-primary transition-colors">
+                      hello@codeandcount.com
                     </a>
                   </div>
                 </div>

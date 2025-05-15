@@ -18,33 +18,33 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: 'Apex Agency - Web Design & Branding',
-    template: '%s | Apex Agency',
+    default: 'CodeAndCount.com - Web & App Development',
+    template: '%s | CodeAndCount.com',
   },
-  description: 'Apex Agency is a sophisticated web design and branding agency specializing in Craft CMS, Shopify, and SEO.',
+  description: 'CodeAndCount.com is a modern web and app development agency, creating powerful digital solutions.',
   openGraph: {
-    title: 'Apex Agency - Web Design & Branding',
-    description: 'Sophisticated web design and branding solutions.',
+    title: 'CodeAndCount.com - Web & App Development',
+    description: 'Modern web and app development solutions.',
     type: 'website',
     locale: 'en_US',
-    url: 'https://apexagency.example.com', // Replace with actual URL
-    siteName: 'Apex Agency',
+    url: 'https://codeandcount.com.example', // Replace with actual URL
+    siteName: 'CodeAndCount.com',
     images: [
       {
-        url: 'https://placehold.co/1200x630.png?text=Apex+Agency', // Replace with actual OG image
+        url: 'https://placehold.co/1200x630.png?text=CodeAndCount', // Replace with actual OG image
         width: 1200,
         height: 630,
-        alt: 'Apex Agency',
+        alt: 'CodeAndCount.com',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Apex Agency - Web Design & Branding',
-    description: 'Sophisticated web design and branding solutions.',
-    // site: '@apexagency', // Replace with actual Twitter handle
+    title: 'CodeAndCount.com - Web & App Development',
+    description: 'Modern web and app development solutions.',
+    // site: '@codeandcount', // Replace with actual Twitter handle
     // creator: '@creatorhandle', // Replace with actual creator handle
-    images: ['https://placehold.co/1200x630.png?text=Apex+Agency'], // Replace
+    images: ['https://placehold.co/1200x630.png?text=CodeAndCount'], // Replace
   },
   // PWA related meta tags (basic)
   manifest: '/manifest.json', // Create this file later if full PWA is needed

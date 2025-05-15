@@ -22,7 +22,7 @@ export default function AboutPage() {
     <div className="bg-background text-foreground">
       <header className="py-16 md:py-24 text-center bg-secondary">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-4">About Apex Agency</h1>
+          <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-4">About CodeAndCount.com</h1>
           <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
             We are a passionate team of designers, developers, and strategists dedicated to crafting exceptional digital experiences that drive results.
           </p>
@@ -36,7 +36,7 @@ export default function AboutPage() {
             <div>
               <h2 className="text-3xl md:text-4xl font-bold mb-6">Our Story</h2>
               <p className="text-lg text-muted-foreground mb-4">
-                Founded with a vision to merge creativity with technology, Apex Agency has grown into a leading digital firm. We believe that great design and smart strategy are key to unlocking business potential. Our journey is one of continuous learning, innovation, and a relentless pursuit of excellence.
+                Founded with a vision to merge creativity with technology, CodeAndCount.com has grown into a leading digital firm. We believe that great design and smart strategy are key to unlocking business potential. Our journey is one of continuous learning, innovation, and a relentless pursuit of excellence.
               </p>
               <p className="text-lg text-muted-foreground">
                 We partner with businesses of all sizes, from ambitious startups to established enterprises, helping them navigate the digital landscape and achieve their goals. Our personal approach ensures we understand your unique challenges and aspirations, delivering tailored solutions that make a real impact.
@@ -45,7 +45,7 @@ export default function AboutPage() {
             <div>
               <Image 
                 src="https://placehold.co/600x400.png" 
-                alt="Apex Agency Team Working" 
+                alt="CodeAndCount.com Team Working" 
                 width={600} 
                 height={400} 
                 className="rounded-lg shadow-xl"

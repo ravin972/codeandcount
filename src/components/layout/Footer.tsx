@@ -18,8 +18,8 @@ export function Footer() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <Link href="/" className="text-2xl font-bold text-primary hover:text-primary/90 transition-colors">
-              Apex<span className="text-foreground">Agency</span>
+            <Link href="/" className="text-2xl font-bold text-foreground hover:opacity-80 transition-opacity">
+              C<span className="text-primary">2</span>
             </Link>
             <p className="mt-2 text-sm">
               Crafting digital experiences that inspire and convert.
@@ -55,12 +55,12 @@ export function Footer() {
               123 Design St, Web City, 00000
             </p>
             <p className="text-sm">
-              <a href="mailto:hello@apexagency.example" className="hover:text-primary transition-colors">hello@apexagency.example</a>
+              <a href="mailto:hello@codeandcount.com" className="hover:text-primary transition-colors">hello@codeandcount.com</a>
             </p>
           </div>
         </div>
         <div className="mt-12 border-t border-border pt-8 text-center text-sm">
-          <p>&copy; {currentYear} Apex Agency. All rights reserved.</p>
+          <p>&copy; {currentYear} CodeAndCount.com. All rights reserved.</p>
         </div>
       </div>
     </footer>

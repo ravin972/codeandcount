@@ -25,8 +25,8 @@ export function Header() {
   return (
     <header className="bg-background/80 backdrop-blur-md sticky top-0 z-50 border-b">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex h-20 items-center justify-between">
-        <Link href="/" className="text-3xl font-bold text-primary hover:text-primary/90 transition-colors">
-          Apex<span className="text-foreground">Agency</span>
+        <Link href="/" className="text-3xl font-bold text-foreground hover:opacity-80 transition-opacity">
+          C<span className="text-primary">2</span>
         </Link>
 
         <nav className="hidden md:flex items-center space-x-6">
@@ -60,8 +60,8 @@ export function Header() {
             </SheetTrigger>
             <SheetContent side="right" className="w-full max-w-xs bg-background p-6">
               <div className="flex flex-col space-y-6">
-                <Link href="/" className="text-2xl font-bold text-primary self-start" onClick={() => setIsMobileMenuOpen(false)}>
-                  Apex<span className="text-foreground">Agency</span>
+                <Link href="/" className="text-2xl font-bold text-foreground self-start hover:opacity-80 transition-opacity" onClick={() => setIsMobileMenuOpen(false)}>
+                  C<span className="text-primary">2</span>
                 </Link>
                 <nav className="flex flex-col space-y-4">
                   {navLinks.map((link) => (

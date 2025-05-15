@@ -63,9 +63,9 @@ export default function BlogPage() {
     <div className="bg-background text-foreground">
       <header className="py-16 md:py-24 text-center bg-secondary">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-4">Apex Insights</h1>
+          <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-4">CodeAndCount Insights</h1>
           <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
-            Stay updated with the latest trends, tips, and thoughts from the Apex Agency team.
+            Stay updated with the latest trends, tips, and thoughts from the CodeAndCount.com team.
           </p>
         </div>
       </header>
