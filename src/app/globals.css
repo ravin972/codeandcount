@@ -85,4 +85,14 @@
   body {
     @apply bg-background text-foreground font-sans; /* Use --font-geist-sans from layout */
   }
+  
+  /* Global Text Selection Styles */
+  ::selection {
+    background-color: #D2FF70; /* Your specified background color */
+    color: #000000; /* Your specified text color */
+  }
+  ::-moz-selection { /* Firefox */
+    background-color: #D2FF70;
+    color: #000000;
+  }
 }
