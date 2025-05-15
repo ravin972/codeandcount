@@ -202,11 +202,11 @@ export default function HomePage() {
       </section>
 
       {/* SEO Optimizer Tool Section */}
-      <section id="seo-tool" className="py-16 md:py-20 bg-secondary">
+      <section id="seo-tool" className="py-16 md:py-20 bg-foreground text-background dark:bg-secondary dark:text-secondary-foreground">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <Sparkles className="h-12 w-12 text-primary mx-auto mb-6" />
           <h2 className="text-4xl font-bold mb-6">Boost Your SEO with Our AI Optimizer</h2>
-          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
+          <p className="text-lg md:text-xl text-background/80 dark:text-muted-foreground max-w-2xl mx-auto mb-10">
             Unlock the power of AI to rewrite your content, incorporate strategic keywords, and climb search engine rankings. Try our free SEO Optimizer tool today!
           </p>
           <Button size="lg" asChild>
