@@ -116,7 +116,15 @@ export default function HomePage() {
       {/* Services Section */}
       <section id="services" className="py-16 bg-secondary">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-center mb-4">Our Core Services</h2>
+          <div className="relative inline-grid place-items-center [transform-style:preserve-3d] [perspective:1000px] w-full text-center mb-4">
+            <div
+              aria-hidden="true"
+              className="col-start-1 row-start-1 text-4xl font-bold tracking-tight text-primary blur-lg opacity-60 brightness-150 [transform:translateZ(-20px)_scale(1.05)] pointer-events-none"
+            >
+              Our Core Services
+            </div>
+            <h2 className="col-start-1 row-start-1 relative z-[1] text-4xl font-bold text-center">Our Core Services</h2>
+          </div>
           <p className="text-xl text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
             We offer a comprehensive suite of services to bring your vision to life.
           </p>
@@ -153,7 +161,15 @@ export default function HomePage() {
       {/* Case Studies Section */}
       <section id="work" className="py-16 bg-secondary">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-center mb-4">Featured Work</h2>
+          <div className="relative inline-grid place-items-center [transform-style:preserve-3d] [perspective:1000px] w-full text-center mb-4">
+            <div
+              aria-hidden="true"
+              className="col-start-1 row-start-1 text-4xl font-bold tracking-tight text-primary blur-lg opacity-60 brightness-150 [transform:translateZ(-20px)_scale(1.05)] pointer-events-none"
+            >
+              Featured Work
+            </div>
+            <h2 className="col-start-1 row-start-1 relative z-[1] text-4xl font-bold text-center">Featured Work</h2>
+          </div>
           <p className="text-xl text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
             Explore how we've helped businesses like yours succeed.
           </p>
@@ -229,7 +245,15 @@ export default function HomePage() {
       <section id="seo-tool" className="py-16 md:py-20 bg-foreground text-background dark:bg-secondary dark:text-secondary-foreground">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <Sparkles className="h-12 w-12 text-primary mx-auto mb-6" />
-          <h2 className="text-4xl font-bold mb-6">Boost Your SEO with Our AI Optimizer</h2>
+          <div className="relative inline-grid place-items-center [transform-style:preserve-3d] [perspective:1000px] w-full text-center mb-6">
+            <div
+              aria-hidden="true"
+              className="col-start-1 row-start-1 text-4xl font-bold tracking-tight text-primary blur-lg opacity-60 brightness-150 [transform:translateZ(-20px)_scale(1.05)] pointer-events-none"
+            >
+              Boost Your SEO with Our AI Optimizer
+            </div>
+            <h2 className="col-start-1 row-start-1 relative z-[1] text-4xl font-bold">Boost Your SEO with Our AI Optimizer</h2>
+          </div>
           <p className="text-lg md:text-xl text-background/80 dark:text-muted-foreground max-w-2xl mx-auto mb-10">
             Unlock the power of AI to rewrite your content, incorporate strategic keywords, and climb search engine rankings. Try our free SEO Optimizer tool today!
           </p>
