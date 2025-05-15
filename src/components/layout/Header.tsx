@@ -32,10 +32,10 @@ export function Header() {
     if (typeof window !== 'undefined') {
       lastScrollYRef.current = window.scrollY;
       const initialScrollY = window.scrollY;
-      // Initially, show if near top or effectively "scrolling up" from a conceptual previous state of 0
-      const shouldBeVisible = initialScrollY <= NAVBAR_VISIBILITY_OFFSET || initialScrollY < lastScrollYRef.current;
-      setIsNavVisible(shouldBeVisible);
-      isNavVisibleRef.current = shouldBeVisible;
+      // Initially, show if near top
+      const shouldBeVisibleInitially = initialScrollY <= NAVBAR_VISIBILITY_OFFSET;
+      setIsNavVisible(shouldBeVisibleInitially);
+      isNavVisibleRef.current = shouldBeVisibleInitially;
     }
 
     const handleScroll = () => {
@@ -51,9 +51,9 @@ export function Header() {
       let shouldShow;
       if (currentScrollY <= NAVBAR_VISIBILITY_OFFSET) { // If at top or scrolled to top
         shouldShow = true;
-      } else if (currentScrollY < previousScrollY) { // Scrolling UP
+      } else if (currentScrollY < previousScrollY) { // Scrolling UP - SHOW
         shouldShow = true;
-      } else { // Scrolling DOWN (currentScrollY > previousScrollY)
+      } else { // Scrolling DOWN (currentScrollY > previousScrollY) - HIDE
         shouldShow = false;
       }
       
