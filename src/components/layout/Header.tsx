@@ -8,6 +8,7 @@ import { Menu, Briefcase, Users, Rss, Mail, Sparkles } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import React from 'react';
+import { ThemeToggle } from '@/components/ThemeToggle';
 
 const navLinks = [
   { href: '/services', label: 'Services', icon: <Briefcase className="h-5 w-5" /> },
@@ -29,28 +30,29 @@ export function Header() {
           C<span className="text-primary">2</span>
         </Link>
 
-        <nav className="hidden md:flex items-center space-x-6">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className={cn(
-                "text-sm font-medium transition-colors hover:text-primary",
-                pathname === link.href ? "text-primary" : "text-foreground/70"
-              )}
-            >
-              {link.label}
-            </Link>
-          ))}
-        </nav>
-
-        <div className="hidden md:block">
+        <div className="hidden md:flex items-center space-x-4">
+          <nav className="flex items-center space-x-6">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={cn(
+                  "text-sm font-medium transition-colors hover:text-primary",
+                  pathname === link.href ? "text-primary" : "text-foreground/70"
+                )}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
           <Button asChild>
             <Link href="/contact#start-project">Start a project</Link>
           </Button>
+          <ThemeToggle />
         </div>
 
-        <div className="md:hidden">
+        <div className="md:hidden flex items-center space-x-2">
+          <ThemeToggle />
           <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
             <SheetTrigger asChild>
               <Button variant="outline" size="icon">

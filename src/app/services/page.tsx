@@ -62,45 +62,43 @@ const servicesDetails = [
 
 export default function ServicesPage() {
   return (
-    <div className="dark"> {/* This activates .dark theme variables from globals.css */}
-      <div className="bg-background text-foreground min-h-screen">
-        <header className="py-16 md:py-24 text-center">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-4">Our Expertise</h1>
-            <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
-              Delivering innovative solutions to power your digital success. We combine strategy, design, and technology to create exceptional outcomes.
-            </p>
-          </div>
-        </header>
+    <div className="bg-background text-foreground min-h-screen">
+      <header className="py-16 md:py-24 text-center">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-4">Our Expertise</h1>
+          <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
+            Delivering innovative solutions to power your digital success. We combine strategy, design, and technology to create exceptional outcomes.
+          </p>
+        </div>
+      </header>
 
-        <section className="pb-16 md:pb-24">
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-8">
-              {servicesDetails.map((service) => (
-                <Card key={service.name} className="bg-card text-card-foreground shadow-xl flex flex-col md:flex-row overflow-hidden transition-transform hover:scale-[1.02] duration-300">
-                  <div className="md:w-1/3 p-6 flex flex-col items-center justify-center bg-secondary/30 md:border-r border-border">
-                    {service.icon}
-                    <CardTitle className="text-2xl font-semibold text-center">{service.name}</CardTitle>
-                  </div>
-                  <div className="md:w-2/3 p-6">
-                    <CardContent className="pt-0">
-                      <p className="text-muted-foreground mb-6">{service.description}</p>
-                      <ul className="space-y-2">
-                        {service.points.map((point, index) => (
-                          <li key={index} className="flex items-center">
-                            <CheckCircle className="h-5 w-5 text-primary mr-2 flex-shrink-0" />
-                            <span>{point}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </CardContent>
-                  </div>
-                </Card>
-              ))}
-            </div>
+      <section className="pb-16 md:pb-24">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-8">
+            {servicesDetails.map((service) => (
+              <Card key={service.name} className="bg-card text-card-foreground shadow-xl flex flex-col md:flex-row overflow-hidden transition-transform hover:scale-[1.02] duration-300">
+                <div className="md:w-1/3 p-6 flex flex-col items-center justify-center bg-secondary/30 md:border-r border-border">
+                  {service.icon}
+                  <CardTitle className="text-2xl font-semibold text-center">{service.name}</CardTitle>
+                </div>
+                <div className="md:w-2/3 p-6">
+                  <CardContent className="pt-0">
+                    <p className="text-muted-foreground mb-6">{service.description}</p>
+                    <ul className="space-y-2">
+                      {service.points.map((point, index) => (
+                        <li key={index} className="flex items-center">
+                          <CheckCircle className="h-5 w-5 text-primary mr-2 flex-shrink-0" />
+                          <span>{point}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                </div>
+              </Card>
+            ))}
           </div>
-        </section>
-      </div>
+        </div>
+      </section>
     </div>
   );
 }
