@@ -50,7 +50,7 @@ export const metadata: Metadata = {
   },
   // PWA related meta tags (basic)
   manifest: '/manifest.json', // Create this file later if full PWA is needed
-  themeColor: '#008080', // Teal accent
+  themeColor: '#D1FE71', // New primary color
   // Add more meta tags as needed: icons, apple-touch-icon etc.
 };
 
