@@ -79,51 +79,90 @@ const InfiniteScrollerWithMouseFollower: React.FC = () => {
 
 
   useEffect(() => {
-    // Row 1: Right-to-Left Scroll
     const container1 = scrollerContainerRef1.current;
     const el1_1 = textRef1_1.current;
     const el1_2 = textRef1_2.current;
 
-    if (container1 && el1_1 && el1_2) {
-        // Ensure elements are rendered and have width before starting animation
-        gsap.delayedCall(0.1, () => {
-            const elWidth1 = el1_1.offsetWidth;
-            if (elWidth1 === 0) return; // Avoid division by zero or incorrect animation
-
-            gsap.set(el1_2, { x: elWidth1 });
-            gsap.to(container1, {
-                x: -elWidth1, // Move the container left by the width of one span
-                duration: elWidth1 / 70, // Adjust speed by changing the divisor
-                ease: 'none',
-                repeat: -1, // Infinite repeat for seamless loop
-            });
-        });
-    }
-
-    // Row 2: Left-to-Right Scroll (Faster)
     const container2 = scrollerContainerRef2.current;
     const el2_1 = textRef2_1.current;
     const el2_2 = textRef2_2.current;
 
-    if (container2 && el2_1 && el2_2) {
-        // Ensure elements are rendered and have width before starting animation
-        gsap.delayedCall(0.1, () => {
-            const elWidth2 = el2_1.offsetWidth;
-            if (elWidth2 === 0) return; // Avoid division by zero or incorrect animation
+    let anim1: gsap.core.Tween | null = null;
+    let anim2: gsap.core.Tween | null = null;
 
-            // For left-to-right, the second element starts to the left of the first
-            gsap.set(el2_1, { x: 0 }); 
-            gsap.set(el2_2, { x: -elWidth2 }); // Position the second copy before the first
-            
-            gsap.to(container2, {
-                x: elWidth2, // Scroll to the right by one text width
-                duration: elWidth2 / 50, // Faster speed (smaller divisor)
-                ease: 'none',
-                repeat: -1, // Infinite repeat for seamless loop
-            });
+    const setupRow1Animation = () => {
+      if (container1 && el1_1 && el1_2) {
+        gsap.killTweensOf(container1); // Kill previous animation
+        gsap.set(container1, { x: 0 }); // Reset container position
+        gsap.set(el1_1, { x: 0 });    // Reset span position for accurate width measurement
+        gsap.set(el1_2, { x: 0 });
+
+        const elWidth1 = el1_1.offsetWidth;
+        if (elWidth1 === 0) {
+          console.warn("GSAP Scroller: Row 1 text width is 0. Animation skipped.");
+          return;
+        }
+        
+        gsap.set(el1_2, { x: elWidth1 });
+        anim1 = gsap.to(container1, {
+            x: -elWidth1,
+            duration: elWidth1 / 70,
+            ease: 'none',
+            repeat: -1,
         });
-    }
-  }, [scrollText]); // Re-run if scrollText changes, though it's constant here
+      }
+    };
+
+    const setupRow2Animation = () => {
+      if (container2 && el2_1 && el2_2) {
+        gsap.killTweensOf(container2); // Kill previous animation
+        gsap.set(container2, { x: 0 }); // Reset container position
+        gsap.set(el2_1, { x: 0 });    // Reset span position for accurate width measurement
+        gsap.set(el2_2, { x: 0 });
+
+        const elWidth2 = el2_1.offsetWidth;
+        if (elWidth2 === 0) {
+          console.warn("GSAP Scroller: Row 2 text width is 0. Animation skipped.");
+          return;
+        }
+            
+        gsap.set(el2_2, { x: -elWidth2 }); 
+        anim2 = gsap.to(container2, {
+            x: elWidth2,
+            duration: elWidth2 / 50,
+            ease: 'none',
+            repeat: -1,
+        });
+      }
+    };
+    
+    const initOrReinitAnimations = () => {
+      // Use a small delay to allow layout stabilization after font load or resize
+      gsap.delayedCall(0.1, () => {
+        setupRow1Animation();
+        setupRow2Animation();
+      });
+    };
+
+    // Initial setup after fonts are ready (or fallback)
+    document.fonts.ready.then(() => {
+        initOrReinitAnimations();
+    }).catch(error => {
+        console.error("Font loading error or timeout for scroller, initializing anyway:", error);
+        initOrReinitAnimations(); 
+    });
+
+    window.addEventListener('resize', initOrReinitAnimations);
+
+    return () => {
+        window.removeEventListener('resize', initOrReinitAnimations);
+        anim1?.kill();
+        anim2?.kill();
+        // Fallback cleanup if refs are still valid
+        if (container1) gsap.killTweensOf(container1);
+        if (container2) gsap.killTweensOf(container2);
+    };
+  }, [scrollText]); // scrollText is a dependency, if it changes, animations re-initialize
 
   return (
     <section 
@@ -140,7 +179,7 @@ const InfiniteScrollerWithMouseFollower: React.FC = () => {
         </span>
       </div>
       {/* Row 2: Left-to-Right Scroll */}
-      <div className="relative flex whitespace-nowrap mt-2 md:mt-4" ref={scrollerContainerRef2}> {/* Added margin for separation */}
+      <div className="relative flex whitespace-nowrap mt-2 md:mt-4" ref={scrollerContainerRef2}>
         <span ref={textRef2_1} className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-bold uppercase pr-2">
           {scrollText}
         </span>
