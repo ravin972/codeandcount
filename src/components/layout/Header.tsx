@@ -110,14 +110,17 @@ export function Header() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50" 
+        "sticky top-0 z-50 transition-all duration-300 ease-in-out"
       )}
     >
-      <div className="p-3 md:p-4"> 
+      <div className={cn(
+        "transition-all duration-300 ease-in-out",
+        isCondensed ? "p-2 md:p-2" : "p-3 md:p-4"
+      )}> 
         <div
           className={cn(
-            "container mx-auto flex h-16 items-center justify-between rounded-full px-4 py-2 shadow-xl backdrop-blur-lg bg-background/70", 
-            "sm:px-6"
+            "container mx-auto flex items-center justify-between rounded-full shadow-xl backdrop-blur-lg bg-background/70 transition-all duration-300 ease-in-out", 
+            isCondensed ? "h-14 px-3 py-1 sm:px-4" : "h-16 px-4 py-2 sm:px-6"
           )}
         >
           <Link href="/" className="text-3xl font-bold text-foreground hover:opacity-80 transition-opacity" onClick={() => setIsMobileMenuOpen(false)}>
@@ -142,7 +145,7 @@ export function Header() {
                           href={link.href}
                           className={cn(
                             "text-sm font-medium transition-all duration-300 ease-in-out hover:text-primary rounded-md relative",
-                            isCondensed ? "px-2 py-1" : "px-2.5 py-1.5",
+                            isCondensed ? "px-2 py-1 text-xs" : "px-2.5 py-1.5", // Adjusted padding and text size
                             pathname === link.href || pathname.startsWith(link.href + '/') ? "text-primary bg-primary/10" : "text-foreground/80 hover:bg-accent/50"
                           )}
                         >
@@ -164,7 +167,7 @@ export function Header() {
                       onMouseLeave={handleServicesMenuLeave}
                       className="w-[650px] bg-background shadow-2xl rounded-xl p-6 mt-2 border-border/50"
                       align="center"
-                      sideOffset={isCondensed ? 8 : 10}
+                      sideOffset={isCondensed ? 6 : 10} // Adjusted sideOffset
                     >
                       <div className="grid grid-cols-2 gap-x-8">
                         <div className="flex flex-col space-y-1">
@@ -215,7 +218,7 @@ export function Header() {
                   href={link.href}
                   className={cn(
                     "text-sm font-medium transition-all duration-300 ease-in-out hover:text-primary rounded-md relative",
-                    isCondensed ? "px-2 py-1" : "px-2.5 py-1.5",
+                    isCondensed ? "px-2 py-1 text-xs" : "px-2.5 py-1.5", // Adjusted padding and text size
                     pathname === link.href || pathname.startsWith(link.href + '/') ? "text-primary bg-primary/10" : "text-foreground/80 hover:bg-accent/50"
                   )}
                 >
@@ -240,7 +243,7 @@ export function Header() {
             )}>
             <Button
               variant="default" 
-              size="sm" 
+              size={isCondensed ? "sm" : "default"} // Dynamically change size
               className={cn(
                 "rounded-full relative", 
                 isCondensed ? "pl-3 pr-8 py-1 text-xs h-8" : "pl-4 pr-10 h-9" 
