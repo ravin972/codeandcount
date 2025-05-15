@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { CalendarDays, ArrowRight } from 'lucide-react';
+import { CalendarDays, ArrowRight, Newspaper } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 
 const blogPosts = [
@@ -63,7 +63,10 @@ export default function BlogPage() {
     <div className="bg-background text-foreground">
       <header className="py-16 md:py-24 text-center bg-secondary">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-4">CodeAndCount Insights</h1>
+          <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-4 flex items-center justify-center">
+            <Newspaper className="h-12 w-12 mr-4 text-primary" />
+            CodeAndCount Insights
+          </h1>
           <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
             Stay updated with the latest trends, tips, and thoughts from the CodeAndCount.com team.
           </p>

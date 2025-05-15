@@ -1,6 +1,6 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { CheckCircle, Palette, Laptop, Search, Puzzle, ShoppingCart, Calculator } from "lucide-react";
+import { CheckCircle, Palette, Laptop, Search, Puzzle, ShoppingCart, Calculator, Wrench } from "lucide-react";
 
 const servicesDetails = [
   { 
@@ -76,7 +76,10 @@ export default function ServicesPage() {
     <div className="bg-background text-foreground">
       <header className="py-16 md:py-24 text-center">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-4">Our Expertise</h1>
+          <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-4 flex items-center justify-center">
+            <Wrench className="h-12 w-12 mr-4 text-primary" />
+            Our Expertise
+          </h1>
           <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
             Delivering innovative solutions to power your digital success. We combine strategy, design, and technology to create exceptional outcomes.
           </p>

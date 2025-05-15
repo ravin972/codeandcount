@@ -1,6 +1,6 @@
 
 import Image from 'next/image';
-import { Award, Users, Zap, Target } from 'lucide-react';
+import { Award, Users, Zap, Target, Info } from 'lucide-react';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
@@ -22,7 +22,10 @@ export default function AboutPage() {
     <div className="bg-background text-foreground">
       <header className="py-16 md:py-24 text-center bg-secondary">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-4">About CodeAndCount.com</h1>
+          <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-4 flex items-center justify-center">
+            <Info className="h-12 w-12 mr-4 text-primary" />
+            About CodeAndCount.com
+          </h1>
           <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
             We are a passionate team of designers, developers, and strategists dedicated to crafting exceptional digital experiences that drive results.
           </p>

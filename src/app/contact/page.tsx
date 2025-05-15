@@ -1,13 +1,16 @@
 
 import { ContactForm } from '@/components/forms/ContactForm';
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, Phone, MapPin, MailQuestion } from 'lucide-react';
 
 export default function ContactPage() {
   return (
     <div className="bg-background text-foreground">
       <header className="py-16 md:py-24 text-center bg-secondary">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-4">Get in Touch</h1>
+          <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-4 flex items-center justify-center">
+            <MailQuestion className="h-12 w-12 mr-4 text-primary" />
+            Get in Touch
+          </h1>
           <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
             We're excited to hear about your project. Let's create something amazing together.
           </p>
