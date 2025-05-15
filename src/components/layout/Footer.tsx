@@ -23,8 +23,12 @@ const footerSections = {
     title: "Learn",
     links: [
       { text: "About", href: "/about" },
+      { text: "Culture", href: "/placeholder-learn/culture" },
+      { text: "Testimonials", href: "/placeholder-learn/testimonials" },
+      { text: "Processes", href: "/placeholder-learn/processes" },
+      { text: "FAQs", href: "/faq" },
+      { text: "Branding FAQs", href: "/placeholder-learn/branding-faqs" },
       { text: "Blog", href: "/blog" },
-      { text: "FAQs", href: "/faq" }, 
     ]
   },
   explore: {
@@ -33,6 +37,9 @@ const footerSections = {
       { text: "Home", href: "/" },
       { text: "Work", href: "/work", new: true },
       { text: "Services", href: "/services" },
+      { text: "Careers", href: "/placeholder-explore/careers" },
+      { text: "Sectors", href: "/placeholder-explore/sectors" },
+      { text: "Hex Test", href: "/placeholder-explore/hex-test" },
       { text: "Contact", href: "/contact" },
     ]
   },
@@ -45,11 +52,11 @@ const footerSections = {
       "Web City, WC 00000",
       "United States"
     ],
-    otherLink: { text: "///your.unique.link", href: "#" } 
+    otherLink: { text: "///topped.little.pirate", href: "#" }
   }
 };
 
-const foundingYear = 2010; 
+const foundingYear = 2010;
 
 const socialMediaLinks = [
   { name: 'LinkedIn', href: 'https://linkedin.com/company/example', icon: <Linkedin className="h-5 w-5" /> },
@@ -70,7 +77,7 @@ export function Footer() {
         <div
           className={cn(
             "absolute top-16 md:top-24 left-6 z-10 flex-col space-y-3",
-            "hidden md:flex" // Keep hidden on small screens
+            "hidden md:flex"
           )}
         >
           {socialMediaLinks.map((social) => (
@@ -175,7 +182,7 @@ export function Footer() {
                   </div>
                 </li>
                 <li className="flex items-center">
-                  <ExternalLinkIcon className="h-5 w-5 mr-3 text-primary flex-shrink-0" /> 
+                  <ExternalLinkIcon className="h-5 w-5 mr-3 text-primary flex-shrink-0" />
                   <a href={footerSections.getInTouch.otherLink.href} className="hover:text-primary transition-colors duration-200">
                     {footerSections.getInTouch.otherLink.text}
                   </a>
