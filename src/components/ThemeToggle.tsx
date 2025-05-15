@@ -24,7 +24,7 @@ export function ThemeToggle() {
   // A disabled button matching the final size with a default icon is a good approach.
   if (!mounted) {
     return (
-      <Button variant="outline" size="icon" disabled aria-label="Loading theme toggle">
+      <Button variant="outline" size="icon" disabled aria-label="Loading theme toggle" className="rounded-full">
         <Sun className="h-[1.2rem] w-[1.2rem]" /> {/* Placeholder icon */}
       </Button>
     );
@@ -36,6 +36,7 @@ export function ThemeToggle() {
       size="icon"
       onClick={toggleTheme}
       aria-label={`Switch to ${resolvedTheme === 'dark' ? 'light' : 'dark'} mode`}
+      className="rounded-full"
     >
       <Sun
         className={cn(

@@ -31,9 +31,9 @@ export function Header() {
   React.useEffect(() => {
     if (typeof window !== 'undefined') {
       lastScrollYRef.current = window.scrollY;
-      // Initial visibility check
       const initialScrollY = window.scrollY;
-      const shouldBeVisible = initialScrollY <= NAVBAR_VISIBILITY_OFFSET || initialScrollY > lastScrollYRef.current;
+      // Initially, show if near top or effectively "scrolling up" from a conceptual previous state of 0
+      const shouldBeVisible = initialScrollY <= NAVBAR_VISIBILITY_OFFSET || initialScrollY < lastScrollYRef.current;
       setIsNavVisible(shouldBeVisible);
       isNavVisibleRef.current = shouldBeVisible;
     }
@@ -49,11 +49,11 @@ export function Header() {
       }
 
       let shouldShow;
-      if (currentScrollY <= NAVBAR_VISIBILITY_OFFSET) {
-        shouldShow = true; // Always show if near top
-      } else if (currentScrollY > previousScrollY) { // Scrolling down
-        shouldShow = true; 
-      } else { // Scrolling up
+      if (currentScrollY <= NAVBAR_VISIBILITY_OFFSET) { // If at top or scrolled to top
+        shouldShow = true;
+      } else if (currentScrollY < previousScrollY) { // Scrolling UP
+        shouldShow = true;
+      } else { // Scrolling DOWN (currentScrollY > previousScrollY)
         shouldShow = false;
       }
       
@@ -84,36 +84,41 @@ export function Header() {
                      bg-background/70 px-4 py-2 shadow-xl backdrop-blur-lg 
                      sm:px-6" // The actual glassmorphic bar
         >
+          {/* Logo - Left */}
           <Link href="/" className="text-3xl font-bold text-foreground hover:opacity-80 transition-opacity" onClick={() => setIsMobileMenuOpen(false)}>
             C<span className="text-primary">2</span>
           </Link>
 
+          {/* Navigation Links - Center (Desktop) */}
+          <nav className="hidden md:flex flex-grow justify-center items-center space-x-1 lg:space-x-2">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className={cn(
+                  "text-sm font-medium transition-colors hover:text-primary px-2.5 py-1.5 rounded-md",
+                  pathname === link.href ? "text-primary bg-primary/10" : "text-foreground/80 hover:bg-accent/50"
+                )}
+              >
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+
+          {/* CTA and Theme Toggle - Right (Desktop) */}
           <div className="hidden md:flex items-center space-x-3 lg:space-x-4">
-            <nav className="flex items-center space-x-1 lg:space-x-2">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={cn(
-                    "text-sm font-medium transition-colors hover:text-primary px-2.5 py-1.5 rounded-md",
-                    pathname === link.href ? "text-primary bg-primary/10" : "text-foreground/80 hover:bg-accent/50"
-                  )}
-                >
-                  {link.label}
-                </Link>
-              ))}
-            </nav>
             <Button asChild size="sm" className="rounded-full">
               <Link href="/contact#start-project">Start a project</Link>
             </Button>
             <ThemeToggle />
           </div>
 
+          {/* Mobile Menu Trigger & Theme Toggle */}
           <div className="md:hidden flex items-center space-x-2">
             <ThemeToggle />
             <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
               <SheetTrigger asChild>
-                <Button variant="outline" size="icon" className="border-transparent hover:border-border">
+                <Button variant="outline" size="icon" className="border-transparent hover:border-border rounded-full">
                   <Menu className="h-6 w-6" />
                   <span className="sr-only">Open menu</span>
                 </Button>
