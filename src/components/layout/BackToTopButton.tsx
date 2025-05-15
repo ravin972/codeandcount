@@ -29,4 +29,3 @@ export function BackToTopButton({ className }: { className?: string }) {
     </button>
   );
 }
-
