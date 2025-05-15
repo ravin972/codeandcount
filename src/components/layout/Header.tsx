@@ -18,7 +18,7 @@ const navLinks = [
   { href: '/contact', label: 'Contact', icon: <Mail className="h-5 w-5" /> },
 ];
 
-const CONDENSE_THRESHOLD = 100; 
+const CONDENSE_THRESHOLD = 10; // Changed from 100 to 10
 
 export function Header() {
   const pathname = usePathname();
@@ -69,10 +69,10 @@ export function Header() {
         setIsCondensed(initialCondensedState);
     };
 
-    setInitialState(); // Call on mount and pathname change
+    setInitialState(); 
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', setInitialState, { passive: true }); // Recalculate on resize
+    window.addEventListener('resize', setInitialState, { passive: true }); 
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
@@ -83,7 +83,7 @@ export function Header() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50" // Removed transition-transform and translate-y classes
+        "sticky top-0 z-50" 
       )}
     >
       <div className="p-3 md:p-4"> 
