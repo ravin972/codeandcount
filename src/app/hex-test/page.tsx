@@ -167,7 +167,7 @@ export default function HexTestPage() {
     };
   }, [isGameOver, gameStarted, timeLeft, correctHexIndex, gridColors]);
 
-  const handleHexagonClick = (index: number) => {
+  const handleCardClick = (index: number) => {
     if (isGameOver) return;
 
     if (index === correctHexIndex) {
@@ -184,7 +184,7 @@ export default function HexTestPage() {
     }
   };
   
-  const hexagonSize = 100 / getGridDimensions() - (getGridDimensions() > 3 ? 2 : 1) ;
+  const hexagonSize = 100 / getGridDimensions() - (getGridDimensions() > 3 ? 2 : 1) ; // This variable is not used currently
 
   return (
     <div className="bg-background text-foreground min-h-screen py-8 flex flex-col items-center">
@@ -211,7 +211,7 @@ export default function HexTestPage() {
               )}
                {!gameStarted && (
                 <CardDescription className="text-md text-muted-foreground pt-2">
-                 Find the hex with the slightly different shade. Each level gets harder (more hexes / smaller colour differences).
+                 Find the card with the slightly different shade. Each level gets harder (more cards / smaller colour differences).
                 </CardDescription>
               )}
               
@@ -273,22 +273,21 @@ export default function HexTestPage() {
                 {gridColors.map((color, index) => (
                   <div
                     key={index}
-                    onClick={() => handleHexagonClick(index)}
-                    className="flex items-center justify-center cursor-pointer transition-all duration-150 ease-in-out hover:opacity-70 rounded-md" // Removed hover:scale-105
+                    onClick={() => handleCardClick(index)}
+                    className="flex items-center justify-center cursor-pointer transition-all duration-150 ease-in-out hover:opacity-70 rounded-md"
                     style={{
                       width: '100%', 
                       paddingBottom: '100%', // Maintain aspect ratio for the clickable area
                       backgroundColor: color,
-                      clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
-                      // transform: 'scale(0.95)', // Removed scale for tighter grid
+                      // clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)', // Removed clip-path
                     }}
-                    aria-label={`Hexagon ${index + 1}`}
+                    aria-label={`Card ${index + 1}`}
                   />
                 ))}
               </div>
             </CardContent>
             {/* <CardFooter className="text-center p-4">
-              <p className="text-xs text-muted-foreground w-full">Find the hex with the slightly different shade!</p>
+              <p className="text-xs text-muted-foreground w-full">Find the card with the slightly different shade!</p>
             </CardFooter> */}
           </Card>
         )}
@@ -296,3 +295,4 @@ export default function HexTestPage() {
     </div>
   );
 }
+
