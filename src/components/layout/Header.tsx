@@ -80,7 +80,7 @@ export function Header() {
     >
       <div className="p-3 md:p-4"> {/* Padding around the glassmorphic bar */}
         <div
-          className="container mx-auto flex h-16 items-center justify-between rounded-xl 
+          className="container mx-auto flex h-16 items-center justify-between rounded-full 
                      bg-background/70 px-4 py-2 shadow-xl backdrop-blur-lg 
                      sm:px-6" // The actual glassmorphic bar
         >
