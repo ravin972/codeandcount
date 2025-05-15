@@ -3,9 +3,9 @@
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
-import { Palette, Timer, Target, RefreshCw, Skull, Award, Eye, Info } from 'lucide-react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Progress } from '@/components/ui/progress';
+import { Eye, Play, RefreshCw, Gamepad2, AlertTriangle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const INITIAL_TIME_PER_LEVEL = 10; // seconds
@@ -62,6 +62,7 @@ export default function HexTestPage() {
   const [score, setScore] = useState(0);
   const [level, setLevel] = useState(1);
   const [timeLeft, setTimeLeft] = useState(INITIAL_TIME_PER_LEVEL);
+  const [timeForCurrentLevel, setTimeForCurrentLevel] = useState(INITIAL_TIME_PER_LEVEL);
   const [gridColors, setGridColors] = useState<string[]>([]);
   const [correctHexIndex, setCorrectHexIndex] = useState<number | null>(null);
   const [isGameOver, setIsGameOver] = useState(true);
@@ -70,8 +71,8 @@ export default function HexTestPage() {
   const [revealCorrectHex, setRevealCorrectHex] = useState<string | null>(null);
   const [revealChosenHex, setRevealChosenHex] = useState<string | null>(null);
 
-
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const messageTimerRef = useRef<NodeJS.Timeout | null>(null);
 
   const getGridDimensions = useCallback(() => {
     const dimension = Math.min(MAX_GRID_DIMENSION, Math.floor(level / 2) + 2);
@@ -79,9 +80,11 @@ export default function HexTestPage() {
   }, [level]);
 
   const setupNewLevel = useCallback(() => {
+    if (messageTimerRef.current) clearTimeout(messageTimerRef.current);
     setMessage(null);
     setRevealCorrectHex(null);
     setRevealChosenHex(null);
+
     const dimension = getGridDimensions();
     const totalHexagons = dimension * dimension;
     
@@ -94,26 +97,29 @@ export default function HexTestPage() {
     
     setGridColors(newGridColors);
     setCorrectHexIndex(newCorrectHexIndex);
-    setTimeLeft(INITIAL_TIME_PER_LEVEL + Math.max(0, 5 - Math.floor(level/3)));
+    const currentTimeForLevel = Math.max(3, INITIAL_TIME_PER_LEVEL - Math.floor(level / 4));
+    setTimeForCurrentLevel(currentTimeForLevel);
+    setTimeLeft(currentTimeForLevel);
   }, [level, getGridDimensions]);
 
+  const showTemporaryMessage = (text: string, type: 'success' | 'error' | 'info', duration: number = 1500) => {
+    setMessage({ text, type });
+    if (messageTimerRef.current) clearTimeout(messageTimerRef.current);
+    messageTimerRef.current = setTimeout(() => {
+      setMessage(null);
+    }, duration);
+  };
+  
   const startGame = useCallback(() => {
     setScore(0);
-    setLevel(1);
     setIsGameOver(false);
     setGameStarted(true);
+    if (messageTimerRef.current) clearTimeout(messageTimerRef.current);
     setMessage(null);
     setRevealCorrectHex(null);
     setRevealChosenHex(null);
-    // setupNewLevel() will be called by useEffect hook listening to 'level' if it's the first game
-    // or if 'level' changes. If 'level' is already 1, it won't re-trigger setupNewLevel.
-    // So, explicitly call it here for "Play Again" scenarios where level might reset to 1.
-    if (level === 1) {
-      setupNewLevel(); // Ensures level 1 setup on "Play Again"
-    } else {
-      setLevel(1); // This will trigger useEffect for setup
-    }
-  }, [setupNewLevel, level]); // Add level to dependencies
+    setLevel(1); // This will trigger useEffect for setupNewLevel
+  }, []);
 
   useEffect(() => {
     if (!isGameOver && gameStarted) {
@@ -125,163 +131,165 @@ export default function HexTestPage() {
     if (timerRef.current) {
       clearInterval(timerRef.current);
     }
-    if (!isGameOver && gameStarted) {
+    if (!isGameOver && gameStarted && timeLeft > 0) {
       timerRef.current = setInterval(() => {
         setTimeLeft((prevTime) => {
-          if (prevTime <= 1) {
+          if (prevTime <= 0.1) { // Check against a small fraction to handle floating point issues
             clearInterval(timerRef.current!);
             setIsGameOver(true);
             if (correctHexIndex !== null && gridColors.length > 0) {
               setRevealCorrectHex(gridColors[correctHexIndex]);
             }
-            setRevealChosenHex(null); // No specific choice when time runs out
-            setMessage({text: "Time's up! Game Over.", type: 'error'});
+            setRevealChosenHex(null); 
+            showTemporaryMessage("TIME'S UP!", 'error', 3000);
             return 0;
           }
-          return prevTime - 1;
+          return prevTime - 0.1; // Update more frequently for smoother progress bar
         });
-      }, 1000);
+      }, 100); // Interval of 100ms
+    } else if (timeLeft <= 0 && !isGameOver && gameStarted) {
+        // This condition handles the case where timeLeft hits 0 before interval clears
+        clearInterval(timerRef.current!);
+        setIsGameOver(true);
+        if (correctHexIndex !== null && gridColors.length > 0) {
+          setRevealCorrectHex(gridColors[correctHexIndex]);
+        }
+        setRevealChosenHex(null);
+        showTemporaryMessage("TIME'S UP!", 'error', 3000);
     }
     return () => {
       if (timerRef.current) {
         clearInterval(timerRef.current);
       }
+      if (messageTimerRef.current) {
+        clearTimeout(messageTimerRef.current);
+      }
     };
-  }, [isGameOver, gameStarted, correctHexIndex, gridColors]);
+  }, [isGameOver, gameStarted, timeLeft, correctHexIndex, gridColors]);
 
   const handleHexagonClick = (index: number) => {
     if (isGameOver) return;
 
     if (index === correctHexIndex) {
       setScore((s) => s + level * 10);
-      setLevel((l) => l + 1);
-      setMessage({text: "Correct! Next level.", type: 'success'});
+      showTemporaryMessage("CORRECT!", 'success');
+      setLevel((l) => l + 1); // This will trigger setupNewLevel via useEffect
     } else {
       setIsGameOver(true);
       if (correctHexIndex !== null) {
         setRevealCorrectHex(gridColors[correctHexIndex]);
       }
       setRevealChosenHex(gridColors[index]);
-      setMessage({text: "Not quite! Game Over.", type: 'error'});
+      showTemporaryMessage("INCORRECT!", 'error', 3000);
     }
   };
   
   const hexagonSize = 100 / getGridDimensions() - (getGridDimensions() > 3 ? 2 : 1) ;
 
   return (
-    <div className="bg-background text-foreground min-h-screen py-8">
-      <header className="text-center mb-12">
+    <div className="bg-background text-foreground min-h-screen py-8 flex flex-col items-center">
+      <header className="text-center mb-8 md:mb-12 w-full max-w-3xl px-4">
         <h1 className="text-4xl md:text-5xl font-bold tracking-tight flex items-center justify-center">
           <Eye className="h-10 w-10 mr-3 text-primary" />
-          Hex Color Challenge
+          HEX TEST
         </h1>
-        <p className="text-lg text-muted-foreground mt-2">Test your color perception skills!</p>
+        <p className="text-lg text-muted-foreground mt-2">Test your colour vision</p>
       </header>
 
-      <main className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-2xl">
+      <main className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-md w-full">
         {!gameStarted || isGameOver ? (
           <Card className="shadow-xl text-center">
             <CardHeader>
               <CardTitle className="text-3xl">
-                {gameStarted && isGameOver ? <Skull className="inline h-8 w-8 mr-2 text-destructive" /> : <Palette className="inline h-8 w-8 mr-2 text-primary" />} 
-                {gameStarted && isGameOver ? "Game Over!" : "Ready to Play?"}
+                {gameStarted && isGameOver ? <AlertTriangle className="inline h-8 w-8 mr-2 text-destructive" /> : <Gamepad2 className="inline h-8 w-8 mr-2 text-primary" />} 
+                {gameStarted && isGameOver ? "GAME OVER" : "HEX TEST"}
               </CardTitle>
-              {!gameStarted && (
-                <CardDescription className="text-md text-muted-foreground pt-2">
-                  Test your ability to distinguish subtle differences in hexadecimal color codes.
-                  Click the hexagon that has a slightly different shade.
-                  Each level increases difficulty by having more hexagons or making the color difference subtler.
-                  Good luck!
+              {gameStarted && isGameOver && (
+                <CardDescription className="text-xl mt-2">
+                  Score: {score} &nbsp;&nbsp;|&nbsp;&nbsp; Level: {level -1 > 0 ? level -1 : 1}
                 </CardDescription>
               )}
-              {gameStarted && isGameOver && (
-                <>
-                  <CardDescription className="text-xl mt-2">Your final score: {score}</CardDescription>
-                  {message && <p className={cn("mt-2 font-semibold", message.type === 'error' ? 'text-destructive' : 'text-green-600')}>{message.text}</p>}
-                  
+               {!gameStarted && (
+                <CardDescription className="text-md text-muted-foreground pt-2">
+                 Find the hex with the slightly different shade. Each level gets harder (more hexes / smaller colour differences).
+                </CardDescription>
+              )}
+              
+              {(gameStarted && isGameOver && (revealCorrectHex || revealChosenHex)) && (
+                <div className="mt-4 text-sm text-left mx-auto max-w-xs p-3 bg-muted/50 rounded-md">
                   {revealCorrectHex && (
-                    <div className="mt-4 text-sm text-left mx-auto max-w-xs p-3 bg-muted/50 rounded-md">
-                      <p className="flex items-center justify-between">
-                        <span>Correct:</span>
-                        <span className="flex items-center">
-                          <span style={{ backgroundColor: revealCorrectHex, width: '16px', height: '16px', display: 'inline-block', marginRight: '8px', border: '1px solid #888', borderRadius: '3px' }}></span>
-                          <code>{revealCorrectHex}</code>
-                        </span>
-                      </p>
-                      {revealChosenHex && (
-                        <p className="flex items-center justify-between mt-1">
-                          <span>You Picked:</span>
-                          <span className="flex items-center">
-                            <span style={{ backgroundColor: revealChosenHex, width: '16px', height: '16px', display: 'inline-block', marginRight: '8px', border: '1px solid #888', borderRadius: '3px' }}></span>
-                            <code>{revealChosenHex}</code>
-                          </span>
-                        </p>
-                      )}
-                    </div>
+                    <p className="flex items-center justify-between">
+                      <span>Correct:</span>
+                      <span className="flex items-center">
+                        <span style={{ backgroundColor: revealCorrectHex, width: '16px', height: '16px', display: 'inline-block', marginRight: '8px', border: '1px solid var(--border)', borderRadius: '3px' }}></span>
+                        <code>{revealCorrectHex}</code>
+                      </span>
+                    </p>
                   )}
-                  <p className="text-xs text-muted-foreground mt-4 pt-2 border-t border-border">
-                    <Info size={14} className="inline mr-1" /> Tip: Higher levels feature more hexagons or smaller color differences. Keep practicing!
-                  </p>
-                </>
+                  {revealChosenHex && (
+                    <p className="flex items-center justify-between mt-1">
+                      <span>You Picked:</span>
+                      <span className="flex items-center">
+                        <span style={{ backgroundColor: revealChosenHex, width: '16px', height: '16px', display: 'inline-block', marginRight: '8px', border: '1px solid var(--border)', borderRadius: '3px' }}></span>
+                        <code>{revealChosenHex}</code>
+                      </span>
+                    </p>
+                  )}
+                </div>
               )}
             </CardHeader>
             <CardContent>
               <Button size="lg" onClick={startGame} className="w-full md:w-auto">
-                <RefreshCw className="mr-2 h-5 w-5" />
-                {gameStarted && isGameOver ? "Play Again" : "Start Game"}
+                {gameStarted && isGameOver ? <RefreshCw className="mr-2 h-5 w-5" /> : <Play className="mr-2 h-5 w-5" />}
+                {gameStarted && isGameOver ? "PLAY AGAIN" : "PLAY"}
               </Button>
             </CardContent>
           </Card>
         ) : (
           <Card className="shadow-xl">
-            <CardHeader>
-              <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mb-4">
-                <Badge variant="outline" className="text-lg p-2">
-                  <Award className="mr-2 h-5 w-5 text-yellow-500" /> Score: {score}
-                </Badge>
-                <Badge variant="outline" className="text-lg p-2">
-                  <Target className="mr-2 h-5 w-5 text-blue-500" /> Level: {level}
-                </Badge>
-                <Badge variant={timeLeft <=5 && timeLeft > 0 ? "destructive" : "outline"} className="text-lg p-2">
-                  <Timer className="mr-2 h-5 w-5" /> Time: {timeLeft}s
-                </Badge>
+            <CardHeader className="p-4">
+              <div className="flex justify-between items-center gap-4 mb-3">
+                <span className="text-sm font-semibold text-muted-foreground">LEVEL {level}</span>
+                <span className="text-sm font-semibold text-muted-foreground">SCORE {score}</span>
               </div>
+              <Progress value={(timeLeft / timeForCurrentLevel) * 100} className="w-full h-2" />
                {message && (
                 <div className={cn(
-                  "p-2 rounded-md text-center text-sm font-semibold",
-                  message.type === 'success' && "bg-green-100 text-green-700 dark:bg-green-800 dark:text-green-200",
-                  message.type === 'error' && "bg-red-100 text-red-700 dark:bg-red-800 dark:text-red-200",
-                  message.type === 'info' && "bg-blue-100 text-blue-700 dark:bg-blue-800 dark:text-blue-200"
+                  "mt-3 p-2 rounded-md text-center text-xs font-semibold h-8 flex items-center justify-center", // Added h-8 and flex for consistent height
+                  message.type === 'success' && "bg-green-500/20 text-green-700 dark:text-green-300",
+                  message.type === 'error' && "bg-red-500/20 text-red-700 dark:text-red-300",
+                  message.type === 'info' && "bg-blue-500/20 text-blue-700 dark:text-blue-300"
                 )}>
                   {message.text}
                 </div>
               )}
+              {!message && <div className="h-8 mt-3"></div>} {/* Placeholder for consistent height */}
             </CardHeader>
-            <CardContent>
+            <CardContent className="p-4">
               <div 
-                className="grid gap-2 justify-center aspect-square"
+                className="grid gap-1 sm:gap-1.5 justify-center aspect-square" // Reduced gap slightly
                 style={{ gridTemplateColumns: `repeat(${getGridDimensions()}, minmax(0, 1fr))` }}
               >
                 {gridColors.map((color, index) => (
                   <div
                     key={index}
                     onClick={() => handleHexagonClick(index)}
-                    className="flex items-center justify-center cursor-pointer transition-all duration-150 ease-in-out hover:scale-105 hover:opacity-80 rounded-md"
+                    className="flex items-center justify-center cursor-pointer transition-all duration-150 ease-in-out hover:opacity-70 rounded-md" // Removed hover:scale-105
                     style={{
                       width: '100%', 
-                      paddingBottom: '100%', 
+                      paddingBottom: '100%', // Maintain aspect ratio for the clickable area
                       backgroundColor: color,
                       clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)',
-                      transform: 'scale(0.95)', 
+                      // transform: 'scale(0.95)', // Removed scale for tighter grid
                     }}
                     aria-label={`Hexagon ${index + 1}`}
                   />
                 ))}
               </div>
             </CardContent>
-            <CardFooter className="text-center">
+            {/* <CardFooter className="text-center p-4">
               <p className="text-xs text-muted-foreground w-full">Find the hex with the slightly different shade!</p>
-            </CardFooter>
+            </CardFooter> */}
           </Card>
         )}
       </main>
