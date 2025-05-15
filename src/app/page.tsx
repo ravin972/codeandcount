@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { ArrowRight, CheckCircle, Eye, Calculator } from 'lucide-react';
+import { ArrowRight, CheckCircle, Eye, Calculator, Sparkles } from 'lucide-react';
 
 const services = [
   { name: 'Brand Identity', description: 'Crafting unique visual identities that resonate.', icon: <CheckCircle className="h-10 w-10 text-primary mb-4" /> },
@@ -198,6 +198,22 @@ export default function HomePage() {
               </Card>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* SEO Optimizer Tool Section */}
+      <section id="seo-tool" className="py-16 md:py-20 bg-secondary">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <Sparkles className="h-12 w-12 text-primary mx-auto mb-6" />
+          <h2 className="text-4xl font-bold mb-6">Boost Your SEO with Our AI Optimizer</h2>
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
+            Unlock the power of AI to rewrite your content, incorporate strategic keywords, and climb search engine rankings. Try our free SEO Optimizer tool today!
+          </p>
+          <Button size="lg" asChild>
+            <Link href="/seo-optimizer">
+              Try SEO Optimizer <ArrowRight className="ml-2 h-5 w-5" />
+            </Link>
+          </Button>
         </div>
       </section>
 
