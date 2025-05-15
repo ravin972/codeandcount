@@ -63,7 +63,7 @@ const socialMediaLinks = [
   { name: 'X', href: 'https://x.com/example', icon: <X className="h-4 w-4" /> },
   { name: 'GitHub', href: 'https://github.com/example', icon: <Github className="h-4 w-4" /> },
   { name: 'Instagram', href: 'https://instagram.com/example', icon: <Instagram className="h-4 w-4" /> },
-  { name: 'Behance', href: 'https://behance.net/example', icon: <span className="font-bold text-xs leading-none">Bē</span> }, // Adjusted text size for Behance
+  { name: 'Behance', href: 'https://behance.net/example', icon: <span className="font-bold text-xs leading-none">Bē</span> }, 
 ];
 
 
@@ -87,7 +87,7 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={social.name}
-              className="bg-primary text-primary-foreground p-2 rounded-full hover:bg-primary/90 transition-all duration-200 ease-in-out transform hover:scale-110 shadow-md" // Reduced padding from p-3 to p-2
+              className="bg-primary text-primary-foreground p-2 rounded-full hover:bg-primary/90 transition-all duration-200 ease-in-out transform hover:scale-110 shadow-md"
               title={social.name}
             >
               {social.icon}
@@ -219,3 +219,4 @@ export function Footer() {
     </>
   );
 }
+
