@@ -3,7 +3,7 @@
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Palette, Timer, Target, RefreshCw, CheckCircle, XCircle, Skull, Award } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -106,7 +106,7 @@ export default function HexTestPage() {
     if (!isGameOver && gameStarted) {
       setupNewLevel();
     }
-  }, [level, isGameOver, gameStarted]); // Rerun setupNewLevel if level changes while game is active
+  }, [level, isGameOver, gameStarted, setupNewLevel]); // Added setupNewLevel
 
    useEffect(() => {
     if (timerRef.current) {
@@ -130,7 +130,7 @@ export default function HexTestPage() {
         clearInterval(timerRef.current);
       }
     };
-  }, [isGameOver, gameStarted, setupNewLevel]); // Added setupNewLevel to deps, was missing
+  }, [isGameOver, gameStarted]);
 
   const handleHexagonClick = (index: number) => {
     if (isGameOver) return;
