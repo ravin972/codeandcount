@@ -85,16 +85,17 @@ const InfiniteScrollerWithMouseFollower: React.FC = () => {
     const el1_2 = textRef1_2.current;
 
     if (container1 && el1_1 && el1_2) {
+        // Ensure elements are rendered and have width before starting animation
         gsap.delayedCall(0.1, () => {
             const elWidth1 = el1_1.offsetWidth;
-            if (elWidth1 === 0) return; 
+            if (elWidth1 === 0) return; // Avoid division by zero or incorrect animation
 
             gsap.set(el1_2, { x: elWidth1 });
             gsap.to(container1, {
-                x: -elWidth1,
-                duration: elWidth1 / 70, // Base speed
+                x: -elWidth1, // Move the container left by the width of one span
+                duration: elWidth1 / 70, // Adjust speed by changing the divisor
                 ease: 'none',
-                repeat: -1,
+                repeat: -1, // Infinite repeat for seamless loop
             });
         });
     }
@@ -105,28 +106,31 @@ const InfiniteScrollerWithMouseFollower: React.FC = () => {
     const el2_2 = textRef2_2.current;
 
     if (container2 && el2_1 && el2_2) {
+        // Ensure elements are rendered and have width before starting animation
         gsap.delayedCall(0.1, () => {
             const elWidth2 = el2_1.offsetWidth;
-            if (elWidth2 === 0) return;
+            if (elWidth2 === 0) return; // Avoid division by zero or incorrect animation
 
-            gsap.set(el2_1, { x: 0 }); // First part of text row 2
-            gsap.set(el2_2, { x: -elWidth2 }); // Second part of text row 2, starts to the left
+            // For left-to-right, the second element starts to the left of the first
+            gsap.set(el2_1, { x: 0 }); 
+            gsap.set(el2_2, { x: -elWidth2 }); // Position the second copy before the first
             
             gsap.to(container2, {
                 x: elWidth2, // Scroll to the right by one text width
                 duration: elWidth2 / 50, // Faster speed (smaller divisor)
                 ease: 'none',
-                repeat: -1,
+                repeat: -1, // Infinite repeat for seamless loop
             });
         });
     }
-  }, [scrollText]); 
+  }, [scrollText]); // Re-run if scrollText changes, though it's constant here
 
   return (
     <section 
       ref={interactiveSectionRef}
       className="relative bg-black text-white py-20 md:py-32 overflow-hidden cursor-none group"
     >
+      {/* Row 1: Right-to-Left Scroll */}
       <div className="relative flex whitespace-nowrap" ref={scrollerContainerRef1}>
         <span ref={textRef1_1} className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-bold uppercase pr-2">
           {scrollText}
@@ -135,6 +139,7 @@ const InfiniteScrollerWithMouseFollower: React.FC = () => {
           {scrollText}
         </span>
       </div>
+      {/* Row 2: Left-to-Right Scroll */}
       <div className="relative flex whitespace-nowrap mt-2 md:mt-4" ref={scrollerContainerRef2}> {/* Added margin for separation */}
         <span ref={textRef2_1} className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-bold uppercase pr-2">
           {scrollText}
@@ -153,5 +158,3 @@ const InfiniteScrollerWithMouseFollower: React.FC = () => {
 };
 
 export default InfiniteScrollerWithMouseFollower;
-
-    
