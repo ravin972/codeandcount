@@ -18,9 +18,6 @@ const navLinks = [
   { href: '/contact', label: 'Contact', icon: <Mail className="h-5 w-5" /> },
 ];
 
-const NAVBAR_VISIBILITY_OFFSET = 60; 
-const SCROLL_DELTA_THRESHOLD = 5;    
-const DEFAULT_HIDE_THRESHOLD = 500; // Renamed from SERVICES_SECTION_HIDE_THRESHOLD
 const CONDENSE_THRESHOLD = 100; 
 
 export function Header() {
@@ -28,71 +25,29 @@ export function Header() {
   const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   
-  const [isNavVisible, setIsNavVisible] = React.useState(true);
   const [isCondensed, setIsCondensed] = React.useState(false);
   const lastScrollYRef = React.useRef(0);
 
-  // Refs to hold the current state to avoid stale closures in event listeners
-  const isNavVisibleRef = React.useRef(isNavVisible);
+  // Ref to hold the current state to avoid stale closures in event listeners
   const isCondensedRef = React.useRef(isCondensed);
-
-  React.useEffect(() => {
-    isNavVisibleRef.current = isNavVisible;
-  }, [isNavVisible]);
 
   React.useEffect(() => {
     isCondensedRef.current = isCondensed;
   }, [isCondensed]);
 
   React.useEffect(() => {
-    const getDynamicHideThreshold = () => {
-      if (pathname === '/') {
-        const trustedSection = document.getElementById('trusted-by-leaders');
-        if (trustedSection && typeof window !== 'undefined') {
-          const sectionTop = trustedSection.offsetTop;
-          const sectionHeight = trustedSection.offsetHeight;
-          // Calculate scrollY for when the center of the section aligns with the center of the viewport
-          const calculatedThreshold = sectionTop + (sectionHeight / 2) - (window.innerHeight / 2);
-          return Math.max(NAVBAR_VISIBILITY_OFFSET + 50, calculatedThreshold); // Ensure it's not too small
-        }
-      }
-      return DEFAULT_HIDE_THRESHOLD;
-    };
-    
     const handleScroll = () => {
       if (typeof window === 'undefined') return;
 
       const currentScrollY = window.scrollY;
-      const previousScrollY = lastScrollYRef.current;
-      const scrollDirection = currentScrollY > previousScrollY ? 'down' : 'up';
-      const scrollDelta = Math.abs(currentScrollY - previousScrollY);
-
-      const hideThreshold = getDynamicHideThreshold();
-
-      let shouldBeVisible: boolean;
-      if (currentScrollY <= NAVBAR_VISIBILITY_OFFSET) {
-        shouldBeVisible = true; // Always show at the very top
-      } else if (currentScrollY > hideThreshold) {
-        shouldBeVisible = false; // Hide if scrolled past the determined threshold
-      } else {
-        // Between top offset and hide threshold
-        if (scrollDelta < SCROLL_DELTA_THRESHOLD) {
-          shouldBeVisible = isNavVisibleRef.current; // Not enough scroll, maintain current state
-        } else {
-          shouldBeVisible = (scrollDirection === 'up'); // Show on scroll up, hide on scroll down
-        }
-      }
       
       let shouldBeCondensed: boolean;
-      if (shouldBeVisible && currentScrollY > CONDENSE_THRESHOLD && currentScrollY < hideThreshold) {
+      if (currentScrollY > CONDENSE_THRESHOLD) {
         shouldBeCondensed = true;
       } else {
         shouldBeCondensed = false;
       }
 
-      if (shouldBeVisible !== isNavVisibleRef.current) {
-        setIsNavVisible(shouldBeVisible);
-      }
       if (shouldBeCondensed !== isCondensedRef.current) {
         setIsCondensed(shouldBeCondensed);
       }
@@ -105,20 +60,8 @@ export function Header() {
         const initialScrollY = window.scrollY;
         lastScrollYRef.current = initialScrollY;
 
-        const hideThreshold = getDynamicHideThreshold();
-
-        let initialVisibleState: boolean;
-        if (initialScrollY <= NAVBAR_VISIBILITY_OFFSET) {
-            initialVisibleState = true;
-        } else if (initialScrollY > hideThreshold) {
-            initialVisibleState = false;
-        } else {
-            initialVisibleState = true; // Default to visible in the dynamic zone on load
-        }
-        setIsNavVisible(initialVisibleState);
-
         let initialCondensedState: boolean;
-        if (initialVisibleState && initialScrollY > CONDENSE_THRESHOLD && initialScrollY < hideThreshold) {
+        if (initialScrollY > CONDENSE_THRESHOLD) {
             initialCondensedState = true;
         } else {
             initialCondensedState = false;
@@ -140,8 +83,7 @@ export function Header() {
   return (
     <header
       className={cn(
-        "sticky top-0 z-50 transition-transform duration-300 ease-in-out",
-        isNavVisible ? "translate-y-0" : "-translate-y-full"
+        "sticky top-0 z-50" // Removed transition-transform and translate-y classes
       )}
     >
       <div className="p-3 md:p-4"> 
@@ -247,6 +189,7 @@ export function Header() {
                     className="w-full rounded-full" 
                     onClick={() => {
                       setIsMobileMenuOpen(false);
+                      router.push('/contact#start-project');
                     }}
                   >
                     <Link href="/contact#start-project" className="flex items-center justify-center">
