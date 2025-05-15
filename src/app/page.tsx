@@ -4,14 +4,15 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { ArrowRight, CheckCircle, Eye } from 'lucide-react';
+import { ArrowRight, CheckCircle, Eye, Calculator } from 'lucide-react';
 
 const services = [
-  { name: 'Brand Identity', description: 'Crafting unique visual identities that resonate.' },
-  { name: 'Websites & Apps', description: 'Designing and developing high-performance digital platforms.' },
-  { name: 'SEO Strategy', description: 'Optimizing your online presence for maximum visibility.' },
-  { name: 'Craft CMS Development', description: 'Building flexible and powerful websites with Craft CMS.' },
-  { name: 'Shopify Solutions', description: 'Creating engaging e-commerce experiences on Shopify.' },
+  { name: 'Brand Identity', description: 'Crafting unique visual identities that resonate.', icon: <CheckCircle className="h-10 w-10 text-primary mb-4" /> },
+  { name: 'Websites & Apps', description: 'Designing and developing high-performance digital platforms.', icon: <CheckCircle className="h-10 w-10 text-primary mb-4" /> },
+  { name: 'SEO Strategy', description: 'Optimizing your online presence for maximum visibility.', icon: <CheckCircle className="h-10 w-10 text-primary mb-4" /> },
+  { name: 'Craft CMS Development', description: 'Building flexible and powerful websites with Craft CMS.', icon: <CheckCircle className="h-10 w-10 text-primary mb-4" /> },
+  { name: 'Shopify Solutions', description: 'Creating engaging e-commerce experiences on Shopify.', icon: <CheckCircle className="h-10 w-10 text-primary mb-4" /> },
+  { name: 'Accounting', description: 'Managing your finances with precision and expertise.', icon: <Calculator className="h-10 w-10 text-primary mb-4" /> },
 ];
 
 const clientLogos = [
@@ -99,7 +100,7 @@ export default function HomePage() {
             {services.map((service) => (
               <Card key={service.name} className="shadow-lg hover:shadow-xl transition-shadow duration-300">
                 <CardHeader>
-                  <CheckCircle className="h-10 w-10 text-primary mb-4" />
+                  {service.icon}
                   <CardTitle className="text-2xl font-semibold">{service.name}</CardTitle>
                 </CardHeader>
                 <CardContent>
