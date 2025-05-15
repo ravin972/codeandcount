@@ -39,7 +39,7 @@ const footerSections = {
       { text: "Services", href: "/services" },
       { text: "Careers", href: "/placeholder-explore/careers" },
       { text: "Sectors", href: "/placeholder-explore/sectors" },
-      { text: "Hex Test", href: "/placeholder-explore/hex-test" },
+      { text: "Hex Test", href: "/hex-test", new: true },
       { text: "Contact", href: "/contact" },
     ]
   },
@@ -219,4 +219,3 @@ export function Footer() {
     </>
   );
 }
-
