@@ -106,7 +106,7 @@ const InfiniteScrollerWithMouseFollower: React.FC = () => {
         gsap.set(el1_2, { x: elWidth1 });
         anim1 = gsap.to(container1, {
             x: -elWidth1,
-            duration: elWidth1 / 70,
+            duration: elWidth1 / 70, // Speed factor
             ease: 'none',
             repeat: -1,
         });
@@ -129,7 +129,7 @@ const InfiniteScrollerWithMouseFollower: React.FC = () => {
         gsap.set(el2_2, { x: -elWidth2 }); 
         anim2 = gsap.to(container2, {
             x: elWidth2,
-            duration: elWidth2 / 50,
+            duration: elWidth2 / 50, // Faster speed factor
             ease: 'none',
             repeat: -1,
         });
@@ -197,3 +197,4 @@ const InfiniteScrollerWithMouseFollower: React.FC = () => {
 };
 
 export default InfiniteScrollerWithMouseFollower;
+
