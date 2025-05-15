@@ -5,11 +5,16 @@ import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 
 const InfiniteScrollerWithMouseFollower: React.FC = () => {
-  const scrollerContainerRef = useRef<HTMLDivElement>(null); // The div that moves
-  const textRef1 = useRef<HTMLSpanElement>(null); // First text span
-  const textRef2 = useRef<HTMLSpanElement>(null); // Second text span (duplicate)
+  const scrollerContainerRef1 = useRef<HTMLDivElement>(null);
+  const textRef1_1 = useRef<HTMLSpanElement>(null);
+  const textRef1_2 = useRef<HTMLSpanElement>(null);
+
+  const scrollerContainerRef2 = useRef<HTMLDivElement>(null);
+  const textRef2_1 = useRef<HTMLSpanElement>(null);
+  const textRef2_2 = useRef<HTMLSpanElement>(null);
+  
   const mouseFollowerRef = useRef<HTMLDivElement>(null);
-  const interactiveSectionRef = useRef<HTMLDivElement>(null); // Ref for the main section
+  const interactiveSectionRef = useRef<HTMLDivElement>(null);
 
   const scrollText = "Let's work together. "; // Trailing space for seamless loop
 
@@ -18,7 +23,7 @@ const InfiniteScrollerWithMouseFollower: React.FC = () => {
     const section = interactiveSectionRef.current;
 
     if (follower) {
-      gsap.set(follower, { xPercent: -50, yPercent: -50, scale: 1 }); // Center the follower and set base scale
+      gsap.set(follower, { xPercent: -50, yPercent: -50, scale: 1 });
       const pos = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
       const mouse = { x: pos.x, y: pos.y };
       const speed = 0.1; 
@@ -40,7 +45,6 @@ const InfiniteScrollerWithMouseFollower: React.FC = () => {
         ySet(pos.y);
       });
 
-      // Mouse move listener for scaling effects
       const interactiveElementsSelector = 'button, [role="button"], a[class*="inline-flex items-center justify-center"][href]';
       
       const updateFollowerScale = (e: MouseEvent) => {
@@ -51,14 +55,13 @@ const InfiniteScrollerWithMouseFollower: React.FC = () => {
         let newScaleTargetType = 'default';
 
         if (target.closest(interactiveElementsSelector)) {
-          newScale = 2.5; // Larger scale for buttons/CTAs
+          newScale = 2.5;
           newScaleTargetType = 'interactive';
         } else if (section && section.contains(target)) {
-          newScale = 1.5; // Moderate scale for the scroller section
+          newScale = 1.5;
           newScaleTargetType = 'section';
         }
         
-        // Animate only if the scale or target type has changed
         if (String(follower.dataset.currentGsapScaleTargetType) !== newScaleTargetType) {
           gsap.to(follower, { scale: newScale, duration: 0.2, ease: 'power1.out' });
           follower.dataset.currentGsapScaleTargetType = newScaleTargetType;
@@ -66,31 +69,52 @@ const InfiniteScrollerWithMouseFollower: React.FC = () => {
       };
       document.body.addEventListener('mousemove', updateFollowerScale);
       
-      // Cleanup
       return () => {
         window.removeEventListener("mousemove", handleMouseMoveForPosition);
         document.body.removeEventListener('mousemove', updateFollowerScale);
         gsap.ticker.remove(ticker);
       };
     }
-  }, []); // Empty dependency array ensures this runs once on mount
+  }, []);
 
 
   useEffect(() => {
-    // Infinite Scroller Logic
-    const container = scrollerContainerRef.current;
-    const el1 = textRef1.current;
-    const el2 = textRef2.current;
+    // Row 1: Right-to-Left Scroll
+    const container1 = scrollerContainerRef1.current;
+    const el1_1 = textRef1_1.current;
+    const el1_2 = textRef1_2.current;
 
-    if (container && el1 && el2) {
+    if (container1 && el1_1 && el1_2) {
         gsap.delayedCall(0.1, () => {
-            const elWidth = el1.offsetWidth;
-            if (elWidth === 0) return; 
+            const elWidth1 = el1_1.offsetWidth;
+            if (elWidth1 === 0) return; 
 
-            gsap.set(el2, { x: elWidth });
-            gsap.to(container, {
-                x: -elWidth,
-                duration: elWidth / 70, 
+            gsap.set(el1_2, { x: elWidth1 });
+            gsap.to(container1, {
+                x: -elWidth1,
+                duration: elWidth1 / 70, // Base speed
+                ease: 'none',
+                repeat: -1,
+            });
+        });
+    }
+
+    // Row 2: Left-to-Right Scroll (Faster)
+    const container2 = scrollerContainerRef2.current;
+    const el2_1 = textRef2_1.current;
+    const el2_2 = textRef2_2.current;
+
+    if (container2 && el2_1 && el2_2) {
+        gsap.delayedCall(0.1, () => {
+            const elWidth2 = el2_1.offsetWidth;
+            if (elWidth2 === 0) return;
+
+            gsap.set(el2_1, { x: 0 }); // First part of text row 2
+            gsap.set(el2_2, { x: -elWidth2 }); // Second part of text row 2, starts to the left
+            
+            gsap.to(container2, {
+                x: elWidth2, // Scroll to the right by one text width
+                duration: elWidth2 / 50, // Faster speed (smaller divisor)
                 ease: 'none',
                 repeat: -1,
             });
@@ -100,24 +124,34 @@ const InfiniteScrollerWithMouseFollower: React.FC = () => {
 
   return (
     <section 
-      ref={interactiveSectionRef} // Assign ref to the section
+      ref={interactiveSectionRef}
       className="relative bg-black text-white py-20 md:py-32 overflow-hidden cursor-none group"
     >
-      <div className="relative flex whitespace-nowrap" ref={scrollerContainerRef}>
-        <span ref={textRef1} className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-bold uppercase pr-2">
+      <div className="relative flex whitespace-nowrap" ref={scrollerContainerRef1}>
+        <span ref={textRef1_1} className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-bold uppercase pr-2">
           {scrollText}
         </span>
-        <span ref={textRef2} className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-bold uppercase pr-2">
+        <span ref={textRef1_2} className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-bold uppercase pr-2">
+          {scrollText}
+        </span>
+      </div>
+      <div className="relative flex whitespace-nowrap mt-2 md:mt-4" ref={scrollerContainerRef2}> {/* Added margin for separation */}
+        <span ref={textRef2_1} className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-bold uppercase pr-2">
+          {scrollText}
+        </span>
+        <span ref={textRef2_2} className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-bold uppercase pr-2">
           {scrollText}
         </span>
       </div>
       <div
         ref={mouseFollowerRef}
         className="fixed top-0 left-0 w-5 h-5 bg-white rounded-full pointer-events-none z-[9999] hidden md:block"
-        style={{ mixBlendMode: 'difference' }} // GSAP will handle scale
+        style={{ mixBlendMode: 'difference' }}
       ></div>
     </section>
   );
 };
 
 export default InfiniteScrollerWithMouseFollower;
+
+    
