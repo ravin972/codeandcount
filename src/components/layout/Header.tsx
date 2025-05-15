@@ -16,7 +16,6 @@ const navLinks = [
   { href: '/about', label: 'About', icon: <Users className="h-5 w-5" /> },
   { href: '/blog', label: 'Blog', icon: <Rss className="h-5 w-5" /> },
   { href: '/contact', label: 'Contact', icon: <Mail className="h-5 w-5" /> },
-  { href: '/seo-optimizer', label: 'SEO Tool', icon: <Sparkles className="h-5 w-5" /> },
 ];
 
 export function Header() {
