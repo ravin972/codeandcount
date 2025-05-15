@@ -1,7 +1,11 @@
 
+"use client";
+
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ArrowUpRight, Phone, Mail, MapPin, Star, ExternalLinkIcon, Linkedin, XIcon, Headphones, Instagram } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { cn } from '@/lib/utils';
 
 const footerSections = {
   cta: {
@@ -49,7 +53,7 @@ const foundingYear = 2010;
 const socialMediaLinks = [
   { name: 'LinkedIn', href: 'https://linkedin.com/company/example', icon: <Linkedin className="h-5 w-5" /> },
   { name: 'X', href: 'https://x.com/example', icon: <XIcon className="h-5 w-5" /> },
-  { name: 'Dribbble', href: 'https://dribbble.com/example', icon: <Headphones className="h-5 w-5" /> }, // Using Headphones as a proxy for Dribbble/audio
+  { name: 'Dribbble', href: 'https://dribbble.com/example', icon: <Headphones className="h-5 w-5" /> },
   { name: 'Instagram', href: 'https://instagram.com/example', icon: <Instagram className="h-5 w-5" /> },
   { name: 'Behance', href: 'https://behance.net/example', icon: <span className="font-bold text-sm leading-none">Bē</span> },
 ];
@@ -57,11 +61,39 @@ const socialMediaLinks = [
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
+  const footerRef = useRef<HTMLElement>(null);
+  const [isSocialBarVisible, setIsSocialBarVisible] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (footerRef.current) {
+        const footerRect = footerRef.current.getBoundingClientRect();
+        const socialBarShouldBeVisible = footerRect.top < window.innerHeight && footerRect.bottom > 0;
+        setIsSocialBarVisible(socialBarShouldBeVisible);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleScroll);
+    handleScroll(); // Initial check
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleScroll);
+    };
+  }, []);
 
   return (
     <>
       {/* Fixed Social Media Bar */}
-      <div className="hidden md:flex fixed top-1/2 -translate-y-1/2 left-6 z-40 flex-col space-y-3">
+      <div
+        className={cn(
+          "fixed top-1/2 -translate-y-1/2 left-6 z-40 flex-col space-y-3",
+          "transition-opacity duration-300 ease-in-out",
+          isSocialBarVisible ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none",
+          "hidden md:flex"
+        )}
+      >
         {socialMediaLinks.map((social) => (
           <a
             key={social.name}
@@ -77,7 +109,7 @@ export function Footer() {
         ))}
       </div>
 
-      <footer className="bg-neutral-900 text-neutral-300 pt-16 md:pt-24 pb-8">
+      <footer ref={footerRef} className="bg-neutral-900 text-neutral-300 pt-16 md:pt-24 pb-8">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           {/* Top Grid Section */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16 md:mb-24">
