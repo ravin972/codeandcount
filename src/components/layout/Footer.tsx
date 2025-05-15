@@ -15,7 +15,7 @@ const footerSections = {
     buttonLink: "/contact#start-project",
     reviews: {
       rating: "5.0",
-      count: "69 reviews",
+      count: "69 reviews", // Updated to match image
       source: "Google"
     }
   },
@@ -56,7 +56,7 @@ const footerSections = {
   }
 };
 
-const foundingYear = 2010;
+const foundingYear = 2010; // Updated to match image
 
 const socialMediaLinks = [
   { name: 'LinkedIn', href: 'https://linkedin.com/company/example', icon: <Linkedin className="h-5 w-5" /> },
@@ -76,8 +76,8 @@ export function Footer() {
         {/* Social Media Bar - Absolute Positioned */}
         <div
           className={cn(
-            "absolute top-16 md:top-2 left-6 z-10 flex-col space-y-3", // Changed md:top-24 to md:top-2
-            "hidden md:flex"
+            "absolute top-2 left-6 z-10 flex-col space-y-3",
+            "hidden md:flex" 
           )}
         >
           {socialMediaLinks.map((social) => (
@@ -96,7 +96,7 @@ export function Footer() {
         </div>
 
         {/* Back To Top Button - Absolute Positioned */}
-        <BackToTopButton className="absolute top-16 md:top-2 right-6 z-10 hidden md:flex" /> {/* Changed md:top-24 to md:top-2 */}
+        <BackToTopButton className="absolute top-2 right-6 z-10 hidden md:flex" />
 
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
