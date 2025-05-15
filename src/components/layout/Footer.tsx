@@ -3,7 +3,7 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowUpRight, Phone, Mail, MapPin, Star, ExternalLinkIcon, Linkedin, XIcon, Copyright, Instagram, Headphones } from 'lucide-react'; // Added Headphones
+import { ArrowUpRight, Phone, Mail, MapPin, Star, ExternalLinkIcon, Linkedin, XIcon, Copyright, Instagram, Github } from 'lucide-react'; // Added Github, removed Headphones
 import React, { useState, useEffect, useRef } from 'react';
 import { cn } from '@/lib/utils';
 
@@ -53,7 +53,7 @@ const foundingYear = 2010;
 const socialMediaLinks = [
   { name: 'LinkedIn', href: 'https://linkedin.com/company/example', icon: <Linkedin className="h-5 w-5" /> },
   { name: 'X', href: 'https://x.com/example', icon: <XIcon className="h-5 w-5" /> },
-  { name: 'Dribbble/Audio', href: 'https://dribbble.com/example', icon: <Headphones className="h-5 w-5" /> }, // Changed back to Headphones
+  { name: 'GitHub', href: 'https://github.com/example', icon: <Github className="h-5 w-5" /> }, // Changed to GitHub
   { name: 'Instagram', href: 'https://instagram.com/example', icon: <Instagram className="h-5 w-5" /> },
   { name: 'Behance', href: 'https://behance.net/example', icon: <span className="font-bold text-sm leading-none">Bē</span> },
 ];
