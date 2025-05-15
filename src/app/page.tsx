@@ -76,9 +76,32 @@ export default function HomePage() {
       {/* Hero Section */}
       <section className="py-20 md:py-32">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6">
-            Crafting <span className="text-primary">Digital Excellence</span>.
-          </h1>
+          {/* Wrapper for Title and its bottom margin */}
+          <div className="mb-6">
+            {/* Relative container for 3D effect and alignment */}
+            <div className="relative inline-grid place-items-center [transform-style:preserve-3d] [perspective:1000px]">
+              {/* Glow Element */}
+              <div
+                aria-hidden="true"
+                // Text styling classes MUST match the main h1 for size and shape
+                className="col-start-1 row-start-1 text-5xl md:text-7xl font-bold tracking-tight 
+                           text-primary {/* Glow color */}
+                           blur-xl opacity-60 brightness-150 {/* Effects: blur, opacity, brightness */}
+                           [transform:translateZ(-30px)_scale(1.1)] {/* 3D effect and slight enlargement */}
+                           pointer-events-none {/* Ensure it doesn't interfere with text selection/interaction */}
+                          "
+              >
+                {/* Text content for the glow to take shape - must match main title */}
+                Crafting <span className="text-primary">Digital Excellence</span>.
+              </div>
+
+              {/* Main Title */}
+              <h1 className="col-start-1 row-start-1 relative z-[1] text-5xl md:text-7xl font-bold tracking-tight">
+                Crafting <span className="text-primary">Digital Excellence</span>.
+              </h1>
+            </div>
+          </div>
+
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-10">
             CodeAndCount.com is a web and app development powerhouse, dedicated to building impactful digital experiences that drive growth and elevate brands across industries.
           </p>

@@ -56,7 +56,7 @@ const footerSections = {
   }
 };
 
-const foundingYear = 2010;
+const foundingYear = 2020;
 
 const socialMediaLinks = [
   { name: 'LinkedIn', href: 'https://linkedin.com/company/example', icon: <Linkedin className="h-4 w-4" /> },
