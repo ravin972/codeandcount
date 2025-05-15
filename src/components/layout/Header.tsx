@@ -52,7 +52,7 @@ export function Header() {
       if (currentScrollY <= NAVBAR_VISIBILITY_OFFSET) {
         shouldShow = true; // Always show if near top
       } else if (currentScrollY > previousScrollY) { // Scrolling down
-        shouldShow = true;
+        shouldShow = true; 
       } else { // Scrolling up
         shouldShow = false;
       }
@@ -103,7 +103,7 @@ export function Header() {
                 </Link>
               ))}
             </nav>
-            <Button asChild size="sm">
+            <Button asChild size="sm" className="rounded-full">
               <Link href="/contact#start-project">Start a project</Link>
             </Button>
             <ThemeToggle />
@@ -139,7 +139,7 @@ export function Header() {
                       </Link>
                     ))}
                   </nav>
-                  <Button asChild className="w-full" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Button asChild className="w-full rounded-full" onClick={() => setIsMobileMenuOpen(false)}>
                     <Link href="/contact#start-project">Start a project</Link>
                   </Button>
                 </div>
