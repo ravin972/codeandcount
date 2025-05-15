@@ -3,9 +3,10 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowUpRight, Phone, Mail, MapPin, Star, ExternalLinkIcon, Linkedin, XIcon, Copyright, Instagram, Github } from 'lucide-react'; // Added Github, removed Headphones
-import React, { useState, useEffect, useRef } from 'react';
+import { ArrowUpRight, Phone, Mail, MapPin, Star, ExternalLinkIcon, Linkedin, XIcon, Github, Instagram, Copyright } from 'lucide-react';
+import React from 'react';
 import { cn } from '@/lib/utils';
+import { BackToTopButton } from './BackToTopButton';
 
 const footerSections = {
   cta: {
@@ -53,7 +54,7 @@ const foundingYear = 2010;
 const socialMediaLinks = [
   { name: 'LinkedIn', href: 'https://linkedin.com/company/example', icon: <Linkedin className="h-5 w-5" /> },
   { name: 'X', href: 'https://x.com/example', icon: <XIcon className="h-5 w-5" /> },
-  { name: 'GitHub', href: 'https://github.com/example', icon: <Github className="h-5 w-5" /> }, // Changed to GitHub
+  { name: 'GitHub', href: 'https://github.com/example', icon: <Github className="h-5 w-5" /> },
   { name: 'Instagram', href: 'https://instagram.com/example', icon: <Instagram className="h-5 w-5" /> },
   { name: 'Behance', href: 'https://behance.net/example', icon: <span className="font-bold text-sm leading-none">Bē</span> },
 ];
@@ -61,55 +62,36 @@ const socialMediaLinks = [
 
 export function Footer() {
   const currentYear = new Date().getFullYear();
-  const footerRef = useRef<HTMLElement>(null);
-  const [isSocialBarVisible, setIsSocialBarVisible] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (footerRef.current) {
-        const footerRect = footerRef.current.getBoundingClientRect();
-        const socialBarShouldBeVisible = footerRect.top < window.innerHeight && footerRect.bottom > 0;
-        setIsSocialBarVisible(socialBarShouldBeVisible);
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-    window.addEventListener('resize', handleScroll);
-    handleScroll(); // Initial check
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
-    };
-  }, []);
 
   return (
     <>
-      {/* Fixed Social Media Bar */}
-      <div
-        className={cn(
-          "fixed top-1/2 -translate-y-1/2 left-6 z-40 flex-col space-y-3",
-          "transition-opacity duration-300 ease-in-out",
-          isSocialBarVisible ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none",
-          "hidden md:flex"
-        )}
-      >
-        {socialMediaLinks.map((social) => (
-          <a
-            key={social.name}
-            href={social.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={social.name}
-            className="bg-primary text-primary-foreground p-3 rounded-full hover:bg-primary/90 transition-all duration-200 ease-in-out transform hover:scale-110 shadow-md"
-            title={social.name}
-          >
-            {social.icon}
-          </a>
-        ))}
-      </div>
+      <footer className="bg-neutral-900 text-neutral-300 pt-16 md:pt-24 pb-8 relative">
+        {/* Social Media Bar - Absolute Positioned */}
+        <div
+          className={cn(
+            "absolute top-16 md:top-24 left-6 z-10 flex-col space-y-3",
+            "hidden md:flex" // Keep hidden on small screens
+          )}
+        >
+          {socialMediaLinks.map((social) => (
+            <a
+              key={social.name}
+              href={social.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label={social.name}
+              className="bg-primary text-primary-foreground p-3 rounded-full hover:bg-primary/90 transition-all duration-200 ease-in-out transform hover:scale-110 shadow-md"
+              title={social.name}
+            >
+              {social.icon}
+            </a>
+          ))}
+        </div>
 
-      <footer ref={footerRef} className="bg-neutral-900 text-neutral-300 pt-16 md:pt-24 pb-8">
+        {/* Back To Top Button - Absolute Positioned */}
+        <BackToTopButton className="absolute top-16 md:top-24 right-6 z-10 hidden md:flex" />
+
+
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           {/* Top Grid Section */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16 md:mb-24">
@@ -230,3 +212,4 @@ export function Footer() {
     </>
   );
 }
+

@@ -7,7 +7,7 @@ import { Footer } from '@/components/layout/Footer';
 import { Toaster } from "@/components/ui/toaster";
 import { cn } from '@/lib/utils';
 import { ThemeProvider } from "@/components/ThemeProvider";
-import { BackToTopButton } from '@/components/layout/BackToTopButton';
+// BackToTopButton removed from here
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -73,9 +73,10 @@ export default function RootLayout({
           <main className="flex-grow">{children}</main>
           <Footer />
           <Toaster />
-          <BackToTopButton />
+          {/* BackToTopButton removed from here */}
         </ThemeProvider>
       </body>
     </html>
   );
 }
+
