@@ -3,8 +3,8 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowUpRight, Phone, Mail, MapPin, Star, ExternalLinkIcon, Linkedin, X, Github, Instagram, Copyright } from 'lucide-react'; // Changed XIcon to X
-import React from 'react';
+import { ArrowUpRight, Phone, Mail, MapPin, Star, Github, Instagram, Copyright, Linkedin, X } from 'lucide-react'; 
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { cn } from '@/lib/utils';
 import { BackToTopButton } from './BackToTopButton';
 
@@ -59,11 +59,11 @@ const footerSections = {
 const foundingYear = 2010;
 
 const socialMediaLinks = [
-  { name: 'LinkedIn', href: 'https://linkedin.com/company/example', icon: <Linkedin className="h-5 w-5" /> },
-  { name: 'X', href: 'https://x.com/example', icon: <X className="h-5 w-5" /> }, // Changed XIcon to X
-  { name: 'GitHub', href: 'https://github.com/example', icon: <Github className="h-5 w-5" /> },
-  { name: 'Instagram', href: 'https://instagram.com/example', icon: <Instagram className="h-5 w-5" /> },
-  { name: 'Behance', href: 'https://behance.net/example', icon: <span className="font-bold text-sm leading-none">Bē</span> },
+  { name: 'LinkedIn', href: 'https://linkedin.com/company/example', icon: <Linkedin className="h-4 w-4" /> },
+  { name: 'X', href: 'https://x.com/example', icon: <X className="h-4 w-4" /> },
+  { name: 'GitHub', href: 'https://github.com/example', icon: <Github className="h-4 w-4" /> },
+  { name: 'Instagram', href: 'https://instagram.com/example', icon: <Instagram className="h-4 w-4" /> },
+  { name: 'Behance', href: 'https://behance.net/example', icon: <span className="font-bold text-xs leading-none">Bē</span> }, // Adjusted text size for Behance
 ];
 
 
@@ -76,7 +76,7 @@ export function Footer() {
         {/* Social Media Bar - Absolute Positioned */}
         <div
           className={cn(
-            "absolute top-2 left-6 z-10 flex-col space-y-3", // md:top-2 to match BackToTopButton
+            "absolute top-2 left-6 z-10 flex-col space-y-3", 
             "hidden md:flex" 
           )}
         >
@@ -87,7 +87,7 @@ export function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={social.name}
-              className="bg-primary text-primary-foreground p-3 rounded-full hover:bg-primary/90 transition-all duration-200 ease-in-out transform hover:scale-110 shadow-md"
+              className="bg-primary text-primary-foreground p-2 rounded-full hover:bg-primary/90 transition-all duration-200 ease-in-out transform hover:scale-110 shadow-md" // Reduced padding from p-3 to p-2
               title={social.name}
             >
               {social.icon}
@@ -182,7 +182,7 @@ export function Footer() {
                   </div>
                 </li>
                 <li className="flex items-center">
-                  <ExternalLinkIcon className="h-5 w-5 mr-3 text-primary flex-shrink-0" />
+                  <Copyright className="h-5 w-5 mr-3 text-primary flex-shrink-0" /> {/* Assuming Copyright icon for placeholder, replace if specific icon is needed */}
                   <a href={footerSections.getInTouch.otherLink.href} className="hover:text-primary transition-colors duration-200">
                     {footerSections.getInTouch.otherLink.text}
                   </a>
