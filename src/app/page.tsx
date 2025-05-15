@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ArrowRight, CheckCircle, Eye, Calculator, Sparkles } from 'lucide-react';
+import InfiniteScrollerWithMouseFollower from '@/components/effects/InfiniteScrollerWithMouseFollower';
 
 const services = [
   { name: 'Brand Identity', description: 'Crafting unique visual identities that resonate.', icon: <CheckCircle className="h-10 w-10 text-primary mb-4" /> },
@@ -81,7 +82,7 @@ export default function HomePage() {
           <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-10">
             CodeAndCount.com is a web and app development powerhouse, dedicated to building impactful digital experiences that drive growth and elevate brands across industries.
           </p>
-          <Button size="lg" asChild>
+          <Button size="lg" asChild className="rounded-full">
             <Link href="/contact#start-project">
               Start Your Project <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
@@ -145,7 +146,7 @@ export default function HomePage() {
                   <p className="text-muted-foreground">{study.description}</p>
                 </CardContent>
                 <CardFooter>
-                  <Button variant="outline" asChild>
+                  <Button variant="outline" asChild className="rounded-full">
                     <Link href={`/work/${study.id}`}>
                       View Case Study <Eye className="ml-2 h-4 w-4" />
                     </Link>
@@ -155,7 +156,7 @@ export default function HomePage() {
             ))}
           </div>
           <div className="text-center mt-12">
-            <Button size="lg" variant="link" asChild>
+            <Button size="lg" variant="link" asChild className="rounded-md">
               <Link href="/work">
                 Explore All Projects <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
@@ -201,6 +202,9 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* Infinite Scroller Section */}
+      <InfiniteScrollerWithMouseFollower />
+
       {/* SEO Optimizer Tool Section */}
       <section id="seo-tool" className="py-16 md:py-20 bg-foreground text-background dark:bg-secondary dark:text-secondary-foreground">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -209,7 +213,7 @@ export default function HomePage() {
           <p className="text-lg md:text-xl text-background/80 dark:text-muted-foreground max-w-2xl mx-auto mb-10">
             Unlock the power of AI to rewrite your content, incorporate strategic keywords, and climb search engine rankings. Try our free SEO Optimizer tool today!
           </p>
-          <Button size="lg" asChild>
+          <Button size="lg" asChild className="rounded-full">
             <Link href="/seo-optimizer">
               Try SEO Optimizer <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
@@ -225,7 +229,7 @@ export default function HomePage() {
             Let's discuss how CodeAndCount.com can help you achieve your business goals.
             We partner with clients of all sizes, across diverse industries, to deliver exceptional results.
           </p>
-          <Button size="lg" variant="secondary" asChild>
+          <Button size="lg" variant="secondary" asChild className="rounded-full">
             <Link href="/contact#start-project">
               Get in Touch <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
