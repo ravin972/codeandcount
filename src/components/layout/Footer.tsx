@@ -3,7 +3,7 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowUpRight, Phone, Mail, MapPin, Star, ExternalLinkIcon, Linkedin, XIcon, Github, Instagram, Copyright } from 'lucide-react';
+import { ArrowUpRight, Phone, Mail, MapPin, Star, ExternalLinkIcon, Linkedin, X, Github, Instagram, Copyright } from 'lucide-react'; // Changed XIcon to X
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { BackToTopButton } from './BackToTopButton';
@@ -15,7 +15,7 @@ const footerSections = {
     buttonLink: "/contact#start-project",
     reviews: {
       rating: "5.0",
-      count: "69 reviews", // Updated to match image
+      count: "69 reviews", 
       source: "Google"
     }
   },
@@ -56,11 +56,11 @@ const footerSections = {
   }
 };
 
-const foundingYear = 2010; // Updated to match image
+const foundingYear = 2010;
 
 const socialMediaLinks = [
   { name: 'LinkedIn', href: 'https://linkedin.com/company/example', icon: <Linkedin className="h-5 w-5" /> },
-  { name: 'X', href: 'https://x.com/example', icon: <XIcon className="h-5 w-5" /> },
+  { name: 'X', href: 'https://x.com/example', icon: <X className="h-5 w-5" /> }, // Changed XIcon to X
   { name: 'GitHub', href: 'https://github.com/example', icon: <Github className="h-5 w-5" /> },
   { name: 'Instagram', href: 'https://instagram.com/example', icon: <Instagram className="h-5 w-5" /> },
   { name: 'Behance', href: 'https://behance.net/example', icon: <span className="font-bold text-sm leading-none">Bē</span> },
@@ -76,7 +76,7 @@ export function Footer() {
         {/* Social Media Bar - Absolute Positioned */}
         <div
           className={cn(
-            "absolute top-2 left-6 z-10 flex-col space-y-3",
+            "absolute top-2 left-6 z-10 flex-col space-y-3", // md:top-2 to match BackToTopButton
             "hidden md:flex" 
           )}
         >
