@@ -4,9 +4,6 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Textarea } from "@/components/ui/textarea";
 import { ArrowUpRight, Calculator, Sparkles, ArrowRight, Eye } from 'lucide-react';
 import InfiniteScrollerWithMouseFollower from '@/components/effects/InfiniteScrollerWithMouseFollower';
 // Changed: Using CircleCheckBig for services as it's visually closer to CheckCircle and available in lucide-react
@@ -266,29 +263,6 @@ export default function HomePage() {
           <p className="text-lg md:text-xl text-background/80 dark:text-muted-foreground max-w-2xl mx-auto mb-10">
             Unlock the power of AI to rewrite your content, incorporate strategic keywords, and climb search engine rankings. Try our free SEO Optimizer tool today!
           </p>
-          <Card className="max-w-xl mx-auto bg-background/5 dark:bg-foreground/5 backdrop-blur-sm border-transparent shadow-md mb-10 p-6 text-left">
-            <CardContent className="p-0 space-y-4">
-              <div>
-                <Label htmlFor="mock-text-input" className="text-sm font-medium text-background/90 dark:text-foreground/90">Original Text (Preview)</Label>
-                <Textarea
-                  id="mock-text-input"
-                  placeholder="Your original content goes here..."
-                  readOnly
-                  rows={3}
-                  className="mt-1 bg-background/10 dark:bg-foreground/10 text-background dark:text-foreground placeholder:text-background/50 dark:placeholder:text-foreground/50 border-background/20 dark:border-foreground/20 focus-visible:ring-primary"
-                />
-              </div>
-              <div>
-                <Label htmlFor="mock-keywords-input" className="text-sm font-medium text-background/90 dark:text-foreground/90">Target Keywords (Preview)</Label>
-                <Input
-                  id="mock-keywords-input"
-                  placeholder="Keywords like 'web design, AI, content strategy'..."
-                  readOnly
-                  className="mt-1 bg-background/10 dark:bg-foreground/10 text-background dark:text-foreground placeholder:text-background/50 dark:placeholder:text-foreground/50 border-background/20 dark:border-foreground/20 focus-visible:ring-primary"
-                />
-              </div>
-            </CardContent>
-          </Card>
           <Button size="lg" asChild className="rounded-full">
             <Link href="/seo-optimizer">
               Try SEO Optimizer <ArrowRight className="ml-2 h-5 w-5" />
