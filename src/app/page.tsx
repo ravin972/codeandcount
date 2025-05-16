@@ -7,15 +7,18 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { ArrowUpRight, CheckCircle, Eye, Calculator, Sparkles, ArrowRight } from 'lucide-react';
+import { ArrowUpRight, Calculator, Sparkles, ArrowRight, Eye } from 'lucide-react';
 import InfiniteScrollerWithMouseFollower from '@/components/effects/InfiniteScrollerWithMouseFollower';
+// Changed: Using CircleCheckBig for services as it's visually closer to CheckCircle and available in lucide-react
+import { CircleCheckBig } from 'lucide-react';
+
 
 const services = [
-  { name: 'Brand Identity', description: 'Crafting unique visual identities that resonate.', icon: <CheckCircle className="h-10 w-10 text-primary mb-4" /> },
-  { name: 'Websites & Apps', description: 'Designing and developing high-performance digital platforms.', icon: <CheckCircle className="h-10 w-10 text-primary mb-4" /> },
-  { name: 'SEO Strategy', description: 'Optimizing your online presence for maximum visibility.', icon: <CheckCircle className="h-10 w-10 text-primary mb-4" /> },
-  { name: 'Craft CMS Development', description: 'Building flexible and powerful websites with Craft CMS.', icon: <CheckCircle className="h-10 w-10 text-primary mb-4" /> },
-  { name: 'Shopify Solutions', description: 'Creating engaging e-commerce experiences on Shopify.', icon: <CheckCircle className="h-10 w-10 text-primary mb-4" /> },
+  { name: 'Brand Identity', description: 'Crafting unique visual identities that resonate.', icon: <CircleCheckBig className="h-10 w-10 text-primary mb-4" /> },
+  { name: 'Websites & Apps', description: 'Designing and developing high-performance digital platforms.', icon: <CircleCheckBig className="h-10 w-10 text-primary mb-4" /> },
+  { name: 'SEO Strategy', description: 'Optimizing your online presence for maximum visibility.', icon: <CircleCheckBig className="h-10 w-10 text-primary mb-4" /> },
+  { name: 'Craft CMS Development', description: 'Building flexible and powerful websites with Craft CMS.', icon: <CircleCheckBig className="h-10 w-10 text-primary mb-4" /> },
+  { name: 'Shopify Solutions', description: 'Creating engaging e-commerce experiences on Shopify.', icon: <CircleCheckBig className="h-10 w-10 text-primary mb-4" /> },
   { name: 'Accounting', description: 'Managing your finances with precision and expertise.', icon: <Calculator className="h-10 w-10 text-primary mb-4" /> },
 ];
 
@@ -201,9 +204,9 @@ export default function HomePage() {
             ))}
           </div>
           <div className="text-center mt-12">
-            <Button size="lg" variant="outline" asChild className="rounded-full">
+            <Button size="lg" variant="outline" asChild className="rounded-full group">
               <Link href="/work">
-                Explore All Projects <ArrowRight className="ml-2 h-5 w-5" />
+                Explore All Projects <ArrowRight className="ml-2 h-5 w-5 transition-all duration-300 ease-in-out group-hover:rotate-45" />
               </Link>
             </Button>
           </div>
