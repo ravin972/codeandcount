@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { CalendarDays, ArrowRight, Newspaper } from 'lucide-react';
+import { CalendarDays, ArrowRight, Newspaper, Clock3, Dot } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 
 const blogPosts = [
@@ -19,6 +19,7 @@ const blogPosts = [
     imageUrl: 'https://placehold.co/600x400.png',
     dataAiHintImage: 'futuristic web design',
     category: 'Web Design',
+    readTime: '6 min read',
   },
   {
     slug: 'unlocking-seo-success-a-comprehensive-guide',
@@ -31,6 +32,7 @@ const blogPosts = [
     imageUrl: 'https://placehold.co/600x400.png',
     dataAiHintImage: 'seo chart graph',
     category: 'SEO',
+    readTime: '10 min read',
   },
   {
     slug: 'why-craft-cms-is-our-go-to-for-flexible-websites',
@@ -43,6 +45,7 @@ const blogPosts = [
     imageUrl: 'https://placehold.co/600x400.png',
     dataAiHintImage: 'cms interface',
     category: 'Craft CMS',
+    readTime: '4 min read',
   },
   {
     slug: 'building-a-strong-brand-identity-key-principles',
@@ -55,6 +58,7 @@ const blogPosts = [
     imageUrl: 'https://placehold.co/600x400.png',
     dataAiHintImage: 'brand moodboard',
     category: 'Branding',
+    readTime: '7 min read',
   },
 ];
 
@@ -89,7 +93,12 @@ export default function BlogPage() {
                   />
                 </Link>
                 <CardHeader>
-                  <Badge variant="outline" className="w-fit mb-2">{post.category}</Badge>
+                  <div className="flex items-center justify-between text-xs text-muted-foreground mb-2">
+                    <Badge variant="outline" className="w-fit">{post.category}</Badge>
+                    <span className="flex items-center">
+                       <Clock3 className="h-3.5 w-3.5 mr-1" /> {post.readTime}
+                    </span>
+                  </div>
                   <Link href={`/blog/${post.slug}`} className="block">
                     <CardTitle className="text-2xl font-semibold leading-tight group-hover:text-primary transition-colors">{post.title}</CardTitle>
                   </Link>
@@ -104,11 +113,11 @@ export default function BlogPage() {
                       <AvatarFallback>{post.author.split(' ').map(n=>n[0]).join('')}</AvatarFallback>
                     </Avatar>
                     <span>By {post.author}</span>
-                    <span className="mx-2">&#8226;</span>
+                    <Dot className="h-4 w-4 mx-1 opacity-50" />
                     <CalendarDays className="h-4 w-4 mr-1" />
                     <time dateTime={post.date}>{new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
                   </div>
-                  <Button variant="link" asChild className="p-0 h-auto">
+                  <Button variant="link" asChild className="p-0 h-auto text-sm">
                     <Link href={`/blog/${post.slug}`}>
                       Read More <ArrowRight className="ml-1 h-4 w-4" />
                     </Link>
@@ -122,3 +131,5 @@ export default function BlogPage() {
     </div>
   );
 }
+
+    

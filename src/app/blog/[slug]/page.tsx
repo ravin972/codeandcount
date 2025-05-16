@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { ArrowLeft, CalendarDays, Tag } from 'lucide-react';
+import { ArrowLeft, CalendarDays, Tag, Clock3, Dot } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 
@@ -20,6 +20,7 @@ const blogPosts = [
     imageUrl: 'https://placehold.co/1200x600.png',
     dataAiHintImage: 'futuristic design',
     category: 'Web Design',
+    readTime: '6 min read',
     content: `
       <p>The world of web design is in constant flux, driven by technological advancements and evolving user expectations. As we look ahead to 2024, several key trends are set to redefine how we create and interact with websites.</p>
       
@@ -42,7 +43,36 @@ const blogPosts = [
     `,
     tags: ['Web Design', 'Future Trends', 'AI', '3D Graphics', 'Accessibility']
   },
-  // Add more mock posts if needed
+   {
+    slug: 'unlocking-seo-success-a-comprehensive-guide',
+    title: 'Unlocking SEO Success: A Comprehensive Guide',
+    date: '2024-07-01',
+    author: 'Sam Lee',
+    authorAvatar: 'https://placehold.co/40x40.png?text=SL',
+    dataAiHintAuthor: 'marketing expert',
+    excerpt: 'Navigate the complexities of SEO with our in-depth guide, covering everything from keyword research to technical optimization.',
+    imageUrl: 'https://placehold.co/1200x600.png',
+    dataAiHintImage: 'seo chart graph',
+    category: 'SEO',
+    readTime: '10 min read',
+    content: `<p>Content for SEO Guide...</p>`,
+    tags: ['SEO', 'Digital Marketing', 'Keywords']
+  },
+  {
+    slug: 'why-craft-cms-is-our-go-to-for-flexible-websites',
+    title: 'Why Craft CMS is Our Go-To for Flexible Websites',
+    date: '2024-06-20',
+    author: 'Maria Rodriguez',
+    authorAvatar: 'https://placehold.co/40x40.png?text=MR',
+    dataAiHintAuthor: 'software developer',
+    excerpt: 'Explore the benefits of Craft CMS and why it stands out as a powerful, flexible, and user-friendly content management system.',
+    imageUrl: 'https://placehold.co/1200x600.png',
+    dataAiHintImage: 'cms interface',
+    category: 'Craft CMS',
+    readTime: '4 min read',
+    content: `<p>Content for Craft CMS...</p>`,
+    tags: ['Craft CMS', 'Web Development', 'CMS']
+  },
 ];
 
 export async function generateStaticParams() {
@@ -90,6 +120,9 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
               <div className="flex items-center text-xs">
                 <CalendarDays className="h-4 w-4 mr-1" />
                 <time dateTime={post.date}>{new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+                <Dot className="h-4 w-4 mx-1 opacity-50" />
+                <Clock3 className="h-3.5 w-3.5 mr-1" />
+                <span>{post.readTime}</span>
               </div>
             </div>
           </div>
@@ -125,3 +158,5 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
     </div>
   );
 }
+
+    

@@ -4,11 +4,10 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { ArrowUpRight, Calculator, Sparkles, ArrowRight, Eye } from 'lucide-react';
+import { ArrowUpRight, Calculator, Sparkles, ArrowRight, Eye, Dot } from 'lucide-react';
 import InfiniteScrollerWithMouseFollower from '@/components/effects/InfiniteScrollerWithMouseFollower';
 // Changed: Using CircleCheckBig for services as it's visually closer to CheckCircle and available in lucide-react
 import { CircleCheckBig, ShoppingCart } from 'lucide-react';
-
 
 const services = [
   { name: 'Brand Identity', description: 'Crafting unique visual identities that resonate.', icon: <CircleCheckBig className="h-10 w-10 text-primary mb-4" /> },
@@ -72,6 +71,34 @@ const testimonials = [
     videoUrl: 'https://vimeo.com/placeholder', // Placeholder
   },
 ];
+
+const homepageBlogPosts = [
+  {
+    slug: 'the-future-of-web-design-trends-for-2024',
+    title: 'The Future of Web Design: Trends for 2024',
+    imageUrl: 'https://placehold.co/600x450.png',
+    dataAiHintImage: 'futuristic design',
+    excerpt: 'Discover the cutting-edge web design trends shaping the digital landscape in 2024, from AI integration to immersive experiences.',
+    readTime: '6 min read',
+  },
+  {
+    slug: 'unlocking-seo-success-a-comprehensive-guide',
+    title: 'Unlocking SEO Success: A Comprehensive Guide',
+    imageUrl: 'https://placehold.co/600x450.png',
+    dataAiHintImage: 'seo chart graph',
+    excerpt: 'Navigate the complexities of SEO with our in-depth guide, covering everything from keyword research to technical optimization.',
+    readTime: '10 min read',
+  },
+  {
+    slug: 'why-craft-cms-is-our-go-to-for-flexible-websites',
+    title: 'Why Craft CMS is Our Go-To for Flexible Websites',
+    imageUrl: 'https://placehold.co/600x450.png',
+    dataAiHintImage: 'cms interface',
+    excerpt: 'Explore the benefits of Craft CMS and why it stands out as a powerful, flexible, and user-friendly content management system.',
+    readTime: '4 min read',
+  },
+];
+
 
 export default function HomePage() {
   return (
@@ -271,19 +298,61 @@ export default function HomePage() {
         </div>
       </section>
       
-      {/* Call to Action Section */}
-      <section className="py-20 bg-primary text-primary-foreground">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-bold mb-6">Ready to Elevate Your Brand?</h2>
-          <p className="text-lg md:text-xl max-w-2xl mx-auto mb-10">
-            Let's discuss how CodeAndCount.com can help you achieve your business goals.
-            We partner with clients of all sizes, across diverse industries, to deliver exceptional results.
-          </p>
-          <Button size="lg" variant="secondary" asChild className="rounded-full">
-            <Link href="/contact#start-project">
-              Get in Touch <ArrowRight className="ml-2 h-5 w-5" />
-            </Link>
-          </Button>
+      {/* Blog Section */}
+      <section className="py-16 md:py-24 bg-neutral-900 text-neutral-100">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid md:grid-cols-3 gap-8 items-center">
+            <div className="md:col-span-1 space-y-6">
+              <p className="text-sm font-semibold text-primary flex items-center">
+                <Dot className="h-5 w-5 mr-1 -ml-1" /> Blog
+              </p>
+              <h2 className="text-4xl md:text-5xl font-bold leading-tight">
+                The latest from CodeAndCount.com
+              </h2>
+              <Button
+                variant="default"
+                size="lg"
+                asChild
+                className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full group pl-6 pr-4 py-3 text-base"
+              >
+                <Link href="/blog">
+                  View the blog
+                  <span className="ml-2 bg-primary-foreground/20 p-1.5 rounded-full inline-flex items-center justify-center">
+                    <ArrowUpRight className="h-4 w-4 text-primary-foreground" />
+                  </span>
+                </Link>
+              </Button>
+            </div>
+            <div className="md:col-span-2">
+              <div className="flex space-x-6 overflow-x-auto pb-4 -mb-4">
+                {homepageBlogPosts.slice(0, 3).map((post) => (
+                  <Link key={post.slug} href={`/blog/${post.slug}`} className="block flex-shrink-0 w-full sm:w-[calc(50%-0.75rem)] md:w-[calc(33.333%-1rem)] group">
+                    <Card className="bg-neutral-800 border-neutral-700 hover:border-primary/50 transition-all duration-300 ease-in-out transform hover:-translate-y-1 h-full flex flex-col">
+                      <Image
+                        src={post.imageUrl}
+                        alt={post.title}
+                        width={600}
+                        height={400}
+                        className="w-full h-48 object-cover rounded-t-lg transition-transform duration-300 ease-in-out group-hover:scale-105"
+                        data-ai-hint={post.dataAiHintImage}
+                      />
+                      <CardContent className="p-4 flex-grow flex flex-col">
+                        <p className="text-xs text-neutral-400 mb-1 flex items-center">
+                           <Dot className="h-4 w-4 mr-0.5 -ml-1 text-primary" /> {post.readTime}
+                        </p>
+                        <h3 className="text-lg font-semibold text-neutral-100 group-hover:text-primary transition-colors line-clamp-2 mb-2">
+                          {post.title}
+                        </h3>
+                        <p className="text-sm text-neutral-300 line-clamp-3 flex-grow">
+                          {post.excerpt}
+                        </p>
+                      </CardContent>
+                    </Card>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -292,3 +361,5 @@ export default function HomePage() {
     </div>
   );
 }
+
+    
