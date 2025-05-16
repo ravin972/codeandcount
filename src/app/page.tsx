@@ -7,13 +7,17 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ArrowUpRight, Calculator, Sparkles, ArrowRight, Eye, Dot } from 'lucide-react';
 import InfiniteScrollerWithMouseFollower from '@/components/effects/InfiniteScrollerWithMouseFollower';
 import { CircleCheckBig, ShoppingCart } from 'lucide-react';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+
 
 const services = [
   { name: 'Brand Identity', description: 'Crafting unique visual identities that resonate.', icon: <CircleCheckBig className="h-10 w-10 text-primary mb-4" /> },
   { name: 'Websites & Apps', description: 'Designing and developing high-performance digital platforms.', icon: <CircleCheckBig className="h-10 w-10 text-primary mb-4" /> },
   { name: 'SEO Strategy', description: 'Optimizing your online presence for maximum visibility.', icon: <CircleCheckBig className="h-10 w-10 text-primary mb-4" /> },
   { name: 'Craft CMS Development', description: 'Building flexible and powerful websites with Craft CMS.', icon: <CircleCheckBig className="h-10 w-10 text-primary mb-4" /> },
-  { name: 'WordPress Solutions', description: 'Building powerful and scalable websites with WordPress.', icon: <CircleCheckBig className="h-10 w-10 text-primary mb-4" /> }, // Changed from ShoppingCart to CircleCheckBig for consistency
+  { name: 'WordPress Solutions', description: 'Building powerful and scalable websites with WordPress.', icon: <CircleCheckBig className="h-10 w-10 text-primary mb-4" /> },
   { name: 'Accounting', description: 'Managing your finances with precision and expertise.', icon: <Calculator className="h-10 w-10 text-primary mb-4" /> },
 ];
 
@@ -75,24 +79,21 @@ const homepageBlogPosts = [
   {
     slug: 'the-future-of-web-design-trends-for-2024',
     title: 'The Future of Web Design: Trends for 2024',
-    imageUrl: 'https://placehold.co/600x450.png',
-    dataAiHintImage: 'futuristic design',
+    imageUrl: 'https://images.unsplash.com/photo-1547398123-828a28902e57?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxmdXR1cmlzdGljJTIwZGVzaWdufGVufDB8fHx8MTc0NzM3NjYzN3ww&ixlib=rb-4.1.0&q=80&w=1080',
     excerpt: 'Discover the cutting-edge web design trends shaping the digital landscape in 2024, from AI integration to immersive experiences.',
     readTime: '6 min read',
   },
   {
     slug: 'unlocking-seo-success-a-comprehensive-guide',
     title: 'Unlocking SEO Success: A Comprehensive Guide',
-    imageUrl: 'https://placehold.co/600x450.png',
-    dataAiHintImage: 'seo chart graph',
+    imageUrl: 'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzZW8lMjBjaGFydCUyMGdyYXBofGVufDB8fHx8MTc0NzM3NjYzN3ww&ixlib=rb-4.1.0&q=80&w=1080',
     excerpt: 'Navigate the complexities of SEO with our in-depth guide, covering everything from keyword research to technical optimization.',
     readTime: '10 min read',
   },
   {
     slug: 'why-craft-cms-is-our-go-to-for-flexible-websites',
     title: 'Why Craft CMS is Our Go-To for Flexible Websites',
-    imageUrl: 'https://placehold.co/600x450.png',
-    dataAiHintImage: 'cms interface',
+    imageUrl: 'https://images.unsplash.com/photo-1698621193747-e8788c620dbc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxjbXMlMjBpbnRlcmZhY2V8ZW58MHx8fHwxNzQ3Mzc2NjM3fDA&ixlib=rb-4.1.0&q=80&w=1080',
     excerpt: 'Explore the benefits of Craft CMS and why it stands out as a powerful, flexible, and user-friendly content management system.',
     readTime: '4 min read',
   },
@@ -350,7 +351,6 @@ export default function HomePage() {
                         width={600}
                         height={400}
                         className="w-full h-48 object-cover rounded-t-lg transition-transform duration-300 ease-in-out group-hover:scale-105"
-                        data-ai-hint={post.dataAiHintImage}
                       />
                       <CardContent className="p-4 flex-grow flex flex-col">
                         <p className="text-xs text-neutral-400 mb-1 flex items-center">
@@ -374,3 +374,4 @@ export default function HomePage() {
     </div>
   );
 }
+
