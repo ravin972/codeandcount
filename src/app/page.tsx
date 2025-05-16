@@ -4,6 +4,9 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
 import { ArrowUpRight, CheckCircle, Eye, Calculator, Sparkles, ArrowRight } from 'lucide-react';
 import InfiniteScrollerWithMouseFollower from '@/components/effects/InfiniteScrollerWithMouseFollower';
 
@@ -127,8 +130,8 @@ export default function HomePage() {
       {/* Services Section */}
       <section id="services" className="py-16 bg-secondary">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-center mb-4">Our Core Services</h2>
-          <p className="text-xl text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
+          <h2 className="text-4xl font-bold text-center">Our Core Services</h2>
+          <p className="text-xl text-muted-foreground text-center mt-4 mb-12 max-w-2xl mx-auto">
             We offer a comprehensive suite of services to bring your vision to life.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -198,7 +201,7 @@ export default function HomePage() {
             ))}
           </div>
           <div className="text-center mt-12">
-            <Button size="lg" variant="link" asChild className="rounded-md">
+            <Button size="lg" variant="outline" asChild className="rounded-full">
               <Link href="/work">
                 Explore All Projects <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
@@ -260,6 +263,29 @@ export default function HomePage() {
           <p className="text-lg md:text-xl text-background/80 dark:text-muted-foreground max-w-2xl mx-auto mb-10">
             Unlock the power of AI to rewrite your content, incorporate strategic keywords, and climb search engine rankings. Try our free SEO Optimizer tool today!
           </p>
+          <Card className="max-w-xl mx-auto bg-background/5 dark:bg-foreground/5 backdrop-blur-sm border-transparent shadow-md mb-10 p-6 text-left">
+            <CardContent className="p-0 space-y-4">
+              <div>
+                <Label htmlFor="mock-text-input" className="text-sm font-medium text-background/90 dark:text-foreground/90">Original Text (Preview)</Label>
+                <Textarea
+                  id="mock-text-input"
+                  placeholder="Your original content goes here..."
+                  readOnly
+                  rows={3}
+                  className="mt-1 bg-background/10 dark:bg-foreground/10 text-background dark:text-foreground placeholder:text-background/50 dark:placeholder:text-foreground/50 border-background/20 dark:border-foreground/20 focus-visible:ring-primary"
+                />
+              </div>
+              <div>
+                <Label htmlFor="mock-keywords-input" className="text-sm font-medium text-background/90 dark:text-foreground/90">Target Keywords (Preview)</Label>
+                <Input
+                  id="mock-keywords-input"
+                  placeholder="Keywords like 'web design, AI, content strategy'..."
+                  readOnly
+                  className="mt-1 bg-background/10 dark:bg-foreground/10 text-background dark:text-foreground placeholder:text-background/50 dark:placeholder:text-foreground/50 border-background/20 dark:border-foreground/20 focus-visible:ring-primary"
+                />
+              </div>
+            </CardContent>
+          </Card>
           <Button size="lg" asChild className="rounded-full">
             <Link href="/seo-optimizer">
               Try SEO Optimizer <ArrowRight className="ml-2 h-5 w-5" />
