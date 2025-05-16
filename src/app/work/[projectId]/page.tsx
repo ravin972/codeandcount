@@ -23,9 +23,9 @@ const portfolioItems = [
     servicesProvided: ['Brand Strategy', 'Visual Identity Design', 'Logo Creation', 'Style Guide Development', 'Print Design'],
     results: '200% increase in brand recognition, 150% uplift in website engagement, Successfully secured Series A funding post-rebrand.',
     gallery: [
-        { src: 'https://placehold.co/800x600.png?text=Logo+Concept', alt: 'Logo Concept', dataAiHint: 'logo sketch' },
-        { src: 'https://placehold.co/800x600.png?text=Website+Mockup', alt: 'Website Mockup', dataAiHint: 'website ui' },
-        { src: 'https://placehold.co/800x600.png?text=Brand+Guidelines', alt: 'Brand Guidelines', dataAiHint: 'brochure design' },
+        { src: 'https://placehold.co/800x600.png', alt: 'Logo Concept', dataAiHint: 'logo sketch' },
+        { src: 'https://placehold.co/800x600.png', alt: 'Website Mockup', dataAiHint: 'website ui' },
+        { src: 'https://placehold.co/800x600.png', alt: 'Brand Guidelines', dataAiHint: 'brochure design' },
     ]
   },
   // Add more mock projects if needed
@@ -155,3 +155,4 @@ export default function ProjectDetailPage({ params }: { params: { projectId: str
     </div>
   );
 }
+
