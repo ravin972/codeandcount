@@ -82,6 +82,7 @@ const homepageBlogPosts = [
     imageUrl: 'https://images.unsplash.com/photo-1547398123-828a28902e57?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxmdXR1cmlzdGljJTIwZGVzaWdufGVufDB8fHx8MTc0NzM3NjYzN3ww&ixlib=rb-4.1.0&q=80&w=1080',
     excerpt: 'Discover the cutting-edge web design trends shaping the digital landscape in 2024, from AI integration to immersive experiences.',
     readTime: '6 min read',
+    dataAiHint: 'futuristic design'
   },
   {
     slug: 'unlocking-seo-success-a-comprehensive-guide',
@@ -89,6 +90,7 @@ const homepageBlogPosts = [
     imageUrl: 'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzZW8lMjBjaGFydCUyMGdyYXBofGVufDB8fHx8MTc0NzM3NjYzN3ww&ixlib=rb-4.1.0&q=80&w=1080',
     excerpt: 'Navigate the complexities of SEO with our in-depth guide, covering everything from keyword research to technical optimization.',
     readTime: '10 min read',
+    dataAiHint: 'seo chart graph'
   },
   {
     slug: 'why-craft-cms-is-our-go-to-for-flexible-websites',
@@ -96,6 +98,7 @@ const homepageBlogPosts = [
     imageUrl: 'https://images.unsplash.com/photo-1698621193747-e8788c620dbc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxjbXMlMjBpbnRlcmZhY2V8ZW58MHx8fHwxNzQ3Mzc2NjM3fDA&ixlib=rb-4.1.0&q=80&w=1080',
     excerpt: 'Explore the benefits of Craft CMS and why it stands out as a powerful, flexible, and user-friendly content management system.',
     readTime: '4 min read',
+    dataAiHint: 'cms interface'
   },
   {
     slug: 'ai-in-digital-marketing-the-new-frontier',
@@ -134,9 +137,9 @@ export default function HomePage() {
   const checkScrollability = useCallback(() => {
     if (scrollContainerRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
-      setCanScrollLeft(scrollLeft > 0);
-      // Add a small tolerance to handle potential floating point inaccuracies
-      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1);
+      setCanScrollLeft(scrollLeft > 5); // Use a small tolerance
+      // Add a small tolerance to handle potential floating point inaccuracies or fractional widths
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 5);
     }
   }, []);
 
@@ -145,28 +148,27 @@ export default function HomePage() {
       if (cardRef.current) {
         const cardStyles = window.getComputedStyle(cardRef.current);
         const cardWidth = cardRef.current.offsetWidth;
-        // Assuming space-x-6 which is 1.5rem. Convert rem to px.
-        const gap = parseFloat(window.getComputedStyle(document.documentElement).fontSize) * 1.5;
+        const gap = parseFloat(cardStyles.marginRight) || (parseFloat(window.getComputedStyle(document.documentElement).fontSize) * 1.5); // 1.5rem = space-x-6
         setItemWidth(cardWidth + gap);
       }
     };
 
     calculateItemWidth();
-    checkScrollability(); // Check initial scrollability
+    checkScrollability();
 
-    window.addEventListener('resize', calculateItemWidth);
-    window.addEventListener('resize', checkScrollability);
     const container = scrollContainerRef.current;
     if (container) {
         container.addEventListener('scroll', checkScrollability);
     }
+    window.addEventListener('resize', calculateItemWidth);
+    window.addEventListener('resize', checkScrollability);
 
     return () => {
-        window.removeEventListener('resize', calculateItemWidth);
-        window.removeEventListener('resize', checkScrollability);
         if (container) {
             container.removeEventListener('scroll', checkScrollability);
         }
+        window.removeEventListener('resize', calculateItemWidth);
+        window.removeEventListener('resize', checkScrollability);
     };
   }, [homepageBlogPosts, checkScrollability]);
 
@@ -178,9 +180,7 @@ export default function HomePage() {
         left: scrollValue,
         behavior: 'smooth',
       });
-      // checkScrollability might be slightly delayed due to smooth scroll
-      // Re-check after a short delay
-      setTimeout(checkScrollability, 350); // Adjust delay as needed for smooth scroll duration
+      setTimeout(checkScrollability, 350); 
     }
   };
 
@@ -306,7 +306,7 @@ export default function HomePage() {
           <div className="text-center mt-12">
             <Button size="lg" variant="outline" asChild className="rounded-full group">
               <Link href="/work">
-                Explore All Projects <ArrowRight className="ml-2 h-5 w-5 transition-all duration-300 ease-in-out group-hover:rotate-45" />
+                Explore All Projects <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
           </div>
@@ -403,7 +403,7 @@ export default function HomePage() {
               <h2 className="text-4xl md:text-5xl font-bold leading-tight">
                 The latest from CodeAndCount.com
               </h2>
-              <div className="flex items-center space-x-3">
+              <div className="space-y-4">
                 <Button
                   variant="default"
                   size="lg"
@@ -417,14 +417,16 @@ export default function HomePage() {
                     </span>
                   </Link>
                 </Button>
-                <Button variant="outline" size="icon" onClick={() => handleScroll('left')} disabled={!canScrollLeft} className="bg-neutral-800 border-neutral-700 hover:bg-neutral-700 disabled:opacity-50">
-                  <ChevronLeft className="h-5 w-5" />
-                  <span className="sr-only">Scroll Left</span>
-                </Button>
-                <Button variant="outline" size="icon" onClick={() => handleScroll('right')} disabled={!canScrollRight} className="bg-neutral-800 border-neutral-700 hover:bg-neutral-700 disabled:opacity-50">
-                  <ChevronRight className="h-5 w-5" />
-                  <span className="sr-only">Scroll Right</span>
-                </Button>
+                <div className="flex space-x-3">
+                  <Button variant="outline" size="icon" onClick={() => handleScroll('left')} disabled={!canScrollLeft} className="bg-neutral-800 border-neutral-700 hover:bg-neutral-700 disabled:opacity-50">
+                    <ChevronLeft className="h-5 w-5" />
+                    <span className="sr-only">Scroll Left</span>
+                  </Button>
+                  <Button variant="outline" size="icon" onClick={() => handleScroll('right')} disabled={!canScrollRight} className="bg-neutral-800 border-neutral-700 hover:bg-neutral-700 disabled:opacity-50">
+                    <ChevronRight className="h-5 w-5" />
+                    <span className="sr-only">Scroll Right</span>
+                  </Button>
+                </div>
               </div>
             </div>
             <div className="md:col-span-2">
@@ -467,3 +469,4 @@ export default function HomePage() {
     </div>
   );
 }
+
