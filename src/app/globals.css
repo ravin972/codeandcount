@@ -83,7 +83,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground font-sans; /* Use --font-geist-sans from layout */
+    @apply bg-background text-foreground font-sans; /* Use --font-oldschoolGrotesk from layout */
   }
   
   /* Global Text Selection Styles */
@@ -94,5 +94,15 @@
   ::-moz-selection { /* Firefox */
     background-color: #D2FF70;
     color: #000000;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
   }
 }
