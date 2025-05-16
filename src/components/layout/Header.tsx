@@ -7,7 +7,7 @@ import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Menu, Briefcase, Users, Rss, Mail, Sparkles, ArrowUpRight } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { ThemeToggle } from '@/components/ThemeToggle';
 
 const navLinks = [
@@ -50,7 +50,7 @@ export function Header() {
           "flex items-center justify-between rounded-full shadow-xl backdrop-blur-lg bg-background/80 transition-all duration-300 ease-in-out",
           isCondensed
             ? "w-1/2 h-14 px-3 py-1 sm:px-4 mx-auto" 
-            : "container mx-auto h-16 px-4 py-2 sm:px-6" // Added mx-auto here
+            : "container mx-auto h-16 px-4 py-2 sm:px-6" 
         )}
       >
         {/* Logo */}
@@ -87,14 +87,14 @@ export function Header() {
 
         {/* CTA and Theme Toggle */}
         <div className={cn(
-          "hidden md:flex items-center transition-all duration-300 ease-in-out group", // Added group here for hover effect on icon
+          "hidden md:flex items-center transition-all duration-300 ease-in-out group", 
           isCondensed ? "space-x-2 lg:space-x-3" : "space-x-3 lg:space-x-4"
         )}>
           <Button
             variant="default"
             size={isCondensed ? "sm" : "default"} 
             className={cn(
-              "rounded-full relative transition-all duration-300 ease-in-out group", // Added group here for icon hover
+              "rounded-full relative transition-all duration-300 ease-in-out group", 
               isCondensed ? "pl-3 pr-8 h-8 text-xs" : "pl-4 pr-10 h-9 text-sm" 
             )}
             onClick={() => router.push('/contact#start-project')}
@@ -102,7 +102,7 @@ export function Header() {
             <span>Start a project</span>
             <ArrowUpRight
               className={cn(
-                "absolute top-1/2 -translate-y-1/2 transition-all duration-300 ease-in-out group-hover:rotate-[-45deg]", //Rotate on group hover
+                "absolute top-1/2 -translate-y-1/2 transition-all duration-300 ease-in-out group-hover:rotate-180", 
                 isCondensed ? "right-2 h-3.5 w-3.5" : "right-2.5 h-4 w-4" 
               )}
             />
@@ -143,7 +143,7 @@ export function Header() {
                 </nav>
                 <Button 
                   asChild 
-                  className="w-full rounded-full group" // Added group for icon hover
+                  className="w-full rounded-full group" 
                   onClick={() => {
                     setIsMobileMenuOpen(false);
                     router.push('/contact#start-project');
@@ -151,7 +151,7 @@ export function Header() {
                 >
                   <Link href="/contact#start-project" className="flex items-center justify-center">
                     Start a project
-                    <ArrowUpRight className="ml-2 h-4 w-4 transition-all duration-300 ease-in-out group-hover:rotate-[-45deg]" />
+                    <ArrowUpRight className="ml-2 h-4 w-4 transition-all duration-300 ease-in-out group-hover:rotate-180" />
                   </Link>
                 </Button>
               </div>
