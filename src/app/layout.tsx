@@ -1,22 +1,17 @@
 
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Inter } from 'next/font/google'; // Changed from Geist, Geist_Mono
 import './globals.css';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { Toaster } from "@/components/ui/toaster";
 import { cn } from '@/lib/utils';
 import { ThemeProvider } from "@/components/ThemeProvider";
-// BackToTopButton removed from here
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
+// Initialize Inter font
+const inter = Inter({
   subsets: ['latin'],
-});
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
-  subsets: ['latin'],
+  variable: '--font-inter', // Define a CSS variable for Inter
 });
 
 export const metadata: Metadata = {
@@ -49,10 +44,8 @@ export const metadata: Metadata = {
     // creator: '@creatorhandle', // Replace with actual creator handle
     images: ['https://placehold.co/1200x630.png?text=CodeAndCount'], // Replace
   },
-  // PWA related meta tags (basic)
-  manifest: '/manifest.json', // Create this file later if full PWA is needed
-  themeColor: '#D1FE71', // New primary color
-  // Add more meta tags as needed: icons, apple-touch-icon etc.
+  manifest: '/manifest.json',
+  themeColor: '#D1FE71',
 };
 
 export default function RootLayout({
@@ -61,7 +54,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn(geistSans.variable, geistMono.variable)} suppressHydrationWarning>
+    <html lang="en" className={cn(inter.variable)} suppressHydrationWarning> {/* Use Inter variable */}
       <body className="antialiased flex flex-col min-h-screen">
         <ThemeProvider
           attribute="class"
@@ -73,10 +66,8 @@ export default function RootLayout({
           <main className="flex-grow">{children}</main>
           <Footer />
           <Toaster />
-          {/* BackToTopButton removed from here */}
         </ThemeProvider>
       </body>
     </html>
   );
 }
-
