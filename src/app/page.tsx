@@ -206,7 +206,7 @@ export default function HomePage() {
           <div className="text-center mt-12">
             <Button size="lg" variant="outline" asChild className="rounded-full group">
               <Link href="/work">
-                Explore All Projects <ArrowRight className="ml-2 h-5 w-5 transition-all duration-300 ease-in-out group-hover:rotate-45" />
+                Explore All Projects <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
             </Button>
           </div>
@@ -318,4 +318,3 @@ export default function HomePage() {
     </div>
   );
 }
-
