@@ -102,7 +102,7 @@ export function Header() {
             <span>Start a project</span>
             <ArrowUpRight
               className={cn(
-                "absolute top-1/2 -translate-y-1/2 transition-all duration-300 ease-in-out group-hover:rotate-90", 
+                "absolute top-1/2 -translate-y-1/2 transition-all duration-300 ease-in-out group-hover:rotate-45", 
                 isCondensed ? "right-2 h-3.5 w-3.5" : "right-2.5 h-4 w-4" 
               )}
             />
@@ -151,7 +151,7 @@ export function Header() {
                 >
                   <Link href="/contact#start-project" className="flex items-center justify-center">
                     Start a project
-                    <ArrowUpRight className="ml-2 h-4 w-4 transition-all duration-300 ease-in-out group-hover:rotate-90" />
+                    <ArrowUpRight className="ml-2 h-4 w-4 transition-all duration-300 ease-in-out group-hover:rotate-45" />
                   </Link>
                 </Button>
               </div>
