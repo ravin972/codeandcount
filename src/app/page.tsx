@@ -1,15 +1,15 @@
 
+"use client";
+
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { ArrowUpRight, Calculator, Sparkles, ArrowRight, Eye, Dot } from 'lucide-react';
+import { ArrowUpRight, Calculator, Sparkles, ArrowRight, Eye, Dot, ChevronLeft, ChevronRight } from 'lucide-react';
 import InfiniteScrollerWithMouseFollower from '@/components/effects/InfiniteScrollerWithMouseFollower';
 import { CircleCheckBig, ShoppingCart } from 'lucide-react';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
+import React, { useRef, useState, useEffect, useCallback } from 'react';
 
 
 const services = [
@@ -63,7 +63,7 @@ const testimonials = [
     avatar: 'https://placehold.co/100x100.png?text=JD',
     dataAiHint: 'person portrait',
     quote: "CodeAndCount.com transformed our online presence. Their team is professional, creative, and delivered outstanding results. We couldn't be happier!",
-    videoUrl: 'https://vimeo.com/placeholder', 
+    videoUrl: 'https://vimeo.com/placeholder',
   },
   {
     name: 'John Smith',
@@ -97,10 +97,94 @@ const homepageBlogPosts = [
     excerpt: 'Explore the benefits of Craft CMS and why it stands out as a powerful, flexible, and user-friendly content management system.',
     readTime: '4 min read',
   },
+  {
+    slug: 'ai-in-digital-marketing-the-new-frontier',
+    title: 'AI in Digital Marketing: The New Frontier',
+    imageUrl: 'https://placehold.co/600x400.png',
+    dataAiHint: 'artificial intelligence marketing',
+    excerpt: 'How AI is revolutionizing digital marketing strategies, from content creation to customer analytics.',
+    readTime: '8 min read',
+  },
+  {
+    slug: 'the-importance-of-user-experience-ux-in-web-design',
+    title: 'The Importance of User Experience (UX) in Web Design',
+    imageUrl: 'https://placehold.co/600x400.png',
+    dataAiHint: 'user experience interface',
+    excerpt: 'A deep dive into why UX is paramount for website success and how to optimize it for your users.',
+    readTime: '7 min read',
+  },
+  {
+    slug: 'wordpress-vs-headless-cms-which-is-right-for-you',
+    title: 'WordPress vs. Headless CMS: Which is Right for You?',
+    imageUrl: 'https://placehold.co/600x400.png',
+    dataAiHint: 'cms comparison chart',
+    excerpt: 'Comparing traditional WordPress with modern headless CMS solutions to help you choose the best fit.',
+    readTime: '9 min read',
+  },
 ];
 
 
 export default function HomePage() {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
+  const [itemWidth, setItemWidth] = useState(0);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
+
+  const checkScrollability = useCallback(() => {
+    if (scrollContainerRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
+      setCanScrollLeft(scrollLeft > 0);
+      // Add a small tolerance to handle potential floating point inaccuracies
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1);
+    }
+  }, []);
+
+  useEffect(() => {
+    const calculateItemWidth = () => {
+      if (cardRef.current) {
+        const cardStyles = window.getComputedStyle(cardRef.current);
+        const cardWidth = cardRef.current.offsetWidth;
+        // Assuming space-x-6 which is 1.5rem. Convert rem to px.
+        const gap = parseFloat(window.getComputedStyle(document.documentElement).fontSize) * 1.5;
+        setItemWidth(cardWidth + gap);
+      }
+    };
+
+    calculateItemWidth();
+    checkScrollability(); // Check initial scrollability
+
+    window.addEventListener('resize', calculateItemWidth);
+    window.addEventListener('resize', checkScrollability);
+    const container = scrollContainerRef.current;
+    if (container) {
+        container.addEventListener('scroll', checkScrollability);
+    }
+
+    return () => {
+        window.removeEventListener('resize', calculateItemWidth);
+        window.removeEventListener('resize', checkScrollability);
+        if (container) {
+            container.removeEventListener('scroll', checkScrollability);
+        }
+    };
+  }, [homepageBlogPosts, checkScrollability]);
+
+
+  const handleScroll = (direction: 'left' | 'right') => {
+    if (scrollContainerRef.current && itemWidth > 0) {
+      const scrollValue = direction === 'left' ? -itemWidth : itemWidth;
+      scrollContainerRef.current.scrollBy({
+        left: scrollValue,
+        behavior: 'smooth',
+      });
+      // checkScrollability might be slightly delayed due to smooth scroll
+      // Re-check after a short delay
+      setTimeout(checkScrollability, 350); // Adjust delay as needed for smooth scroll duration
+    }
+  };
+
+
   return (
     <div className="bg-background text-foreground">
       {/* Hero Section */}
@@ -119,11 +203,11 @@ export default function HomePage() {
               <div className="relative inline-grid place-items-center [transform-style:preserve-3d] [perspective:1000px]">
                 <div
                   aria-hidden="true"
-                  className="col-start-1 row-start-1 text-5xl md:text-7xl font-bold tracking-tight 
-                             text-primary 
-                             blur-xl opacity-60 brightness-150 
-                             [transform:translateZ(-30px)_scale(1.1)] 
-                             pointer-events-none 
+                  className="col-start-1 row-start-1 text-5xl md:text-7xl font-bold tracking-tight
+                             text-primary
+                             blur-xl opacity-60 brightness-150
+                             [transform:translateZ(-30px)_scale(1.1)]
+                             pointer-events-none
                             "
                 >
                   Crafting <span className="text-primary">Digital Excellence</span>.
@@ -222,7 +306,7 @@ export default function HomePage() {
           <div className="text-center mt-12">
             <Button size="lg" variant="outline" asChild className="rounded-full group">
               <Link href="/work">
-                Explore All Projects <ArrowRight className="ml-2 h-5 w-5" />
+                Explore All Projects <ArrowRight className="ml-2 h-5 w-5 transition-all duration-300 ease-in-out group-hover:rotate-45" />
               </Link>
             </Button>
           </div>
@@ -272,16 +356,16 @@ export default function HomePage() {
           <div className="relative inline-grid place-items-center [transform-style:preserve-3d] [perspective:1000px] w-full text-center mb-6">
             <div
               aria-hidden="true"
-              className="col-start-1 row-start-1 text-4xl font-bold tracking-tight text-primary blur-lg opacity-60 brightness-150 [transform:translateZ(-20px)_scale(1.05)] pointer-events-none"
+              className="col-start-1 row-start-1 text-4xl md:text-5xl font-bold tracking-tight text-primary blur-lg opacity-60 brightness-150 [transform:translateZ(-20px)_scale(1.05)] pointer-events-none"
             >
               Boost Your SEO with Our AI Optimizer
             </div>
-            <h2 className="col-start-1 row-start-1 relative z-[1] text-4xl font-bold">Boost Your SEO with Our AI Optimizer</h2>
+            <h2 className="col-start-1 row-start-1 relative z-[1] text-4xl md:text-5xl font-bold">Boost Your SEO with Our AI Optimizer</h2>
           </div>
           <p className="text-lg md:text-xl text-background/80 dark:text-muted-foreground max-w-2xl mx-auto mb-10">
             Unlock the power of AI to rewrite your content, incorporate strategic keywords, and climb search engine rankings. Try our free SEO Optimizer tool today!
           </p>
-          
+
           <Button size="lg" asChild className="rounded-full">
             <Link href="/seo-optimizer">
               Try SEO Optimizer <ArrowRight className="ml-2 h-5 w-5" />
@@ -289,11 +373,11 @@ export default function HomePage() {
           </Button>
         </div>
       </section>
-      
+
       {/* Ready to Elevate Section */}
       <section className="py-20 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl font-bold mb-6">Ready to Elevate Your Brand?</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Elevate Your Brand?</h2>
           <p className="text-lg md:text-xl max-w-2xl mx-auto mb-10">
             Let's discuss how CodeAndCount.com can help you achieve your business goals. We partner with clients of all sizes, across diverse industries, to deliver exceptional results.
           </p>
@@ -311,7 +395,7 @@ export default function HomePage() {
       {/* Blog Section */}
       <section className="py-16 md:py-24 bg-neutral-900 text-neutral-100">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-3 gap-12 items-center"> {/* Increased gap here */}
+          <div className="grid md:grid-cols-3 gap-12 items-center">
             <div className="md:col-span-1 space-y-6">
               <p className="text-sm font-semibold text-primary flex items-center">
                 <Dot className="h-5 w-5 mr-1 -ml-1" /> Blog
@@ -319,24 +403,39 @@ export default function HomePage() {
               <h2 className="text-4xl md:text-5xl font-bold leading-tight">
                 The latest from CodeAndCount.com
               </h2>
-              <Button
-                variant="default"
-                size="lg"
-                asChild
-                className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full group pl-6 pr-4 py-3 text-base"
-              >
-                <Link href="/blog">
-                  View the blog
-                  <span className="ml-2 bg-primary-foreground/20 p-1.5 rounded-full inline-flex items-center justify-center">
-                    <ArrowUpRight className="h-4 w-4 text-primary-foreground" />
-                  </span>
-                </Link>
-              </Button>
+              <div className="flex items-center space-x-3">
+                <Button
+                  variant="default"
+                  size="lg"
+                  asChild
+                  className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full group pl-6 pr-4 py-3 text-base"
+                >
+                  <Link href="/blog">
+                    View the blog
+                    <span className="ml-2 bg-primary-foreground/20 p-1.5 rounded-full inline-flex items-center justify-center">
+                      <ArrowUpRight className="h-4 w-4 text-primary-foreground" />
+                    </span>
+                  </Link>
+                </Button>
+                <Button variant="outline" size="icon" onClick={() => handleScroll('left')} disabled={!canScrollLeft} className="bg-neutral-800 border-neutral-700 hover:bg-neutral-700 disabled:opacity-50">
+                  <ChevronLeft className="h-5 w-5" />
+                  <span className="sr-only">Scroll Left</span>
+                </Button>
+                <Button variant="outline" size="icon" onClick={() => handleScroll('right')} disabled={!canScrollRight} className="bg-neutral-800 border-neutral-700 hover:bg-neutral-700 disabled:opacity-50">
+                  <ChevronRight className="h-5 w-5" />
+                  <span className="sr-only">Scroll Right</span>
+                </Button>
+              </div>
             </div>
             <div className="md:col-span-2">
-              <div className="flex space-x-6 overflow-x-auto pb-4 -mb-4">
-                {homepageBlogPosts.slice(0, 3).map((post) => (
-                  <Link key={post.slug} href={`/blog/${post.slug}`} className="block flex-shrink-0 w-full sm:w-[calc(50%-0.75rem)] md:w-[calc(33.333%-1rem)] group">
+              <div ref={scrollContainerRef} className="flex space-x-6 overflow-x-auto pb-4 -mb-4 scrollbar-hide">
+                {homepageBlogPosts.map((post, index) => (
+                  <Link
+                    key={post.slug}
+                    href={`/blog/${post.slug}`}
+                    className="block flex-shrink-0 w-full sm:w-[calc(50%-0.75rem)] md:w-[calc(33.333%-1rem)] group"
+                    ref={index === 0 ? cardRef : null}
+                  >
                     <Card className="bg-neutral-800 border-neutral-700 hover:border-primary/50 transition-all duration-300 ease-in-out transform hover:-translate-y-1 h-full flex flex-col">
                       <Image
                         src={post.imageUrl}
@@ -344,6 +443,7 @@ export default function HomePage() {
                         width={600}
                         height={400}
                         className="w-full h-48 object-cover rounded-t-lg transition-transform duration-300 ease-in-out group-hover:scale-105"
+                        data-ai-hint={post.dataAiHint}
                       />
                       <CardContent className="p-4 flex-grow flex flex-col">
                         <p className="text-xs text-neutral-400 mb-1 flex items-center">
@@ -367,4 +467,3 @@ export default function HomePage() {
     </div>
   );
 }
-
