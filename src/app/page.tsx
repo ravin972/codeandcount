@@ -6,7 +6,6 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ArrowUpRight, Calculator, Sparkles, ArrowRight, Eye, Dot } from 'lucide-react';
 import InfiniteScrollerWithMouseFollower from '@/components/effects/InfiniteScrollerWithMouseFollower';
-// Changed: Using CircleCheckBig for services as it's visually closer to CheckCircle and available in lucide-react
 import { CircleCheckBig, ShoppingCart } from 'lucide-react';
 
 const services = [
@@ -14,7 +13,7 @@ const services = [
   { name: 'Websites & Apps', description: 'Designing and developing high-performance digital platforms.', icon: <CircleCheckBig className="h-10 w-10 text-primary mb-4" /> },
   { name: 'SEO Strategy', description: 'Optimizing your online presence for maximum visibility.', icon: <CircleCheckBig className="h-10 w-10 text-primary mb-4" /> },
   { name: 'Craft CMS Development', description: 'Building flexible and powerful websites with Craft CMS.', icon: <CircleCheckBig className="h-10 w-10 text-primary mb-4" /> },
-  { name: 'WordPress Solutions', description: 'Building powerful and scalable websites with WordPress.', icon: <ShoppingCart className="h-10 w-10 text-primary mb-4" /> },
+  { name: 'WordPress Solutions', description: 'Building powerful and scalable websites with WordPress.', icon: <CircleCheckBig className="h-10 w-10 text-primary mb-4" /> }, // Changed from ShoppingCart to CircleCheckBig for consistency
   { name: 'Accounting', description: 'Managing your finances with precision and expertise.', icon: <Calculator className="h-10 w-10 text-primary mb-4" /> },
 ];
 
@@ -60,7 +59,7 @@ const testimonials = [
     avatar: 'https://placehold.co/100x100.png?text=JD',
     dataAiHint: 'person portrait',
     quote: "CodeAndCount.com transformed our online presence. Their team is professional, creative, and delivered outstanding results. We couldn't be happier!",
-    videoUrl: 'https://vimeo.com/placeholder', // Placeholder
+    videoUrl: 'https://vimeo.com/placeholder', 
   },
   {
     name: 'John Smith',
@@ -68,7 +67,7 @@ const testimonials = [
     avatar: 'https://placehold.co/100x100.png?text=JS',
     dataAiHint: 'man smiling',
     quote: 'Working with CodeAndCount.com was a game-changer. Their insights into branding and web development are unparalleled. Highly recommended!',
-    videoUrl: 'https://vimeo.com/placeholder', // Placeholder
+    videoUrl: 'https://vimeo.com/placeholder',
   },
 ];
 
@@ -105,7 +104,6 @@ export default function HomePage() {
     <div className="bg-background text-foreground">
       {/* Hero Section */}
       <section className="py-20 md:py-32 relative overflow-hidden">
-        {/* Background Blobs */}
         <div
           aria-hidden="true"
           className="absolute top-[-10rem] left-[-15rem] w-[30rem] h-[30rem] md:w-[40rem] md:h-[40rem] bg-gradient-to-br from-primary/20 to-secondary/20 dark:from-primary/10 dark:to-secondary/10 rounded-full opacity-60 blur-3xl -z-10"
@@ -116,26 +114,19 @@ export default function HomePage() {
         />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
          <div className="relative bg-background/30 dark:bg-neutral-900/30 backdrop-blur-xl rounded-3xl border border-white/10 dark:border-neutral-700/50 shadow-2xl p-8 md:p-12 lg:p-16">
-            {/* Wrapper for Title and its bottom margin */}
             <div className="mb-6">
-              {/* Relative container for 3D effect and alignment */}
               <div className="relative inline-grid place-items-center [transform-style:preserve-3d] [perspective:1000px]">
-                {/* Glow Element */}
                 <div
                   aria-hidden="true"
-                  // Text styling classes MUST match the main h1 for size and shape
                   className="col-start-1 row-start-1 text-5xl md:text-7xl font-bold tracking-tight 
-                             text-primary {/* Glow color */}
-                             blur-xl opacity-60 brightness-150 {/* Effects: blur, opacity, brightness */}
-                             [transform:translateZ(-30px)_scale(1.1)] {/* 3D effect and slight enlargement */}
-                             pointer-events-none {/* Ensure it doesn't interfere with text selection/interaction */}
+                             text-primary 
+                             blur-xl opacity-60 brightness-150 
+                             [transform:translateZ(-30px)_scale(1.1)] 
+                             pointer-events-none 
                             "
                 >
-                  {/* Text content for the glow to take shape - must match main title */}
                   Crafting <span className="text-primary">Digital Excellence</span>.
                 </div>
-
-                {/* Main Title */}
                 <h1 className="col-start-1 row-start-1 relative z-[1] text-5xl md:text-7xl font-bold tracking-tight">
                   Crafting <span className="text-primary">Digital Excellence</span>.
                 </h1>
@@ -157,7 +148,15 @@ export default function HomePage() {
       {/* Services Section */}
       <section id="services" className="py-16 bg-secondary">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-center">Our Core Services</h2>
+          <div className="relative inline-grid place-items-center [transform-style:preserve-3d] [perspective:1000px] w-full text-center mb-4">
+            <div
+              aria-hidden="true"
+              className="col-start-1 row-start-1 text-4xl font-bold tracking-tight text-primary blur-lg opacity-60 brightness-150 [transform:translateZ(-20px)_scale(1.05)] pointer-events-none"
+            >
+              Our Core Services
+            </div>
+            <h2 className="col-start-1 row-start-1 relative z-[1] text-4xl font-bold text-center">Our Core Services</h2>
+          </div>
           <p className="text-xl text-muted-foreground text-center mt-4 mb-12 max-w-2xl mx-auto">
             We offer a comprehensive suite of services to bring your vision to life.
           </p>
@@ -262,7 +261,6 @@ export default function HomePage() {
                     "{testimonial.quote}"
                   </blockquote>
                   <div className="mt-4">
-                    {/* Placeholder for Vimeo embed */}
                     <div className="aspect-video bg-muted rounded-md flex items-center justify-center">
                       <p className="text-muted-foreground">Vimeo Video Placeholder (View on <a href={testimonial.videoUrl} target="_blank" rel="noopener noreferrer" className="text-primary underline">Vimeo</a>)</p>
                     </div>
@@ -298,6 +296,24 @@ export default function HomePage() {
         </div>
       </section>
       
+      {/* Ready to Elevate Section */}
+      <section className="py-20 bg-primary text-primary-foreground">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-4xl font-bold mb-6">Ready to Elevate Your Brand?</h2>
+          <p className="text-lg md:text-xl max-w-2xl mx-auto mb-10">
+            Let's discuss how CodeAndCount.com can help you achieve your business goals. We partner with clients of all sizes, across diverse industries, to deliver exceptional results.
+          </p>
+          <Button size="lg" variant="secondary" asChild className="rounded-full">
+            <Link href="/contact#start-project">
+              Get in Touch <ArrowRight className="ml-2 h-5 w-5" />
+            </Link>
+          </Button>
+        </div>
+      </section>
+
+      {/* Infinite Scroller Section */}
+      <InfiniteScrollerWithMouseFollower />
+
       {/* Blog Section */}
       <section className="py-16 md:py-24 bg-neutral-900 text-neutral-100">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -355,11 +371,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* Infinite Scroller Section */}
-      <InfiniteScrollerWithMouseFollower />
     </div>
   );
 }
-
-    
