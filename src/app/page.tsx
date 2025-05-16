@@ -7,7 +7,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ArrowUpRight, Calculator, Sparkles, ArrowRight, Eye } from 'lucide-react';
 import InfiniteScrollerWithMouseFollower from '@/components/effects/InfiniteScrollerWithMouseFollower';
 // Changed: Using CircleCheckBig for services as it's visually closer to CheckCircle and available in lucide-react
-import { CircleCheckBig } from 'lucide-react';
+import { CircleCheckBig, ShoppingCart } from 'lucide-react';
 
 
 const services = [
@@ -15,7 +15,7 @@ const services = [
   { name: 'Websites & Apps', description: 'Designing and developing high-performance digital platforms.', icon: <CircleCheckBig className="h-10 w-10 text-primary mb-4" /> },
   { name: 'SEO Strategy', description: 'Optimizing your online presence for maximum visibility.', icon: <CircleCheckBig className="h-10 w-10 text-primary mb-4" /> },
   { name: 'Craft CMS Development', description: 'Building flexible and powerful websites with Craft CMS.', icon: <CircleCheckBig className="h-10 w-10 text-primary mb-4" /> },
-  { name: 'Shopify Solutions', description: 'Creating engaging e-commerce experiences on Shopify.', icon: <CircleCheckBig className="h-10 w-10 text-primary mb-4" /> },
+  { name: 'WordPress Solutions', description: 'Building powerful and scalable websites with WordPress.', icon: <ShoppingCart className="h-10 w-10 text-primary mb-4" /> },
   { name: 'Accounting', description: 'Managing your finances with precision and expertise.', icon: <Calculator className="h-10 w-10 text-primary mb-4" /> },
 ];
 

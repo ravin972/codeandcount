@@ -48,14 +48,14 @@ const servicesDetails = [
     ]
   },
   { 
-    name: 'Shopify E-commerce', 
-    description: 'Launch and grow your online store with our expert Shopify development services. We design and build captivating e-commerce experiences that drive sales and enhance customer engagement.',
-    icon: <ShoppingCart className="h-12 w-12 mb-4 text-primary" />,
+    name: 'WordPress Solutions', 
+    description: 'We build robust and scalable websites using WordPress, tailored to your business needs, from blogs and portfolios to complex platforms and e-commerce stores with WooCommerce.',
+    icon: <ShoppingCart className="h-12 w-12 mb-4 text-primary" />, // Keeping ShoppingCart for now, can be changed
     points: [
-      "Shopify Theme Customization",
-      "Custom Shopify App Development",
-      "Store Setup & Migration",
-      "Conversion Rate Optimization"
+      "Custom WordPress Theme Development",
+      "Plugin Customization & Development",
+      "WooCommerce Integration & E-commerce",
+      "Performance & Security Optimization"
     ]
   },
   {
