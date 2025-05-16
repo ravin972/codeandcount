@@ -25,7 +25,7 @@ export function Header() {
   const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
   const [isCondensed, setIsCondensed] = useState(false);
-
+  
   useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
@@ -43,16 +43,15 @@ export function Header() {
     <header
       className={cn(
         "sticky top-0 z-50 transition-all duration-300 ease-in-out",
-        isCondensed ? "py-2" : "py-3 md:py-4" // Adjust overall vertical padding around the bar
+        isCondensed ? "py-2" : "py-3 md:py-4" 
       )}
     >
-      {/* This div is the actual navbar bar that floats and changes width/height/padding */}
       <div
         className={cn(
-          "flex items-center justify-between rounded-full shadow-xl backdrop-blur-lg bg-background/70 transition-all duration-300 ease-in-out mx-auto",
+          "flex items-center justify-between rounded-full shadow-xl backdrop-blur-lg bg-background/80 transition-all duration-300 ease-in-out", // Increased opacity from /70 to /80
           isCondensed
-            ? "w-1/2 h-14 px-3 py-1 sm:px-4" // Condensed: 50% width, smaller height/padding
-            : "container h-16 px-4 py-2 sm:px-6" // Default: container behavior for width, default height/padding
+            ? "w-1/2 h-14 px-3 py-1 sm:px-4 mx-auto" 
+            : "container h-16 px-4 py-2 sm:px-6" 
         )}
       >
         {/* Logo */}
@@ -77,8 +76,8 @@ export function Header() {
               key={link.href}
               href={link.href}
               className={cn(
-                "font-medium transition-all duration-300 ease-in-out hover:text-primary rounded-md relative",
-                isCondensed ? "px-2 py-1 text-xs" : "px-2.5 py-1.5 text-sm", // Text size and padding changes
+                "font-medium transition-all duration-300 ease-in-out hover:text-primary rounded-md relative text-sm", // Text size is consistently sm
+                isCondensed ? "px-2 py-1" : "px-2.5 py-1.5", 
                 pathname === link.href || pathname.startsWith(link.href + '/') ? "text-primary bg-primary/10" : "text-foreground/80 hover:bg-accent/50"
               )}
             >
@@ -94,10 +93,10 @@ export function Header() {
         )}>
           <Button
             variant="default"
-            size={isCondensed ? "sm" : "default"} // Button size changes
+            size={isCondensed ? "sm" : "default"} 
             className={cn(
               "rounded-full relative transition-all duration-300 ease-in-out",
-              isCondensed ? "pl-3 pr-8 h-8 text-xs" : "pl-4 pr-10 h-9 text-sm" // Padding and text size changes
+              isCondensed ? "pl-3 pr-8 h-8 text-xs" : "pl-4 pr-10 h-9 text-sm" 
             )}
             onClick={() => router.push('/contact#start-project')}
           >
@@ -105,7 +104,7 @@ export function Header() {
             <ArrowUpRight
               className={cn(
                 "absolute top-1/2 -translate-y-1/2 transition-all duration-300 ease-in-out",
-                isCondensed ? "right-2 h-3.5 w-3.5" : "right-2.5 h-4 w-4" // Icon size changes
+                isCondensed ? "right-2 h-3.5 w-3.5" : "right-2.5 h-4 w-4" 
               )}
             />
           </Button>
