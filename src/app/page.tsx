@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { ArrowRight, CheckCircle, Eye, Calculator, Sparkles } from 'lucide-react';
+import { ArrowUpRight, CheckCircle, Eye, Calculator, Sparkles, ArrowRight } from 'lucide-react';
 import InfiniteScrollerWithMouseFollower from '@/components/effects/InfiniteScrollerWithMouseFollower';
 
 const services = [
@@ -74,57 +74,60 @@ export default function HomePage() {
   return (
     <div className="bg-background text-foreground">
       {/* Hero Section */}
-      <section className="py-20 md:py-32">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          {/* Wrapper for Title and its bottom margin */}
-          <div className="mb-6">
-            {/* Relative container for 3D effect and alignment */}
-            <div className="relative inline-grid place-items-center [transform-style:preserve-3d] [perspective:1000px]">
-              {/* Glow Element */}
-              <div
-                aria-hidden="true"
-                // Text styling classes MUST match the main h1 for size and shape
-                className="col-start-1 row-start-1 text-5xl md:text-7xl font-bold tracking-tight 
-                           text-primary {/* Glow color */}
-                           blur-xl opacity-60 brightness-150 {/* Effects: blur, opacity, brightness */}
-                           [transform:translateZ(-30px)_scale(1.1)] {/* 3D effect and slight enlargement */}
-                           pointer-events-none {/* Ensure it doesn't interfere with text selection/interaction */}
-                          "
-              >
-                {/* Text content for the glow to take shape - must match main title */}
-                Crafting <span className="text-primary">Digital Excellence</span>.
+      <section className="py-20 md:py-32 relative overflow-hidden">
+        {/* Background Blobs */}
+        <div
+          aria-hidden="true"
+          className="absolute top-[-10rem] left-[-15rem] w-[30rem] h-[30rem] md:w-[40rem] md:h-[40rem] bg-gradient-to-br from-primary/20 to-secondary/20 dark:from-primary/10 dark:to-secondary/10 rounded-full opacity-60 blur-3xl -z-10"
+        />
+        <div
+          aria-hidden="true"
+          className="absolute bottom-[-5rem] right-[-10rem] w-[25rem] h-[25rem] md:w-[35rem] md:h-[35rem] bg-gradient-to-tl from-accent/20 to-primary/10 dark:from-accent/10 dark:to-primary/5 rounded-full opacity-50 blur-3xl -z-10"
+        />
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+         <div className="relative bg-background/30 dark:bg-neutral-900/30 backdrop-blur-xl rounded-3xl border border-white/10 dark:border-neutral-700/50 shadow-2xl p-8 md:p-12 lg:p-16">
+            {/* Wrapper for Title and its bottom margin */}
+            <div className="mb-6">
+              {/* Relative container for 3D effect and alignment */}
+              <div className="relative inline-grid place-items-center [transform-style:preserve-3d] [perspective:1000px]">
+                {/* Glow Element */}
+                <div
+                  aria-hidden="true"
+                  // Text styling classes MUST match the main h1 for size and shape
+                  className="col-start-1 row-start-1 text-5xl md:text-7xl font-bold tracking-tight 
+                             text-primary {/* Glow color */}
+                             blur-xl opacity-60 brightness-150 {/* Effects: blur, opacity, brightness */}
+                             [transform:translateZ(-30px)_scale(1.1)] {/* 3D effect and slight enlargement */}
+                             pointer-events-none {/* Ensure it doesn't interfere with text selection/interaction */}
+                            "
+                >
+                  {/* Text content for the glow to take shape - must match main title */}
+                  Crafting <span className="text-primary">Digital Excellence</span>.
+                </div>
+
+                {/* Main Title */}
+                <h1 className="col-start-1 row-start-1 relative z-[1] text-5xl md:text-7xl font-bold tracking-tight">
+                  Crafting <span className="text-primary">Digital Excellence</span>.
+                </h1>
               </div>
-
-              {/* Main Title */}
-              <h1 className="col-start-1 row-start-1 relative z-[1] text-5xl md:text-7xl font-bold tracking-tight">
-                Crafting <span className="text-primary">Digital Excellence</span>.
-              </h1>
             </div>
-          </div>
 
-          <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-10">
-            CodeAndCount.com is a web and app development powerhouse, dedicated to building impactful digital experiences that drive growth and elevate brands across industries.
-          </p>
-          <Button size="lg" asChild className="rounded-full">
-            <Link href="/contact#start-project">
-              Start Your Project <ArrowRight className="ml-2 h-5 w-5" />
-            </Link>
-          </Button>
+            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-10">
+              CodeAndCount.com is a web and app development powerhouse, dedicated to building impactful digital experiences that drive growth and elevate brands across industries.
+            </p>
+            <Button size="lg" asChild className="rounded-full">
+              <Link href="/contact#start-project">
+                Start Your Project <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </Button>
+          </div>
         </div>
       </section>
 
       {/* Services Section */}
       <section id="services" className="py-16 bg-secondary">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative inline-grid place-items-center [transform-style:preserve-3d] [perspective:1000px] w-full text-center mb-4">
-            <div
-              aria-hidden="true"
-              className="col-start-1 row-start-1 text-4xl font-bold tracking-tight text-primary blur-lg opacity-60 brightness-150 [transform:translateZ(-20px)_scale(1.05)] pointer-events-none"
-            >
-              Our Core Services
-            </div>
-            <h2 className="col-start-1 row-start-1 relative z-[1] text-4xl font-bold text-center">Our Core Services</h2>
-          </div>
+          <h2 className="text-4xl font-bold text-center mb-4">Our Core Services</h2>
           <p className="text-xl text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
             We offer a comprehensive suite of services to bring your vision to life.
           </p>
@@ -286,3 +289,4 @@ export default function HomePage() {
     </div>
   );
 }
+
