@@ -17,7 +17,7 @@ const blogPosts = [
     authorAvatar: 'https://placehold.co/40x40.png?text=AC',
     dataAiHintAuthor: 'professional person',
     excerpt: 'Discover the cutting-edge web design trends shaping the digital landscape in 2024, from AI integration to immersive experiences.',
-    imageUrl: 'https://placehold.co/1200x600.png',
+    imageUrl: 'https://images.unsplash.com/photo-1547398123-828a28902e57?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxmdXR1cmlzdGljJTIwZGVzaWdufGVufDB8fHx8MTc0NzM3NjYzN3ww&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHintImage: 'futuristic design',
     category: 'Web Design',
     readTime: '6 min read',
@@ -51,7 +51,7 @@ const blogPosts = [
     authorAvatar: 'https://placehold.co/40x40.png?text=SL',
     dataAiHintAuthor: 'marketing expert',
     excerpt: 'Navigate the complexities of SEO with our in-depth guide, covering everything from keyword research to technical optimization.',
-    imageUrl: 'https://placehold.co/1200x600.png',
+    imageUrl: 'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzZW8lMjBjaGFydCUyMGdyYXBofGVufDB8fHx8MTc0NzM3NjYzN3ww&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHintImage: 'seo chart graph',
     category: 'SEO',
     readTime: '10 min read',
@@ -66,19 +66,172 @@ const blogPosts = [
     authorAvatar: 'https://placehold.co/40x40.png?text=MR',
     dataAiHintAuthor: 'software developer',
     excerpt: 'Explore the benefits of Craft CMS and why it stands out as a powerful, flexible, and user-friendly content management system.',
-    imageUrl: 'https://placehold.co/1200x600.png',
+    imageUrl: 'https://images.unsplash.com/photo-1698621193747-e8788c620dbc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxjbXMlMjBpbnRlcmZhY2V8ZW58MHx8fHwxNzQ3Mzc2NjM3fDA&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHintImage: 'cms interface',
     category: 'Craft CMS',
     readTime: '4 min read',
     content: `<p>Content for Craft CMS...</p>`,
     tags: ['Craft CMS', 'Web Development', 'CMS']
   },
+  {
+    slug: 'building-a-strong-brand-identity-key-principles',
+    title: 'Building a Strong Brand Identity: Key Principles',
+    date: '2024-06-05',
+    author: 'Alex Chen',
+    authorAvatar: 'https://placehold.co/40x40.png?text=AC',
+    dataAiHintAuthor: 'professional person',
+    excerpt: 'Learn the fundamental principles of creating a memorable and effective brand identity that resonates with your target audience.',
+    imageUrl: 'https://placehold.co/1200x600.png',
+    dataAiHintImage: 'brand moodboard',
+    category: 'Branding',
+    readTime: '7 min read',
+    content: '<p>Content for branding principles...</p>',
+    tags: ['Branding', 'Design', 'Strategy']
+  },
+  {
+    slug: 'ai-in-digital-marketing-the-new-frontier',
+    title: 'AI in Digital Marketing: The New Frontier',
+    date: '2024-05-22',
+    author: 'Sam Lee',
+    authorAvatar: 'https://placehold.co/40x40.png?text=SL',
+    dataAiHintAuthor: 'marketing expert',
+    excerpt: 'How AI is revolutionizing digital marketing strategies, from content creation to customer analytics.',
+    imageUrl: 'https://placehold.co/1200x600.png',
+    dataAiHintImage: 'artificial intelligence marketing',
+    category: 'Digital Marketing',
+    readTime: '8 min read',
+    content: '<p>Content for AI in digital marketing...</p>',
+    tags: ['AI', 'Digital Marketing', 'Technology']
+  },
+  {
+    slug: 'the-importance-of-user-experience-ux-in-web-design',
+    title: 'The Importance of User Experience (UX) in Web Design',
+    date: '2024-05-10',
+    author: 'Alex Chen',
+    authorAvatar: 'https://placehold.co/40x40.png?text=AC',
+    dataAiHintAuthor: 'professional person',
+    excerpt: 'A deep dive into why UX is paramount for website success and how to optimize it for your users.',
+    imageUrl: 'https://placehold.co/1200x600.png',
+    dataAiHintImage: 'user experience interface',
+    category: 'Web Design',
+    readTime: '7 min read',
+    content: '<p>Content for UX importance...</p>',
+    tags: ['UX', 'Web Design', 'User Experience']
+  },
+  {
+    slug: 'wordpress-vs-headless-cms-which-is-right-for-you',
+    title: 'WordPress vs. Headless CMS: Which is Right for You?',
+    date: '2024-04-28',
+    author: 'Maria Rodriguez',
+    authorAvatar: 'https://placehold.co/40x40.png?text=MR',
+    dataAiHintAuthor: 'software developer',
+    excerpt: 'Comparing traditional WordPress with modern headless CMS solutions to help you choose the best fit.',
+    imageUrl: 'https://placehold.co/1200x600.png',
+    dataAiHintImage: 'cms comparison chart',
+    category: 'CMS',
+    readTime: '9 min read',
+    content: '<p>Content for WordPress vs Headless CMS...</p>',
+    tags: ['WordPress', 'Headless CMS', 'Web Development']
+  },
+  {
+    slug: 'mastering-tailwind-css-tips-and-tricks',
+    title: 'Mastering Tailwind CSS: Tips and Tricks',
+    date: '2024-04-15',
+    author: 'Sam Lee',
+    authorAvatar: 'https://placehold.co/40x40.png?text=SL',
+    dataAiHintAuthor: 'marketing expert',
+    excerpt: 'Unlock the full potential of Tailwind CSS with these advanced tips, tricks, and best practices.',
+    imageUrl: 'https://placehold.co/1200x600.png',
+    dataAiHintImage: 'tailwind css code',
+    category: 'Web Development',
+    readTime: '6 min read',
+    content: '<p>Content for Tailwind CSS tips...</p>',
+    tags: ['Tailwind CSS', 'CSS', 'Frontend']
+  },
+  {
+    slug: 'the-rise-of-server-components-in-nextjs',
+    title: 'The Rise of Server Components in Next.js',
+    date: '2024-04-02',
+    author: 'Maria Rodriguez',
+    authorAvatar: 'https://placehold.co/40x40.png?text=MR',
+    dataAiHintAuthor: 'software developer',
+    excerpt: 'Understanding Next.js Server Components and how they are changing the landscape of React development.',
+    imageUrl: 'https://placehold.co/1200x600.png',
+    dataAiHintImage: 'nextjs server components',
+    category: 'Next.js',
+    readTime: '8 min read',
+    content: '<p>Content for Next.js Server Components...</p>',
+    tags: ['Next.js', 'React', 'Server Components']
+  },
+  {
+    slug: 'effective-content-strategy-for-saas-businesses',
+    title: 'Effective Content Strategy for SaaS Businesses',
+    date: '2024-03-20',
+    author: 'Alex Chen',
+    authorAvatar: 'https://placehold.co/40x40.png?text=AC',
+    dataAiHintAuthor: 'professional person',
+    excerpt: 'Key elements of a successful content strategy tailored for SaaS companies looking to grow.',
+    imageUrl: 'https://placehold.co/1200x600.png',
+    dataAiHintImage: 'saas content strategy',
+    category: 'Content Strategy',
+    readTime: '7 min read',
+    content: '<p>Content for SaaS content strategy...</p>',
+    tags: ['SaaS', 'Content Marketing', 'Strategy']
+  },
+  {
+    slug: 'optimizing-images-for-web-performance',
+    title: 'Optimizing Images for Web Performance',
+    date: '2024-03-05',
+    author: 'Sam Lee',
+    authorAvatar: 'https://placehold.co/40x40.png?text=SL',
+    dataAiHintAuthor: 'marketing expert',
+    excerpt: 'Best practices for image optimization to improve website speed and user experience.',
+    imageUrl: 'https://placehold.co/1200x600.png',
+    dataAiHintImage: 'image optimization tools',
+    category: 'Web Performance',
+    readTime: '5 min read',
+    content: '<p>Content for image optimization...</p>',
+    tags: ['Web Performance', 'Image Optimization', 'SEO']
+  },
+  {
+    slug: 'introduction-to-genkit-ai-for-nextjs-developers',
+    title: 'Introduction to Genkit AI for Next.js Developers',
+    date: '2024-02-18',
+    author: 'Maria Rodriguez',
+    authorAvatar: 'https://placehold.co/40x40.png?text=MR',
+    dataAiHintAuthor: 'software developer',
+    excerpt: 'A beginner-friendly guide to integrating Genkit AI into your Next.js applications.',
+    imageUrl: 'https://placehold.co/1200x600.png',
+    dataAiHintImage: 'ai integration code',
+    category: 'AI Development',
+    readTime: '9 min read',
+    content: '<p>Content for Genkit AI intro...</p>',
+    tags: ['Genkit', 'AI', 'Next.js', 'Firebase']
+  },
+  {
+    slug: 'creating-accessible-forms-a-practical-guide',
+    title: 'Creating Accessible Forms: A Practical Guide',
+    date: '2024-02-01',
+    author: 'Alex Chen',
+    authorAvatar: 'https://placehold.co/40x40.png?text=AC',
+    dataAiHintAuthor: 'professional person',
+    excerpt: 'Step-by-step instructions on how to design and build web forms that are usable by everyone.',
+    imageUrl: 'https://placehold.co/1200x600.png',
+    dataAiHintImage: 'accessible form ui',
+    category: 'Accessibility',
+    readTime: '7 min read',
+    content: '<p>Content for accessible forms guide...</p>',
+    tags: ['Accessibility', 'Web Forms', 'UX']
+  },
 ];
 
+
 export async function generateStaticParams() {
-  return blogPosts.map((post) => ({
-    slug: post.slug,
-  }));
+  return blogPosts
+    .filter(post => typeof post.slug === 'string' && post.slug.length > 0)
+    .map((post) => ({
+      slug: post.slug,
+    }));
 }
 
 
@@ -120,9 +273,13 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
               <div className="flex items-center text-xs">
                 <CalendarDays className="h-4 w-4 mr-1" />
                 <time dateTime={post.date}>{new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
-                <Dot className="h-4 w-4 mx-1 opacity-50" />
-                <Clock3 className="h-3.5 w-3.5 mr-1" />
-                <span>{post.readTime}</span>
+                {post.readTime && (
+                  <>
+                    <Dot className="h-4 w-4 mx-1 opacity-50" />
+                    <Clock3 className="h-3.5 w-3.5 mr-1" />
+                    <span>{post.readTime}</span>
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -158,5 +315,3 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
     </div>
   );
 }
-
-    

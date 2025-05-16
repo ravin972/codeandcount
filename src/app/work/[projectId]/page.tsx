@@ -32,9 +32,11 @@ const portfolioItems = [
 ];
 
 export async function generateStaticParams() {
-  return portfolioItems.map((item) => ({
-    projectId: item.id,
-  }));
+  return portfolioItems
+    .filter(item => typeof item.id === 'string' && item.id.length > 0)
+    .map((item) => ({
+      projectId: item.id,
+    }));
 }
 
 export default function ProjectDetailPage({ params }: { params: { projectId: string } }) {
