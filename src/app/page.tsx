@@ -149,15 +149,7 @@ export default function HomePage() {
       {/* Services Section */}
       <section id="services" className="py-16 bg-secondary">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative inline-grid place-items-center [transform-style:preserve-3d] [perspective:1000px] w-full text-center mb-4">
-            <div
-              aria-hidden="true"
-              className="col-start-1 row-start-1 text-4xl font-bold tracking-tight text-primary blur-lg opacity-60 brightness-150 [transform:translateZ(-20px)_scale(1.05)] pointer-events-none"
-            >
-              Our Core Services
-            </div>
-            <h2 className="col-start-1 row-start-1 relative z-[1] text-4xl font-bold text-center">Our Core Services</h2>
-          </div>
+          <h2 className="col-start-1 row-start-1 relative z-[1] text-4xl font-bold text-center">Our Core Services</h2>
           <p className="text-xl text-muted-foreground text-center mt-4 mb-12 max-w-2xl mx-auto">
             We offer a comprehensive suite of services to bring your vision to life.
           </p>
@@ -289,6 +281,7 @@ export default function HomePage() {
           <p className="text-lg md:text-xl text-background/80 dark:text-muted-foreground max-w-2xl mx-auto mb-10">
             Unlock the power of AI to rewrite your content, incorporate strategic keywords, and climb search engine rankings. Try our free SEO Optimizer tool today!
           </p>
+          
           <Button size="lg" asChild className="rounded-full">
             <Link href="/seo-optimizer">
               Try SEO Optimizer <ArrowRight className="ml-2 h-5 w-5" />
@@ -318,7 +311,7 @@ export default function HomePage() {
       {/* Blog Section */}
       <section className="py-16 md:py-24 bg-neutral-900 text-neutral-100">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-3 gap-8 items-center">
+          <div className="grid md:grid-cols-3 gap-12 items-center"> {/* Increased gap here */}
             <div className="md:col-span-1 space-y-6">
               <p className="text-sm font-semibold text-primary flex items-center">
                 <Dot className="h-5 w-5 mr-1 -ml-1" /> Blog
