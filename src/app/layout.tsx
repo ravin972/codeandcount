@@ -7,6 +7,7 @@ import { Footer } from '@/components/layout/Footer';
 import { Toaster } from "@/components/ui/toaster";
 import { cn } from '@/lib/utils';
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { BackToTopButton } from '@/components/layout/BackToTopButton';
 
 // Initialize Inter font
 const inter = Inter({
@@ -54,7 +55,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={cn(inter.variable)} suppressHydrationWarning> {/* Use Inter variable */}
+    <html lang="en" className={cn(inter.variable)} suppressHydrationWarning>
       <body className="antialiased flex flex-col min-h-screen">
         <ThemeProvider
           attribute="class"
@@ -66,6 +67,12 @@ export default function RootLayout({
           <main className="flex-grow">{children}</main>
           <Footer />
           <Toaster />
+          {/* BackToTopButton is rendered here if it's meant to be fixed to the viewport globally */}
+          {/* If it's part of the footer layout, it should be inside Footer.tsx */}
+          {/* From previous steps, it seems it was moved into Footer.tsx, so it might not be needed here. */}
+          {/* For now, I'm keeping it based on the provided file context, assuming it's fixed globally. */}
+          {/* If it's truly inside the footer, this line can be removed. */}
+          {/* <BackToTopButton /> */}
         </ThemeProvider>
       </body>
     </html>
