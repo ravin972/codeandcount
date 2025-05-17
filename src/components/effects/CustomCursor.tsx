@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils';
 const CustomCursor: React.FC = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
   const [isMounted, setIsMounted] = useState(false);
+  const [primaryColor, setPrimaryColor] = useState('hsl(180, 100%, 25%)'); // Default fallback, matches current teal
 
   useEffect(() => {
     setIsMounted(true);
@@ -19,14 +20,32 @@ const CustomCursor: React.FC = () => {
     }
 
     const cursorEl = cursorRef.current;
-    // Initial setup: centered, invisible, and at base scale
-    gsap.set(cursorEl, { xPercent: -50, yPercent: -50, opacity: 0, scale: 1 });
+    const computedPrimaryColor = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim();
+    if (computedPrimaryColor) {
+      setPrimaryColor(`hsl(${computedPrimaryColor})`);
+    }
+    
+    // Initial setup: centered, invisible, at base scale, and filled
+    gsap.set(cursorEl, { 
+      xPercent: -50, 
+      yPercent: -50, 
+      opacity: 0, 
+      scale: 1,
+      backgroundColor: primaryColor, // Initial fill
+      borderWidth: '0px',
+      borderColor: 'transparent'
+    });
 
     let firstMove = true;
 
     const onMouseMove = (e: MouseEvent) => {
       if (firstMove) {
-        gsap.to(cursorEl, { opacity: 0.85, duration: 0.3 }); // Fade in on first move
+        gsap.to(cursorEl, { 
+          opacity: 1, // Use 1 for full opacity, adjust if needed
+          duration: 0.3,
+          backgroundColor: primaryColor, // Ensure it's filled on first appearance
+          borderWidth: '0px'
+        });
         firstMove = false;
       }
       gsap.to(cursorEl, {
@@ -40,18 +59,30 @@ const CustomCursor: React.FC = () => {
     const onMouseOver = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
       if (target.closest('a, button, [role="button"], [data-interactive-cursor="true"]')) {
-        gsap.to(cursorEl, { scale: 2.5, duration: 0.3, ease: 'power2.out' });
+        gsap.to(cursorEl, { 
+          scale: 2.5, 
+          backgroundColor: 'transparent',
+          borderWidth: '1px',
+          borderColor: primaryColor,
+          duration: 0.3, 
+          ease: 'power2.out' 
+        });
       }
     };
 
     const onMouseOut = (e: MouseEvent) => {
       const target = e.target as HTMLElement;
-      // Check if the relatedTarget (where the mouse is going) is NOT also an interactive element
-      // This prevents shrinking when moving between interactive elements.
       const relatedTargetIsInteractive = (e.relatedTarget as HTMLElement)?.closest('a, button, [role="button"], [data-interactive-cursor="true"]');
 
       if (target.closest('a, button, [role="button"], [data-interactive-cursor="true"]') && !relatedTargetIsInteractive) {
-        gsap.to(cursorEl, { scale: 1, duration: 0.3, ease: 'power2.out' });
+        gsap.to(cursorEl, { 
+          scale: 1, 
+          backgroundColor: primaryColor, // Revert to filled
+          borderWidth: '0px',
+          borderColor: 'transparent',
+          duration: 0.3, 
+          ease: 'power2.out' 
+        });
       }
     };
 
@@ -63,9 +94,9 @@ const CustomCursor: React.FC = () => {
       document.body.removeEventListener('mousemove', onMouseMove);
       document.body.removeEventListener('mouseover', onMouseOver);
       document.body.removeEventListener('mouseout', onMouseOut);
-      gsap.to(cursorEl, { opacity: 0, scale: 0.5, duration: 0.2 }); // Animate out
+      gsap.to(cursorEl, { opacity: 0, scale: 0.5, duration: 0.2 }); 
     };
-  }, [isMounted]);
+  }, [isMounted, primaryColor]); // Add primaryColor to dependency array
 
   if (!isMounted) {
     return null;
@@ -75,13 +106,12 @@ const CustomCursor: React.FC = () => {
     <div
       ref={cursorRef}
       className={cn(
-        "fixed w-3 h-3 rounded-full bg-primary pointer-events-none z-[9999] opacity-75", // Default size w-3 h-3
-        "shadow-md" // Subtle shadow for the smaller cursor
+        "fixed w-3 h-3 rounded-full pointer-events-none z-[9999]", // Removed bg-primary and shadow-md
+        "border" // Add border class for GSAP to control its properties
       )}
-      style={{ opacity: 0 }} // Start fully transparent, GSAP handles fade-in
+      style={{ opacity: 0 }} // Start fully transparent, GSAP handles fade-in and initial fill
     />
   );
 };
 
 export default CustomCursor;
-
