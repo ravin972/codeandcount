@@ -3,80 +3,36 @@
 
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
+import Link from 'next/link';
+import { ArrowUpRight } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 const InfiniteScrollerWithMouseFollower: React.FC = () => {
   const scrollerContainerRef1 = useRef<HTMLDivElement>(null);
-  const textRef1_1 = useRef<HTMLSpanElement>(null);
-  const textRef1_2 = useRef<HTMLSpanElement>(null);
+  const textRef1_1 = useRef<HTMLDivElement>(null); // Changed to HTMLDivElement for consistency
+  const textRef1_2 = useRef<HTMLDivElement>(null); // Changed to HTMLDivElement
 
   const scrollerContainerRef2 = useRef<HTMLDivElement>(null);
-  const textRef2_1 = useRef<HTMLSpanElement>(null);
-  const textRef2_2 = useRef<HTMLSpanElement>(null);
+  const textRef2_1 = useRef<HTMLDivElement>(null); // Changed to HTMLDivElement
+  const textRef2_2 = useRef<HTMLDivElement>(null); // Changed to HTMLDivElement
   
-  const mouseFollowerRef = useRef<HTMLDivElement>(null);
   const interactiveSectionRef = useRef<HTMLDivElement>(null);
 
-  const scrollText = "Let's work together. "; // Trailing space for seamless loop
-
-  useEffect(() => {
-    const follower = mouseFollowerRef.current;
-    const section = interactiveSectionRef.current;
-
-    if (follower) {
-      gsap.set(follower, { xPercent: -50, yPercent: -50, scale: 1 });
-      const pos = { x: window.innerWidth / 2, y: window.innerHeight / 2 };
-      const mouse = { x: pos.x, y: pos.y };
-      const speed = 0.1; 
-
-      const xSet = gsap.quickSetter(follower, "x", "px");
-      const ySet = gsap.quickSetter(follower, "y", "px");
-
-      const handleMouseMoveForPosition = (e: MouseEvent) => {
-        mouse.x = e.clientX;
-        mouse.y = e.clientY;
-      };
-      window.addEventListener("mousemove", handleMouseMoveForPosition);
-
-      const ticker = gsap.ticker.add(() => {
-        const dt = 1.0 - Math.pow(1.0 - speed, gsap.ticker.deltaRatio());
-        pos.x += (mouse.x - pos.x) * dt;
-        pos.y += (mouse.y - pos.y) * dt;
-        xSet(pos.x);
-        ySet(pos.y);
-      });
-
-      const interactiveElementsSelector = 'button, [role="button"], a[class*="inline-flex items-center justify-center"][href]';
-      
-      const updateFollowerScale = (e: MouseEvent) => {
-        if (!follower) return;
-
-        const target = e.target as HTMLElement;
-        let newScale = 1.0;
-        let newScaleTargetType = 'default';
-
-        if (target.closest(interactiveElementsSelector)) {
-          newScale = 2.5;
-          newScaleTargetType = 'interactive';
-        } else if (section && section.contains(target)) {
-          newScale = 1.5;
-          newScaleTargetType = 'section';
-        }
-        
-        if (String(follower.dataset.currentGsapScaleTargetType) !== newScaleTargetType) {
-          gsap.to(follower, { scale: newScale, duration: 0.2, ease: 'power1.out' });
-          follower.dataset.currentGsapScaleTargetType = newScaleTargetType;
-        }
-      };
-      document.body.addEventListener('mousemove', updateFollowerScale);
-      
-      return () => {
-        window.removeEventListener("mousemove", handleMouseMoveForPosition);
-        document.body.removeEventListener('mousemove', updateFollowerScale);
-        gsap.ticker.remove(ticker);
-      };
-    }
-  }, []);
-
+  const scrollTextContent = (
+    <Link href="/contact#start-project" className="inline-flex items-center group/link">
+      <span className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-bold uppercase pr-4 md:pr-6 lg:pr-8 text-muted-foreground group-hover/link:text-primary transition-colors duration-300">
+        Let's work together.
+      </span>
+      <span className={cn(
+        "ml-2 md:ml-4 mt-1 md:mt-2 flex-shrink-0",
+        "w-12 h-12 md:w-16 md:h-16 lg:w-20 lg:h-20", 
+        "rounded-full bg-primary flex items-center justify-center",
+        "transition-transform duration-300 ease-in-out group-hover/link:scale-110"
+      )}>
+        <ArrowUpRight className="text-primary-foreground w-6 h-6 md:w-7 md:h-7 lg:w-8 lg:h-8" />
+      </span>
+    </Link>
+  );
 
   useEffect(() => {
     const container1 = scrollerContainerRef1.current;
@@ -92,9 +48,9 @@ const InfiniteScrollerWithMouseFollower: React.FC = () => {
 
     const setupRow1Animation = () => {
       if (container1 && el1_1 && el1_2) {
-        gsap.killTweensOf(container1); // Kill previous animation
-        gsap.set(container1, { x: 0 }); // Reset container position
-        gsap.set(el1_1, { x: 0 });    // Reset span position for accurate width measurement
+        gsap.killTweensOf(container1); 
+        gsap.set(container1, { x: 0 }); 
+        gsap.set(el1_1, { x: 0 });    
         gsap.set(el1_2, { x: 0 });
 
         const elWidth1 = el1_1.offsetWidth;
@@ -106,7 +62,7 @@ const InfiniteScrollerWithMouseFollower: React.FC = () => {
         gsap.set(el1_2, { x: elWidth1 });
         anim1 = gsap.to(container1, {
             x: -elWidth1,
-            duration: elWidth1 / 70, // Speed factor
+            duration: elWidth1 / 70, 
             ease: 'none',
             repeat: -1,
         });
@@ -115,9 +71,9 @@ const InfiniteScrollerWithMouseFollower: React.FC = () => {
 
     const setupRow2Animation = () => {
       if (container2 && el2_1 && el2_2) {
-        gsap.killTweensOf(container2); // Kill previous animation
-        gsap.set(container2, { x: 0 }); // Reset container position
-        gsap.set(el2_1, { x: 0 });    // Reset span position for accurate width measurement
+        gsap.killTweensOf(container2); 
+        gsap.set(container2, { x: 0 }); 
+        gsap.set(el2_1, { x: 0 });    
         gsap.set(el2_2, { x: 0 });
 
         const elWidth2 = el2_1.offsetWidth;
@@ -129,7 +85,7 @@ const InfiniteScrollerWithMouseFollower: React.FC = () => {
         gsap.set(el2_2, { x: -elWidth2 }); 
         anim2 = gsap.to(container2, {
             x: elWidth2,
-            duration: elWidth2 / 50, // Faster speed factor
+            duration: elWidth2 / 50, 
             ease: 'none',
             repeat: -1,
         });
@@ -137,14 +93,12 @@ const InfiniteScrollerWithMouseFollower: React.FC = () => {
     };
     
     const initOrReinitAnimations = () => {
-      // Use a small delay to allow layout stabilization after font load or resize
       gsap.delayedCall(0.1, () => {
         setupRow1Animation();
         setupRow2Animation();
       });
     };
 
-    // Initial setup after fonts are ready (or fallback)
     document.fonts.ready.then(() => {
         initOrReinitAnimations();
     }).catch(error => {
@@ -158,43 +112,36 @@ const InfiniteScrollerWithMouseFollower: React.FC = () => {
         window.removeEventListener('resize', initOrReinitAnimations);
         anim1?.kill();
         anim2?.kill();
-        // Fallback cleanup if refs are still valid
         if (container1) gsap.killTweensOf(container1);
         if (container2) gsap.killTweensOf(container2);
     };
-  }, [scrollText]); // scrollText is a dependency, if it changes, animations re-initialize
+  }, []); 
 
   return (
     <section 
       ref={interactiveSectionRef}
-      className="relative bg-black text-white py-20 md:py-32 overflow-hidden cursor-none group"
+      className="relative bg-background dark:bg-neutral-900 py-20 md:py-32 overflow-hidden"
     >
       {/* Row 1: Right-to-Left Scroll */}
       <div className="relative flex whitespace-nowrap" ref={scrollerContainerRef1}>
-        <span ref={textRef1_1} className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-bold uppercase pr-2">
-          {scrollText}
-        </span>
-        <span ref={textRef1_2} className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-bold uppercase pr-2">
-          {scrollText}
-        </span>
+        <div ref={textRef1_1} className="inline-block px-2 md:px-3 lg:px-4">
+          {scrollTextContent}
+        </div>
+        <div ref={textRef1_2} className="inline-block px-2 md:px-3 lg:px-4">
+          {scrollTextContent}
+        </div>
       </div>
       {/* Row 2: Left-to-Right Scroll */}
       <div className="relative flex whitespace-nowrap mt-2 md:mt-4" ref={scrollerContainerRef2}>
-        <span ref={textRef2_1} className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-bold uppercase pr-2">
-          {scrollText}
-        </span>
-        <span ref={textRef2_2} className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-bold uppercase pr-2">
-          {scrollText}
-        </span>
+        <div ref={textRef2_1} className="inline-block px-2 md:px-3 lg:px-4">
+          {scrollTextContent}
+        </div>
+        <div ref={textRef2_2} className="inline-block px-2 md:px-3 lg:px-4">
+          {scrollTextContent}
+        </div>
       </div>
-      <div
-        ref={mouseFollowerRef}
-        className="fixed top-0 left-0 w-5 h-5 bg-white rounded-full pointer-events-none z-[9999] hidden md:block opacity-75"
-        style={{ mixBlendMode: 'difference' }}
-      ></div>
     </section>
   );
 };
 
 export default InfiniteScrollerWithMouseFollower;
-
