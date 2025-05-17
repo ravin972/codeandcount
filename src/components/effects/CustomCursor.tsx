@@ -10,22 +10,26 @@ const CustomCursor: React.FC = () => {
   const [isMounted, setIsMounted] = useState(false);
   const [primaryColorForFill, setPrimaryColorForFill] = useState('hsl(var(--primary))'); // Default fallback
 
+  // Effect to set isMounted and fetch primary color
   useEffect(() => {
     setIsMounted(true);
-    const computedPrimaryColor = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim();
-    if (computedPrimaryColor) {
-      setPrimaryColorForFill(`hsl(${computedPrimaryColor})`);
+    // Fetch primary color from CSS variables once mounted
+    const computedColor = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim();
+    if (computedColor) {
+      setPrimaryColorForFill(`hsl(${computedColor})`);
     }
-  }, []);
+  }, []); // Runs once on client mount
 
+  // Effect for ALL GSAP logic including initial setup and event listeners
   useEffect(() => {
     if (!isMounted || !cursorRef.current) {
-      return;
+      return; // Guard against null ref or non-mounted state
     }
 
     const cursorEl = cursorRef.current;
-    
+
     // Initial setup: centered, invisible, at base scale, and filled
+    // This will now run only when cursorEl is guaranteed to be non-null
     gsap.set(cursorEl, { 
       xPercent: -50, 
       yPercent: -50, 
@@ -39,17 +43,17 @@ const CustomCursor: React.FC = () => {
     let firstMove = true;
 
     const onMouseMove = (e: MouseEvent) => {
-      if (!cursorRef.current) return;
+      // cursorEl is already confirmed to be non-null from the effect's guard
       if (firstMove) {
-        gsap.to(cursorRef.current, { 
+        gsap.to(cursorEl, { 
           opacity: 1,
           duration: 0.3,
-          backgroundColor: primaryColorForFill,
-          borderWidth: '0px'
+          backgroundColor: primaryColorForFill, 
+          borderWidth: '0px' // Ensure border is reset on first move after initial set
         });
         firstMove = false;
       }
-      gsap.to(cursorRef.current, {
+      gsap.to(cursorEl, {
         x: e.clientX,
         y: e.clientY,
         duration: 0.2,
@@ -58,14 +62,14 @@ const CustomCursor: React.FC = () => {
     };
 
     const onMouseOver = (e: MouseEvent) => {
-      if (!cursorRef.current) return;
+      // cursorEl is already confirmed to be non-null
       const target = e.target as HTMLElement;
       if (target.closest('a, button, [role="button"], [data-interactive-cursor="true"]')) {
-        gsap.to(cursorRef.current, { 
-          scale: 2.5, 
+        gsap.to(cursorEl, { 
+          scale: 2.8, 
           backgroundColor: 'transparent',
-          borderWidth: '0.5px',
-          borderColor: '#ffffff', // White border
+          borderWidth: '0.2px',
+          borderColor: '#ffffff', 
           duration: 0.3, 
           ease: 'power2.out' 
         });
@@ -73,14 +77,15 @@ const CustomCursor: React.FC = () => {
     };
 
     const onMouseOut = (e: MouseEvent) => {
-      if (!cursorRef.current) return;
+      // cursorEl is already confirmed to be non-null
       const target = e.target as HTMLElement;
-      const relatedTargetIsInteractive = (e.relatedTarget as HTMLElement)?.closest('a, button, [role="button"], [data-interactive-cursor="true"]');
+      const relatedTarget = e.relatedTarget as HTMLElement | null;
+      const isMovingToInteractive = relatedTarget?.closest('a, button, [role="button"], [data-interactive-cursor="true"]');
 
-      if (target.closest('a, button, [role="button"], [data-interactive-cursor="true"]') && !relatedTargetIsInteractive) {
-        gsap.to(cursorRef.current, { 
+      if (target.closest('a, button, [role="button"], [data-interactive-cursor="true"]') && !isMovingToInteractive) {
+        gsap.to(cursorEl, { 
           scale: 1, 
-          backgroundColor: primaryColorForFill,
+          backgroundColor: primaryColorForFill, 
           borderWidth: '0px',
           borderColor: 'transparent',
           duration: 0.3, 
@@ -97,14 +102,14 @@ const CustomCursor: React.FC = () => {
       document.body.removeEventListener('mousemove', onMouseMove);
       document.body.removeEventListener('mouseover', onMouseOver);
       document.body.removeEventListener('mouseout', onMouseOut);
-      if (cursorRef.current) {
+      if (cursorRef.current) { // Check ref before cleanup animation
         gsap.to(cursorRef.current, { opacity: 0, scale: 0.5, duration: 0.2 }); 
       }
     };
-  }, [isMounted, primaryColorForFill]);
+  }, [isMounted, primaryColorForFill]); // Re-run if isMounted or primaryColorForFill changes
 
   if (!isMounted) {
-    return null;
+    return null; // Prevents SSR rendering of the cursor div
   }
 
   return (
@@ -114,7 +119,7 @@ const CustomCursor: React.FC = () => {
         "fixed w-3 h-3 rounded-full pointer-events-none z-[9999]",
         "border" 
       )}
-      style={{ opacity: 0 }} 
+      style={{ opacity: 0 }} // Initial style to prevent flash of unstyled content
     />
   );
 };
