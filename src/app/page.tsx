@@ -6,10 +6,13 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { ArrowUpRight, Calculator, Sparkles, ArrowRight, Eye, Dot, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowUpRight, Sparkles, ArrowRight, Eye, Dot, ChevronLeft, ChevronRight } from 'lucide-react';
 import InfiniteScrollerWithMouseFollower from '@/components/effects/InfiniteScrollerWithMouseFollower';
-import { CircleCheckBig, ShoppingCart, Puzzle, Wrench } from 'lucide-react'; 
+import { CircleCheckBig, ShoppingCart, Puzzle, Wrench, Calculator } from 'lucide-react'; 
 import React, { useRef, useState, useEffect, useCallback } from 'react';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import { Input } from '@/components/ui/input';
 
 
 const services = [
@@ -159,13 +162,17 @@ export default function HomePage() {
       if (cardRef.current) {
         const cardStyles = window.getComputedStyle(cardRef.current);
         const cardWidth = cardRef.current.offsetWidth;
-        const gap = parseFloat(cardStyles.marginRight) || (parseFloat(window.getComputedStyle(document.documentElement).fontSize) * 1.5); 
-        setItemWidth(cardWidth + gap);
+        const gapRem = 1.5; // from space-x-6
+        const rootFontSize = parseFloat(window.getComputedStyle(document.documentElement).fontSize);
+        const gapPx = gapRem * rootFontSize;
+        setItemWidth(cardWidth + gapPx);
+      } else {
+        setItemWidth(0); // Reset or set to a default if cardRef is not available
       }
     };
 
     calculateItemWidth();
-    checkScrollability();
+    checkScrollability(); // Initial check
 
     const container = scrollContainerRef.current;
     if (container) {
@@ -191,6 +198,7 @@ export default function HomePage() {
         left: scrollValue,
         behavior: 'smooth',
       });
+      // Re-check scrollability after a short delay to allow scroll to complete
       setTimeout(checkScrollability, 350); 
     }
   };
@@ -270,7 +278,7 @@ export default function HomePage() {
       {/* Client Logos Section */}
       <section id="trusted-by-leaders" className="py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center text-foreground mb-10">Trusted by Industry Leaders</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-10">Trusted by Industry Leaders</h2>
           <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
             {clientLogos.map((logo) => (
               <div key={logo.name} title={logo.name} className="opacity-70 hover:opacity-100 transition-opacity duration-300 ease-in-out transform hover:scale-105">
@@ -432,11 +440,11 @@ export default function HomePage() {
                   </Link>
                 </Button>
                 <div className="flex space-x-3">
-                  <Button variant="outline" size="icon" onClick={() => handleScroll('left')} disabled={!canScrollLeft} className="bg-neutral-800 border-neutral-700 hover:bg-neutral-700 disabled:opacity-50 rounded-full">
+                  <Button variant="outline" size="icon" onClick={() => handleScroll('left')} disabled={!canScrollLeft || itemWidth === 0} className="bg-neutral-800 border-neutral-700 hover:bg-neutral-700 disabled:opacity-50 rounded-full">
                     <ChevronLeft className="h-5 w-5" />
                     <span className="sr-only">Scroll Left</span>
                   </Button>
-                  <Button variant="outline" size="icon" onClick={() => handleScroll('right')} disabled={!canScrollRight} className="bg-neutral-800 border-neutral-700 hover:bg-neutral-700 disabled:opacity-50 rounded-full">
+                  <Button variant="outline" size="icon" onClick={() => handleScroll('right')} disabled={!canScrollRight || itemWidth === 0} className="bg-neutral-800 border-neutral-700 hover:bg-neutral-700 disabled:opacity-50 rounded-full">
                     <ChevronRight className="h-5 w-5" />
                     <span className="sr-only">Scroll Right</span>
                   </Button>
@@ -449,7 +457,7 @@ export default function HomePage() {
                   <Link
                     key={post.slug}
                     href={`/blog/${post.slug}`}
-                    className="block flex-shrink-0 w-full sm:w-[calc(50%-0.75rem)] md:w-[calc(33.333%-1rem)] group" 
+                    className="block flex-shrink-0 w-[80vw] sm:w-[calc(50%-0.75rem)] md:w-[calc(33.333%-1rem)] group" 
                     ref={index === 0 ? cardRef : null}
                   >
                     <Card className="bg-neutral-800 border-neutral-700 hover:border-primary/50 transition-all duration-300 ease-in-out transform hover:-translate-y-1 h-full flex flex-col" data-interactive-cursor="true">
@@ -487,3 +495,4 @@ export default function HomePage() {
   );
 }
 
+    
