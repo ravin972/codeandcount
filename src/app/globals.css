@@ -4,33 +4,33 @@
 
 @layer base {
   :root {
-    --background: 0 0% 99%; /* Near White (#fefafc) */
-    --foreground: 215 15% 15%; /* Dark Bluish-Gray (#1f252d) */
+    --background: 338 13% 96%; /* Lighter tint of #b5a1a9 for light mode background */
+    --foreground: 240 100% 3%; /* Near black #000007 for light mode text */
 
-    --card: 0 0% 99%;
-    --card-foreground: 215 15% 15%;
+    --card: 338 13% 96%;
+    --card-foreground: 240 100% 3%;
 
-    --popover: 0 0% 99%;
-    --popover-foreground: 215 15% 15%;
+    --popover: 338 13% 96%;
+    --popover-foreground: 240 100% 3%;
 
-    --primary: 145 88% 40%; /* Bright Green (#0cbf50) */
-    --primary-foreground: 0 0% 99%; /* Near White text on green */
+    --primary: 42 85% 45%; /* Dark Gold #d89d10 */
+    --primary-foreground: 240 100% 3%; /* Near black text on gold */
 
-    --secondary: 215 15% 95%; /* Very Light Bluish-Gray */
-    --secondary-foreground: 215 15% 15%; /* Dark text on light secondary */
+    --secondary: 338 13% 92%; /* Slightly darker tint of #b5a1a9 */
+    --secondary-foreground: 240 100% 3%;
 
-    --muted: 215 15% 96%; 
-    --muted-foreground: 215 15% 45%; 
+    --muted: 338 13% 90%; 
+    --muted-foreground: 240 20% 30%; 
 
-    --accent: 145 88% 40%; /* Bright Green (#0cbf50) */
-    --accent-foreground: 0 0% 99%; /* Near White text on green accent */
+    --accent: 42 85% 45%; /* Dark Gold #d89d10 */
+    --accent-foreground: 240 100% 3%; /* Near black text on gold accent */
     
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 215 15% 88%; /* Lighter shade of foreground for borders */
-    --input: 215 15% 88%;
-    --ring: 145 88% 40%; /* Bright Green for focus rings */
+    --border: 338 13% 88%;
+    --input: 338 13% 88%;
+    --ring: 42 85% 48%; /* Dark Gold for focus rings */
 
     --radius: 0.5rem;
 
@@ -42,33 +42,33 @@
   }
 
   .dark {
-    --background: 215 15% 15%; /* Dark Bluish-Gray (#1f252d) */
-    --foreground: 0 0% 99%; /* Near White (#fefafc) */
+    --background: 240 100% 2%; /* Near black #000007 */
+    --foreground: 338 13% 80%; /* Lighter Dusty Rose #b5a1a9 for dark mode text */
 
-    --card: 215 15% 18%; /* Slightly distinct dark card background */
-    --card-foreground: 0 0% 99%;
+    --card: 240 80% 4%; /* Slightly distinct dark card background */
+    --card-foreground: 338 13% 80%;
 
-    --popover: 215 15% 15%;
-    --popover-foreground: 0 0% 99%;
+    --popover: 240 100% 2%;
+    --popover-foreground: 338 13% 80%;
 
-    --primary: 145 88% 40%; /* Bright Green (#0cbf50) */
-    --primary-foreground: 0 0% 99%; /* Near White text on green */
+    --primary: 42 85% 45%; /* Dark Gold #d89d10 */
+    --primary-foreground: 240 100% 3%; /* Near black text on gold */
 
-    --secondary: 215 15% 20%; /* Slightly lighter than dark background */
-    --secondary-foreground: 0 0% 90%; /* Dimmer light text */
+    --secondary: 240 60% 5%; /* Slightly lighter than dark background */
+    --secondary-foreground: 338 13% 70%; 
 
-    --muted: 215 15% 20%;
-    --muted-foreground: 0 0% 60%; 
+    --muted: 240 50% 7%;
+    --muted-foreground: 338 13% 55%; 
 
-    --accent: 145 88% 40%; /* Bright Green (#0cbf50) */
-    --accent-foreground: 0 0% 99%; /* Near White text on green accent */
+    --accent: 42 85% 45%; /* Dark Gold #d89d10 */
+    --accent-foreground: 240 100% 3%; /* Near black text on gold accent */
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 215 15% 25%; /* Slightly lighter than dark background for borders */
-    --input: 215 15% 25%;
-    --ring: 145 88% 45%; /* Lighter Bright Green for focus rings */
+    --border: 240 30% 8%; 
+    --input: 240 30% 8%;
+    --ring: 42 85% 50%; /* Slightly lighter Gold for focus rings */
     
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
