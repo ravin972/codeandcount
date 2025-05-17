@@ -244,7 +244,10 @@ export default function HomePage() {
       {/* Services Section */}
       <section id="services" className="py-16 bg-secondary">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="col-start-1 row-start-1 relative z-[1] text-4xl md:text-5xl font-bold text-center">Our Core Services</h2>
+        <div className="relative inline-grid place-items-center [transform-style:preserve-3d] [perspective:1000px] w-full text-center mb-4">
+           
+            <h2 className="col-start-1 row-start-1 relative z-[1] text-4xl md:text-5xl font-bold text-center">Our Core Services</h2>
+          </div>
           <p className="text-xl md:text-2xl text-muted-foreground text-center mt-4 mb-12 max-w-2xl mx-auto">
             We offer a comprehensive suite of services to bring your vision to life.
           </p>
@@ -400,6 +403,9 @@ export default function HomePage() {
         </div>
       </section>
       
+      <div className="h-0.5 w-1/3 sm:w-1/4 md:w-1/6 mx-auto my-12 md:my-16 lg:my-20 bg-primary rounded-full" />
+      <InfiniteScrollerWithMouseFollower />
+      
       {/* Blog Section */}
       <section className="py-16 md:py-24 bg-neutral-900 text-neutral-100">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -474,8 +480,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-      
-      <InfiniteScrollerWithMouseFollower />
       
       <div className="h-0.5 w-1/3 sm:w-1/4 md:w-1/6 mx-auto my-12 md:my-16 lg:my-20 bg-primary rounded-full" />
 
