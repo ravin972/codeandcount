@@ -4,33 +4,33 @@
 
 @layer base {
   :root {
-    --background: 338 13% 96%; /* Lighter tint of #b5a1a9 for light mode background */
-    --foreground: 240 100% 3%; /* Near black #000007 for light mode text */
+    --background: 295 80% 96%; /* Light tint of #e77ff0 for light mode background */
+    --foreground: 287 100% 7%; /* #1d0022 for light mode text */
 
-    --card: 338 13% 96%;
-    --card-foreground: 240 100% 3%;
+    --card: 295 80% 96%;
+    --card-foreground: 287 100% 7%;
 
-    --popover: 338 13% 96%;
-    --popover-foreground: 240 100% 3%;
+    --popover: 295 80% 96%;
+    --popover-foreground: 287 100% 7%;
 
-    --primary: 42 85% 45%; /* Dark Gold #d89d10 */
-    --primary-foreground: 240 100% 3%; /* Near black text on gold */
+    --primary: 220 18% 52%; /* #6e7c9c Slate Blue */
+    --primary-foreground: 0 0% 99%; /* Near white text on Slate Blue */
 
-    --secondary: 338 13% 92%; /* Slightly darker tint of #b5a1a9 */
-    --secondary-foreground: 240 100% 3%;
+    --secondary: 295 80% 92%; /* Slightly darker tint of #e77ff0 */
+    --secondary-foreground: 287 100% 7%;
 
-    --muted: 338 13% 90%; 
-    --muted-foreground: 240 20% 30%; 
+    --muted: 295 70% 90%; 
+    --muted-foreground: 287 40% 30%; 
 
-    --accent: 42 85% 45%; /* Dark Gold #d89d10 */
-    --accent-foreground: 240 100% 3%; /* Near black text on gold accent */
+    --accent: 220 18% 52%; /* #6e7c9c Slate Blue */
+    --accent-foreground: 0 0% 99%; /* Near white text on Slate Blue accent */
     
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 338 13% 88%;
-    --input: 338 13% 88%;
-    --ring: 42 85% 48%; /* Dark Gold for focus rings */
+    --border: 295 70% 88%;
+    --input: 295 70% 88%;
+    --ring: 220 18% 55%; /* Slate Blue for focus rings */
 
     --radius: 0.5rem;
 
@@ -42,33 +42,33 @@
   }
 
   .dark {
-    --background: 240 100% 2%; /* Near black #000007 */
-    --foreground: 338 13% 80%; /* Lighter Dusty Rose #b5a1a9 for dark mode text */
+    --background: 287 100% 7%; /* #1d0022 Very Dark Purple */
+    --foreground: 295 83% 85%; /* Lighter tint of #e77ff0 for dark mode text */
 
-    --card: 240 80% 4%; /* Slightly distinct dark card background */
-    --card-foreground: 338 13% 80%;
+    --card: 287 70% 10%; /* Slightly distinct dark card background */
+    --card-foreground: 295 83% 85%;
 
-    --popover: 240 100% 2%;
-    --popover-foreground: 338 13% 80%;
+    --popover: 287 100% 7%;
+    --popover-foreground: 295 83% 85%;
 
-    --primary: 42 85% 45%; /* Dark Gold #d89d10 */
-    --primary-foreground: 240 100% 3%; /* Near black text on gold */
+    --primary: 220 18% 52%; /* #6e7c9c Slate Blue */
+    --primary-foreground: 0 0% 99%; /* Near white text on Slate Blue */
 
-    --secondary: 240 60% 5%; /* Slightly lighter than dark background */
-    --secondary-foreground: 338 13% 70%; 
+    --secondary: 287 70% 12%; /* Slightly lighter than dark background */
+    --secondary-foreground: 295 83% 75%; 
 
-    --muted: 240 50% 7%;
-    --muted-foreground: 338 13% 55%; 
+    --muted: 287 60% 15%;
+    --muted-foreground: 295 70% 60%; 
 
-    --accent: 42 85% 45%; /* Dark Gold #d89d10 */
-    --accent-foreground: 240 100% 3%; /* Near black text on gold accent */
+    --accent: 220 18% 52%; /* #6e7c9c Slate Blue */
+    --accent-foreground: 0 0% 99%; /* Near white text on Slate Blue accent */
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 240 30% 8%; 
-    --input: 240 30% 8%;
-    --ring: 42 85% 50%; /* Slightly lighter Gold for focus rings */
+    --border: 287 50% 18%; 
+    --input: 287 50% 18%;
+    --ring: 220 18% 55%; /* Slightly lighter Slate Blue for focus rings */
     
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
