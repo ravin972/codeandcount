@@ -1,3 +1,4 @@
+
 "use client";
 
 import React, { useEffect, useRef, useState } from 'react';
@@ -18,43 +19,69 @@ const CustomCursor: React.FC = () => {
     }
 
     const cursorEl = cursorRef.current;
-    // Start small, centered, and invisible
-    gsap.set(cursorEl, { xPercent: -50, yPercent: -50, opacity: 0, scale: 0.5 }); 
+    // Initial setup: centered, invisible, and at base scale
+    gsap.set(cursorEl, { xPercent: -50, yPercent: -50, opacity: 0, scale: 1 });
+
+    let firstMove = true;
 
     const onMouseMove = (e: MouseEvent) => {
+      if (firstMove) {
+        gsap.to(cursorEl, { opacity: 0.85, duration: 0.3 }); // Fade in on first move
+        firstMove = false;
+      }
       gsap.to(cursorEl, {
         x: e.clientX,
         y: e.clientY,
-        duration: 0.2, // Smooth follow duration
+        duration: 0.2,
         ease: 'power2.out',
-        opacity: 0.85, // Desired final opacity
-        scale: 1,      // Scale to full size
       });
     };
-    
-    window.addEventListener('mousemove', onMouseMove);
+
+    const onMouseOver = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (target.closest('a, button, [role="button"], [data-interactive-cursor="true"]')) {
+        gsap.to(cursorEl, { scale: 2.5, duration: 0.3, ease: 'power2.out' });
+      }
+    };
+
+    const onMouseOut = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      // Check if the relatedTarget (where the mouse is going) is NOT also an interactive element
+      // This prevents shrinking when moving between interactive elements.
+      const relatedTargetIsInteractive = (e.relatedTarget as HTMLElement)?.closest('a, button, [role="button"], [data-interactive-cursor="true"]');
+
+      if (target.closest('a, button, [role="button"], [data-interactive-cursor="true"]') && !relatedTargetIsInteractive) {
+        gsap.to(cursorEl, { scale: 1, duration: 0.3, ease: 'power2.out' });
+      }
+    };
+
+    document.body.addEventListener('mousemove', onMouseMove, { passive: true });
+    document.body.addEventListener('mouseover', onMouseOver);
+    document.body.addEventListener('mouseout', onMouseOut);
 
     return () => {
-      window.removeEventListener('mousemove', onMouseMove);
-      // Optional: Animate out if the component unmounts or window loses focus
-      // gsap.to(cursorEl, { opacity: 0, scale: 0.5, duration: 0.2 });
+      document.body.removeEventListener('mousemove', onMouseMove);
+      document.body.removeEventListener('mouseover', onMouseOver);
+      document.body.removeEventListener('mouseout', onMouseOut);
+      gsap.to(cursorEl, { opacity: 0, scale: 0.5, duration: 0.2 }); // Animate out
     };
   }, [isMounted]);
 
   if (!isMounted) {
-    return null; 
+    return null;
   }
 
   return (
     <div
       ref={cursorRef}
       className={cn(
-        "fixed w-5 h-5 rounded-full bg-primary pointer-events-none z-[9999]", // z-index to be on top
-        "shadow-lg" // A subtle shadow for depth
+        "fixed w-3 h-3 rounded-full bg-primary pointer-events-none z-[9999] opacity-75", // Default size w-3 h-3
+        "shadow-md" // Subtle shadow for the smaller cursor
       )}
-      style={{ opacity: 0 }} // Initial style for GSAP to animate from
+      style={{ opacity: 0 }} // Start fully transparent, GSAP handles fade-in
     />
   );
 };
 
 export default CustomCursor;
+

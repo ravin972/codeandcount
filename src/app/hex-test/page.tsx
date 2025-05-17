@@ -118,7 +118,7 @@ export default function HexTestPage() {
     setMessage(null);
     setRevealCorrectHex(null);
     setRevealChosenHex(null);
-    setLevel(1); // This will trigger useEffect for setupNewLevel
+    setLevel(1); 
   }, []);
 
   useEffect(() => {
@@ -134,7 +134,7 @@ export default function HexTestPage() {
     if (!isGameOver && gameStarted && timeLeft > 0) {
       timerRef.current = setInterval(() => {
         setTimeLeft((prevTime) => {
-          if (prevTime <= 0.1) { // Check against a small fraction to handle floating point issues
+          if (prevTime <= 0.1) { 
             clearInterval(timerRef.current!);
             setIsGameOver(true);
             if (correctHexIndex !== null && gridColors.length > 0) {
@@ -144,11 +144,10 @@ export default function HexTestPage() {
             showTemporaryMessage("TIME'S UP!", 'error', 3000);
             return 0;
           }
-          return prevTime - 0.1; // Update more frequently for smoother progress bar
+          return prevTime - 0.1; 
         });
-      }, 100); // Interval of 100ms
+      }, 100); 
     } else if (timeLeft <= 0 && !isGameOver && gameStarted) {
-        // This condition handles the case where timeLeft hits 0 before interval clears
         clearInterval(timerRef.current!);
         setIsGameOver(true);
         if (correctHexIndex !== null && gridColors.length > 0) {
@@ -173,7 +172,7 @@ export default function HexTestPage() {
     if (index === correctHexIndex) {
       setScore((s) => s + level * 10);
       showTemporaryMessage("CORRECT!", 'success');
-      setLevel((l) => l + 1); // This will trigger setupNewLevel via useEffect
+      setLevel((l) => l + 1); 
     } else {
       setIsGameOver(true);
       if (correctHexIndex !== null) {
@@ -184,8 +183,6 @@ export default function HexTestPage() {
     }
   };
   
-  const hexagonSize = 100 / getGridDimensions() - (getGridDimensions() > 3 ? 2 : 1) ; // This variable is not used currently
-
   return (
     <div className="bg-background text-foreground min-h-screen py-8 flex flex-col items-center">
       <header className="text-center mb-8 md:mb-12 w-full max-w-3xl px-4">
@@ -198,7 +195,7 @@ export default function HexTestPage() {
 
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-md w-full">
         {!gameStarted || isGameOver ? (
-          <Card className="shadow-xl text-center">
+          <Card className="shadow-xl text-center" data-interactive-cursor="true">
             <CardHeader>
               <CardTitle className="text-3xl">
                 {gameStarted && isGameOver ? <AlertTriangle className="inline h-8 w-8 mr-2 text-destructive" /> : <Gamepad2 className="inline h-8 w-8 mr-2 text-primary" />} 
@@ -246,7 +243,7 @@ export default function HexTestPage() {
             </CardContent>
           </Card>
         ) : (
-          <Card className="shadow-xl">
+          <Card className="shadow-xl" data-interactive-cursor="true">
             <CardHeader className="p-4">
               <div className="flex justify-between items-center gap-4 mb-3">
                 <span className="text-sm font-semibold text-muted-foreground">LEVEL {level}</span>
@@ -255,7 +252,7 @@ export default function HexTestPage() {
               <Progress value={(timeLeft / timeForCurrentLevel) * 100} className="w-full h-2" />
                {message && (
                 <div className={cn(
-                  "mt-3 p-2 rounded-md text-center text-xs font-semibold h-8 flex items-center justify-center", // Added h-8 and flex for consistent height
+                  "mt-3 p-2 rounded-md text-center text-xs font-semibold h-8 flex items-center justify-center", 
                   message.type === 'success' && "bg-green-500/20 text-green-700 dark:text-green-300",
                   message.type === 'error' && "bg-red-500/20 text-red-700 dark:text-red-300",
                   message.type === 'info' && "bg-blue-500/20 text-blue-700 dark:text-blue-300"
@@ -263,11 +260,11 @@ export default function HexTestPage() {
                   {message.text}
                 </div>
               )}
-              {!message && <div className="h-8 mt-3"></div>} {/* Placeholder for consistent height */}
+              {!message && <div className="h-8 mt-3"></div>} 
             </CardHeader>
             <CardContent className="p-4">
               <div 
-                className="grid gap-1 sm:gap-1.5 justify-center aspect-square" // Reduced gap slightly
+                className="grid gap-1 sm:gap-1.5 justify-center aspect-square" 
                 style={{ gridTemplateColumns: `repeat(${getGridDimensions()}, minmax(0, 1fr))` }}
               >
                 {gridColors.map((color, index) => (
@@ -277,22 +274,18 @@ export default function HexTestPage() {
                     className="flex items-center justify-center cursor-pointer transition-all duration-150 ease-in-out hover:opacity-70 rounded-md"
                     style={{
                       width: '100%', 
-                      paddingBottom: '100%', // Maintain aspect ratio for the clickable area
+                      paddingBottom: '100%', 
                       backgroundColor: color,
-                      // clipPath: 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)', // Removed clip-path
                     }}
                     aria-label={`Card ${index + 1}`}
+                    data-interactive-cursor="true"
                   />
                 ))}
               </div>
             </CardContent>
-            {/* <CardFooter className="text-center p-4">
-              <p className="text-xs text-muted-foreground w-full">Find the card with the slightly different shade!</p>
-            </CardFooter> */}
           </Card>
         )}
       </main>
     </div>
   );
 }
-

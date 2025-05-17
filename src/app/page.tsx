@@ -8,7 +8,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ArrowUpRight, Calculator, Sparkles, ArrowRight, Eye, Dot, ChevronLeft, ChevronRight } from 'lucide-react';
 import InfiniteScrollerWithMouseFollower from '@/components/effects/InfiniteScrollerWithMouseFollower';
-import { CircleCheckBig, ShoppingCart } from 'lucide-react';
+import { CircleCheckBig, ShoppingCart, Puzzle } from 'lucide-react'; // Added Puzzle
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 
 
@@ -82,7 +82,6 @@ const homepageBlogPosts = [
     imageUrl: 'https://images.unsplash.com/photo-1547398123-828a28902e57?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxmdXR1cmlzdGljJTIwZGVzaWdufGVufDB8fHx8MTc0NzM3NjYzN3ww&ixlib=rb-4.1.0&q=80&w=1080',
     excerpt: 'Discover the cutting-edge web design trends shaping the digital landscape in 2024, from AI integration to immersive experiences.',
     readTime: '6 min read',
-    dataAiHint: 'futuristic design'
   },
   {
     slug: 'unlocking-seo-success-a-comprehensive-guide',
@@ -90,7 +89,6 @@ const homepageBlogPosts = [
     imageUrl: 'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzZW8lMjBjaGFydCUyMGdyYXBofGVufDB8fHx8MTc0NzM3NjYzN3ww&ixlib=rb-4.1.0&q=80&w=1080',
     excerpt: 'Navigate the complexities of SEO with our in-depth guide, covering everything from keyword research to technical optimization.',
     readTime: '10 min read',
-    dataAiHint: 'seo chart graph'
   },
   {
     slug: 'why-craft-cms-is-our-go-to-for-flexible-websites',
@@ -98,7 +96,6 @@ const homepageBlogPosts = [
     imageUrl: 'https://images.unsplash.com/photo-1698621193747-e8788c620dbc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxjbXMlMjBpbnRlcmZhY2V8ZW58MHx8fHwxNzQ3Mzc2NjM3fDA&ixlib=rb-4.1.0&q=80&w=1080',
     excerpt: 'Explore the benefits of Craft CMS and why it stands out as a powerful, flexible, and user-friendly content management system.',
     readTime: '4 min read',
-    dataAiHint: 'cms interface'
   },
   {
     slug: 'ai-in-digital-marketing-the-new-frontier',
@@ -137,8 +134,7 @@ export default function HomePage() {
   const checkScrollability = useCallback(() => {
     if (scrollContainerRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
-      setCanScrollLeft(scrollLeft > 5); // Use a small tolerance
-      // Add a small tolerance to handle potential floating point inaccuracies or fractional widths
+      setCanScrollLeft(scrollLeft > 5); 
       setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 5);
     }
   }, []);
@@ -148,7 +144,7 @@ export default function HomePage() {
       if (cardRef.current) {
         const cardStyles = window.getComputedStyle(cardRef.current);
         const cardWidth = cardRef.current.offsetWidth;
-        const gap = parseFloat(cardStyles.marginRight) || (parseFloat(window.getComputedStyle(document.documentElement).fontSize) * 1.5); // 1.5rem = space-x-6
+        const gap = parseFloat(cardStyles.marginRight) || (parseFloat(window.getComputedStyle(document.documentElement).fontSize) * 1.5);
         setItemWidth(cardWidth + gap);
       }
     };
@@ -158,7 +154,7 @@ export default function HomePage() {
 
     const container = scrollContainerRef.current;
     if (container) {
-        container.addEventListener('scroll', checkScrollability);
+        container.addEventListener('scroll', checkScrollability, { passive: true });
     }
     window.addEventListener('resize', calculateItemWidth);
     window.addEventListener('resize', checkScrollability);
@@ -233,13 +229,15 @@ export default function HomePage() {
       {/* Services Section */}
       <section id="services" className="py-16 bg-secondary">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="col-start-1 row-start-1 relative z-[1] text-4xl font-bold text-center">Our Core Services</h2>
+          <div className="relative inline-grid place-items-center [transform-style:preserve-3d] [perspective:1000px] w-full text-center mb-4">
+             <h2 className="col-start-1 row-start-1 relative z-[1] text-4xl font-bold text-center">Our Core Services</h2>
+          </div>
           <p className="text-xl text-muted-foreground text-center mt-4 mb-12 max-w-2xl mx-auto">
             We offer a comprehensive suite of services to bring your vision to life.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service) => (
-              <Card key={service.name} className="shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out hover:-translate-y-1">
+              <Card key={service.name} className="shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out hover:-translate-y-1" data-interactive-cursor="true">
                 <CardHeader>
                   {service.icon}
                   <CardTitle className="text-2xl font-semibold">{service.name}</CardTitle>
@@ -284,7 +282,7 @@ export default function HomePage() {
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {caseStudies.map((study) => (
-              <Card key={study.id} className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out flex flex-col group hover:-translate-y-1">
+              <Card key={study.id} className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out flex flex-col group hover:-translate-y-1" data-interactive-cursor="true">
                 <Image src={study.imageUrl} alt={study.title} width={600} height={400} className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out" data-ai-hint={study.dataAiHint} />
                 <CardHeader>
                   <CardTitle className="text-2xl font-semibold">{study.title}</CardTitle>
@@ -322,7 +320,7 @@ export default function HomePage() {
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {testimonials.map((testimonial) => (
-              <Card key={testimonial.name} className="shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out hover:-translate-y-1">
+              <Card key={testimonial.name} className="shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out hover:-translate-y-1" data-interactive-cursor="true">
                 <CardContent className="pt-6">
                   <div className="flex items-start space-x-4 mb-4">
                     <Avatar className="h-16 w-16">
@@ -391,7 +389,7 @@ export default function HomePage() {
 
       {/* Infinite Scroller Section */}
       <InfiniteScrollerWithMouseFollower />
-
+      
       {/* Blog Section */}
       <section className="py-16 md:py-24 bg-neutral-900 text-neutral-100">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -438,14 +436,13 @@ export default function HomePage() {
                     className="block flex-shrink-0 w-full sm:w-[calc(50%-0.75rem)] md:w-[calc(33.333%-1rem)] group"
                     ref={index === 0 ? cardRef : null}
                   >
-                    <Card className="bg-neutral-800 border-neutral-700 hover:border-primary/50 transition-all duration-300 ease-in-out transform hover:-translate-y-1 h-full flex flex-col">
+                    <Card className="bg-neutral-800 border-neutral-700 hover:border-primary/50 transition-all duration-300 ease-in-out transform hover:-translate-y-1 h-full flex flex-col" data-interactive-cursor="true">
                       <Image
                         src={post.imageUrl}
                         alt={post.title}
                         width={600}
                         height={400}
                         className="w-full h-48 object-cover rounded-t-lg transition-transform duration-300 ease-in-out group-hover:scale-105"
-                        data-ai-hint={post.dataAiHint}
                       />
                       <CardContent className="p-4 flex-grow flex flex-col">
                         <p className="text-xs text-neutral-400 mb-1 flex items-center">

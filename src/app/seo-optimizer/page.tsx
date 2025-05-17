@@ -93,7 +93,7 @@ export default function SEOOptimizerPage() {
 
       <section className="py-12 md:py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
-          <Card className="shadow-xl">
+          <Card className="shadow-xl" data-interactive-cursor="true">
             <CardHeader>
               <CardTitle>Rewrite Your Content</CardTitle>
               <CardDescription>
@@ -145,7 +145,7 @@ export default function SEOOptimizerPage() {
           </Card>
 
           {rewrittenText && (
-            <Card className="mt-10 shadow-xl">
+            <Card className="mt-10 shadow-xl" data-interactive-cursor="true">
               <CardHeader className="flex flex-row items-center justify-between">
                 <div>
                   <CardTitle>Optimized Content</CardTitle>
@@ -172,4 +172,3 @@ export default function SEOOptimizerPage() {
     </div>
   );
 }
-
