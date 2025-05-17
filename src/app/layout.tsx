@@ -1,6 +1,6 @@
 
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google'; // Changed from localFont
+import { Inter } from 'next/font/google';
 import './globals.css';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
@@ -8,10 +8,9 @@ import { Toaster } from "@/components/ui/toaster";
 import { cn } from '@/lib/utils';
 import { ThemeProvider } from "@/components/ThemeProvider";
 
-// Configure Inter font
-const inter = Inter({ // Changed font configuration
+const inter = Inter({ 
   subsets: ['latin'],
-  variable: '--font-inter', // Define a CSS variable for Inter
+  variable: '--font-inter', 
 });
 
 export const metadata: Metadata = {
@@ -25,11 +24,11 @@ export const metadata: Metadata = {
     description: 'Modern web and app development solutions.',
     type: 'website',
     locale: 'en_US',
-    url: 'https://codeandcount.com.example', // Replace with actual URL
+    url: 'https://codeandcount.com.example', 
     siteName: 'CodeAndCount.com',
     images: [
       {
-        url: 'https://placehold.co/1200x630.png?text=CodeAndCount', // Replace with actual OG image
+        url: 'https://placehold.co/1200x630.png?text=CodeAndCount', 
         width: 1200,
         height: 630,
         alt: 'CodeAndCount.com',
@@ -40,12 +39,10 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'CodeAndCount.com - Web & App Development',
     description: 'Modern web and app development solutions.',
-    // site: '@codeandcount', // Replace with actual Twitter handle
-    // creator: '@creatorhandle', // Replace with actual creator handle
-    images: ['https://placehold.co/1200x630.png?text=CodeAndCount'], // Replace
+    images: ['https://placehold.co/1200x630.png?text=CodeAndCount'], 
   },
   manifest: '/manifest.json',
-  themeColor: '#008080',
+  themeColor: '#33bbfd', // Updated to new accent color
 };
 
 export default function RootLayout({

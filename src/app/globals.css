@@ -5,32 +5,32 @@
 @layer base {
   :root {
     --background: 0 0% 100%; /* White */
-    --foreground: 0 0% 3.9%; /* Near Black */
+    --foreground: 203 17% 13%; /* Dark Charcoal Blue (#1b2327) */
 
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 3.9%;
+    --card-foreground: 203 17% 13%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 3.9%;
+    --popover-foreground: 203 17% 13%;
 
-    --primary: 180 100% 25%; /* Teal #008080 */
-    --primary-foreground: 0 0% 98%; /* Near White for contrast on Teal */
+    --primary: 200 98% 60%; /* Bright Blue (#33bbfd) */
+    --primary-foreground: 0 0% 100%; /* White for contrast on Bright Blue */
 
-    --secondary: 0 0% 96.1%; /* Light Gray */
-    --secondary-foreground: 0 0% 9%; /* Dark Gray */
+    --secondary: 250 27% 90%; /* Light Lavender Gray (#e0deea) */
+    --secondary-foreground: 203 17% 13%; /* Dark Charcoal Blue for text on light secondary */
 
-    --muted: 0 0% 96.1%;
-    --muted-foreground: 0 0% 45.1%;
+    --muted: 0 0% 96.1%; /* Default light muted gray */
+    --muted-foreground: 0 0% 45.1%; /* Default dark muted text */
 
-    --accent: 180 60% 90%; /* Very Light Teal for hover backgrounds */
-    --accent-foreground: 180 100% 20%; /* Darker Teal for text on light teal accent */
+    --accent: 200 98% 90%; /* Very Light Blue (derived from #33bbfd) */
+    --accent-foreground: 200 98% 30%; /* Darker Blue for text on light blue accent */
     
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 89.8%;
-    --input: 0 0% 89.8%;
-    --ring: 180 100% 25%; /* Teal for focus rings */
+    --border: 203 17% 85%; /* Lighter shade of #1b2327 for borders */
+    --input: 203 17% 85%;
+    --ring: 200 98% 60%; /* Bright Blue for focus rings */
 
     --radius: 0.5rem;
 
@@ -42,33 +42,33 @@
   }
 
   .dark {
-    --background: 0 0% 3.9%; /* Near Black */
-    --foreground: 0 0% 98%; /* White */
+    --background: 203 17% 13%; /* Dark Charcoal Blue (#1b2327) */
+    --foreground: 250 27% 90%; /* Light Lavender Gray (#e0deea) */
 
-    --card: 0 0% 3.9%;
-    --card-foreground: 0 0% 98%;
+    --card: 203 17% 16%; /* Slightly distinct dark card background */
+    --card-foreground: 250 27% 90%;
 
-    --popover: 0 0% 3.9%;
-    --popover-foreground: 0 0% 98%;
+    --popover: 203 17% 13%;
+    --popover-foreground: 250 27% 90%;
 
-    --primary: 180 70% 45%; /* Brighter Teal for dark mode (e.g., #24b3b3) */
-    --primary-foreground: 0 0% 98%; /* White for contrast on dark mode brighter Teal */
+    --primary: 250 27% 90%; /* Light Lavender Gray (#e0deea) for primary actions */
+    --primary-foreground: 203 17% 13%; /* Dark Charcoal Blue text on light primary */
 
-    --secondary: 0 0% 14.9%; /* Dark Gray */
-    --secondary-foreground: 0 0% 98%; /* White */
+    --secondary: 203 17% 18%; /* Slightly lighter than dark background */
+    --secondary-foreground: 250 27% 80%; /* Dimmer light text */
 
-    --muted: 0 0% 14.9%;
-    --muted-foreground: 0 0% 63.9%;
+    --muted: 203 17% 18%;
+    --muted-foreground: 250 27% 50%; /* Dimmer muted text */
 
-    --accent: 180 50% 12%; /* Dark, desaturated Teal for hover backgrounds in dark mode */
-    --accent-foreground: 0 0% 98%; /* White for text on dark teal accent */
+    --accent: 200 98% 60%; /* Bright Blue (#33bbfd) */
+    --accent-foreground: 0 0% 100%; /* White text on blue accent */
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 14.9%;
-    --input: 0 0% 14.9%;
-    --ring: 180 70% 55%; /* Even Brighter Teal for focus rings in dark mode */
+    --border: 203 17% 25%; /* Slightly lighter than dark background for borders */
+    --input: 203 17% 25%;
+    --ring: 200 98% 70%; /* Lighter Bright Blue for focus rings */
     
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
@@ -83,13 +83,13 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground font-sans; /* Use --font-oldschoolGrotesk from layout */
+    @apply bg-background text-foreground font-sans; 
   }
   
   /* Global Text Selection Styles */
   ::selection {
-    background-color: #D2FF70; /* Your specified background color */
-    color: #000000; /* Your specified text color */
+    background-color: #D2FF70; 
+    color: #000000; 
   }
   ::-moz-selection { /* Firefox */
     background-color: #D2FF70;
