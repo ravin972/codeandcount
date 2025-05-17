@@ -83,6 +83,7 @@ const homepageBlogPosts = [
     slug: 'the-future-of-web-design-trends-for-2024',
     title: 'The Future of Web Design: Trends for 2024',
     imageUrl: 'https://images.unsplash.com/photo-1547398123-828a28902e57?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxmdXR1cmlzdGljJTIwZGVzaWdufGVufDB8fHx8MTc0NzM3NjYzN3ww&ixlib=rb-4.1.0&q=80&w=1080',
+    dataAiHintImage: 'futuristic design',
     excerpt: 'Discover the cutting-edge web design trends shaping the digital landscape in 2024, from AI integration to immersive experiences.',
     readTime: '6 min read',
     category: 'Web Design',
@@ -93,6 +94,7 @@ const homepageBlogPosts = [
     slug: 'unlocking-seo-success-a-comprehensive-guide',
     title: 'Unlocking SEO Success: A Comprehensive Guide',
     imageUrl: 'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzZW8lMjBjaGFydCUyMGdyYXBofGVufDB8fHx8MTc0NzM3NjYzN3ww&ixlib=rb-4.1.0&q=80&w=1080',
+    dataAiHintImage: 'seo chart graph',
     excerpt: 'Navigate the complexities of SEO with our in-depth guide, covering everything from keyword research to technical optimization.',
     readTime: '10 min read',
     category: 'SEO',
@@ -103,6 +105,7 @@ const homepageBlogPosts = [
     slug: 'why-craft-cms-is-our-go-to-for-flexible-websites',
     title: 'Why Craft CMS is Our Go-To for Flexible Websites',
     imageUrl: 'https://images.unsplash.com/photo-1698621193747-e8788c620dbc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxjbXMlMjBpbnRlcmZhY2V8ZW58MHx8fHwxNzQ3Mzc2NjM3fDA&ixlib=rb-4.1.0&q=80&w=1080',
+    dataAiHintImage: 'cms interface',
     excerpt: 'Explore the benefits of Craft CMS and why it stands out as a powerful, flexible, and user-friendly content management system.',
     readTime: '4 min read',
     category: 'Craft CMS',
@@ -112,7 +115,7 @@ const homepageBlogPosts = [
   {
     slug: 'ai-in-digital-marketing-the-new-frontier',
     title: 'AI in Digital Marketing: The New Frontier',
-    imageUrl: 'https://placehold.co/600x400.png', dataAiHint: 'artificial intelligence marketing',
+    imageUrl: 'https://placehold.co/600x400.png', dataAiHintImage: 'artificial intelligence marketing',
     excerpt: 'How AI is revolutionizing digital marketing strategies, from content creation to customer analytics.',
     readTime: '8 min read',
     category: 'Digital Marketing',
@@ -122,7 +125,7 @@ const homepageBlogPosts = [
   {
     slug: 'the-importance-of-user-experience-ux-in-web-design',
     title: 'The Importance of User Experience (UX) in Web Design',
-    imageUrl: 'https://placehold.co/600x400.png', dataAiHint: 'user experience interface',
+    imageUrl: 'https://placehold.co/600x400.png', dataAiHintImage: 'user experience interface',
     excerpt: 'A deep dive into why UX is paramount for website success and how to optimize it for your users.',
     readTime: '7 min read',
     category: 'Web Design',
@@ -132,7 +135,7 @@ const homepageBlogPosts = [
   {
     slug: 'wordpress-vs-headless-cms-which-is-right-for-you',
     title: 'WordPress vs. Headless CMS: Which is Right for You?',
-    imageUrl: 'https://placehold.co/600x400.png', dataAiHint: 'cms comparison chart',
+    imageUrl: 'https://placehold.co/600x400.png', dataAiHintImage: 'cms comparison chart',
     excerpt: 'Comparing traditional WordPress with modern headless CMS solutions to help you choose the best fit.',
     readTime: '9 min read',
     category: 'CMS',
@@ -182,7 +185,13 @@ export default function HomePage() {
       }
     };
 
-    const animationFrameId = requestAnimationFrame(calculateAndUpdateAll);
+    let animationFrameId: number;
+    const runCalculation = () => {
+      calculateAndUpdateAll();
+      animationFrameId = requestAnimationFrame(runCalculation);
+    };
+    
+    animationFrameId = requestAnimationFrame(runCalculation);
     
     if (container) {
       container.addEventListener('scroll', checkScrollability, { passive: true });
@@ -229,12 +238,7 @@ export default function HomePage() {
               <div className="relative inline-grid place-items-center [transform-style:preserve-3d] [perspective:1000px]">
                 <div
                   aria-hidden="true"
-                  className="col-start-1 row-start-1 text-5xl md:text-7xl font-bold tracking-tight
-                             text-primary
-                             blur-xl opacity-60 brightness-150
-                             [transform:translateZ(-30px)_scale(1.1)]
-                             pointer-events-none
-                            "
+                  className="col-start-1 row-start-1 text-5xl md:text-7xl font-bold tracking-tight text-primary blur-xl opacity-60 brightness-150 [transform:translateZ(-30px)_scale(1.1)] pointer-events-none"
                 >
                   Crafting <span className="text-primary">Digital Excellence</span>.
                 </div>
@@ -260,7 +264,6 @@ export default function HomePage() {
       <section id="services" className="py-16 bg-secondary">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative inline-grid place-items-center [transform-style:preserve-3d] [perspective:1000px] w-full text-center mb-4">
-           
             <h2 className="col-start-1 row-start-1 relative z-[1] text-4xl md:text-5xl font-bold text-center">Our Core Services</h2>
           </div>
           <p className="text-xl md:text-2xl text-muted-foreground text-center mt-4 mb-12 max-w-2xl mx-auto">
@@ -302,7 +305,7 @@ export default function HomePage() {
           <div className="relative inline-grid place-items-center [transform-style:preserve-3d] [perspective:1000px] w-full text-center mb-4">
             <div
               aria-hidden="true"
-              className="col-start-1 row-start-1 text-4xl md:text-5xl font-bold tracking-tight text-primary blur-lg opacity-60 brightness-150 [transform:translateZ(-20px)_scale(1.05)] pointer-events-none"
+              className="col-start-1 row-start-1 text-4xl font-bold tracking-tight text-primary blur-lg opacity-60 brightness-150 [transform:translateZ(-20px)_scale(1.05)] pointer-events-none"
             >
               Featured Work
             </div>
@@ -458,7 +461,7 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-            <div className="md:col-span-2">
+            <div className="md:col-span-2 overflow-x-hidden md:overflow-visible">
               <div ref={scrollContainerRef} className="flex space-x-6 overflow-x-auto pb-4 -mb-4 scrollbar-hide">
                 {homepageBlogPosts.map((post, index) => (
                   <Link
