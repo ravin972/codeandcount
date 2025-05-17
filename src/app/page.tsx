@@ -8,7 +8,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ArrowUpRight, Calculator, Sparkles, ArrowRight, Eye, Dot, ChevronLeft, ChevronRight } from 'lucide-react';
 import InfiniteScrollerWithMouseFollower from '@/components/effects/InfiniteScrollerWithMouseFollower';
-import { CircleCheckBig, ShoppingCart, Puzzle, Wrench } from 'lucide-react'; // Added Puzzle, Wrench
+import { CircleCheckBig, ShoppingCart, Puzzle, Wrench } from 'lucide-react'; 
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 
 
@@ -80,49 +80,61 @@ const homepageBlogPosts = [
     slug: 'the-future-of-web-design-trends-for-2024',
     title: 'The Future of Web Design: Trends for 2024',
     imageUrl: 'https://images.unsplash.com/photo-1547398123-828a28902e57?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxmdXR1cmlzdGljJTIwZGVzaWdufGVufDB8fHx8MTc0NzM3NjYzN3ww&ixlib=rb-4.1.0&q=80&w=1080',
-    dataAiHintImage: 'futuristic design',
     excerpt: 'Discover the cutting-edge web design trends shaping the digital landscape in 2024, from AI integration to immersive experiences.',
     readTime: '6 min read',
+    category: 'Web Design',
+    date: '2024-07-15',
+    author: 'Alex Chen',
   },
   {
     slug: 'unlocking-seo-success-a-comprehensive-guide',
     title: 'Unlocking SEO Success: A Comprehensive Guide',
     imageUrl: 'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzZW8lMjBjaGFydCUyMGdyYXBofGVufDB8fHx8MTc0NzM3NjYzN3ww&ixlib=rb-4.1.0&q=80&w=1080',
-    dataAiHintImage: 'seo chart graph',
     excerpt: 'Navigate the complexities of SEO with our in-depth guide, covering everything from keyword research to technical optimization.',
     readTime: '10 min read',
+    category: 'SEO',
+    date: '2024-07-01',
+    author: 'Sam Lee',
   },
   {
     slug: 'why-craft-cms-is-our-go-to-for-flexible-websites',
     title: 'Why Craft CMS is Our Go-To for Flexible Websites',
     imageUrl: 'https://images.unsplash.com/photo-1698621193747-e8788c620dbc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxjbXMlMjBpbnRlcmZhY2V8ZW58MHx8fHwxNzQ3Mzc2NjM3fDA&ixlib=rb-4.1.0&q=80&w=1080',
-    dataAiHintImage: 'cms interface',
     excerpt: 'Explore the benefits of Craft CMS and why it stands out as a powerful, flexible, and user-friendly content management system.',
     readTime: '4 min read',
+    category: 'Craft CMS',
+    date: '2024-06-20',
+    author: 'Maria Rodriguez',
   },
   {
     slug: 'ai-in-digital-marketing-the-new-frontier',
     title: 'AI in Digital Marketing: The New Frontier',
-    imageUrl: 'https://placehold.co/600x400.png',
-    dataAiHintImage: 'artificial intelligence marketing',
+    imageUrl: 'https://placehold.co/600x400.png', dataAiHint: 'artificial intelligence marketing',
     excerpt: 'How AI is revolutionizing digital marketing strategies, from content creation to customer analytics.',
     readTime: '8 min read',
+    category: 'Digital Marketing',
+    date: '2024-05-22',
+    author: 'Sam Lee',
   },
   {
     slug: 'the-importance-of-user-experience-ux-in-web-design',
     title: 'The Importance of User Experience (UX) in Web Design',
-    imageUrl: 'https://placehold.co/600x400.png',
-    dataAiHintImage: 'user experience interface',
+    imageUrl: 'https://placehold.co/600x400.png', dataAiHint: 'user experience interface',
     excerpt: 'A deep dive into why UX is paramount for website success and how to optimize it for your users.',
     readTime: '7 min read',
+    category: 'Web Design',
+    date: '2024-05-10',
+    author: 'Alex Chen',
   },
   {
     slug: 'wordpress-vs-headless-cms-which-is-right-for-you',
     title: 'WordPress vs. Headless CMS: Which is Right for You?',
-    imageUrl: 'https://placehold.co/600x400.png',
-    dataAiHintImage: 'cms comparison chart',
+    imageUrl: 'https://placehold.co/600x400.png', dataAiHint: 'cms comparison chart',
     excerpt: 'Comparing traditional WordPress with modern headless CMS solutions to help you choose the best fit.',
     readTime: '9 min read',
+    category: 'CMS',
+    date: '2024-04-28',
+    author: 'Maria Rodriguez',
   },
 ];
 
@@ -147,7 +159,6 @@ export default function HomePage() {
       if (cardRef.current) {
         const cardStyles = window.getComputedStyle(cardRef.current);
         const cardWidth = cardRef.current.offsetWidth;
-        // Estimate gap based on typical Tailwind `space-x-6` (1.5rem)
         const gap = parseFloat(cardStyles.marginRight) || (parseFloat(window.getComputedStyle(document.documentElement).fontSize) * 1.5); 
         setItemWidth(cardWidth + gap);
       }
@@ -170,7 +181,7 @@ export default function HomePage() {
         window.removeEventListener('resize', calculateItemWidth);
         window.removeEventListener('resize', checkScrollability);
     };
-  }, [homepageBlogPosts, checkScrollability]);
+  }, [checkScrollability]);
 
 
   const handleScroll = (direction: 'left' | 'right') => {
@@ -180,8 +191,7 @@ export default function HomePage() {
         left: scrollValue,
         behavior: 'smooth',
       });
-      // Re-check scrollability after the scroll animation might have completed
-      setTimeout(checkScrollability, 350); // Adjust timeout as needed
+      setTimeout(checkScrollability, 350); 
     }
   };
 
@@ -234,10 +244,8 @@ export default function HomePage() {
       {/* Services Section */}
       <section id="services" className="py-16 bg-secondary">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative inline-grid place-items-center [transform-style:preserve-3d] [perspective:1000px] w-full text-center mb-4">
-             <h2 className="col-start-1 row-start-1 relative z-[1] text-4xl font-bold text-center">Our Core Services</h2>
-          </div>
-          <p className="text-xl text-muted-foreground text-center mt-4 mb-12 max-w-2xl mx-auto">
+          <h2 className="col-start-1 row-start-1 relative z-[1] text-4xl md:text-5xl font-bold text-center">Our Core Services</h2>
+          <p className="text-xl md:text-2xl text-muted-foreground text-center mt-4 mb-12 max-w-2xl mx-auto">
             We offer a comprehensive suite of services to bring your vision to life.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -276,13 +284,13 @@ export default function HomePage() {
           <div className="relative inline-grid place-items-center [transform-style:preserve-3d] [perspective:1000px] w-full text-center mb-4">
             <div
               aria-hidden="true"
-              className="col-start-1 row-start-1 text-4xl font-bold tracking-tight text-primary blur-lg opacity-60 brightness-150 [transform:translateZ(-20px)_scale(1.05)] pointer-events-none"
+              className="col-start-1 row-start-1 text-4xl md:text-5xl font-bold tracking-tight text-primary blur-lg opacity-60 brightness-150 [transform:translateZ(-20px)_scale(1.05)] pointer-events-none"
             >
               Featured Work
             </div>
-            <h2 className="col-start-1 row-start-1 relative z-[1] text-4xl font-bold text-center">Featured Work</h2>
+            <h2 className="col-start-1 row-start-1 relative z-[1] text-4xl md:text-5xl font-bold text-center">Featured Work</h2>
           </div>
-          <p className="text-xl text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
+          <p className="text-xl md:text-2xl text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
             Explore how we've helped businesses like yours succeed.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -320,7 +328,7 @@ export default function HomePage() {
       <section id="testimonials" className="py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-4xl font-bold text-center mb-4">What Our Clients Say</h2>
-          <p className="text-xl text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
+          <p className="text-xl md:text-2xl text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
             Real stories from satisfied partners.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -368,7 +376,7 @@ export default function HomePage() {
           <p className="text-lg md:text-xl text-background/80 dark:text-muted-foreground max-w-2xl mx-auto mb-10">
             Unlock the power of AI to rewrite your content, incorporate strategic keywords, and climb search engine rankings. Try our free SEO Optimizer tool today!
           </p>
-
+          
           <Button size="lg" asChild className="rounded-full">
             <Link href="/seo-optimizer">
               Try SEO Optimizer <ArrowRight className="ml-2 h-5 w-5" />
@@ -391,7 +399,7 @@ export default function HomePage() {
           </Button>
         </div>
       </section>
-
+      
       {/* Blog Section */}
       <section className="py-16 md:py-24 bg-neutral-900 text-neutral-100">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -418,11 +426,11 @@ export default function HomePage() {
                   </Link>
                 </Button>
                 <div className="flex space-x-3">
-                  <Button variant="outline" size="icon" onClick={() => handleScroll('left')} disabled={!canScrollLeft} className="bg-neutral-800 border-neutral-700 hover:bg-neutral-700 disabled:opacity-50">
+                  <Button variant="outline" size="icon" onClick={() => handleScroll('left')} disabled={!canScrollLeft} className="bg-neutral-800 border-neutral-700 hover:bg-neutral-700 disabled:opacity-50 rounded-full">
                     <ChevronLeft className="h-5 w-5" />
                     <span className="sr-only">Scroll Left</span>
                   </Button>
-                  <Button variant="outline" size="icon" onClick={() => handleScroll('right')} disabled={!canScrollRight} className="bg-neutral-800 border-neutral-700 hover:bg-neutral-700 disabled:opacity-50">
+                  <Button variant="outline" size="icon" onClick={() => handleScroll('right')} disabled={!canScrollRight} className="bg-neutral-800 border-neutral-700 hover:bg-neutral-700 disabled:opacity-50 rounded-full">
                     <ChevronRight className="h-5 w-5" />
                     <span className="sr-only">Scroll Right</span>
                   </Button>
@@ -435,7 +443,7 @@ export default function HomePage() {
                   <Link
                     key={post.slug}
                     href={`/blog/${post.slug}`}
-                    className="block flex-shrink-0 w-full sm:w-[calc(50%-0.75rem)] md:w-[calc(33.333%-1rem)] group" // Adjust card width for typical 3-card display
+                    className="block flex-shrink-0 w-full sm:w-[calc(50%-0.75rem)] md:w-[calc(33.333%-1rem)] group" 
                     ref={index === 0 ? cardRef : null}
                   >
                     <Card className="bg-neutral-800 border-neutral-700 hover:border-primary/50 transition-all duration-300 ease-in-out transform hover:-translate-y-1 h-full flex flex-col" data-interactive-cursor="true">
@@ -467,8 +475,11 @@ export default function HomePage() {
         </div>
       </section>
       
-      {/* Infinite Scroller Section */}
       <InfiniteScrollerWithMouseFollower />
+      
+      <div className="h-0.5 w-1/3 sm:w-1/4 md:w-1/6 mx-auto my-12 md:my-16 lg:my-20 bg-primary rounded-full" />
+
     </div>
   );
 }
+
