@@ -30,7 +30,7 @@ export const metadata: Metadata = {
     siteName: 'CodeAndCount.com',
     images: [
       {
-        url: 'https://placehold.co/1200x630.png?text=CodeAndCount',
+        url: 'https://placehold.co/1200x630.png', // Removed text parameter
         width: 1200,
         height: 630,
         alt: 'CodeAndCount.com',
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'CodeAndCount.com - Web & App Development',
     description: 'Modern web and app development solutions.',
-    images: ['https://placehold.co/1200x630.png?text=CodeAndCount'],
+    images: ['https://placehold.co/1200x630.png'], // Removed text parameter
   },
   manifest: '/manifest.json',
   themeColor: '#b2ff03', 

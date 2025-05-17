@@ -8,7 +8,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { ArrowUpRight, Calculator, Sparkles, ArrowRight, Eye, Dot, ChevronLeft, ChevronRight } from 'lucide-react';
 import InfiniteScrollerWithMouseFollower from '@/components/effects/InfiniteScrollerWithMouseFollower';
-import { CircleCheckBig, ShoppingCart, Puzzle } from 'lucide-react'; // Added Puzzle
+import { CircleCheckBig, ShoppingCart, Puzzle, Wrench } from 'lucide-react'; // Added Puzzle, Wrench
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 
 
@@ -17,16 +17,16 @@ const services = [
   { name: 'Websites & Apps', description: 'Designing and developing high-performance digital platforms.', icon: <CircleCheckBig className="h-10 w-10 text-primary mb-4" /> },
   { name: 'SEO Strategy', description: 'Optimizing your online presence for maximum visibility.', icon: <CircleCheckBig className="h-10 w-10 text-primary mb-4" /> },
   { name: 'Craft CMS Development', description: 'Building flexible and powerful websites with Craft CMS.', icon: <CircleCheckBig className="h-10 w-10 text-primary mb-4" /> },
-  { name: 'WordPress Solutions', description: 'Building powerful and scalable websites with WordPress.', icon: <CircleCheckBig className="h-10 w-10 text-primary mb-4" /> },
+  { name: 'WordPress Solutions', description: 'Building powerful and scalable websites with WordPress.', icon: <Wrench className="h-10 w-10 text-primary mb-4" /> },
   { name: 'Accounting', description: 'Managing your finances with precision and expertise.', icon: <Calculator className="h-10 w-10 text-primary mb-4" /> },
 ];
 
 const clientLogos = [
-  { name: 'Client Alpha', src: 'https://placehold.co/150x60.png?text=Alpha', dataAiHint: 'logo abstract' },
-  { name: 'Client Beta', src: 'https://placehold.co/150x60.png?text=Beta', dataAiHint: 'logo geometric' },
-  { name: 'Client Gamma', src: 'https://placehold.co/150x60.png?text=Gamma', dataAiHint: 'logo modern' },
-  { name: 'Client Delta', src: 'https://placehold.co/150x60.png?text=Delta', dataAiHint: 'logo minimalist' },
-  { name: 'Client Epsilon', src: 'https://placehold.co/150x60.png?text=Epsilon', dataAiHint: 'logo corporate' },
+  { name: 'Client Alpha', src: 'https://placehold.co/150x60.png', dataAiHint: 'logo abstract' },
+  { name: 'Client Beta', src: 'https://placehold.co/150x60.png', dataAiHint: 'logo geometric' },
+  { name: 'Client Gamma', src: 'https://placehold.co/150x60.png', dataAiHint: 'logo modern' },
+  { name: 'Client Delta', src: 'https://placehold.co/150x60.png', dataAiHint: 'logo minimalist' },
+  { name: 'Client Epsilon', src: 'https://placehold.co/150x60.png', dataAiHint: 'logo corporate' },
 ];
 
 const caseStudies = [
@@ -60,7 +60,7 @@ const testimonials = [
   {
     name: 'Jane Doe',
     title: 'CEO, Alpha Corp',
-    avatar: 'https://placehold.co/100x100.png?text=JD',
+    avatar: 'https://placehold.co/100x100.png',
     dataAiHint: 'person portrait',
     quote: "CodeAndCount.com transformed our online presence. Their team is professional, creative, and delivered outstanding results. We couldn't be happier!",
     videoUrl: 'https://vimeo.com/placeholder',
@@ -68,7 +68,7 @@ const testimonials = [
   {
     name: 'John Smith',
     title: 'Founder, Beta Solutions',
-    avatar: 'https://placehold.co/100x100.png?text=JS',
+    avatar: 'https://placehold.co/100x100.png',
     dataAiHint: 'man smiling',
     quote: 'Working with CodeAndCount.com was a game-changer. Their insights into branding and web development are unparalleled. Highly recommended!',
     videoUrl: 'https://vimeo.com/placeholder',
@@ -80,6 +80,7 @@ const homepageBlogPosts = [
     slug: 'the-future-of-web-design-trends-for-2024',
     title: 'The Future of Web Design: Trends for 2024',
     imageUrl: 'https://images.unsplash.com/photo-1547398123-828a28902e57?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxmdXR1cmlzdGljJTIwZGVzaWdufGVufDB8fHx8MTc0NzM3NjYzN3ww&ixlib=rb-4.1.0&q=80&w=1080',
+    dataAiHintImage: 'futuristic design',
     excerpt: 'Discover the cutting-edge web design trends shaping the digital landscape in 2024, from AI integration to immersive experiences.',
     readTime: '6 min read',
   },
@@ -87,6 +88,7 @@ const homepageBlogPosts = [
     slug: 'unlocking-seo-success-a-comprehensive-guide',
     title: 'Unlocking SEO Success: A Comprehensive Guide',
     imageUrl: 'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzZW8lMjBjaGFydCUyMGdyYXBofGVufDB8fHx8MTc0NzM3NjYzN3ww&ixlib=rb-4.1.0&q=80&w=1080',
+    dataAiHintImage: 'seo chart graph',
     excerpt: 'Navigate the complexities of SEO with our in-depth guide, covering everything from keyword research to technical optimization.',
     readTime: '10 min read',
   },
@@ -94,6 +96,7 @@ const homepageBlogPosts = [
     slug: 'why-craft-cms-is-our-go-to-for-flexible-websites',
     title: 'Why Craft CMS is Our Go-To for Flexible Websites',
     imageUrl: 'https://images.unsplash.com/photo-1698621193747-e8788c620dbc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxjbXMlMjBpbnRlcmZhY2V8ZW58MHx8fHwxNzQ3Mzc2NjM3fDA&ixlib=rb-4.1.0&q=80&w=1080',
+    dataAiHintImage: 'cms interface',
     excerpt: 'Explore the benefits of Craft CMS and why it stands out as a powerful, flexible, and user-friendly content management system.',
     readTime: '4 min read',
   },
@@ -101,7 +104,7 @@ const homepageBlogPosts = [
     slug: 'ai-in-digital-marketing-the-new-frontier',
     title: 'AI in Digital Marketing: The New Frontier',
     imageUrl: 'https://placehold.co/600x400.png',
-    dataAiHint: 'artificial intelligence marketing',
+    dataAiHintImage: 'artificial intelligence marketing',
     excerpt: 'How AI is revolutionizing digital marketing strategies, from content creation to customer analytics.',
     readTime: '8 min read',
   },
@@ -109,7 +112,7 @@ const homepageBlogPosts = [
     slug: 'the-importance-of-user-experience-ux-in-web-design',
     title: 'The Importance of User Experience (UX) in Web Design',
     imageUrl: 'https://placehold.co/600x400.png',
-    dataAiHint: 'user experience interface',
+    dataAiHintImage: 'user experience interface',
     excerpt: 'A deep dive into why UX is paramount for website success and how to optimize it for your users.',
     readTime: '7 min read',
   },
@@ -117,7 +120,7 @@ const homepageBlogPosts = [
     slug: 'wordpress-vs-headless-cms-which-is-right-for-you',
     title: 'WordPress vs. Headless CMS: Which is Right for You?',
     imageUrl: 'https://placehold.co/600x400.png',
-    dataAiHint: 'cms comparison chart',
+    dataAiHintImage: 'cms comparison chart',
     excerpt: 'Comparing traditional WordPress with modern headless CMS solutions to help you choose the best fit.',
     readTime: '9 min read',
   },
@@ -144,7 +147,8 @@ export default function HomePage() {
       if (cardRef.current) {
         const cardStyles = window.getComputedStyle(cardRef.current);
         const cardWidth = cardRef.current.offsetWidth;
-        const gap = parseFloat(cardStyles.marginRight) || (parseFloat(window.getComputedStyle(document.documentElement).fontSize) * 1.5);
+        // Estimate gap based on typical Tailwind `space-x-6` (1.5rem)
+        const gap = parseFloat(cardStyles.marginRight) || (parseFloat(window.getComputedStyle(document.documentElement).fontSize) * 1.5); 
         setItemWidth(cardWidth + gap);
       }
     };
@@ -176,7 +180,8 @@ export default function HomePage() {
         left: scrollValue,
         behavior: 'smooth',
       });
-      setTimeout(checkScrollability, 350); 
+      // Re-check scrollability after the scroll animation might have completed
+      setTimeout(checkScrollability, 350); // Adjust timeout as needed
     }
   };
 
@@ -387,9 +392,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Infinite Scroller Section */}
-      <InfiniteScrollerWithMouseFollower />
-      
       {/* Blog Section */}
       <section className="py-16 md:py-24 bg-neutral-900 text-neutral-100">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -433,7 +435,7 @@ export default function HomePage() {
                   <Link
                     key={post.slug}
                     href={`/blog/${post.slug}`}
-                    className="block flex-shrink-0 w-full sm:w-[calc(50%-0.75rem)] md:w-[calc(33.333%-1rem)] group"
+                    className="block flex-shrink-0 w-full sm:w-[calc(50%-0.75rem)] md:w-[calc(33.333%-1rem)] group" // Adjust card width for typical 3-card display
                     ref={index === 0 ? cardRef : null}
                   >
                     <Card className="bg-neutral-800 border-neutral-700 hover:border-primary/50 transition-all duration-300 ease-in-out transform hover:-translate-y-1 h-full flex flex-col" data-interactive-cursor="true">
@@ -443,6 +445,7 @@ export default function HomePage() {
                         width={600}
                         height={400}
                         className="w-full h-48 object-cover rounded-t-lg transition-transform duration-300 ease-in-out group-hover:scale-105"
+                        data-ai-hint={post.dataAiHintImage}
                       />
                       <CardContent className="p-4 flex-grow flex flex-col">
                         <p className="text-xs text-neutral-400 mb-1 flex items-center">
@@ -463,7 +466,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+      
+      {/* Infinite Scroller Section */}
+      <InfiniteScrollerWithMouseFollower />
     </div>
   );
 }
-
