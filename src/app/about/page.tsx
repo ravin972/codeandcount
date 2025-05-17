@@ -47,12 +47,11 @@ export default function AboutPage() {
             </div>
             <div>
               <Image 
-                src="https://placehold.co/600x400.png" 
-                alt="CodeAndCount.com Team Working" 
+                src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600&h=400&fit=crop&q=80"
+                alt="Modern workspace with a laptop displaying a vibrant screen" 
                 width={600} 
                 height={400} 
                 className="rounded-lg shadow-xl transition-transform duration-300 ease-in-out hover:scale-105"
-                data-ai-hint="team collaboration office"
               />
             </div>
           </div>
