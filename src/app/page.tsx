@@ -153,40 +153,48 @@ export default function HomePage() {
     if (scrollContainerRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
       setCanScrollLeft(scrollLeft > 5); 
-      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 5);
+      setCanScrollRight(scrollLeft < (scrollWidth - clientWidth) - 5);
+    } else {
+      setCanScrollLeft(false);
+      setCanScrollRight(false);
     }
   }, []);
 
   useEffect(() => {
-    const calculateItemWidth = () => {
-      if (cardRef.current) {
-        const cardStyles = window.getComputedStyle(cardRef.current);
+    const container = scrollContainerRef.current;
+
+    const calculateAndUpdateAll = () => {
+      if (cardRef.current && container) {
         const cardWidth = cardRef.current.offsetWidth;
-        const gapRem = 1.5; // from space-x-6
+        const gapRem = 1.5; // Corresponds to space-x-6
         const rootFontSize = parseFloat(window.getComputedStyle(document.documentElement).fontSize);
         const gapPx = gapRem * rootFontSize;
-        setItemWidth(cardWidth + gapPx);
+        
+        if (cardWidth > 0) {
+          setItemWidth(cardWidth + gapPx);
+        } else {
+          setItemWidth(0); 
+        }
+        checkScrollability(); 
       } else {
-        setItemWidth(0); // Reset or set to a default if cardRef is not available
+        setItemWidth(0);
+        checkScrollability();
       }
     };
 
-    calculateItemWidth();
-    checkScrollability(); // Initial check
-
-    const container = scrollContainerRef.current;
+    const animationFrameId = requestAnimationFrame(calculateAndUpdateAll);
+    
     if (container) {
-        container.addEventListener('scroll', checkScrollability, { passive: true });
+      container.addEventListener('scroll', checkScrollability, { passive: true });
     }
-    window.addEventListener('resize', calculateItemWidth);
-    window.addEventListener('resize', checkScrollability);
+    window.addEventListener('resize', calculateAndUpdateAll); 
 
     return () => {
-        if (container) {
-            container.removeEventListener('scroll', checkScrollability);
-        }
-        window.removeEventListener('resize', calculateItemWidth);
-        window.removeEventListener('resize', checkScrollability);
+      cancelAnimationFrame(animationFrameId);
+      if (container) {
+        container.removeEventListener('scroll', checkScrollability);
+      }
+      window.removeEventListener('resize', calculateAndUpdateAll);
     };
   }, [checkScrollability]);
 
@@ -198,7 +206,6 @@ export default function HomePage() {
         left: scrollValue,
         behavior: 'smooth',
       });
-      // Re-check scrollability after a short delay to allow scroll to complete
       setTimeout(checkScrollability, 350); 
     }
   };
@@ -458,29 +465,30 @@ export default function HomePage() {
                     key={post.slug}
                     href={`/blog/${post.slug}`}
                     className="block flex-shrink-0 w-[80vw] sm:w-[calc(50%-0.75rem)] md:w-[calc(33.333%-1rem)] group" 
-                    ref={index === 0 ? cardRef : null}
                   >
-                    <Card className="bg-neutral-800 border-neutral-700 hover:border-primary/50 transition-all duration-300 ease-in-out transform hover:-translate-y-1 h-full flex flex-col" data-interactive-cursor="true">
-                      <Image
-                        src={post.imageUrl}
-                        alt={post.title}
-                        width={600}
-                        height={400}
-                        className="w-full h-48 object-cover rounded-t-lg transition-transform duration-300 ease-in-out group-hover:scale-105"
-                        data-ai-hint={post.dataAiHintImage}
-                      />
-                      <CardContent className="p-4 flex-grow flex flex-col">
-                        <p className="text-xs text-neutral-400 mb-1 flex items-center">
-                           <Dot className="h-4 w-4 mr-0.5 -ml-1 text-primary" /> {post.readTime}
-                        </p>
-                        <h3 className="text-lg font-semibold text-neutral-100 group-hover:text-primary transition-colors line-clamp-2 mb-2">
-                          {post.title}
-                        </h3>
-                        <p className="text-sm text-neutral-300 line-clamp-3 flex-grow">
-                          {post.excerpt}
-                        </p>
-                      </CardContent>
-                    </Card>
+                     <div ref={index === 0 ? cardRef : null} className="h-full">
+                      <Card className="bg-neutral-800 border-neutral-700 hover:border-primary/50 transition-all duration-300 ease-in-out transform hover:-translate-y-1 h-full flex flex-col" data-interactive-cursor="true">
+                        <Image
+                          src={post.imageUrl}
+                          alt={post.title}
+                          width={600}
+                          height={400}
+                          className="w-full h-48 object-cover rounded-t-lg transition-transform duration-300 ease-in-out group-hover:scale-105"
+                          data-ai-hint={post.dataAiHintImage}
+                        />
+                        <CardContent className="p-4 flex-grow flex flex-col">
+                          <p className="text-xs text-neutral-400 mb-1 flex items-center">
+                            <Dot className="h-4 w-4 mr-0.5 -ml-1 text-primary" /> {post.readTime}
+                          </p>
+                          <h3 className="text-lg font-semibold text-neutral-100 group-hover:text-primary transition-colors line-clamp-2 mb-2">
+                            {post.title}
+                          </h3>
+                          <p className="text-sm text-neutral-300 line-clamp-3 flex-grow">
+                            {post.excerpt}
+                          </p>
+                        </CardContent>
+                      </Card>
+                    </div>
                   </Link>
                 ))}
               </div>
@@ -496,3 +504,4 @@ export default function HomePage() {
 }
 
     
+
