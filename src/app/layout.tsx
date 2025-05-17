@@ -7,6 +7,7 @@ import { Footer } from '@/components/layout/Footer';
 import { Toaster } from "@/components/ui/toaster";
 import { cn } from '@/lib/utils';
 import { ThemeProvider } from "@/components/ThemeProvider";
+import CustomCursor from '@/components/effects/CustomCursor';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -43,7 +44,7 @@ export const metadata: Metadata = {
     images: ['https://placehold.co/1200x630.png?text=CodeAndCount'],
   },
   manifest: '/manifest.json',
-  themeColor: '#b2ff03', // Updated theme color
+  themeColor: '#b2ff03', 
 };
 
 export default function RootLayout({
@@ -60,6 +61,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
+          <CustomCursor />
           <Header />
           <main className="flex-grow">{children}</main>
           <Footer />

@@ -83,7 +83,8 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground font-sans; 
+    @apply bg-background text-foreground font-sans;
+    cursor: none; /* Hide default system cursor */
   }
   
   /* Global Text Selection Styles */
