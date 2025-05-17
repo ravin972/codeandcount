@@ -1,6 +1,6 @@
 
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google'; // Changed from localFont
+import { Inter } from 'next/font/google';
 import './globals.css';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
@@ -8,7 +8,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { cn } from '@/lib/utils';
 import { ThemeProvider } from "@/components/ThemeProvider";
 
-const inter = Inter({ // Changed to use Inter from next/font/google
+const inter = Inter({
   subsets: ['latin'],
   variable: '--font-inter',
   display: 'swap',
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
     images: ['https://placehold.co/1200x630.png?text=CodeAndCount'],
   },
   manifest: '/manifest.json',
-  themeColor: '#6e7c9c',
+  themeColor: '#b2ff03', // Updated theme color
 };
 
 export default function RootLayout({
