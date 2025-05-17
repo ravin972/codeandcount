@@ -1,6 +1,6 @@
 
 import type { Config } from "tailwindcss";
-import defaultTheme from 'tailwindcss/defaultTheme'; // Import defaultTheme
+import defaultTheme from 'tailwindcss/defaultTheme';
 
 export default {
     darkMode: ["class"],
@@ -11,8 +11,8 @@ export default {
   ],
   theme: {
   	extend: {
-      fontFamily: { // Add fontFamily
-        sans: ['var(--font-inter)', ...defaultTheme.fontFamily.sans], // Set Inter as the default sans-serif
+      fontFamily: {
+        sans: ['var(--font-inter)', ...defaultTheme.fontFamily.sans], // Changed from --font-oldschoolGrotesk
       },
   		colors: {
   			background: 'hsl(var(--background))',

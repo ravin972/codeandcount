@@ -13,8 +13,8 @@
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 3.9%;
 
-    --primary: 79 99% 72%; /* Lime Green #D1FE71 */
-    --primary-foreground: 0 0% 3.9%; /* Near Black for contrast on light lime green */
+    --primary: 180 100% 25%; /* Teal #008080 */
+    --primary-foreground: 0 0% 98%; /* Near White for contrast on Teal */
 
     --secondary: 0 0% 96.1%; /* Light Gray */
     --secondary-foreground: 0 0% 9%; /* Dark Gray */
@@ -22,15 +22,15 @@
     --muted: 0 0% 96.1%;
     --muted-foreground: 0 0% 45.1%;
 
-    --accent: 79 99% 90%; /* Lighter Lime Green for hover */
-    --accent-foreground: 79 99% 15%; /* Darker Lime Green for text on Lighter Lime */
+    --accent: 180 60% 90%; /* Very Light Teal for hover backgrounds */
+    --accent-foreground: 180 100% 20%; /* Darker Teal for text on light teal accent */
     
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
     --border: 0 0% 89.8%;
     --input: 0 0% 89.8%;
-    --ring: 79 99% 50%; /* Lime Green for focus rings */
+    --ring: 180 100% 25%; /* Teal for focus rings */
 
     --radius: 0.5rem;
 
@@ -51,8 +51,8 @@
     --popover: 0 0% 3.9%;
     --popover-foreground: 0 0% 98%;
 
-    --primary: 79 99% 65%; /* Slightly darker Lime Green for dark mode */
-    --primary-foreground: 0 0% 3.9%; /* Near Black for contrast on dark mode lime green */
+    --primary: 180 70% 45%; /* Brighter Teal for dark mode (e.g., #24b3b3) */
+    --primary-foreground: 0 0% 98%; /* White for contrast on dark mode brighter Teal */
 
     --secondary: 0 0% 14.9%; /* Dark Gray */
     --secondary-foreground: 0 0% 98%; /* White */
@@ -60,15 +60,15 @@
     --muted: 0 0% 14.9%;
     --muted-foreground: 0 0% 63.9%;
 
-    --accent: 79 80% 30%; /* Darker Lime Green accent for dark mode */
-    --accent-foreground: 0 0% 98%; /* White for text on dark lime accent */
+    --accent: 180 50% 12%; /* Dark, desaturated Teal for hover backgrounds in dark mode */
+    --accent-foreground: 0 0% 98%; /* White for text on dark teal accent */
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
     --border: 0 0% 14.9%;
     --input: 0 0% 14.9%;
-    --ring: 79 99% 70%; /* Brighter Lime Green for focus rings in dark mode */
+    --ring: 180 70% 55%; /* Even Brighter Teal for focus rings in dark mode */
     
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;

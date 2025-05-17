@@ -1,16 +1,15 @@
 
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google'; // Changed from Geist, Geist_Mono
+import { Inter } from 'next/font/google'; // Changed from localFont
 import './globals.css';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { Toaster } from "@/components/ui/toaster";
 import { cn } from '@/lib/utils';
 import { ThemeProvider } from "@/components/ThemeProvider";
-import { BackToTopButton } from '@/components/layout/BackToTopButton';
 
-// Initialize Inter font
-const inter = Inter({
+// Configure Inter font
+const inter = Inter({ // Changed font configuration
   subsets: ['latin'],
   variable: '--font-inter', // Define a CSS variable for Inter
 });
@@ -46,7 +45,7 @@ export const metadata: Metadata = {
     images: ['https://placehold.co/1200x630.png?text=CodeAndCount'], // Replace
   },
   manifest: '/manifest.json',
-  themeColor: '#D1FE71',
+  themeColor: '#008080',
 };
 
 export default function RootLayout({
@@ -67,12 +66,6 @@ export default function RootLayout({
           <main className="flex-grow">{children}</main>
           <Footer />
           <Toaster />
-          {/* BackToTopButton is rendered here if it's meant to be fixed to the viewport globally */}
-          {/* If it's part of the footer layout, it should be inside Footer.tsx */}
-          {/* From previous steps, it seems it was moved into Footer.tsx, so it might not be needed here. */}
-          {/* For now, I'm keeping it based on the provided file context, assuming it's fixed globally. */}
-          {/* If it's truly inside the footer, this line can be removed. */}
-          {/* <BackToTopButton /> */}
         </ThemeProvider>
       </body>
     </html>
