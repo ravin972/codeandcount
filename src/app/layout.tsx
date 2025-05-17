@@ -42,7 +42,7 @@ export const metadata: Metadata = {
     images: ['https://placehold.co/1200x630.png?text=CodeAndCount'], 
   },
   manifest: '/manifest.json',
-  themeColor: '#33bbfd', // Updated to new accent color
+  themeColor: '#0cbf50', // Updated to new accent color
 };
 
 export default function RootLayout({

@@ -4,33 +4,33 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%; /* White */
-    --foreground: 203 17% 13%; /* Dark Charcoal Blue (#1b2327) */
+    --background: 0 0% 99%; /* Near White (#fefafc) */
+    --foreground: 215 15% 15%; /* Dark Bluish-Gray (#1f252d) */
 
-    --card: 0 0% 100%;
-    --card-foreground: 203 17% 13%;
+    --card: 0 0% 99%;
+    --card-foreground: 215 15% 15%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 203 17% 13%;
+    --popover: 0 0% 99%;
+    --popover-foreground: 215 15% 15%;
 
-    --primary: 200 98% 60%; /* Bright Blue (#33bbfd) */
-    --primary-foreground: 0 0% 100%; /* White for contrast on Bright Blue */
+    --primary: 145 88% 40%; /* Bright Green (#0cbf50) */
+    --primary-foreground: 0 0% 99%; /* Near White text on green */
 
-    --secondary: 250 27% 90%; /* Light Lavender Gray (#e0deea) */
-    --secondary-foreground: 203 17% 13%; /* Dark Charcoal Blue for text on light secondary */
+    --secondary: 215 15% 95%; /* Very Light Bluish-Gray */
+    --secondary-foreground: 215 15% 15%; /* Dark text on light secondary */
 
-    --muted: 0 0% 96.1%; /* Default light muted gray */
-    --muted-foreground: 0 0% 45.1%; /* Default dark muted text */
+    --muted: 215 15% 96%; 
+    --muted-foreground: 215 15% 45%; 
 
-    --accent: 200 98% 90%; /* Very Light Blue (derived from #33bbfd) */
-    --accent-foreground: 200 98% 30%; /* Darker Blue for text on light blue accent */
+    --accent: 145 88% 40%; /* Bright Green (#0cbf50) */
+    --accent-foreground: 0 0% 99%; /* Near White text on green accent */
     
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 203 17% 85%; /* Lighter shade of #1b2327 for borders */
-    --input: 203 17% 85%;
-    --ring: 200 98% 60%; /* Bright Blue for focus rings */
+    --border: 215 15% 88%; /* Lighter shade of foreground for borders */
+    --input: 215 15% 88%;
+    --ring: 145 88% 40%; /* Bright Green for focus rings */
 
     --radius: 0.5rem;
 
@@ -42,33 +42,33 @@
   }
 
   .dark {
-    --background: 203 17% 13%; /* Dark Charcoal Blue (#1b2327) */
-    --foreground: 250 27% 90%; /* Light Lavender Gray (#e0deea) */
+    --background: 215 15% 15%; /* Dark Bluish-Gray (#1f252d) */
+    --foreground: 0 0% 99%; /* Near White (#fefafc) */
 
-    --card: 203 17% 16%; /* Slightly distinct dark card background */
-    --card-foreground: 250 27% 90%;
+    --card: 215 15% 18%; /* Slightly distinct dark card background */
+    --card-foreground: 0 0% 99%;
 
-    --popover: 203 17% 13%;
-    --popover-foreground: 250 27% 90%;
+    --popover: 215 15% 15%;
+    --popover-foreground: 0 0% 99%;
 
-    --primary: 250 27% 90%; /* Light Lavender Gray (#e0deea) for primary actions */
-    --primary-foreground: 203 17% 13%; /* Dark Charcoal Blue text on light primary */
+    --primary: 145 88% 40%; /* Bright Green (#0cbf50) */
+    --primary-foreground: 0 0% 99%; /* Near White text on green */
 
-    --secondary: 203 17% 18%; /* Slightly lighter than dark background */
-    --secondary-foreground: 250 27% 80%; /* Dimmer light text */
+    --secondary: 215 15% 20%; /* Slightly lighter than dark background */
+    --secondary-foreground: 0 0% 90%; /* Dimmer light text */
 
-    --muted: 203 17% 18%;
-    --muted-foreground: 250 27% 50%; /* Dimmer muted text */
+    --muted: 215 15% 20%;
+    --muted-foreground: 0 0% 60%; 
 
-    --accent: 200 98% 60%; /* Bright Blue (#33bbfd) */
-    --accent-foreground: 0 0% 100%; /* White text on blue accent */
+    --accent: 145 88% 40%; /* Bright Green (#0cbf50) */
+    --accent-foreground: 0 0% 99%; /* Near White text on green accent */
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 203 17% 25%; /* Slightly lighter than dark background for borders */
-    --input: 203 17% 25%;
-    --ring: 200 98% 70%; /* Lighter Bright Blue for focus rings */
+    --border: 215 15% 25%; /* Slightly lighter than dark background for borders */
+    --input: 215 15% 25%;
+    --ring: 145 88% 45%; /* Lighter Bright Green for focus rings */
     
     --chart-1: 220 70% 50%;
     --chart-2: 160 60% 45%;
