@@ -8,10 +8,14 @@ import { cn } from '@/lib/utils';
 const CustomCursor: React.FC = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
   const [isMounted, setIsMounted] = useState(false);
-  const [primaryColor, setPrimaryColor] = useState('hsl(180, 100%, 25%)'); // Default fallback, matches current teal
+  const [primaryColorForFill, setPrimaryColorForFill] = useState('hsl(var(--primary))'); // Default fallback
 
   useEffect(() => {
     setIsMounted(true);
+    const computedPrimaryColor = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim();
+    if (computedPrimaryColor) {
+      setPrimaryColorForFill(`hsl(${computedPrimaryColor})`);
+    }
   }, []);
 
   useEffect(() => {
@@ -20,10 +24,6 @@ const CustomCursor: React.FC = () => {
     }
 
     const cursorEl = cursorRef.current;
-    const computedPrimaryColor = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim();
-    if (computedPrimaryColor) {
-      setPrimaryColor(`hsl(${computedPrimaryColor})`);
-    }
     
     // Initial setup: centered, invisible, at base scale, and filled
     gsap.set(cursorEl, { 
@@ -31,7 +31,7 @@ const CustomCursor: React.FC = () => {
       yPercent: -50, 
       opacity: 0, 
       scale: 1,
-      backgroundColor: primaryColor, // Initial fill
+      backgroundColor: primaryColorForFill,
       borderWidth: '0px',
       borderColor: 'transparent'
     });
@@ -39,16 +39,17 @@ const CustomCursor: React.FC = () => {
     let firstMove = true;
 
     const onMouseMove = (e: MouseEvent) => {
+      if (!cursorRef.current) return;
       if (firstMove) {
-        gsap.to(cursorEl, { 
-          opacity: 1, // Use 1 for full opacity, adjust if needed
+        gsap.to(cursorRef.current, { 
+          opacity: 1,
           duration: 0.3,
-          backgroundColor: primaryColor, // Ensure it's filled on first appearance
+          backgroundColor: primaryColorForFill,
           borderWidth: '0px'
         });
         firstMove = false;
       }
-      gsap.to(cursorEl, {
+      gsap.to(cursorRef.current, {
         x: e.clientX,
         y: e.clientY,
         duration: 0.2,
@@ -57,13 +58,14 @@ const CustomCursor: React.FC = () => {
     };
 
     const onMouseOver = (e: MouseEvent) => {
+      if (!cursorRef.current) return;
       const target = e.target as HTMLElement;
       if (target.closest('a, button, [role="button"], [data-interactive-cursor="true"]')) {
-        gsap.to(cursorEl, { 
+        gsap.to(cursorRef.current, { 
           scale: 2.5, 
           backgroundColor: 'transparent',
-          borderWidth: '1px',
-          borderColor: primaryColor,
+          borderWidth: '0.5px',
+          borderColor: '#ffffff', // White border
           duration: 0.3, 
           ease: 'power2.out' 
         });
@@ -71,13 +73,14 @@ const CustomCursor: React.FC = () => {
     };
 
     const onMouseOut = (e: MouseEvent) => {
+      if (!cursorRef.current) return;
       const target = e.target as HTMLElement;
       const relatedTargetIsInteractive = (e.relatedTarget as HTMLElement)?.closest('a, button, [role="button"], [data-interactive-cursor="true"]');
 
       if (target.closest('a, button, [role="button"], [data-interactive-cursor="true"]') && !relatedTargetIsInteractive) {
-        gsap.to(cursorEl, { 
+        gsap.to(cursorRef.current, { 
           scale: 1, 
-          backgroundColor: primaryColor, // Revert to filled
+          backgroundColor: primaryColorForFill,
           borderWidth: '0px',
           borderColor: 'transparent',
           duration: 0.3, 
@@ -94,9 +97,11 @@ const CustomCursor: React.FC = () => {
       document.body.removeEventListener('mousemove', onMouseMove);
       document.body.removeEventListener('mouseover', onMouseOver);
       document.body.removeEventListener('mouseout', onMouseOut);
-      gsap.to(cursorEl, { opacity: 0, scale: 0.5, duration: 0.2 }); 
+      if (cursorRef.current) {
+        gsap.to(cursorRef.current, { opacity: 0, scale: 0.5, duration: 0.2 }); 
+      }
     };
-  }, [isMounted, primaryColor]); // Add primaryColor to dependency array
+  }, [isMounted, primaryColorForFill]);
 
   if (!isMounted) {
     return null;
@@ -106,10 +111,10 @@ const CustomCursor: React.FC = () => {
     <div
       ref={cursorRef}
       className={cn(
-        "fixed w-3 h-3 rounded-full pointer-events-none z-[9999]", // Removed bg-primary and shadow-md
-        "border" // Add border class for GSAP to control its properties
+        "fixed w-3 h-3 rounded-full pointer-events-none z-[9999]",
+        "border" 
       )}
-      style={{ opacity: 0 }} // Start fully transparent, GSAP handles fade-in and initial fill
+      style={{ opacity: 0 }} 
     />
   );
 };
