@@ -3,7 +3,7 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet'; // Added SheetHeader, SheetTitle
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { Menu, Briefcase, Users, Rss, Mail, Sparkles, ArrowUpRight } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
@@ -18,7 +18,7 @@ const navLinks = [
   { href: '/contact', label: 'Contact', icon: <Mail className="h-5 w-5" /> },
 ];
 
-const CONDENSE_THRESHOLD = 10; // Pixels to scroll before condensing
+const CONDENSE_THRESHOLD = 10; 
 
 export function Header() {
   const pathname = usePathname();
@@ -32,7 +32,7 @@ export function Header() {
       setIsCondensed(currentScrollY > CONDENSE_THRESHOLD);
     };
 
-    handleScroll(); // Set initial state
+    handleScroll(); 
 
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
@@ -48,9 +48,10 @@ export function Header() {
       <div
         className={cn(
           "flex items-center justify-between rounded-full shadow-xl backdrop-blur-lg bg-background/80 transition-all duration-300 ease-in-out",
+          "w-full", // Base full width for mobile
           isCondensed
-            ? "w-1/2 h-14 px-3 py-1 sm:px-4 mx-auto" 
-            : "container mx-auto h-16 px-4 py-2 sm:px-6" 
+            ? "h-14 px-3 py-1 sm:px-4 md:w-1/2 md:mx-auto" // Condensed: mobile gets h/p, desktop gets w/mx too
+            : "h-16 px-4 py-2 sm:px-6 md:container md:mx-auto" // Expanded: mobile gets h/p, desktop gets container/mx too
         )}
       >
         {/* Logo */}
@@ -124,7 +125,7 @@ export function Header() {
               <SheetHeader>
                 <SheetTitle className="sr-only">Main Menu</SheetTitle>
               </SheetHeader>
-              <div className="flex flex-col space-y-6 mt-4"> {/* Added mt-4 for spacing from header */}
+              <div className="flex flex-col space-y-6 mt-4"> 
                 <Link href="/" className="text-2xl font-bold text-foreground self-start hover:opacity-80 transition-opacity" onClick={() => setIsMobileMenuOpen(false)}>
                   C<span className="text-primary">2</span>
                 </Link>
@@ -165,4 +166,3 @@ export function Header() {
     </header>
   );
 }
-
