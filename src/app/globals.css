@@ -5,25 +5,25 @@
 @layer base {
   :root {
     --background: 223 47% 96%; /* Light tint of #bac8e9 for light mode background */
-    --foreground: 156 100% 6%; /* #00200f for light mode text */
+    --foreground: 0 0% 5%; /* #0e0e0e for light mode text */
 
     --card: 223 47% 96%;
-    --card-foreground: 156 100% 6%;
+    --card-foreground: 0 0% 5%;
 
     --popover: 223 47% 96%;
-    --popover-foreground: 156 100% 6%;
+    --popover-foreground: 0 0% 5%;
 
     --primary: 81 100% 50%; /* #b2ff03 Bright Lime Green */
-    --primary-foreground: 156 100% 6%; /* #00200f Dark text on bright lime */
+    --primary-foreground: 0 0% 5%; /* #0e0e0e Dark text on bright lime */
 
     --secondary: 223 47% 92%; /* Slightly darker tint of #bac8e9 */
-    --secondary-foreground: 156 100% 6%;
+    --secondary-foreground: 0 0% 5%;
 
     --muted: 223 40% 90%; 
     --muted-foreground: 156 40% 30%; 
 
     --accent: 81 100% 50%; /* #b2ff03 Bright Lime Green */
-    --accent-foreground: 156 100% 6%; /* #00200f Dark text on bright lime accent */
+    --accent-foreground: 0 0% 5%; /* #0e0e0e Dark text on bright lime accent */
     
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 98%;
@@ -42,32 +42,32 @@
   }
 
   .dark {
-    --background: 156 100% 6%; /* #00200f Very Dark Green/Teal */
+    --background: 0 0% 5%; /* #0e0e0e Very Dark */
     --foreground: 223 47% 85%; /* Lighter tint of #bac8e9 for dark mode text */
 
-    --card: 156 70% 10%; /* Slightly distinct dark card background */
+    --card: 0 0% 8%; /* Slightly lighter than #0e0e0e */
     --card-foreground: 223 47% 85%;
 
-    --popover: 156 100% 6%;
+    --popover: 0 0% 5%; /* #0e0e0e */
     --popover-foreground: 223 47% 85%;
 
     --primary: 81 100% 50%; /* #b2ff03 Bright Lime Green */
-    --primary-foreground: 156 100% 6%; /* #00200f Dark text on bright lime */
+    --primary-foreground: 0 0% 5%; /* #0e0e0e Dark text on bright lime */
 
-    --secondary: 156 70% 12%; /* Slightly lighter than dark background */
+    --secondary: 0 0% 10%; /* Slightly lighter than #0e0e0e */
     --secondary-foreground: 223 47% 75%; 
 
-    --muted: 156 60% 15%;
+    --muted: 0 0% 12%; /* Slightly lighter than #0e0e0e */
     --muted-foreground: 223 30% 60%; 
 
     --accent: 81 100% 50%; /* #b2ff03 Bright Lime Green */
-    --accent-foreground: 156 100% 6%; /* #00200f Dark text on bright lime accent */
+    --accent-foreground: 0 0% 5%; /* #0e0e0e Dark text on bright lime accent */
 
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 156 50% 18%; 
-    --input: 156 50% 18%;
+    --border: 0 0% 15%; /* Slightly lighter than #0e0e0e */
+    --input: 0 0% 15%; /* Slightly lighter than #0e0e0e */
     --ring: 81 100% 50%; /* #b2ff03 Bright Lime Green for focus rings */
     
     --chart-1: 220 70% 50%;
@@ -84,7 +84,14 @@
   }
   body {
     @apply bg-background text-foreground font-sans;
-    cursor: none; /* Hide default system cursor */
+    /* cursor: none; */ /* Hide default system cursor - Re-enable if custom cursor is desired globally */
+  }
+
+  /* Conditional cursor hiding for non-touch devices */
+  @media (hover: hover) and (pointer: fine) {
+    body {
+      /* cursor: none; */ /* Re-enable if custom cursor is desired */
+    }
   }
   
   /* Global Text Selection Styles */
