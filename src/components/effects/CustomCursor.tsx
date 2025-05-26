@@ -1,76 +1,81 @@
 
 "use client";
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { gsap } from 'gsap';
 import { cn } from '@/lib/utils';
-import { useIsMobile } from '@/hooks/use-mobile'; // Import the hook
+import { useIsMobile } from '@/hooks/use-mobile';
 
 const CustomCursor: React.FC = () => {
   const cursorRef = useRef<HTMLDivElement>(null);
   const [isMounted, setIsMounted] = useState(false);
+  // Initialize with a fallback or ensure it's only used when valid
   const [primaryColorForFill, setPrimaryColorForFill] = useState('hsl(var(--primary))');
-  const isMobile = useIsMobile(); // Use the hook
+  const isMobile = useIsMobile();
 
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
   useEffect(() => {
-    if (!isMounted || isMobile) return;
-
-    const computedColor = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim();
-    if (computedColor) {
-      setPrimaryColorForFill(`hsl(${computedColor})`);
+    if (isMounted) {
+      const computedColor = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim();
+      if (computedColor && CSS.supports('color', `hsl(${computedColor})`)) {
+        setPrimaryColorForFill(`hsl(${computedColor})`);
+      } else if (computedColor && CSS.supports('color', computedColor) ) { // If it's a hex or rgb, try to use it directly if supported
+        setPrimaryColorForFill(computedColor);
+      }
+      else {
+        // Fallback if CSS var is not found or invalid
+        setPrimaryColorForFill('rgba(178, 255, 3, 0.8)'); // Default to a lime green if primary is not set
+      }
     }
-  }, [isMounted, isMobile]);
+  }, [isMounted]);
 
   useEffect(() => {
-    if (!isMounted || isMobile) {
+    if (!isMounted || isMobile === undefined || isMobile === true || primaryColorForFill.startsWith('hsl(var')) {
       if (cursorRef.current) {
-        // Ensure cursor is hidden if it was visible and then screen became mobile
-        gsap.set(cursorRef.current, { opacity: 0, scale: 0 });
+        // Ensure cursor is hidden if it was visible and then conditions changed
+        gsap.set(cursorRef.current, { opacity: 0, scale: 0, borderWidth: '0px' });
       }
-      return;
+      return; // Bail out if not ready, on mobile, or color not resolved
     }
 
     let animationFrameId: number;
-    let eventListenersCleanup: (() => void) | undefined;
-
+    let onMouseMoveHandler: ((e: MouseEvent) => void) | null = null;
+    let onMouseOverHandler: ((e: MouseEvent) => void) | null = null;
+    let onMouseOutHandler: ((e: MouseEvent) => void) | null = null;
+    
     const initializeCursorAndListeners = () => {
-      const cursorEl = cursorRef.current; // Fetch fresh ref value INSIDE the RAF callback
-      if (!cursorEl) {
-        // console.warn("CustomCursor: cursorRef.current is null inside RAF callback. Skipping GSAP operations.");
-        return undefined; // Indicate that setup didn't complete
+      const cursorEl = cursorRef.current;
+      if (!cursorEl || !(cursorEl instanceof HTMLElement)) {
+        // console.warn("CustomCursor: Ref is not an HTMLElement or is null in RAF. Skipping GSAP init.");
+        return;
       }
 
       // Initial setup: centered, invisible, at base scale, and filled
       gsap.set(cursorEl, { 
-        xPercent: -50,
-        yPercent: -50,
-        opacity: 0,
+        xPercent: -50, 
+        yPercent: -50, 
+        opacity: 0, 
         scale: 1,
-        backgroundColor: primaryColorForFill,
-        borderWidth: '0px',
-        borderColor: 'transparent'
+        backgroundColor: primaryColorForFill, // Use resolved color
+        borderWidth: '0px', // Explicitly set initial border width
+        borderColor: 'transparent' // Explicitly set initial border color
       });
 
       let firstMove = true;
 
-      const onMouseMove = (e: MouseEvent) => {
-        const currentRefVal = cursorRef.current;
-        if (!currentRefVal) return;
-
+      onMouseMoveHandler = (e: MouseEvent) => {
+        if (!cursorRef.current) return;
         if (firstMove) {
-          gsap.to(currentRefVal, {
+          gsap.to(cursorRef.current, {
             opacity: 1,
             duration: 0.3,
-            // backgroundColor: primaryColorForFill, // Keep the initial set color
-            // borderWidth: '0px'
           });
           firstMove = false;
         }
-        gsap.to(currentRefVal, {
+        gsap.to(cursorRef.current, {
           x: e.clientX,
           y: e.clientY,
           duration: 0.2,
@@ -78,33 +83,31 @@ const CustomCursor: React.FC = () => {
         });
       };
 
-      const onMouseOver = (e: MouseEvent) => {
-        const currentRefVal = cursorRef.current;
-        if (!currentRefVal) return;
-
+      onMouseOverHandler = (e: MouseEvent) => {
+        if (!cursorRef.current) return;
         const target = e.target as HTMLElement;
         if (target.closest('a, button, [role="button"], [data-interactive-cursor="true"]')) {
-          gsap.to(currentRefVal, {
+          gsap.to(cursorRef.current, {
             scale: 2.8,
             backgroundColor: 'transparent',
             borderWidth: '0.2px',
-            borderColor: '#ffffff',
+            borderColor: '#ffffff', // White border on hover
             duration: 0.3,
             ease: 'power2.out'
           });
         }
       };
 
-      const onMouseOut = (e: MouseEvent) => {
-        const currentRefVal = cursorRef.current;
-        if (!currentRefVal) return;
-        
+      onMouseOutHandler = (e: MouseEvent) => {
+        if (!cursorRef.current) return;
         const target = e.target as HTMLElement;
         const relatedTarget = e.relatedTarget as HTMLElement | null;
-        const isMovingToInteractive = relatedTarget?.closest('a, button, [role="button"], [data-interactive-cursor="true"]');
+        
+        const isLeavingInteractive = target.closest('a, button, [role="button"], [data-interactive-cursor="true"]');
+        const isEnteringInteractive = relatedTarget?.closest('a, button, [role="button"], [data-interactive-cursor="true"]');
 
-        if (target.closest('a, button, [role="button"], [data-interactive-cursor="true"]') && !isMovingToInteractive) {
-          gsap.to(currentRefVal, {
+        if (isLeavingInteractive && !isEnteringInteractive) {
+          gsap.to(cursorRef.current, {
             scale: 1,
             backgroundColor: primaryColorForFill,
             borderWidth: '0px',
@@ -115,38 +118,30 @@ const CustomCursor: React.FC = () => {
         }
       };
 
-      document.body.addEventListener('mousemove', onMouseMove, { passive: true });
-      document.body.addEventListener('mouseover', onMouseOver);
-      document.body.addEventListener('mouseout', onMouseOut);
-
-      // Return the cleanup function for these listeners
-      return () => {
-        document.body.removeEventListener('mousemove', onMouseMove);
-        document.body.removeEventListener('mouseover', onMouseOver);
-        document.body.removeEventListener('mouseout', onMouseOut);
-        if (cursorRef.current) { // Important: check ref again during cleanup
-          gsap.to(cursorRef.current, { opacity: 0, scale: 0.5, duration: 0.2 });
-        }
-      };
+      document.body.addEventListener('mousemove', onMouseMoveHandler, { passive: true });
+      document.body.addEventListener('mouseover', onMouseOverHandler);
+      document.body.addEventListener('mouseout', onMouseOutHandler);
     };
     
-    animationFrameId = requestAnimationFrame(() => {
-      eventListenersCleanup = initializeCursorAndListeners();
-    });
+    // Schedule initialization
+    animationFrameId = requestAnimationFrame(initializeCursorAndListeners);
 
+    // Cleanup function
     return () => {
       cancelAnimationFrame(animationFrameId);
-      if (eventListenersCleanup) {
-        eventListenersCleanup();
-      } else if (cursorRef.current) {
-        // Fallback cleanup if initializeCursorAndListeners didn't run (e.g., unmounted before RAF)
-         gsap.to(cursorRef.current, { opacity: 0, scale: 0, duration: 0.2 });
+      if (onMouseMoveHandler) document.body.removeEventListener('mousemove', onMouseMoveHandler);
+      if (onMouseOverHandler) document.body.removeEventListener('mouseover', onMouseOverHandler);
+      if (onMouseOutHandler) document.body.removeEventListener('mouseout', onMouseOutHandler);
+
+      if (cursorRef.current instanceof HTMLElement) {
+        gsap.killTweensOf(cursorRef.current);
+        gsap.to(cursorRef.current, { opacity: 0, scale: 0, duration: 0.2 });
       }
     };
+  }, [isMounted, isMobile, primaryColorForFill]); // primaryColorForFill ensures effect re-runs if color changes post-initialization
 
-  }, [isMounted, primaryColorForFill, isMobile]);
 
-  if (!isMounted || isMobile) {
+  if (!isMounted || isMobile === undefined || isMobile === true) {
     return null;
   }
 
@@ -157,7 +152,7 @@ const CustomCursor: React.FC = () => {
         "fixed w-3 h-3 rounded-full pointer-events-none z-[9999]",
         "border" 
       )}
-      style={{ opacity: 0 }} 
+      style={{ opacity: 0 }} // Initial opacity set by style, then controlled by GSAP
     />
   );
 };
