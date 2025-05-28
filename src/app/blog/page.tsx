@@ -37,7 +37,6 @@ const initialBlogPosts = [
     dataAiHintAuthor: 'professional person',
     excerpt: 'Discover the cutting-edge web design trends shaping the digital landscape in 2024, from AI integration to immersive experiences.',
     imageUrl: 'https://images.unsplash.com/photo-1547398123-828a28902e57?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxmdXR1cmlzdGljJTIwZGVzaWdufGVufDB8fHx8MTc0NzM3NjYzN3ww&ixlib=rb-4.1.0&q=80&w=1080',
-    // dataAiHintImage: 'futuristic design', // Removed as it's a real image now
     category: 'Web Design',
     readTime: '6 min read',
   },
@@ -50,7 +49,6 @@ const initialBlogPosts = [
     dataAiHintAuthor: 'marketing expert',
     excerpt: 'Navigate the complexities of SEO with our in-depth guide, covering everything from keyword research to technical optimization.',
     imageUrl: 'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzZW8lMjBjaGFydCUyMGdyYXBofGVufDB8fHx8MTc0NzM3NjYzN3ww&ixlib=rb-4.1.0&q=80&w=1080',
-    // dataAiHintImage: 'seo chart graph', // Removed as it's a real image now
     category: 'SEO',
     readTime: '10 min read',
   },
@@ -63,7 +61,6 @@ const initialBlogPosts = [
     dataAiHintAuthor: 'software developer',
     excerpt: 'Explore the benefits of Craft CMS and why it stands out as a powerful, flexible, and user-friendly content management system.',
     imageUrl: 'https://images.unsplash.com/photo-1698621193747-e8788c620dbc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxjbXMlMjBpbnRlcmZhY2V8ZW58MHx8fHwxNzQ3Mzc2NjM3fDA&ixlib=rb-4.1.0&q=80&w=1080',
-    // dataAiHintImage: 'cms interface', // Removed as it's a real image now
     category: 'Craft CMS',
     readTime: '4 min read',
   },
@@ -255,7 +252,7 @@ export default function BlogPage() {
             
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
               <DialogTrigger asChild>
-                <Button variant="outline" size="lg" className="rounded-full">
+                <Button variant="default" size="lg" className="rounded-full">
                   <PlusCircle className="mr-2 h-5 w-5" /> Create New Post
                 </Button>
               </DialogTrigger>
@@ -359,3 +356,4 @@ export default function BlogPage() {
     </div>
   );
 }
+
