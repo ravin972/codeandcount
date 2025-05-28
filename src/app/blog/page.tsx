@@ -36,9 +36,11 @@ const initialBlogPosts = [
     authorAvatar: 'https://placehold.co/40x40.png',
     dataAiHintAuthor: 'professional person',
     excerpt: 'Discover the cutting-edge web design trends shaping the digital landscape in 2024, from AI integration to immersive experiences.',
-    imageUrl: 'https://images.unsplash.com/photo-1547398123-828a28902e57?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxmdXR1cmlzdGljJTIwZGVzaWdufGVufDB8fHx8MTc0NzM3NjYzN3ww&ixlib=rb-4.1.0&q=80&w=1080',
+    imageUrl: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600&h=400&fit=crop&q=80',
     category: 'Web Design',
     readTime: '6 min read',
+    content: `<p>The world of web design is in constant flux, driven by technological advancements and evolving user expectations. As we look ahead to 2024, several key trends are set to redefine how we create and interact with websites.</p><h2 class="text-2xl font-semibold my-4">1. AI-Powered Design and Personalization</h2><p>Artificial intelligence is no longer a futuristic concept but a practical tool in a designer's arsenal. AI can assist in generating design layouts, suggesting color palettes, and even creating A/B testing variations. More importantly, AI will enable hyper-personalization, tailoring website content and experiences to individual users in real-time.</p><h2 class="text-2xl font-semibold my-4">2. Immersive 3D Graphics and WebGL</h2><p>With advancements in browser capabilities and technologies like WebGL, expect to see more websites incorporating immersive 3D graphics and interactive elements. This trend moves beyond flat design, offering users more engaging and memorable experiences.</p><h2 class="text-2xl font-semibold my-4">3. Microinteractions and Delightful Details</h2><p>Subtle animations, hover effects, and thoughtful microinteractions will continue to be crucial for enhancing user experience. These small details can significantly improve usability and add a touch of personality to a website, making interactions more intuitive and enjoyable.</p><h2 class="text-2xl font-semibold my-4">4. Accessibility and Inclusive Design</h2><p>Designing for everyone is not just a trend but a necessity. In 2024, there will be an even stronger emphasis on creating accessible websites that cater to users of all abilities. This includes considerations for WCAG compliance, keyboard navigation, screen reader compatibility, and more.</p><h2 class="text-2xl font-semibold my-4">5. Sustainable Web Design</h2><p>As environmental concerns grow, sustainable web design practices are gaining traction. This involves optimizing websites for performance to reduce energy consumption, choosing eco-friendly hosting, and designing with efficiency in mind.</p><p>Staying ahead of these trends will be key for businesses and designers looking to create impactful and effective digital presences in the coming year.</p>`,
+    tags: ['Web Design', 'Future Trends', 'AI', '3D Graphics', 'Accessibility']
   },
   {
     slug: 'unlocking-seo-success-a-comprehensive-guide',
@@ -51,6 +53,8 @@ const initialBlogPosts = [
     imageUrl: 'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzZW8lMjBjaGFydCUyMGdyYXBofGVufDB8fHx8MTc0NzM3NjYzN3ww&ixlib=rb-4.1.0&q=80&w=1080',
     category: 'SEO',
     readTime: '10 min read',
+    content: `<p>Content for SEO Guide...</p>`,
+    tags: ['SEO', 'Digital Marketing', 'Keywords']
   },
   {
     slug: 'why-craft-cms-is-our-go-to-for-flexible-websites',
@@ -63,6 +67,8 @@ const initialBlogPosts = [
     imageUrl: 'https://images.unsplash.com/photo-1698621193747-e8788c620dbc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxjbXMlMjBpbnRlcmZhY2V8ZW58MHx8fHwxNzQ3Mzc2NjM3fDA&ixlib=rb-4.1.0&q=80&w=1080',
     category: 'Craft CMS',
     readTime: '4 min read',
+    content: `<p>Content for Craft CMS...</p>`,
+    tags: ['Craft CMS', 'Web Development', 'CMS']
   },
   {
     slug: 'building-a-strong-brand-identity-key-principles',
@@ -74,6 +80,8 @@ const initialBlogPosts = [
     imageUrl: 'https://placehold.co/600x400.png', dataAiHintImage: 'brand moodboard',
     category: 'Branding',
     readTime: '7 min read',
+    content: '<p>Content for branding principles...</p>',
+    tags: ['Branding', 'Design', 'Strategy']
   },
   {
     slug: 'ai-in-digital-marketing-the-new-frontier',
@@ -85,6 +93,8 @@ const initialBlogPosts = [
     imageUrl: 'https://placehold.co/600x400.png', dataAiHintImage: 'artificial intelligence marketing',
     category: 'Digital Marketing',
     readTime: '8 min read',
+    content: '<p>Content for AI in digital marketing...</p>',
+    tags: ['AI', 'Digital Marketing', 'Technology']
   },
   {
     slug: 'the-importance-of-user-experience-ux-in-web-design',
@@ -96,6 +106,8 @@ const initialBlogPosts = [
     imageUrl: 'https://placehold.co/600x400.png', dataAiHintImage: 'user experience interface',
     category: 'Web Design',
     readTime: '7 min read',
+    content: '<p>Content for UX importance...</p>',
+    tags: ['UX', 'Web Design', 'User Experience']
   },
   {
     slug: 'wordpress-vs-headless-cms-which-is-right-for-you',
@@ -107,6 +119,8 @@ const initialBlogPosts = [
     imageUrl: 'https://placehold.co/600x400.png', dataAiHintImage: 'cms comparison chart',
     category: 'CMS',
     readTime: '9 min read',
+    content: '<p>Content for WordPress vs Headless CMS...</p>',
+    tags: ['WordPress', 'Headless CMS', 'Web Development']
   },
   {
     slug: 'mastering-tailwind-css-tips-and-tricks',
@@ -118,6 +132,8 @@ const initialBlogPosts = [
     imageUrl: 'https://placehold.co/600x400.png', dataAiHintImage: 'tailwind css code',
     category: 'Web Development',
     readTime: '6 min read',
+    content: '<p>Content for Tailwind CSS tips...</p>',
+    tags: ['Tailwind CSS', 'CSS', 'Frontend']
   },
   {
     slug: 'the-rise-of-server-components-in-nextjs',
@@ -129,6 +145,8 @@ const initialBlogPosts = [
     imageUrl: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600&h=400&fit=crop&q=80',
     category: 'Next.js',
     readTime: '8 min read',
+    content: '<p>Content for Next.js Server Components...</p>',
+    tags: ['Next.js', 'React', 'Server Components']
   },
   {
     slug: 'effective-content-strategy-for-saas-businesses',
@@ -140,6 +158,8 @@ const initialBlogPosts = [
     imageUrl: 'https://placehold.co/600x400.png', dataAiHintImage: 'saas content strategy',
     category: 'Content Strategy',
     readTime: '7 min read',
+    content: '<p>Content for SaaS content strategy...</p>',
+    tags: ['SaaS', 'Content Marketing', 'Strategy']
   },
   {
     slug: 'optimizing-images-for-web-performance',
@@ -151,6 +171,8 @@ const initialBlogPosts = [
     imageUrl: 'https://placehold.co/600x400.png', dataAiHintImage: 'image optimization tools',
     category: 'Web Performance',
     readTime: '5 min read',
+    content: '<p>Content for image optimization...</p>',
+    tags: ['Web Performance', 'Image Optimization', 'SEO']
   },
   {
     slug: 'introduction-to-genkit-ai-for-nextjs-developers',
@@ -162,6 +184,8 @@ const initialBlogPosts = [
     imageUrl: 'https://placehold.co/600x400.png', dataAiHintImage: 'ai integration code',
     category: 'AI Development',
     readTime: '9 min read',
+    content: '<p>Content for Genkit AI intro...</p>',
+    tags: ['Genkit', 'AI', 'Next.js', 'Firebase']
   },
   {
     slug: 'creating-accessible-forms-a-practical-guide',
@@ -173,6 +197,8 @@ const initialBlogPosts = [
     imageUrl: 'https://placehold.co/600x400.png', dataAiHintImage: 'accessible form ui',
     category: 'Accessibility',
     readTime: '7 min read',
+    content: '<p>Content for accessible forms guide...</p>',
+    tags: ['Accessibility', 'Web Forms', 'UX']
   },
 ];
 
@@ -215,22 +241,20 @@ export default function BlogPage() {
     const newPost = {
       slug: newSlug,
       title: data.title,
-      // For simplicity, using placeholder content for excerpt and the full content for actual 'content'
-      // In a real CMS, you'd have separate fields.
       excerpt: data.content.substring(0, 150) + "...", 
-      content: `<p>${data.content.replace(/\n/g, '</p><p>')}</p>`, // Basic paragraph formatting
+      content: `<p>${data.content.replace(/\n/g, '</p><p>')}</p>`,
       author: data.author,
-      authorAvatar: 'https://placehold.co/40x40.png', // Default avatar
+      authorAvatar: 'https://placehold.co/40x40.png', 
       dataAiHintAuthor: 'person',
-      imageUrl: 'https://placehold.co/600x400.png', // Default image
+      imageUrl: 'https://placehold.co/600x400.png', 
       dataAiHintImage: 'abstract background',
       category: data.category,
-      date: new Date().toISOString().split('T')[0], // Today's date
-      readTime: `${Math.ceil(data.content.split(/\s+/).length / 200)} min read`, // Approximate read time
-      tags: [data.category, "User Submitted"], // Add some default tags
+      date: new Date().toISOString().split('T')[0], 
+      readTime: `${Math.ceil(data.content.split(/\s+/).length / 200)} min read`,
+      tags: [data.category, "User Submitted"],
     };
 
-    setPosts(prevPosts => [newPost, ...prevPosts]); // Add to the beginning of the list
+    setPosts(prevPosts => [newPost, ...prevPosts]);
     toast({
       title: "Blog Post Added (Session Only)",
       description: "Your new blog post has been added to the list for this session. It will be lost on page refresh.",
@@ -244,12 +268,17 @@ export default function BlogPage() {
     <div className="bg-background text-foreground">
       <header className="py-16 md:py-24 text-center bg-secondary">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-8">
+          <div className="mb-4">
             <h1 className="text-5xl md:text-6xl font-bold tracking-tight flex items-center justify-center">
               <Newspaper className="h-12 w-12 mr-4 text-primary" />
               CodeAndCount Insights
             </h1>
-            
+          </div>
+          <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto mb-8">
+            Stay updated with the latest trends, tips, and thoughts from the CodeAndCount.com team.
+          </p>
+          
+          <div className="mt-8 flex justify-center">
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
               <DialogTrigger asChild>
                 <Button variant="default" size="lg" className="rounded-full">
@@ -296,9 +325,6 @@ export default function BlogPage() {
               </DialogContent>
             </Dialog>
           </div>
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
-            Stay updated with the latest trends, tips, and thoughts from the CodeAndCount.com team.
-          </p>
         </div>
       </header>
 
