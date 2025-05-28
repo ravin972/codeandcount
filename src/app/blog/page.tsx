@@ -1,13 +1,33 @@
 
+"use client";
+
+import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { CalendarDays, ArrowRight, Newspaper, Clock3, Dot } from 'lucide-react';
+import { CalendarDays, ArrowRight, Newspaper, Clock3, Dot, PlusCircle } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogClose,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Textarea } from "@/components/ui/textarea";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { z } from "zod";
+import { useToast } from "@/hooks/use-toast";
 
-const blogPosts = [
+const initialBlogPosts = [
   {
     slug: 'the-future-of-web-design-trends-for-2024',
     title: 'The Future of Web Design: Trends for 2024',
@@ -17,7 +37,7 @@ const blogPosts = [
     dataAiHintAuthor: 'professional person',
     excerpt: 'Discover the cutting-edge web design trends shaping the digital landscape in 2024, from AI integration to immersive experiences.',
     imageUrl: 'https://images.unsplash.com/photo-1547398123-828a28902e57?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxmdXR1cmlzdGljJTIwZGVzaWdufGVufDB8fHx8MTc0NzM3NjYzN3ww&ixlib=rb-4.1.0&q=80&w=1080',
-    dataAiHintImage: 'futuristic design',
+    // dataAiHintImage: 'futuristic design', // Removed as it's a real image now
     category: 'Web Design',
     readTime: '6 min read',
   },
@@ -30,7 +50,7 @@ const blogPosts = [
     dataAiHintAuthor: 'marketing expert',
     excerpt: 'Navigate the complexities of SEO with our in-depth guide, covering everything from keyword research to technical optimization.',
     imageUrl: 'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzZW8lMjBjaGFydCUyMGdyYXBofGVufDB8fHx8MTc0NzM3NjYzN3ww&ixlib=rb-4.1.0&q=80&w=1080',
-    dataAiHintImage: 'seo chart graph',
+    // dataAiHintImage: 'seo chart graph', // Removed as it's a real image now
     category: 'SEO',
     readTime: '10 min read',
   },
@@ -43,7 +63,7 @@ const blogPosts = [
     dataAiHintAuthor: 'software developer',
     excerpt: 'Explore the benefits of Craft CMS and why it stands out as a powerful, flexible, and user-friendly content management system.',
     imageUrl: 'https://images.unsplash.com/photo-1698621193747-e8788c620dbc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxjbXMlMjBpbnRlcmZhY2V8ZW58MHx8fHwxNzQ3Mzc2NjM3fDA&ixlib=rb-4.1.0&q=80&w=1080',
-    dataAiHintImage: 'cms interface',
+    // dataAiHintImage: 'cms interface', // Removed as it's a real image now
     category: 'Craft CMS',
     readTime: '4 min read',
   },
@@ -52,11 +72,9 @@ const blogPosts = [
     title: 'Building a Strong Brand Identity: Key Principles',
     date: '2024-06-05',
     author: 'Alex Chen',
-    authorAvatar: 'https://placehold.co/40x40.png',
-    dataAiHintAuthor: 'professional person',
+    authorAvatar: 'https://placehold.co/40x40.png', dataAiHintAuthor: 'professional person',
     excerpt: 'Learn the fundamental principles of creating a memorable and effective brand identity that resonates with your target audience.',
-    imageUrl: 'https://placehold.co/600x400.png',
-    dataAiHintImage: 'brand moodboard',
+    imageUrl: 'https://placehold.co/600x400.png', dataAiHintImage: 'brand moodboard',
     category: 'Branding',
     readTime: '7 min read',
   },
@@ -65,11 +83,9 @@ const blogPosts = [
     title: 'AI in Digital Marketing: The New Frontier',
     date: '2024-05-22',
     author: 'Sam Lee',
-    authorAvatar: 'https://placehold.co/40x40.png',
-    dataAiHintAuthor: 'marketing expert',
+    authorAvatar: 'https://placehold.co/40x40.png', dataAiHintAuthor: 'marketing expert',
     excerpt: 'How AI is revolutionizing digital marketing strategies, from content creation to customer analytics.',
-    imageUrl: 'https://placehold.co/600x400.png',
-    dataAiHintImage: 'artificial intelligence marketing',
+    imageUrl: 'https://placehold.co/600x400.png', dataAiHintImage: 'artificial intelligence marketing',
     category: 'Digital Marketing',
     readTime: '8 min read',
   },
@@ -78,11 +94,9 @@ const blogPosts = [
     title: 'The Importance of User Experience (UX) in Web Design',
     date: '2024-05-10',
     author: 'Alex Chen',
-    authorAvatar: 'https://placehold.co/40x40.png',
-    dataAiHintAuthor: 'professional person',
+    authorAvatar: 'https://placehold.co/40x40.png', dataAiHintAuthor: 'professional person',
     excerpt: 'A deep dive into why UX is paramount for website success and how to optimize it for your users.',
-    imageUrl: 'https://placehold.co/600x400.png',
-    dataAiHintImage: 'user experience interface',
+    imageUrl: 'https://placehold.co/600x400.png', dataAiHintImage: 'user experience interface',
     category: 'Web Design',
     readTime: '7 min read',
   },
@@ -91,11 +105,9 @@ const blogPosts = [
     title: 'WordPress vs. Headless CMS: Which is Right for You?',
     date: '2024-04-28',
     author: 'Maria Rodriguez',
-    authorAvatar: 'https://placehold.co/40x40.png',
-    dataAiHintAuthor: 'software developer',
+    authorAvatar: 'https://placehold.co/40x40.png', dataAiHintAuthor: 'software developer',
     excerpt: 'Comparing traditional WordPress with modern headless CMS solutions to help you choose the best fit.',
-    imageUrl: 'https://placehold.co/600x400.png',
-    dataAiHintImage: 'cms comparison chart',
+    imageUrl: 'https://placehold.co/600x400.png', dataAiHintImage: 'cms comparison chart',
     category: 'CMS',
     readTime: '9 min read',
   },
@@ -104,11 +116,9 @@ const blogPosts = [
     title: 'Mastering Tailwind CSS: Tips and Tricks',
     date: '2024-04-15',
     author: 'Sam Lee',
-    authorAvatar: 'https://placehold.co/40x40.png',
-    dataAiHintAuthor: 'marketing expert',
+    authorAvatar: 'https://placehold.co/40x40.png', dataAiHintAuthor: 'marketing expert',
     excerpt: 'Unlock the full potential of Tailwind CSS with these advanced tips, tricks, and best practices.',
-    imageUrl: 'https://placehold.co/600x400.png',
-    dataAiHintImage: 'tailwind css code',
+    imageUrl: 'https://placehold.co/600x400.png', dataAiHintImage: 'tailwind css code',
     category: 'Web Development',
     readTime: '6 min read',
   },
@@ -117,10 +127,9 @@ const blogPosts = [
     title: 'The Rise of Server Components in Next.js',
     date: '2024-04-02',
     author: 'Maria Rodriguez',
-    authorAvatar: 'https://placehold.co/40x40.png',
-    dataAiHintAuthor: 'software developer',
+    authorAvatar: 'https://placehold.co/40x40.png', dataAiHintAuthor: 'software developer',
     excerpt: 'Understanding Next.js Server Components and how they are changing the landscape of React development.',
-    imageUrl: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=1200&h=600&fit=crop&q=80',
+    imageUrl: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600&h=400&fit=crop&q=80',
     category: 'Next.js',
     readTime: '8 min read',
   },
@@ -129,11 +138,9 @@ const blogPosts = [
     title: 'Effective Content Strategy for SaaS Businesses',
     date: '2024-03-20',
     author: 'Alex Chen',
-    authorAvatar: 'https://placehold.co/40x40.png',
-    dataAiHintAuthor: 'professional person',
+    authorAvatar: 'https://placehold.co/40x40.png', dataAiHintAuthor: 'professional person',
     excerpt: 'Key elements of a successful content strategy tailored for SaaS companies looking to grow.',
-    imageUrl: 'https://placehold.co/600x400.png',
-    dataAiHintImage: 'saas content strategy',
+    imageUrl: 'https://placehold.co/600x400.png', dataAiHintImage: 'saas content strategy',
     category: 'Content Strategy',
     readTime: '7 min read',
   },
@@ -142,11 +149,9 @@ const blogPosts = [
     title: 'Optimizing Images for Web Performance',
     date: '2024-03-05',
     author: 'Sam Lee',
-    authorAvatar: 'https://placehold.co/40x40.png',
-    dataAiHintAuthor: 'marketing expert',
+    authorAvatar: 'https://placehold.co/40x40.png', dataAiHintAuthor: 'marketing expert',
     excerpt: 'Best practices for image optimization to improve website speed and user experience.',
-    imageUrl: 'https://placehold.co/600x400.png',
-    dataAiHintImage: 'image optimization tools',
+    imageUrl: 'https://placehold.co/600x400.png', dataAiHintImage: 'image optimization tools',
     category: 'Web Performance',
     readTime: '5 min read',
   },
@@ -155,11 +160,9 @@ const blogPosts = [
     title: 'Introduction to Genkit AI for Next.js Developers',
     date: '2024-02-18',
     author: 'Maria Rodriguez',
-    authorAvatar: 'https://placehold.co/40x40.png',
-    dataAiHintAuthor: 'software developer',
+    authorAvatar: 'https://placehold.co/40x40.png', dataAiHintAuthor: 'software developer',
     excerpt: 'A beginner-friendly guide to integrating Genkit AI into your Next.js applications.',
-    imageUrl: 'https://placehold.co/600x400.png',
-    dataAiHintImage: 'ai integration code',
+    imageUrl: 'https://placehold.co/600x400.png', dataAiHintImage: 'ai integration code',
     category: 'AI Development',
     readTime: '9 min read',
   },
@@ -168,26 +171,134 @@ const blogPosts = [
     title: 'Creating Accessible Forms: A Practical Guide',
     date: '2024-02-01',
     author: 'Alex Chen',
-    authorAvatar: 'https://placehold.co/40x40.png',
-    dataAiHintAuthor: 'professional person',
+    authorAvatar: 'https://placehold.co/40x40.png', dataAiHintAuthor: 'professional person',
     excerpt: 'Step-by-step instructions on how to design and build web forms that are usable by everyone.',
-    imageUrl: 'https://placehold.co/600x400.png',
-    dataAiHintImage: 'accessible form ui',
+    imageUrl: 'https://placehold.co/600x400.png', dataAiHintImage: 'accessible form ui',
     category: 'Accessibility',
     readTime: '7 min read',
   },
 ];
 
+const newPostSchema = z.object({
+  title: z.string().min(5, "Title must be at least 5 characters long."),
+  content: z.string().min(50, "Content must be at least 50 characters long."),
+  author: z.string().min(2, "Author name must be at least 2 characters long."),
+  category: z.string().min(2, "Category must be at least 2 characters long."),
+});
+type NewPostFormValues = z.infer<typeof newPostSchema>;
+
+// Helper to generate a simple slug
+const generateSlug = (title: string) => {
+  return title
+    .toLowerCase()
+    .replace(/\s+/g, '-')       // Replace spaces with -
+    .replace(/[^\w-]+/g, '')  // Remove all non-word chars
+    .replace(/--+/g, '-')      // Replace multiple - with single -
+    .replace(/^-+/, '')        // Trim - from start of text
+    .replace(/-+$/, '');       // Trim - from end of text
+};
 
 export default function BlogPage() {
+  const [posts, setPosts] = useState(initialBlogPosts);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const { toast } = useToast();
+
+  const form = useForm<NewPostFormValues>({
+    resolver: zodResolver(newPostSchema),
+    defaultValues: {
+      title: "",
+      content: "",
+      author: "Your Name", // Default author
+      category: "General",
+    },
+  });
+
+  const onSubmit = (data: NewPostFormValues) => {
+    const newSlug = generateSlug(data.title);
+    const newPost = {
+      slug: newSlug,
+      title: data.title,
+      // For simplicity, using placeholder content for excerpt and the full content for actual 'content'
+      // In a real CMS, you'd have separate fields.
+      excerpt: data.content.substring(0, 150) + "...", 
+      content: `<p>${data.content.replace(/\n/g, '</p><p>')}</p>`, // Basic paragraph formatting
+      author: data.author,
+      authorAvatar: 'https://placehold.co/40x40.png', // Default avatar
+      dataAiHintAuthor: 'person',
+      imageUrl: 'https://placehold.co/600x400.png', // Default image
+      dataAiHintImage: 'abstract background',
+      category: data.category,
+      date: new Date().toISOString().split('T')[0], // Today's date
+      readTime: `${Math.ceil(data.content.split(/\s+/).length / 200)} min read`, // Approximate read time
+      tags: [data.category, "User Submitted"], // Add some default tags
+    };
+
+    setPosts(prevPosts => [newPost, ...prevPosts]); // Add to the beginning of the list
+    toast({
+      title: "Blog Post Added (Session Only)",
+      description: "Your new blog post has been added to the list for this session. It will be lost on page refresh.",
+    });
+    form.reset();
+    setIsDialogOpen(false);
+  };
+
+
   return (
     <div className="bg-background text-foreground">
       <header className="py-16 md:py-24 text-center bg-secondary">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-4 flex items-center justify-center">
-            <Newspaper className="h-12 w-12 mr-4 text-primary" />
-            CodeAndCount Insights
-          </h1>
+          <div className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-8">
+            <h1 className="text-5xl md:text-6xl font-bold tracking-tight flex items-center justify-center">
+              <Newspaper className="h-12 w-12 mr-4 text-primary" />
+              CodeAndCount Insights
+            </h1>
+            
+            <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+              <DialogTrigger asChild>
+                <Button variant="outline" size="lg" className="rounded-full">
+                  <PlusCircle className="mr-2 h-5 w-5" /> Create New Post
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-[600px]">
+                <DialogHeader>
+                  <DialogTitle>Create a New Blog Post</DialogTitle>
+                  <DialogDescription>
+                    Fill in the details for your new blog post. Remember, this post is only for the current session and won't be saved permanently.
+                  </DialogDescription>
+                </DialogHeader>
+                <form onSubmit={form.handleSubmit(onSubmit)} className="grid gap-4 py-4">
+                  <div className="grid grid-cols-4 items-center gap-4">
+                    <Label htmlFor="title" className="text-right">Title</Label>
+                    <Input id="title" {...form.register("title")} className="col-span-3" placeholder="Your amazing blog post title" />
+                    {form.formState.errors.title && <p className="col-span-4 text-sm text-destructive text-right">{form.formState.errors.title.message}</p>}
+                  </div>
+                  <div className="grid grid-cols-4 items-center gap-4">
+                    <Label htmlFor="author" className="text-right">Author</Label>
+                    <Input id="author" {...form.register("author")} className="col-span-3" placeholder="Your name" />
+                     {form.formState.errors.author && <p className="col-span-4 text-sm text-destructive text-right">{form.formState.errors.author.message}</p>}
+                  </div>
+                  <div className="grid grid-cols-4 items-center gap-4">
+                    <Label htmlFor="category" className="text-right">Category</Label>
+                    <Input id="category" {...form.register("category")} className="col-span-3" placeholder="e.g., Web Development" />
+                    {form.formState.errors.category && <p className="col-span-4 text-sm text-destructive text-right">{form.formState.errors.category.message}</p>}
+                  </div>
+                  <div className="grid grid-cols-4 items-start gap-4">
+                    <Label htmlFor="content" className="text-right pt-2">Content</Label>
+                    <Textarea id="content" {...form.register("content")} className="col-span-3 min-h-[150px]" placeholder="Write your blog post content here..." />
+                    {form.formState.errors.content && <p className="col-span-4 text-sm text-destructive text-right">{form.formState.errors.content.message}</p>}
+                  </div>
+                  <DialogFooter>
+                    <DialogClose asChild>
+                       <Button type="button" variant="outline">Cancel</Button>
+                    </DialogClose>
+                    <Button type="submit" disabled={form.formState.isSubmitting}>
+                      {form.formState.isSubmitting ? "Publishing..." : "Publish Post"}
+                    </Button>
+                  </DialogFooter>
+                </form>
+              </DialogContent>
+            </Dialog>
+          </div>
           <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
             Stay updated with the latest trends, tips, and thoughts from the CodeAndCount.com team.
           </p>
@@ -197,7 +308,7 @@ export default function BlogPage() {
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogPosts.map((post) => (
+            {posts.map((post) => (
               <Card key={post.slug} className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out flex flex-col group hover:-translate-y-1" data-interactive-cursor="true">
                 <Link href={`/blog/${post.slug}`} className="block">
                   <Image 
