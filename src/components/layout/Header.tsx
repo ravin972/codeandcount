@@ -58,12 +58,12 @@ export function Header() {
         <Link 
           href="/" 
           className={cn(
-            "font-bold hover:opacity-80 transition-all duration-300 ease-in-out", 
-            isCondensed ? "text-2xl" : "text-3xl"
+            "font-bold hover:opacity-80 transition-all duration-300 ease-in-out whitespace-nowrap", 
+            isCondensed ? "text-xl" : "text-2xl" // Adjusted size slightly for longer text
           )} 
           onClick={() => setIsMobileMenuOpen(false)}
         >
-          C<span className="text-primary">2</span>
+          Code<span className="text-primary">And</span>Count
         </Link>
 
         {/* Desktop Nav */}
@@ -126,8 +126,8 @@ export function Header() {
                 <SheetTitle className="sr-only">Main Menu</SheetTitle>
               </SheetHeader>
               <div className="flex flex-col space-y-6 mt-4"> 
-                <Link href="/" className="text-2xl font-bold text-foreground self-start hover:opacity-80 transition-opacity" onClick={() => setIsMobileMenuOpen(false)}>
-                  C<span className="text-primary">2</span>
+                <Link href="/" className="text-2xl font-bold text-foreground self-start hover:opacity-80 transition-opacity whitespace-nowrap" onClick={() => setIsMobileMenuOpen(false)}>
+                  Code<span className="text-primary">And</span>Count
                 </Link>
                 <nav className="flex flex-col space-y-4">
                   {navLinks.map((link) => (
