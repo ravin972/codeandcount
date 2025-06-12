@@ -47,11 +47,11 @@ export function Header() {
     >
       <div
         className={cn(
-          "flex items-center justify-between rounded-full shadow-xl backdrop-blur-lg bg-background/80 transition-all duration-300 ease-in-out",
-          "w-full", // Base full width for mobile
+          "flex items-center justify-between rounded-full shadow-xl backdrop-blur-lg bg-background/60 transition-all duration-300 ease-in-out",
+          "w-full", 
           isCondensed
-            ? "h-14 px-3 py-1 sm:px-4 md:w-1/2 md:mx-auto" // Condensed: mobile gets h/p, desktop gets w/mx too
-            : "h-16 px-4 py-2 sm:px-6 md:container md:mx-auto" // Expanded: mobile gets h/p, desktop gets container/mx too
+            ? "h-14 px-3 py-1 sm:px-4 md:w-1/2 md:mx-auto" 
+            : "h-16 px-4 py-2 sm:px-6 md:container md:mx-auto" 
         )}
       >
         {/* Logo */}
