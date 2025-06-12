@@ -59,7 +59,7 @@ export function Header() {
           href="/" 
           className={cn(
             "font-bold hover:opacity-80 transition-all duration-300 ease-in-out whitespace-nowrap", 
-            isCondensed ? "text-xl" : "text-2xl" // Adjusted size slightly for longer text
+            isCondensed ? "text-xl" : "text-2xl"
           )} 
           onClick={() => setIsMobileMenuOpen(false)}
         >
@@ -69,7 +69,7 @@ export function Header() {
         {/* Desktop Nav */}
         <nav className={cn(
           "hidden md:flex flex-grow justify-center items-center transition-all duration-300 ease-in-out",
-          isCondensed ? "space-x-0.5 lg:space-x-1" : "space-x-1 lg:space-x-2"
+          isCondensed ? "space-x-1 lg:space-x-2" : "space-x-2 lg:space-x-3"
         )}>
           {navLinks.map((link) => (
             <Link
@@ -89,7 +89,7 @@ export function Header() {
         {/* CTA and Theme Toggle */}
         <div className={cn(
           "hidden md:flex items-center transition-all duration-300 ease-in-out group", 
-          isCondensed ? "space-x-2 lg:space-x-3" : "space-x-3 lg:space-x-4"
+          isCondensed ? "space-x-2.5 lg:space-x-3" : "space-x-3 lg:space-x-4"
         )}>
           <Button
             variant="default"
@@ -112,7 +112,7 @@ export function Header() {
         </div>
 
         {/* Mobile Menu Trigger */}
-        <div className="md:hidden flex items-center space-x-2">
+        <div className="md:hidden flex items-center space-x-3">
           <ThemeToggle />
           <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
             <SheetTrigger asChild>
