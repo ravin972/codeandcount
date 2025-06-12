@@ -4,33 +4,33 @@
 
 @layer base {
   :root {
-    --background: 223 47% 82%; /* Light Periwinkle for light mode background */
-    --foreground: 156 100% 6%; /* #00200f Very Dark Green/Teal for light mode text */
+    --background: 0 0% 100%; /* white */
+    --foreground: 240 10% 3.9%; /* near black for text */
 
-    --card: 223 47% 82%; /* Same as background for light mode */
-    --card-foreground: 156 100% 6%;
+    --card: 0 0% 100%; /* white */
+    --card-foreground: 240 10% 3.9%; /* near black for text on cards */
 
-    --popover: 223 47% 82%; /* Same as background for light mode */
-    --popover-foreground: 156 100% 6%;
+    --popover: 0 0% 100%; /* white */
+    --popover-foreground: 240 10% 3.9%; /* near black for text on popovers */
 
-    --primary: 81 100% 50%; /* #b2ff03 Bright Lime Green */
-    --primary-foreground: 156 100% 6%; /* #00200f Dark text on bright lime */
+    --primary: 81 100% 50%; /* #b2ff03 Bright Lime Green (unchanged) */
+    --primary-foreground: 156 100% 6%; /* #00200f Dark text on bright lime (unchanged) */
 
-    --secondary: 223 47% 78%; /* Slightly darker tint of Periwinkle */
-    --secondary-foreground: 156 100% 6%;
+    --secondary: 240 4.8% 95.9%; /* very light gray, e.g., #f4f4f5 */
+    --secondary-foreground: 240 10% 3.9%; /* near black for text on secondary */
 
-    --muted: 223 40% 75%; 
-    --muted-foreground: 156 40% 30%; 
+    --muted: 240 4.8% 95.9%;  /* very light gray, e.g., #f4f4f5 */
+    --muted-foreground: 240 3.7% 46.1%; /* medium gray for muted text, e.g., #71717a */
 
-    --accent: 81 100% 50%; /* #b2ff03 Bright Lime Green */
-    --accent-foreground: 156 100% 6%; /* #00200f Dark text on bright lime accent */
+    --accent: 81 100% 50%; /* #b2ff03 Bright Lime Green (unchanged) */
+    --accent-foreground: 156 100% 6%; /* #00200f Dark text on bright lime accent (unchanged) */
     
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 0 0% 98%;
+    --destructive: 0 84.2% 60.2%; /* (unchanged) */
+    --destructive-foreground: 0 0% 98%; /* (unchanged) */
 
-    --border: 223 40% 70%;
-    --input: 223 40% 70%;
-    --ring: 81 100% 50%; /* #b2ff03 Bright Lime Green for focus rings */
+    --border: 240 5.9% 90%; /* light gray border, e.g., #e4e4e7 */
+    --input: 240 5.9% 90%; /* light gray input border, e.g., #e4e4e7 */
+    --ring: 81 100% 50%; /* #b2ff03 Bright Lime Green for focus rings (unchanged) */
 
     --radius: 0.5rem;
 
