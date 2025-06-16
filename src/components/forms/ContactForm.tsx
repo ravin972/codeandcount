@@ -96,7 +96,7 @@ export function ContactForm() {
             <FormItem>
               <FormLabel>Full Name</FormLabel>
               <FormControl>
-                <Input placeholder="" {...field} />
+                <Input placeholder="Shankritya Pandey" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
