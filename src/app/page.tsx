@@ -253,7 +253,7 @@ export default function HomePage() {
             </div>
 
             <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-10">
-              CodeAndCount.com is a web and app development powerhouse, dedicated to building impactful digital experiences that drive growth and elevate brands across industries.
+            CodeAndCount.com helps turn your ideas into reality — from web development to smart accounting. We simplify success with digital innovation, custom software, and expert financial solutions.
             </p>
             <Button size="lg" asChild className="rounded-full">
               <Link href="/contact#start-project">
