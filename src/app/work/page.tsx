@@ -160,6 +160,7 @@ export default function WorkPage() {
   const getButtonIcon = (filterType: FilterType) => {
     if (filterType === 'accounting') return <Calculator className="mr-2 h-5 w-5" />;
     if (filterType === 'web_ai') return <Laptop className="mr-2 h-5 w-5" />;
+    if (filterType === 'all') return <GalleryThumbnails className="mr-2 h-5 w-5" />;
     return null;
   }
 
@@ -189,6 +190,7 @@ export default function WorkPage() {
                 size="lg"
                 className="rounded-full text-base"
               >
+                <GalleryThumbnails className="mr-2 h-5 w-5" />
                 All Projects
               </Button>
               <Button 
@@ -225,3 +227,4 @@ export default function WorkPage() {
     </div>
   );
 }
+
