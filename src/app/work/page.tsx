@@ -187,8 +187,7 @@ export default function WorkPage() {
               <Button 
                 onClick={() => setActiveFilter('all')} 
                 variant={activeFilter === 'all' ? 'default' : 'outline'}
-                size="lg"
-                className="rounded-full text-base"
+                className="rounded-full text-base h-12 px-10"
               >
                 <GalleryThumbnails className="mr-2 h-5 w-5" />
                 All Projects
@@ -196,8 +195,7 @@ export default function WorkPage() {
               <Button 
                 onClick={() => setActiveFilter('accounting')} 
                 variant={activeFilter === 'accounting' ? 'default' : 'outline'}
-                size="lg"
-                className="rounded-full text-base"
+                className="rounded-full text-base h-12 px-10"
               >
                 <Calculator className="mr-2 h-5 w-5" />
                 Account Management
@@ -205,8 +203,7 @@ export default function WorkPage() {
               <Button 
                 onClick={() => setActiveFilter('web_ai')} 
                 variant={activeFilter === 'web_ai' ? 'default' : 'outline'}
-                size="lg"
-                className="rounded-full text-base"
+                className="rounded-full text-base h-12 px-10"
               >
                  <Laptop className="mr-2 h-5 w-5" />
                 Websites & AI Solutions
@@ -227,4 +224,3 @@ export default function WorkPage() {
     </div>
   );
 }
-
