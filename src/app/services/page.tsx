@@ -82,7 +82,7 @@ const servicesDetails: ServiceDetail[] = [
     type: 'web_ai'
   },
   {
-    name: '📄 Financial Reporting & Analysis',
+    name: 'Financial Reporting & Analysis',
     description: 'Delivering clear insights into your financial performance with comprehensive reports and analysis.',
     icon: <BarChart3 className="h-12 w-12 mb-4 text-primary" />,
     points: [
@@ -95,7 +95,7 @@ const servicesDetails: ServiceDetail[] = [
     type: 'accounting'
   },
   {
-    name: '💰 Accounts Payable & Receivable',
+    name: 'Accounts Payable & Receivable',
     description: 'Managing your payables and receivables efficiently to optimize cash flow and financial health.',
     icon: <ReceiptText className="h-12 w-12 mb-4 text-primary" />,
     points: [
@@ -108,7 +108,7 @@ const servicesDetails: ServiceDetail[] = [
     type: 'accounting'
   },
   {
-    name: '👨‍💼 Payroll Processing',
+    name: 'Payroll Processing',
     description: 'Accurate and compliant payroll services to ensure your employees are paid correctly and on time.',
     icon: <Users2 className="h-12 w-12 mb-4 text-primary" />,
     points: [
@@ -121,7 +121,7 @@ const servicesDetails: ServiceDetail[] = [
     type: 'accounting'
   },
   {
-    name: '🧾 Tax Preparation & Support',
+    name: 'Tax Preparation & Support',
     description: 'Navigating tax complexities with expert preparation and support for GST, income tax, and TDS.',
     icon: <FileText className="h-12 w-12 mb-4 text-primary" />,
     points: [
@@ -134,7 +134,7 @@ const servicesDetails: ServiceDetail[] = [
     type: 'accounting'
   },
   {
-    name: '📈 Custom Dashboards & Reports',
+    name: 'Custom Dashboards & Reports',
     description: 'Visualizing your financial data through custom dashboards for real-time insights and KPI tracking.',
     icon: <LayoutDashboard className="h-12 w-12 mb-4 text-primary" />,
     points: [
@@ -147,7 +147,7 @@ const servicesDetails: ServiceDetail[] = [
     type: 'accounting'
   },
   {
-    name: '📚 Compliance & Audit Support',
+    name: 'Compliance & Audit Support',
     description: 'Ensuring your business meets regulatory requirements with thorough compliance and audit support.',
     icon: <ShieldCheck className="h-12 w-12 mb-4 text-primary" />,
     points: [
@@ -160,7 +160,7 @@ const servicesDetails: ServiceDetail[] = [
     type: 'accounting'
   },
   {
-    name: '✍️ Data Entry & Bookkeeping Services',
+    name: 'Data Entry & Bookkeeping Services',
     description: 'Your data, perfectly organized. Meticulous data entry and bookkeeping to maintain accurate financial records.',
     icon: <DatabaseZap className="h-12 w-12 mb-4 text-primary" />,
     points: [
@@ -174,7 +174,7 @@ const servicesDetails: ServiceDetail[] = [
     type: 'accounting'
   },
   {
-    name: '🧩 Additional Business-Critical Services',
+    name: 'Additional Business-Critical Services',
     description: 'A suite of essential services to support various operational aspects of your business finances.',
     icon: <BriefcaseBusiness className="h-12 w-12 mb-4 text-primary" />,
     points: [
@@ -257,7 +257,7 @@ export default function ServicesPage() {
                         <p className="text-muted-foreground mb-6">{service.description}</p>
                         <ul className="space-y-3">
                           {service.points.map((point, index) => {
-                            if (service.name === '🧩 Additional Business-Critical Services' && point.includes(':')) {
+                            if (service.name === 'Additional Business-Critical Services' && point.includes(':')) {
                               const [subService, details] = point.split(/:(.*)/s);
                               const detailItems = details.split(',').map(d => d.trim());
                               return (
