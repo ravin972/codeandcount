@@ -41,14 +41,14 @@ const footerSections = {
   },
   getInTouch: {
     title: "Get in touch",
-    phone: "+1 (234) 567-890",
+    phone1: "+91-8685941423",
+    phone2: "+91-7737770374",
     email: "hello@codeandcount.com",
     address: [
-      "123 Design Street",
-      "Web City, WC 00000",
-      "United States"
-    ],
-    otherLink: { text: "///topped.little.pirate", href: "#" }
+      "Spaze iTech Park, Sec-49",
+      "Gurugram, Haryana",
+      "India"
+    ]
   }
 };
 
@@ -159,8 +159,14 @@ export function Footer() {
               <ul className="space-y-3">
                 <li className="flex items-center">
                   <Phone className="h-5 w-5 mr-3 text-primary flex-shrink-0" />
-                  <a href={`tel:${footerSections.getInTouch.phone.replace(/\s/g, '')}`} className="hover:text-primary transition-colors duration-200">
-                    {footerSections.getInTouch.phone}
+                  <a href={`tel:${footerSections.getInTouch.phone1.replace(/\s/g, '')}`} className="hover:text-primary transition-colors duration-200">
+                    {footerSections.getInTouch.phone1}
+                  </a>
+                </li>
+                <li className="flex items-center">
+                  <Phone className="h-5 w-5 mr-3 text-primary flex-shrink-0" />
+                  <a href={`tel:${footerSections.getInTouch.phone2.replace(/\s/g, '')}`} className="hover:text-primary transition-colors duration-200">
+                    {footerSections.getInTouch.phone2}
                   </a>
                 </li>
                 <li className="flex items-center">
@@ -176,12 +182,6 @@ export function Footer() {
                       <span key={i} className="block">{line}</span>
                     ))}
                   </div>
-                </li>
-                <li className="flex items-center">
-                  <Copyright className="h-5 w-5 mr-3 text-primary flex-shrink-0" /> {/* Assuming Copyright icon for placeholder, replace if specific icon is needed */}
-                  <a href={footerSections.getInTouch.otherLink.href} className="hover:text-primary transition-colors duration-200">
-                    {footerSections.getInTouch.otherLink.text}
-                  </a>
                 </li>
               </ul>
             </div>
