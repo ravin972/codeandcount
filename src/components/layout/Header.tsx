@@ -63,13 +63,13 @@ export function Header() {
           )} 
           onClick={() => setIsMobileMenuOpen(false)}
         >
-          Code<span className="text-primary">&</span>Count
+          Code<span className="text-primary">&amp;</span>Count
         </Link>
 
         {/* Desktop Nav */}
         <nav className={cn(
           "hidden md:flex flex-grow justify-center items-center transition-all duration-300 ease-in-out",
-          isCondensed ? "space-x-1 lg:space-x-2" : "space-x-2 lg:space-x-3"
+          isCondensed ? "space-x-3 lg:space-x-4" : "space-x-2 lg:space-x-3"
         )}>
           {navLinks.map((link) => (
             <Link
@@ -127,7 +127,7 @@ export function Header() {
               </SheetHeader>
               <div className="flex flex-col space-y-6 mt-4"> 
                 <Link href="/" className="text-2xl font-bold text-foreground self-start hover:opacity-80 transition-opacity whitespace-nowrap" onClick={() => setIsMobileMenuOpen(false)}>
-                  Code<span className="text-primary">And</span>Count
+                  Code<span className="text-primary">&amp;</span>Count
                 </Link>
                 <nav className="flex flex-col space-y-4">
                   {navLinks.map((link) => (
@@ -166,3 +166,4 @@ export function Header() {
     </header>
   );
 }
+
