@@ -3,7 +3,7 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowUpRight, Phone, Mail, MapPin, Star, Github, Instagram, Copyright, Linkedin, X } from 'lucide-react'; 
+import { ArrowUpRight, Phone, Mail, MapPin, Star, Github, Instagram, Copyright, Linkedin, X, StarHalf } from 'lucide-react'; 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { cn } from '@/lib/utils';
 import { BackToTopButton } from './BackToTopButton';
@@ -14,8 +14,8 @@ const footerSections = {
     buttonText: "Start a project",
     buttonLink: "/contact#start-project",
     reviews: {
-      rating: "5.0",
-      count: "69 reviews", 
+      rating: "4.5",
+      count: "45+ reviews", 
       source: "Google"
     }
   },
@@ -45,7 +45,7 @@ const footerSections = {
     phone2: "+91-7737770374",
     email: "hello@codeandcount.com",
     address: [
-      "Spaze iTech Park, Sec-49",
+      "spaze i tech park, Sec-49",
       "Gurugram, Haryana",
       "India"
     ]
@@ -59,7 +59,6 @@ const socialMediaLinks = [
   { name: 'X', href: 'https://x.com/example', icon: <X className="h-4 w-4" /> },
   { name: 'GitHub', href: 'https://github.com/example', icon: <Github className="h-4 w-4" /> },
   { name: 'Instagram', href: 'https://instagram.com/example', icon: <Instagram className="h-4 w-4" /> },
-  { name: 'Behance', href: 'https://behance.net/example', icon: <span className="font-bold text-sm leading-none">Bē</span> }, 
 ];
 
 
@@ -108,12 +107,13 @@ export function Footer() {
                 </Link>
               </Button>
               <div className="flex items-center space-x-2">
-                <div className="bg-white text-black h-6 w-6 rounded-full flex items-center justify-center text-sm font-bold">G</div>
+                <div className="bg-blue-600 text-white h-6 w-6 rounded-full flex items-center justify-center text-sm font-bold">G</div>
                 <div>
                   <div className="flex items-center">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} className="h-4 w-4 text-yellow-400 fill-yellow-400" />
+                    {[...Array(4)].map((_, i) => (
+                      <Star key={`full-${i}`} className="h-4 w-4 text-yellow-400 fill-yellow-400" />
                     ))}
+                    <StarHalf key="half" className="h-4 w-4 text-yellow-400 fill-yellow-400" />
                   </div>
                   <p className="text-xs text-neutral-400">
                     {footerSections.cta.reviews.rating} from {footerSections.cta.reviews.count}
@@ -215,3 +215,4 @@ export function Footer() {
     </>
   );
 }
+
