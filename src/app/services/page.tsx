@@ -1,7 +1,7 @@
 
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { 
   CheckCircle, Palette, Laptop, Search, Puzzle, ShoppingCart, Calculator, Wrench, 
@@ -36,7 +36,7 @@ const servicesDetails: ServiceDetail[] = [
     type: 'web_ai'
   },
   { 
-    name: 'Websites & Mobile Apps', 
+    name: 'Websites & Mobile Apps (Legacy)', 
     description: 'Our team designs and develops bespoke websites and mobile applications that are not only visually stunning but also highly functional, user-friendly, and optimized for performance across all devices.',
     icon: <Laptop className="h-12 w-12 mb-4 text-primary" />,
     points: [
@@ -48,7 +48,7 @@ const servicesDetails: ServiceDetail[] = [
     type: 'web_ai'
   },
   { 
-    name: 'SEO Strategy (Web & AI Focus)', 
+    name: 'SEO Strategy (Legacy Web & AI Focus)', 
     description: 'Boost your online visibility and reach your target audience effectively with our data-driven SEO and digital marketing strategies, integrated with web and AI solutions.',
     icon: <Search className="h-12 w-12 mb-4 text-primary" />,
     points: [
@@ -527,26 +527,62 @@ const servicesDetails: ServiceDetail[] = [
 
 type FilterType = 'all' | 'accounting' | 'web_ai' | 'digital_marketing';
 
+// Fisher-Yates shuffle algorithm
+const shuffleArray = <T extends any[]>(array: T): T => {
+  const newArray = [...array] as T;
+  for (let i = newArray.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [newArray[i], newArray[j]] = [newArray[j], newArray[i]];
+  }
+  return newArray;
+};
+
 export default function ServicesPage() {
   const [activeFilter, setActiveFilter] = useState<FilterType>('all');
+  const [displayedServices, setDisplayedServices] = useState<ServiceDetail[]>([]);
 
-  const filteredServices = servicesDetails.filter(service => {
-    if (activeFilter === 'all') return true;
-    return service.type === activeFilter;
-  });
+  useEffect(() => {
+    let servicesToDisplay = servicesDetails;
+    if (activeFilter !== 'all') {
+      servicesToDisplay = servicesDetails.filter(service => service.type === activeFilter);
+    }
+    // Shuffle the filtered services before setting the state
+    setDisplayedServices(shuffleArray(servicesToDisplay));
+  }, [activeFilter]);
+
 
   const renderServicePoint = (point: string, serviceName: string, pointIndex: number) => {
     if (serviceName === 'Additional Business-Critical Services' && point.includes(':')) {
       const [subService, detailsString] = point.split(/:(.*)/s);
-      const detailItems = detailsString.split(',').map(d => d.trim());
+      const detailItems = detailsString ? detailsString.split(',').map(d => d.trim()) : [];
       return (
         <li key={`${serviceName}-point-${pointIndex}`} className="flex items-start">
           <CheckCircle className="h-5 w-5 text-primary mr-2 mt-1 flex-shrink-0" />
           <div>
             <span className="font-medium text-foreground">{subService.trim()}:</span>
-            <ul className="list-disc list-inside pl-5 text-sm text-muted-foreground">
-              {detailItems.map((item, i) => <li key={`${serviceName}-detail-${pointIndex}-${i}`}>{item}</li>)}
-            </ul>
+            {detailItems.length > 0 && (
+              <ul className="list-disc list-inside pl-5 text-sm text-muted-foreground">
+                {detailItems.map((item, i) => <li key={`${serviceName}-detail-${pointIndex}-${i}`}>{item}</li>)}
+              </ul>
+            )}
+          </div>
+        </li>
+      );
+    }
+     // Handle "Ideal For:" and "Add-On Services:" in WhatsApp Business Services
+    if (serviceName === 'WhatsApp Business Services' && (point.startsWith("Ideal For:") || point.startsWith("Add-On Services:"))) {
+      const [titlePart, itemsPart] = point.split(/:(.*)/s);
+      const items = itemsPart ? itemsPart.split(',').map(item => item.trim()) : [];
+      return (
+        <li key={`${serviceName}-point-${pointIndex}`} className="flex items-start">
+          <CheckCircle className="h-5 w-5 text-primary mr-2 mt-1 flex-shrink-0" />
+          <div>
+            <span className="font-medium text-foreground">{titlePart.trim()}:</span>
+            {items.length > 0 && (
+                 <ul className="list-disc list-inside pl-5 text-sm text-muted-foreground">
+                    {items.map((item, i) => <li key={`${serviceName}-${titlePart}-detail-${i}`}>{item}</li>)}
+                 </ul>
+            )}
           </div>
         </li>
       );
@@ -611,9 +647,9 @@ export default function ServicesPage() {
                 </Button>
               </div>
 
-            {filteredServices.length > 0 ? (
+            {displayedServices.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-8">
-                {filteredServices.map((service) => (
+                {displayedServices.map((service) => (
                   <Card key={service.name} className="flex flex-col md:flex-row overflow-hidden transition-transform hover:scale-[1.01] duration-300" data-interactive-cursor="true">
                     <div className="md:w-1/4 p-6 flex flex-col items-center justify-center bg-secondary/30 md:border-r border-card-foreground/10">
                       {service.icon}
