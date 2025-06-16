@@ -5,9 +5,9 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 const teamMembers = [
-  { name: 'Alex Chen', role: 'Lead Designer & Strategist', avatarSrc: 'https://placehold.co/120x120.png', dataAiHint: 'professional person', bio: 'With over a decade of experience, Alex leads our creative vision, ensuring every project is both beautiful and impactful.' },
-  { name: 'Maria Rodriguez', role: 'Head of Development', avatarSrc: 'https://placehold.co/120x120.png', dataAiHint: 'software developer', bio: 'Maria is a tech wizard, transforming complex ideas into seamless digital experiences with her expert coding skills.' },
-  { name: 'Sam Lee', role: 'SEO & Marketing Guru', avatarSrc: 'https://placehold.co/120x120.png', dataAiHint: 'marketing expert', bio: 'Sam drives growth for our clients through innovative SEO and marketing strategies that deliver measurable results.' },
+  { name: 'Alex Chen', role: 'Lead Designer & Strategist', avatarSrc: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=120&h=120&fit=crop&q=80', dataAiHint: 'professional person', bio: 'With over a decade of experience, Alex leads our creative vision, ensuring every project is both beautiful and impactful.' },
+  { name: 'Maria Rodriguez', role: 'Head of Development', avatarSrc: 'https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=120&h=120&fit=crop&q=80', dataAiHint: 'software developer', bio: 'Maria is a tech wizard, transforming complex ideas into seamless digital experiences with her expert coding skills.' },
+  { name: 'Sam Lee', role: 'SEO & Marketing Guru', avatarSrc: 'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=120&h=120&fit=crop&q=80', dataAiHint: 'marketing expert', bio: 'Sam drives growth for our clients through innovative SEO and marketing strategies that deliver measurable results.' },
 ];
 
 const values = [
