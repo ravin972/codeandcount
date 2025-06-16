@@ -3,6 +3,9 @@ import { ContactForm } from '@/components/forms/ContactForm';
 import { Mail, Phone, MapPin, MailQuestion } from 'lucide-react';
 
 export default function ContactPage() {
+  const mapAddress = "spaze i tech park, Sec-49, Gurugram, Haryana, India";
+  const mapEmbedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(mapAddress)}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
+
   return (
     <div className="bg-background text-foreground">
       <header className="py-16 md:py-24 text-center bg-secondary">
@@ -65,17 +68,25 @@ export default function ContactPage() {
                   <div className="ml-4">
                     <h3 className="text-lg font-semibold text-foreground">Visit Us</h3>
                     <p className="text-muted-foreground">
-                      123 Design Street<br />
-                      Web City, WC 00000<br />
-                      United States
+                      {mapAddress.split(', Sec-')[0]}<br />
+                      {mapAddress.split(', ').slice(1).join(', ')}
                     </p>
                   </div>
                 </div>
               </div>
               
-              {/* Placeholder for Map */}
-              <div className="mt-10 aspect-video bg-muted rounded-lg shadow-md flex items-center justify-center">
-                 <p className="text-muted-foreground">Embedded Map Placeholder</p>
+              {/* Embedded Map */}
+              <div className="mt-10 aspect-video rounded-lg shadow-md overflow-hidden">
+                 <iframe
+                    src={mapEmbedUrl}
+                    width="100%"
+                    height="100%"
+                    style={{ border:0 }}
+                    allowFullScreen={true}
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    title="Office Location Map - Spaze iTech Park, Gurugram"
+                  ></iframe>
               </div>
             </div>
           </div>
