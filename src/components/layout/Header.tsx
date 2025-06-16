@@ -63,7 +63,7 @@ export function Header() {
           )} 
           onClick={() => setIsMobileMenuOpen(false)}
         >
-          Code<span className="text-primary">And</span>Count
+          Code<span className="text-primary">&</span>Count
         </Link>
 
         {/* Desktop Nav */}
