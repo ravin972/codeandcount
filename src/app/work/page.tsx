@@ -17,7 +17,7 @@ const portfolioItems = [
     category: 'E‑commerce · Spiritual Services',
     type: 'webdev',
     imageUrl: 'https://placehold.co/600x450.png',
-    dataAiHint: 'spiritual ecommerce',
+    dataAiHint: 'spiritual store',
     description: 'An all-in-one online store offering puja items, astrology consultations, and religious service bookings. Crafted for spiritual ambience and performance.',
     tags: ['Shopify', 'Religious E-commerce', 'Booking System'],
     liveUrl: 'https://divyasangrah.com',
@@ -28,7 +28,7 @@ const portfolioItems = [
     category: 'Corporate IT Solutions',
     type: 'webdev',
     imageUrl: 'https://placehold.co/600x450.png',
-    dataAiHint: 'corporate it',
+    dataAiHint: 'it solutions',
     description: 'Corporate portal for AI solutions, cloud services, and development projects. Includes career hub, portfolio sections, and contact workflows.',
     tags: ['IT Website', 'AI Services', 'Tech Branding'],
     liveUrl: 'https://www.itverbstechnologysolutions.com',
@@ -39,7 +39,7 @@ const portfolioItems = [
     category: 'Travel SaaS Platform',
     type: 'webdev',
     imageUrl: 'https://placehold.co/600x450.png',
-    dataAiHint: 'travel saas',
+    dataAiHint: 'travel platform',
     description: 'Developed for B2B travel operations. Offers hotel & flight APIs, lead tracking dashboards, and bulk booking systems.',
     tags: ['API Integration', 'Travel CRM', 'Booking Portal'],
     liveUrl: 'http://buztrixtraveltechindiapvtltd.com',
@@ -50,7 +50,7 @@ const portfolioItems = [
     category: 'Travel & Tours Website',
     type: 'webdev',
     imageUrl: 'https://placehold.co/600x450.png',
-    dataAiHint: 'travel booking',
+    dataAiHint: 'travel agency',
     description: 'Travel booking site highlighting packages, destination guides, and lead forms with WhatsApp integration.',
     tags: ['UX Design', 'Lead Funnels', 'Destination Portfolio'],
     liveUrl: 'http://bristatravelspvtltd.com',
@@ -61,7 +61,7 @@ const portfolioItems = [
     category: 'Productivity SaaS',
     type: 'webdev',
     imageUrl: 'https://placehold.co/600x450.png',
-    dataAiHint: 'saas productivity',
+    dataAiHint: 'task tool',
     description: 'Multi-user task manager with role permissions, calendar views, and file sharing. Built for freelancers and small businesses.',
     tags: ['Web App', 'Workflow SaaS', 'Productivity Tools'],
     liveUrl: 'https://taskslate.in',
@@ -72,7 +72,7 @@ const portfolioItems = [
     category: 'NGO · Community Portal',
     type: 'webdev',
     imageUrl: 'https://placehold.co/600x450.png',
-    dataAiHint: 'ngo community',
+    dataAiHint: 'ngo portal',
     description: 'Platform for event listings, donations, and volunteer participation. Built for scalability and public involvement.',
     tags: ['NGO Website', 'Donation Integration', 'Event Platform'],
     liveUrl: 'https://parivartan.divyasangrah.com',
@@ -83,7 +83,7 @@ const portfolioItems = [
     category: 'Health & Spirituality',
     type: 'webdev',
     imageUrl: 'https://placehold.co/600x450.png',
-    dataAiHint: 'wellness spiritual',
+    dataAiHint: 'wellness hub',
     description: 'Wellness portal with articles, guided meditations, and subscription content. Calm UI with blog and member area.',
     tags: ['CMS', 'Wellness UX', 'Blog Membership'],
     liveUrl: 'https://anandam.divyasangrah.com',
@@ -94,7 +94,7 @@ const portfolioItems = [
     category: 'Corporate · Consulting',
     type: 'webdev',
     imageUrl: 'https://placehold.co/600x450.png',
-    dataAiHint: 'corporate consulting',
+    dataAiHint: 'consulting firm',
     description: 'Clean and professional consultancy website. Features services, dynamic forms, and CRM integrations.',
     tags: ['Corporate Design', 'Forms', 'Client Management'],
     liveUrl: 'https://divinepartners.com',
@@ -127,7 +127,7 @@ const portfolioItems = [
     category: 'Health Portal · Ayurvedic Wellness',
     type: 'webdev',
     imageUrl: 'https://placehold.co/600x450.png',
-    dataAiHint: 'health ayurveda',
+    dataAiHint: 'ayurveda portal',
     description: 'Online consultation portal with Ayurveda-based health products and doctor booking. Simple UI and multilingual support.',
     tags: ['Healthcare UX', 'Booking Integration', 'Ayurvedic E‑commerce'],
     liveUrl: 'https://nirogitanman.com/',
@@ -138,7 +138,7 @@ const portfolioItems = [
     category: 'Fintech · Loan Marketplace',
     type: 'webdev',
     imageUrl: 'https://placehold.co/600x450.png',
-    dataAiHint: 'fintech loan',
+    dataAiHint: 'fintech platform',
     description: 'Smart credit platform offering personal loans, credit cards, and financial education. Built with API-backed services and real-time checks.',
     tags: ['Fintech UX', 'API', 'Loan Application'],
     liveUrl: 'https://www.indialends.com/',
@@ -152,7 +152,7 @@ const portfolioItems = [
     dataAiHint: 'adventure travel',
     description: 'An adventure tourism platform offering curated trekking, cultural trips, and personalized travel experiences across India. Built to inspire explorers and manage bookings with ease.',
     tags: ['Adventure Travel', 'Tour Portal', 'Booking Integration'],
-    liveUrl: '#', // Placeholder as no URL provided for this one
+    liveUrl: '#',
   }
 ];
 
@@ -196,7 +196,7 @@ export default function WorkPage() {
   const filteredProjects = portfolioItems.filter(item => {
     if (activeFilter === 'all') return true;
     if (activeFilter === 'accounting') return item.type === 'accounting';
-    if (activeFilter === 'web_ai') return item.type === 'webdev' || item.type === 'ai'; // Adjusted to include 'ai' if that's a possible type
+    if (activeFilter === 'web_ai') return item.type === 'webdev' || item.type === 'ai';
     return true;
   });
 
@@ -259,5 +259,3 @@ export default function WorkPage() {
     </div>
   );
 }
-
-    
