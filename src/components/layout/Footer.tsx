@@ -55,10 +55,10 @@ const footerSections = {
 const foundingYear = 2020;
 
 const socialMediaLinks = [
-  { name: 'LinkedIn', href: 'https://linkedin.com/company/example', icon: <Linkedin className="h-4 w-4" /> },
-  { name: 'X', href: 'https://x.com/example', icon: <X className="h-4 w-4" /> },
-  { name: 'GitHub', href: 'https://github.com/example', icon: <Github className="h-4 w-4" /> },
-  { name: 'Instagram', href: 'https://instagram.com/example', icon: <Instagram className="h-4 w-4" /> },
+  { name: 'LinkedIn', href: 'https://linkedin.com/company/codeandcount', icon: <Linkedin className="h-4 w-4" /> },
+  { name: 'X', href: 'https://x.com/codeandcount', icon: <X className="h-4 w-4" /> },
+  { name: 'GitHub', href: 'https://github.com/codeandcount', icon: <Github className="h-4 w-4" /> },
+  { name: 'Instagram', href: 'https://instagram.com/codeandcount', icon: <Instagram className="h-4 w-4" /> },
 ];
 
 
@@ -215,4 +215,3 @@ export function Footer() {
     </>
   );
 }
-
