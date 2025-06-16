@@ -6,7 +6,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { 
   CheckCircle, Palette, Laptop, Search, Puzzle, ShoppingCart, Calculator, Wrench, 
   GalleryThumbnails, Brain, BarChart3, ReceiptText, Users2, FileText, LayoutDashboard, 
-  ShieldCheck, DatabaseZap, BriefcaseBusiness 
+  ShieldCheck, DatabaseZap, BriefcaseBusiness, Smartphone, Globe, Bot, Database,
+  ImageIcon, MailOpen, BarChartBig, BrainCircuit, SearchCode
 } from "lucide-react";
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -46,7 +47,7 @@ const servicesDetails: ServiceDetail[] = [
     type: 'web_ai'
   },
   { 
-    name: 'SEO & Digital Marketing', 
+    name: 'SEO Strategy', 
     description: 'Boost your online visibility and reach your target audience effectively with our data-driven SEO and digital marketing strategies. We help you climb search rankings and maximize ROI.',
     icon: <Search className="h-12 w-12 mb-4 text-primary" />,
     points: [
@@ -72,7 +73,7 @@ const servicesDetails: ServiceDetail[] = [
   { 
     name: 'WordPress Solutions', 
     description: 'We build robust and scalable websites using WordPress, tailored to your business needs, from blogs and portfolios to complex platforms and e-commerce stores with WooCommerce.',
-    icon: <ShoppingCart className="h-12 w-12 mb-4 text-primary" />,
+    icon: <Wrench className="h-12 w-12 mb-4 text-primary" />,
     points: [
       "Custom WordPress Theme Development",
       "Plugin Customization & Development",
@@ -185,6 +186,158 @@ const servicesDetails: ServiceDetail[] = [
       "Vendor & Client Master Management: KYC and contact details recording, Contract period tracking, Data validation and standardization"
     ],
     type: 'accounting'
+  },
+  {
+    name: 'Mobile App Development',
+    description: 'Custom apps that connect and convert.',
+    icon: <Smartphone className="h-12 w-12 mb-4 text-primary" />,
+    points: [
+      "Android & iOS native apps",
+      "Cross-platform solutions (Flutter, React Native)",
+      "API integration",
+      "App store deployment",
+      "UI/UX optimized for mobile"
+    ],
+    type: 'web_ai'
+  },
+  {
+    name: 'Web Development',
+    description: 'Websites that deliver speed, function, and results.',
+    icon: <Globe className="h-12 w-12 mb-4 text-primary" />,
+    points: [
+      "Custom business websites",
+      "E-commerce platforms (Shopify, WooCommerce, etc.)",
+      "Web portals and dashboards",
+      "Responsive design",
+      "CMS (WordPress, Joomla) solutions"
+    ],
+    type: 'web_ai'
+  },
+  {
+    name: 'AI Chatbots & Agents (MCP)',
+    description: 'Automate conversations and workflows with intelligence.',
+    icon: <Bot className="h-12 w-12 mb-4 text-primary" />,
+    points: [
+      "AI-powered website/live chat bots",
+      "WhatsApp & Messenger bots",
+      "AI customer support agents",
+      "MCP-based business assistants",
+      "CRM and lead generation bots"
+    ],
+    type: 'web_ai'
+  },
+  {
+    name: 'Cybersecurity Solutions',
+    description: 'Protect what matters — your data, users, and operations.',
+    icon: <ShieldCheck className="h-12 w-12 mb-4 text-primary" />,
+    points: [
+      "Website & server security",
+      "Penetration testing",
+      "Network & endpoint security",
+      "Data breach prevention",
+      "Compliance (GDPR, ISO) advisory"
+    ],
+    type: 'web_ai'
+  },
+  {
+    name: 'Database Management',
+    description: 'Reliable storage, faster access, cleaner control.',
+    icon: <Database className="h-12 w-12 mb-4 text-primary" />,
+    points: [
+      "SQL/NoSQL database setup",
+      "Backup & disaster recovery",
+      "Performance optimization",
+      "Cloud-based database solutions",
+      "Data migration services"
+    ],
+    type: 'web_ai'
+  },
+  {
+    name: 'Logo & Branding Design',
+    description: 'Make your identity unforgettable.',
+    icon: <Palette className="h-12 w-12 mb-4 text-primary" />,
+    points: [
+      "Logo creation",
+      "Business card & stationery design",
+      "Brand color palette & typography",
+      "Rebranding and redesign services"
+    ],
+    type: 'web_ai'
+  },
+  {
+    name: 'Graphic Designing',
+    description: 'Visuals that communicate, captivate, and convert.',
+    icon: <ImageIcon className="h-12 w-12 mb-4 text-primary" />,
+    points: [
+      "Social media creatives",
+      "Brochure & flyer design",
+      "Infographics",
+      "Poster/banner design",
+      "UI mockups & wireframes"
+    ],
+    type: 'web_ai'
+  },
+  {
+    name: 'Digital Card & Invitation Design',
+    description: 'Creative, clickable, and completely customizable.',
+    icon: <MailOpen className="h-12 w-12 mb-4 text-primary" />,
+    points: [
+      "Digital wedding cards",
+      "Business invitations",
+      "E-invites for events",
+      "QR code integration",
+      "Animated invitation cards"
+    ],
+    type: 'web_ai'
+  },
+  {
+    name: 'E-Commerce Development',
+    description: 'Comprehensive e-commerce solutions to sell online effectively.',
+    icon: <ShoppingCart className="h-12 w-12 mb-4 text-primary" />,
+    points: [
+      "Multi-vendor marketplace setup",
+      "Payment gateway integration",
+      "Order & inventory management",
+      "Customer account systems"
+    ],
+    type: 'web_ai'
+  },
+  {
+    name: 'Business Intelligence (BI) Tools',
+    description: 'Turn data into actionable insights with custom BI tools.',
+    icon: <BarChartBig className="h-12 w-12 mb-4 text-primary" />,
+    points: [
+      "Custom dashboard creation",
+      "Data analytics & visualization",
+      "Power BI / Tableau integration",
+      "Business forecasting models"
+    ],
+    type: 'web_ai'
+  },
+  {
+    name: 'Machine Learning & AI Solutions',
+    description: 'Leverage AI and ML to solve complex business challenges.',
+    icon: <BrainCircuit className="h-12 w-12 mb-4 text-primary" />,
+    points: [
+      "Predictive analytics",
+      "Image/text recognition models",
+      "Recommendation systems",
+      "Natural Language Processing (NLP) apps"
+    ],
+    type: 'web_ai'
+  },
+  {
+    name: 'SEO & Digital Marketing',
+    description: 'Boost your online presence and drive targeted traffic.',
+    icon: <SearchCode className="h-12 w-12 mb-4 text-primary" />,
+    points: [
+      "On-page and technical SEO",
+      "Google Ads / Meta Ads",
+      "Social media management",
+      "Email marketing campaigns",
+      "Analytics & reporting"
+    ],
+    type: 'web_ai'
   }
 ];
 
@@ -245,7 +398,7 @@ export default function ServicesPage() {
               </div>
 
             {filteredServices.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-8"> {/* Changed to 1 column for better readability of detailed cards */}
+              <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-8">
                 {filteredServices.map((service) => (
                   <Card key={service.name} className="flex flex-col md:flex-row overflow-hidden transition-transform hover:scale-[1.01] duration-300" data-interactive-cursor="true">
                     <div className="md:w-1/4 p-6 flex flex-col items-center justify-center bg-secondary/30 md:border-r border-card-foreground/10">
@@ -294,6 +447,3 @@ export default function ServicesPage() {
     </div>
   );
 }
-
-
-    
