@@ -7,109 +7,152 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
-import { Eye, GalleryThumbnails, Calculator, Laptop, Brain } from 'lucide-react';
+import { Eye, GalleryThumbnails, Calculator, Laptop } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 const portfolioItems = [
   {
-    id: 'project-genesis',
-    title: 'Project Genesis Rebrand',
-    category: 'Brand Identity',
-    type: 'webdev',
-    imageUrl: 'https://images.unsplash.com/photo-1597873618537-64a04f9e1fb3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxicmFuZGluZyUyMHBvcnRmb2xpb3xlbnwwfHx8fDE3NTAwNjM2Njh8MA&ixlib=rb-4.1.0&q=80&w=1080',
-    dataAiHint: 'branding portfolio',
-    description: 'A complete visual and strategic overhaul for a cutting-edge tech startup, positioning them as market leaders.',
-    tags: ['Branding', 'Logo Design', 'Strategy'],
-  },
-  {
-    id: 'e-commerce-nova',
-    title: 'E-commerce Nova Platform',
-    category: 'Websites',
-    type: 'webdev',
-    imageUrl: 'https://images.unsplash.com/photo-1559028012-481c04fa702d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHx3ZWJzaXRlJTIwZGVzaWdufGVufDB8fHx8MTc1MDA2MzY2OHww&ixlib=rb-4.1.0&q=80&w=1080',
-    dataAiHint: 'website design',
-    description: 'Developed a high-conversion e-commerce platform for a luxury fashion brand, focusing on user experience and scalability.',
-    tags: ['Web Development', 'Shopify', 'UI/UX'],
-  },
-  {
-    id: 'seo-summit',
-    title: 'SEO Summit Campaign',
-    category: 'SEO',
-    type: 'webdev',
-    imageUrl: 'https://images.unsplash.com/photo-1643894440616-59735a6db1ae?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxzZW8lMjByZXN1bHRzfGVufDB8fHx8MTc1MDA2MzY2OHww&ixlib=rb-4.1.0&q=80&w=1080',
-    dataAiHint: 'seo results',
-    description: 'Executed a comprehensive SEO strategy that significantly boosted organic traffic and search rankings for a B2B client.',
-    tags: ['SEO', 'Content Marketing', 'Analytics'],
-  },
-  {
-    id: 'craftcms-chronicle',
-    title: 'CraftCMS Chronicle Site',
-    category: 'Craft CMS',
+    id: 'divyasangrah-spiritual-marketplace',
+    title: 'DivyaSangrah Spiritual Marketplace',
+    category: 'E‑commerce · Spiritual Services',
     type: 'webdev',
     imageUrl: 'https://placehold.co/600x450.png',
-    dataAiHint: 'cms dashboard',
-    description: 'Built a flexible and powerful content publishing platform using Craft CMS for a media organization.',
-    tags: ['Craft CMS', 'Web Development', 'Content Strategy'],
+    dataAiHint: 'spiritual ecommerce',
+    description: 'An all-in-one online store offering puja items, astrology consultations, and religious service bookings. Crafted for spiritual ambience and performance.',
+    tags: ['Shopify', 'Religious E-commerce', 'Booking System'],
+    liveUrl: 'https://divyasangrah.com',
   },
   {
-    id: 'mobile-app-voyager',
-    title: 'Voyager Mobile App',
-    category: 'Mobile Apps',
+    id: 'itverbs-technology-solutions',
+    title: 'ITVerbs Technology Solutions',
+    category: 'Corporate IT Solutions',
     type: 'webdev',
     imageUrl: 'https://placehold.co/600x450.png',
-    dataAiHint: 'mobile app ui',
-    description: 'Designed and developed an intuitive travel planning mobile app for iOS and Android.',
-    tags: ['Mobile App', 'UI/UX', 'iOS', 'Android'],
+    dataAiHint: 'corporate it',
+    description: 'Corporate portal for AI solutions, cloud services, and development projects. Includes career hub, portfolio sections, and contact workflows.',
+    tags: ['IT Website', 'AI Services', 'Tech Branding'],
+    liveUrl: 'https://www.itverbstechnologysolutions.com',
   },
   {
-    id: 'shopify-bloom',
-    title: 'Bloom Shopify Store',
-    category: 'Shopify',
+    id: 'buztrix-traveltech',
+    title: 'BuzTrix TravelTech India Pvt. Ltd.',
+    category: 'Travel SaaS Platform',
     type: 'webdev',
     imageUrl: 'https://placehold.co/600x450.png',
-    dataAiHint: 'shopify store product',
-    description: 'Created a visually appealing and user-friendly Shopify store for a boutique flower shop, enhancing online sales.',
-    tags: ['Shopify', 'E-commerce', 'Web Design'],
+    dataAiHint: 'travel saas',
+    description: 'Developed for B2B travel operations. Offers hotel & flight APIs, lead tracking dashboards, and bulk booking systems.',
+    tags: ['API Integration', 'Travel CRM', 'Booking Portal'],
+    liveUrl: 'http://buztrixtraveltechindiapvtltd.com',
   },
   {
-    id: 'accounting-streamline',
-    title: 'Streamlined Financial Reporting',
-    category: 'Financial Systems',
-    type: 'accounting',
+    id: 'brista-travels',
+    title: 'Brista Travels Pvt. Ltd.',
+    category: 'Travel & Tours Website',
+    type: 'webdev',
     imageUrl: 'https://placehold.co/600x450.png',
-    dataAiHint: 'financial report chart',
-    description: 'Implemented a new accounting system for a mid-sized firm, improving reporting efficiency by 40%.',
-    tags: ['Accounting', 'Financial Systems', 'Reporting'],
+    dataAiHint: 'travel booking',
+    description: 'Travel booking site highlighting packages, destination guides, and lead forms with WhatsApp integration.',
+    tags: ['UX Design', 'Lead Funnels', 'Destination Portfolio'],
+    liveUrl: 'http://bristatravelspvtltd.com',
   },
   {
-    id: 'tax-optimizer-pro',
-    title: 'Tax Optimizer Pro Solution',
-    category: 'Tax Advisory',
-    type: 'accounting',
+    id: 'taskslate-productivity-tool',
+    title: 'TaskSlate Productivity Tool',
+    category: 'Productivity SaaS',
+    type: 'webdev',
     imageUrl: 'https://placehold.co/600x450.png',
-    dataAiHint: 'tax documents calculator',
-    description: 'Developed a custom tax optimization solution that saved a client 15% on their annual tax burden.',
-    tags: ['Tax', 'Financial Planning', 'Software'],
+    dataAiHint: 'saas productivity',
+    description: 'Multi-user task manager with role permissions, calendar views, and file sharing. Built for freelancers and small businesses.',
+    tags: ['Web App', 'Workflow SaaS', 'Productivity Tools'],
+    liveUrl: 'https://taskslate.in',
   },
   {
-    id: 'ai-content-gen',
-    title: 'AI Content Generator Tool',
-    category: 'AI Development',
-    type: 'ai',
+    id: 'parivartan-by-divyasangrah',
+    title: 'Parivartan by DivyaSangrah',
+    category: 'NGO · Community Portal',
+    type: 'webdev',
     imageUrl: 'https://placehold.co/600x450.png',
-    dataAiHint: 'ai robot writing',
-    description: 'Built a custom AI tool for generating marketing copy, increasing content output speed significantly.',
-    tags: ['AI', 'NLP', 'Content Creation', 'Genkit'],
+    dataAiHint: 'ngo community',
+    description: 'Platform for event listings, donations, and volunteer participation. Built for scalability and public involvement.',
+    tags: ['NGO Website', 'Donation Integration', 'Event Platform'],
+    liveUrl: 'https://parivartan.divyasangrah.com',
   },
   {
-    id: 'ai-seo-analyzer',
-    title: 'Advanced SEO Analyzer (AI)',
-    category: 'AI & SEO',
-    type: 'ai',
+    id: 'anandam-wellness-hub',
+    title: 'Anandam Wellness Hub',
+    category: 'Health & Spirituality',
+    type: 'webdev',
     imageUrl: 'https://placehold.co/600x450.png',
-    dataAiHint: 'ai brain analytics',
-    description: 'Developed an AI-powered SEO analysis tool providing deep insights and actionable recommendations.',
-    tags: ['AI', 'SEO', 'Analytics', 'Genkit'],
+    dataAiHint: 'wellness spiritual',
+    description: 'Wellness portal with articles, guided meditations, and subscription content. Calm UI with blog and member area.',
+    tags: ['CMS', 'Wellness UX', 'Blog Membership'],
+    liveUrl: 'https://anandam.divyasangrah.com',
+  },
+  {
+    id: 'divinepartners-consulting',
+    title: 'DivinePartners Consulting',
+    category: 'Corporate · Consulting',
+    type: 'webdev',
+    imageUrl: 'https://placehold.co/600x450.png',
+    dataAiHint: 'corporate consulting',
+    description: 'Clean and professional consultancy website. Features services, dynamic forms, and CRM integrations.',
+    tags: ['Corporate Design', 'Forms', 'Client Management'],
+    liveUrl: 'https://divinepartners.com',
+  },
+  {
+    id: 'venkwara-infotech',
+    title: 'Venkwara Infotech Pvt. Ltd.',
+    category: 'IT & Web Services',
+    type: 'webdev',
+    imageUrl: 'https://placehold.co/600x450.png',
+    dataAiHint: 'it services',
+    description: 'Technology-focused site showcasing development and infrastructure projects. Includes client portfolios and contact automation.',
+    tags: ['Enterprise Web', 'Tech Branding', 'DevOps'],
+    liveUrl: 'https://venkwarainfotechpvtltd.com',
+  },
+  {
+    id: 'talentgrowth-id',
+    title: 'TalentGrowth ID',
+    category: 'Career & HR Tech',
+    type: 'webdev',
+    imageUrl: 'https://placehold.co/600x450.png',
+    dataAiHint: 'hr tech',
+    description: 'Indonesia-based talent development platform. Personalized job matching, growth tracking, and candidate profiling system.',
+    tags: ['EdTech', 'Career Platform', 'Job Board'],
+    liveUrl: 'https://www.talentgrowth.id/',
+  },
+  {
+    id: 'nirogitanman-healthcare',
+    title: 'Nirogitanman Healthcare',
+    category: 'Health Portal · Ayurvedic Wellness',
+    type: 'webdev',
+    imageUrl: 'https://placehold.co/600x450.png',
+    dataAiHint: 'health ayurveda',
+    description: 'Online consultation portal with Ayurveda-based health products and doctor booking. Simple UI and multilingual support.',
+    tags: ['Healthcare UX', 'Booking Integration', 'Ayurvedic E‑commerce'],
+    liveUrl: 'https://nirogitanman.com/',
+  },
+  {
+    id: 'indialends',
+    title: 'IndiaLends',
+    category: 'Fintech · Loan Marketplace',
+    type: 'webdev',
+    imageUrl: 'https://placehold.co/600x450.png',
+    dataAiHint: 'fintech loan',
+    description: 'Smart credit platform offering personal loans, credit cards, and financial education. Built with API-backed services and real-time checks.',
+    tags: ['Fintech UX', 'API', 'Loan Application'],
+    liveUrl: 'https://www.indialends.com/',
+  },
+  {
+    id: 'aadideva-venture',
+    title: 'AadiDeva Venture',
+    category: 'Travel & Adventure · Tour Booking',
+    type: 'webdev',
+    imageUrl: 'https://placehold.co/600x450.png',
+    dataAiHint: 'adventure travel',
+    description: 'An adventure tourism platform offering curated trekking, cultural trips, and personalized travel experiences across India. Built to inspire explorers and manage bookings with ease.',
+    tags: ['Adventure Travel', 'Tour Portal', 'Booking Integration'],
+    liveUrl: '#', // Placeholder as no URL provided for this one
   }
 ];
 
@@ -153,17 +196,9 @@ export default function WorkPage() {
   const filteredProjects = portfolioItems.filter(item => {
     if (activeFilter === 'all') return true;
     if (activeFilter === 'accounting') return item.type === 'accounting';
-    if (activeFilter === 'web_ai') return item.type === 'webdev' || item.type === 'ai';
+    if (activeFilter === 'web_ai') return item.type === 'webdev' || item.type === 'ai'; // Adjusted to include 'ai' if that's a possible type
     return true;
   });
-
-  const getButtonIcon = (filterType: FilterType) => {
-    if (filterType === 'accounting') return <Calculator className="mr-2 h-5 w-5" />;
-    if (filterType === 'web_ai') return <Laptop className="mr-2 h-5 w-5" />;
-    if (filterType === 'all') return <GalleryThumbnails className="mr-2 h-5 w-5" />;
-    return null;
-  }
-
 
   return (
     <div className="bg-background text-foreground">
@@ -224,3 +259,5 @@ export default function WorkPage() {
     </div>
   );
 }
+
+    
