@@ -48,14 +48,14 @@ const servicesDetails: ServiceDetail[] = [
     type: 'web_ai'
   },
   { 
-    name: 'SEO Strategy', 
-    description: 'Boost your online visibility and reach your target audience effectively with our data-driven SEO and digital marketing strategies. We help you climb search rankings and maximize ROI.',
+    name: 'SEO Strategy (Web & AI Focus)', 
+    description: 'Boost your online visibility and reach your target audience effectively with our data-driven SEO and digital marketing strategies, integrated with web and AI solutions.',
     icon: <Search className="h-12 w-12 mb-4 text-primary" />,
     points: [
-      "Keyword Research & Analysis",
-      "On-Page & Off-Page SEO",
-      "Content Marketing Strategy",
-      "PPC Campaign Management"
+      "Technical SEO for Web Performance",
+      "AI-driven Content Optimization",
+      "Schema Markup & Structured Data",
+      "Voice Search Optimization"
     ],
     type: 'web_ai' 
   },
@@ -185,6 +185,34 @@ const servicesDetails: ServiceDetail[] = [
       "Inventory & Asset Accounting: Inventory tracking, Stock valuation, Asset depreciation reports",
       "Loan, EMI & Investment Monitoring: Loan schedules, Interest accounting, Investment yield tracking",
       "Vendor & Client Master Management: KYC and contact details recording, Contract period tracking, Data validation and standardization"
+    ],
+    type: 'accounting'
+  },
+  {
+    name: 'EPFO Services for Company Members',
+    description: 'Simplified compliance and support for all employees regarding EPF.',
+    icon: <ShieldCheck className="h-12 w-12 mb-4 text-primary" />,
+    points: [
+      "EPF account registration for employees",
+      "Monthly ECR preparation & upload",
+      "UAN generation & activation",
+      "PF withdrawal support (online & offline)",
+      "KYC update & linking services",
+      "Employee transfer & exit formalities",
+      "Liaison with EPFO officers for issue resolution"
+    ],
+    type: 'accounting'
+  },
+  {
+    name: 'Payroll & HR Services',
+    description: 'Comprehensive payroll processing and HR-related statutory compliance.',
+    icon: <FileText className="h-12 w-12 mb-4 text-primary" />,
+    points: [
+      "Employee payroll processing",
+      "Salary structure management",
+      "Payslip & Form 16 generation",
+      "Statutory deductions (PF, ESI, TDS)",
+      "Attendance, leave & bonus tracking"
     ],
     type: 'accounting'
   },
@@ -328,19 +356,6 @@ const servicesDetails: ServiceDetail[] = [
     type: 'web_ai'
   },
   {
-    name: 'Search Engine Optimization (Digital Marketing)',
-    description: 'Increase visibility and drive long-term traffic. (Included in Digital Marketing Offerings)',
-    icon: <SearchCode className="h-12 w-12 mb-4 text-primary" />,
-    points: [
-      "Keyword research & competitor analysis",
-      "On-page SEO (titles, meta, URLs)",
-      "Technical SEO (speed, mobile, indexing)",
-      "Off-page SEO (backlinks, citations)",
-      "Local SEO for maps & listings"
-    ],
-    type: 'digital_marketing' 
-  },
-  {
     name: 'Pay-Per-Click (PPC) Advertising',
     description: 'Drive targeted traffic and instant conversions with strategic ad campaigns.',
     icon: <MousePointerClick className="h-12 w-12 mb-4 text-primary" />,
@@ -465,6 +480,19 @@ const servicesDetails: ServiceDetail[] = [
       "Video SEO & keyword targeting"
     ],
     type: 'digital_marketing'
+  },
+   {
+    name: 'Search Engine Optimization (SEO)',
+    description: 'Increase visibility and drive long-term traffic through strategic SEO.',
+    icon: <SearchCode className="h-12 w-12 mb-4 text-primary" />,
+    points: [
+      "Keyword research & competitor analysis",
+      "On-page SEO (titles, meta, URLs)",
+      "Technical SEO (speed, mobile, indexing)",
+      "Off-page SEO (backlinks, citations)",
+      "Local SEO for maps & listings"
+    ],
+    type: 'digital_marketing' 
   },
   {
     name: 'Marketplace Optimization',
