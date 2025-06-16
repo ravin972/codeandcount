@@ -1,10 +1,14 @@
 
+"use client";
+
+import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Eye, GalleryThumbnails, Calculator, Laptop, Brain } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 const portfolioItems = [
   {
@@ -12,8 +16,8 @@ const portfolioItems = [
     title: 'Project Genesis Rebrand',
     category: 'Brand Identity',
     type: 'webdev',
-    imageUrl: 'https://placehold.co/600x450.png',
-    dataAiHint: 'modern branding',
+    imageUrl: 'https://images.unsplash.com/photo-1597873618537-64a04f9e1fb3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxicmFuZGluZyUyMHBvcnRmb2xpb3xlbnwwfHx8fDE3NTAwNjM2Njh8MA&ixlib=rb-4.1.0&q=80&w=1080',
+    dataAiHint: 'branding portfolio',
     description: 'A complete visual and strategic overhaul for a cutting-edge tech startup, positioning them as market leaders.',
     tags: ['Branding', 'Logo Design', 'Strategy'],
   },
@@ -22,8 +26,8 @@ const portfolioItems = [
     title: 'E-commerce Nova Platform',
     category: 'Websites',
     type: 'webdev',
-    imageUrl: 'https://placehold.co/600x450.png',
-    dataAiHint: 'ecommerce website',
+    imageUrl: 'https://images.unsplash.com/photo-1559028012-481c04fa702d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHx3ZWJzaXRlJTIwZGVzaWdufGVufDB8fHx8MTc1MDA2MzY2OHww&ixlib=rb-4.1.0&q=80&w=1080',
+    dataAiHint: 'website design',
     description: 'Developed a high-conversion e-commerce platform for a luxury fashion brand, focusing on user experience and scalability.',
     tags: ['Web Development', 'Shopify', 'UI/UX'],
   },
@@ -32,8 +36,8 @@ const portfolioItems = [
     title: 'SEO Summit Campaign',
     category: 'SEO',
     type: 'webdev',
-    imageUrl: 'https://placehold.co/600x450.png',
-    dataAiHint: 'seo analytics',
+    imageUrl: 'https://images.unsplash.com/photo-1643894440616-59735a6db1ae?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxzZW8lMjByZXN1bHRzfGVufDB8fHx8MTc1MDA2MzY2OHww&ixlib=rb-4.1.0&q=80&w=1080',
+    dataAiHint: 'seo results',
     description: 'Executed a comprehensive SEO strategy that significantly boosted organic traffic and search rankings for a B2B client.',
     tags: ['SEO', 'Content Marketing', 'Analytics'],
   },
@@ -109,42 +113,56 @@ const portfolioItems = [
   }
 ];
 
-export default function WorkPage() {
-  const accountingProjects = portfolioItems.filter(item => item.type === 'accounting');
-  const webDevProjects = portfolioItems.filter(item => item.type === 'webdev');
-  const aiProjects = portfolioItems.filter(item => item.type === 'ai');
+type FilterType = 'all' | 'accounting' | 'web_ai';
 
-  const ProjectCard = ({ item }: { item: typeof portfolioItems[0] }) => (
-    <Card key={item.id} className="overflow-hidden flex flex-col group hover:-translate-y-1" data-interactive-cursor="true">
-      <div className="relative overflow-hidden">
-        <Image 
-          src={item.imageUrl} 
-          alt={item.title} 
-          width={600} 
-          height={450} 
-          className="w-full h-72 object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
-          data-ai-hint={item.dataAiHint} 
-        />
+const ProjectCard = ({ item }: { item: typeof portfolioItems[0] }) => (
+  <Card key={item.id} className="overflow-hidden flex flex-col group hover:-translate-y-1" data-interactive-cursor="true">
+    <div className="relative overflow-hidden">
+      <Image 
+        src={item.imageUrl} 
+        alt={item.title} 
+        width={600} 
+        height={450} 
+        className="w-full h-72 object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
+        data-ai-hint={item.dataAiHint} 
+      />
+    </div>
+    <CardHeader>
+      <CardTitle className="text-2xl font-semibold group-hover:text-primary transition-colors">{item.title}</CardTitle>
+      <CardDescription>{item.category}</CardDescription>
+    </CardHeader>
+    <CardContent className="flex-grow">
+      <p className="text-muted-foreground mb-4 line-clamp-3">{item.description}</p>
+      <div className="flex flex-wrap gap-2">
+        {item.tags.map(tag => <Badge key={tag} variant="secondary">{tag}</Badge>)}
       </div>
-      <CardHeader>
-        <CardTitle className="text-2xl font-semibold group-hover:text-primary transition-colors">{item.title}</CardTitle>
-        <CardDescription>{item.category}</CardDescription>
-      </CardHeader>
-      <CardContent className="flex-grow">
-        <p className="text-muted-foreground mb-4 line-clamp-3">{item.description}</p>
-        <div className="flex flex-wrap gap-2">
-          {item.tags.map(tag => <Badge key={tag} variant="secondary">{tag}</Badge>)}
-        </div>
-      </CardContent>
-      <CardFooter>
-        <Button variant="outline" asChild className="w-full">
-          <Link href={`/work/${item.id}`}>
-            View Project Details <Eye className="ml-2 h-4 w-4" />
-          </Link>
-        </Button>
-      </CardFooter>
-    </Card>
-  );
+    </CardContent>
+    <CardFooter>
+      <Button variant="outline" asChild className="w-full">
+        <Link href={`/work/${item.id}`}>
+          View Project Details <Eye className="ml-2 h-4 w-4" />
+        </Link>
+      </Button>
+    </CardFooter>
+  </Card>
+);
+
+export default function WorkPage() {
+  const [activeFilter, setActiveFilter] = useState<FilterType>('all');
+
+  const filteredProjects = portfolioItems.filter(item => {
+    if (activeFilter === 'all') return true;
+    if (activeFilter === 'accounting') return item.type === 'accounting';
+    if (activeFilter === 'web_ai') return item.type === 'webdev' || item.type === 'ai';
+    return true;
+  });
+
+  const getButtonIcon = (filterType: FilterType) => {
+    if (filterType === 'accounting') return <Calculator className="mr-2 h-5 w-5" />;
+    if (filterType === 'web_ai') return <Laptop className="mr-2 h-5 w-5" />;
+    return null;
+  }
+
 
   return (
     <div className="bg-background text-foreground">
@@ -164,44 +182,41 @@ export default function WorkPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-background/70 dark:bg-neutral-900/70 backdrop-blur-lg rounded-xl shadow-xl p-8 md:p-12 border border-white/10 dark:border-neutral-700/30">
             
-            {accountingProjects.length > 0 && (
-              <div className="mb-16">
-                <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-10 flex items-center">
-                  <Calculator className="h-10 w-10 mr-4 text-primary" />
-                  Accounting & Financial Solutions
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {accountingProjects.map((item) => <ProjectCard key={item.id} item={item} />)}
-                </div>
-              </div>
-            )}
-
-            {webDevProjects.length > 0 && (
-              <div className="mb-16">
-                <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-10 flex items-center">
-                  <Laptop className="h-10 w-10 mr-4 text-primary" />
-                  Web Development & Digital Solutions
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {webDevProjects.map((item) => <ProjectCard key={item.id} item={item} />)}
-                </div>
-              </div>
-            )}
+            <div className="mb-12 flex flex-wrap justify-center items-center gap-3 sm:gap-4">
+              <Button 
+                onClick={() => setActiveFilter('all')} 
+                variant={activeFilter === 'all' ? 'default' : 'outline'}
+                size="lg"
+                className="rounded-full text-base"
+              >
+                All Projects
+              </Button>
+              <Button 
+                onClick={() => setActiveFilter('accounting')} 
+                variant={activeFilter === 'accounting' ? 'default' : 'outline'}
+                size="lg"
+                className="rounded-full text-base"
+              >
+                <Calculator className="mr-2 h-5 w-5" />
+                Account Management
+              </Button>
+              <Button 
+                onClick={() => setActiveFilter('web_ai')} 
+                variant={activeFilter === 'web_ai' ? 'default' : 'outline'}
+                size="lg"
+                className="rounded-full text-base"
+              >
+                 <Laptop className="mr-2 h-5 w-5" />
+                Websites & AI Solutions
+              </Button>
+            </div>
             
-            {aiProjects.length > 0 && (
-              <div> {/* No mb-16 for the last section if it's rendered */}
-                <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-10 flex items-center">
-                  <Brain className="h-10 w-10 mr-4 text-primary" />
-                  AI-Powered Tools & Innovations
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                  {aiProjects.map((item) => <ProjectCard key={item.id} item={item} />)}
-                </div>
+            {filteredProjects.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {filteredProjects.map((item) => <ProjectCard key={item.id} item={item} />)}
               </div>
-            )}
-            
-            {accountingProjects.length === 0 && webDevProjects.length === 0 && aiProjects.length === 0 && (
-               <p className="text-center text-muted-foreground text-xl py-10">More projects coming soon. Check back later!</p>
+            ) : (
+               <p className="text-center text-muted-foreground text-xl py-10">No projects found in this category. Check back later or select another category!</p>
             )}
 
           </div>
