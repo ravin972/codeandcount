@@ -25,11 +25,11 @@ const services = [
 ];
 
 const clientLogos = [
-  { name: 'Client Alpha', src: 'https://placehold.co/150x60.png', dataAiHint: 'logo abstract' },
-  { name: 'Client Beta', src: 'https://placehold.co/150x60.png', dataAiHint: 'logo geometric' },
-  { name: 'Client Gamma', src: 'https://placehold.co/150x60.png', dataAiHint: 'logo modern' },
-  { name: 'Client Delta', src: 'https://placehold.co/150x60.png', dataAiHint: 'logo minimalist' },
-  { name: 'Client Epsilon', src: 'https://placehold.co/150x60.png', dataAiHint: 'logo corporate' },
+  { name: 'Client Alpha', src: 'https://images.unsplash.com/photo-1615935319449-e3287a4bbf4f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8bG9nbyUyMGFic3RyYWN0fGVufDB8fHx8MTc1MDA2MzY2OHww&ixlib=rb-4.1.0&q=80&w=1080', dataAiHint: 'logo abstract' },
+  { name: 'Client Beta', src: 'https://images.unsplash.com/photo-1640342538716-286e4e27e104?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxsb2dvJTIwZ2VvbWV0cmljfGVufDB8fHx8MTc1MDA2MzY2OHww&ixlib=rb-4.1.0&q=80&w=1080', dataAiHint: 'logo geometric' },
+  { name: 'Client Gamma', src: 'https://images.unsplash.com/photo-1693374925575-ac8fa3ffab14?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxsb2dvJTIwbW9kZXJufGVufDB8fHx8MTc1MDA2MzY2OHww&ixlib=rb-4.1.0&q=80&w=1080', dataAiHint: 'logo modern' },
+  { name: 'Client Delta', src: 'https://images.unsplash.com/photo-1618242556516-6858a8f34cb0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxsb2dvJTIwbWluaW1hbGlzdHxlbnwwfHx8fDE3NTAwNjM2Njh8MA&ixlib=rb-4.1.0&q=80&w=1080', dataAiHint: 'logo minimalist' },
+  { name: 'Client Epsilon', src: 'https://images.unsplash.com/photo-1554774853-d50f9c681ae2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxsb2dvJTIwY29ycG9yYXRlfGVufDB8fHx8MTc1MDA2MzY2OHww&ixlib=rb-4.1.0&q=80&w=1080', dataAiHint: 'logo corporate' },
 ];
 
 const caseStudies = [
@@ -37,7 +37,7 @@ const caseStudies = [
     id: 'project-genesis',
     title: 'Project Genesis Rebrand',
     category: 'Brand Identity',
-    imageUrl: 'https://placehold.co/600x400.png',
+    imageUrl: 'https://images.unsplash.com/photo-1597873618537-64a04f9e1fb3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxicmFuZGluZyUyMHBvcnRmb2xpb3xlbnwwfHx8fDE3NTAwNjM2Njh8MA&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHint: 'branding portfolio',
     description: 'A complete overhaul of a tech startup\'s brand identity, resulting in a 200% increase in recognition.',
   },
@@ -45,7 +45,7 @@ const caseStudies = [
     id: 'e-commerce-nova',
     title: 'E-commerce Nova Platform',
     category: 'Websites',
-    imageUrl: 'https://placehold.co/600x400.png',
+    imageUrl: 'https://images.unsplash.com/photo-1559028012-481c04fa702d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHx3ZWJzaXRlJTIwZGVzaWdufGVufDB8fHx8MTc1MDA2MzY2OHww&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHint: 'website design',
     description: 'Launched a scalable e-commerce platform for a fashion retailer, boosting sales by 150%.',
   },
@@ -53,7 +53,7 @@ const caseStudies = [
     id: 'seo-summit',
     title: 'SEO Summit Campaign',
     category: 'SEO',
-    imageUrl: 'https://placehold.co/600x400.png',
+    imageUrl: 'https://images.unsplash.com/photo-1643894440616-59735a6db1ae?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxzZW8lMjByZXN1bHRzfGVufDB8fHx8MTc1MDA2MzY2OHww&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHint: 'seo results',
     description: 'Elevated a local business to the top of search rankings for competitive keywords.',
   },
@@ -63,7 +63,7 @@ const testimonials = [
   {
     name: 'Jane Doe',
     title: 'CEO, Alpha Corp',
-    avatar: 'https://placehold.co/100x100.png',
+    avatar: 'https://images.unsplash.com/photo-1540569014015-19a7be504e3a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxwZXJzb24lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NTAwMzk3NTV8MA&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHint: 'person portrait',
     quote: "CodeAndCount.com transformed our online presence. Their team is professional, creative, and delivered outstanding results. We couldn't be happier!",
     videoUrl: 'https://vimeo.com/placeholder',
@@ -71,7 +71,7 @@ const testimonials = [
   {
     name: 'John Smith',
     title: 'Founder, Beta Solutions',
-    avatar: 'https://placehold.co/100x100.png',
+    avatar: 'https://images.unsplash.com/photo-1639747280804-dd2d6b3d88ac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxtYW4lMjBzbWlsaW5nfGVufDB8fHx8MTc1MDA2MzY2OHww&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHint: 'man smiling',
     quote: 'Working with CodeAndCount.com was a game-changer. Their insights into branding and web development are unparalleled. Highly recommended!',
     videoUrl: 'https://vimeo.com/placeholder',
@@ -88,6 +88,7 @@ const homepageBlogPosts = [
     category: 'Web Design',
     date: '2024-07-15',
     author: 'Alex Chen',
+    dataAiHintImage: 'futuristic design',
   },
   {
     slug: 'unlocking-seo-success-a-comprehensive-guide',
@@ -98,6 +99,7 @@ const homepageBlogPosts = [
     category: 'SEO',
     date: '2024-07-01',
     author: 'Sam Lee',
+    dataAiHintImage: 'seo chart graph',
   },
   {
     slug: 'why-craft-cms-is-our-go-to-for-flexible-websites',
@@ -108,11 +110,12 @@ const homepageBlogPosts = [
     category: 'Craft CMS',
     date: '2024-06-20',
     author: 'Maria Rodriguez',
+    dataAiHintImage: 'cms interface',
   },
   {
     slug: 'ai-in-digital-marketing-the-new-frontier',
     title: 'AI in Digital Marketing: The New Frontier',
-    imageUrl: 'https://placehold.co/600x400.png', dataAiHint: 'artificial intelligence marketing',
+    imageUrl: 'https://placehold.co/600x400.png', dataAiHintImage: 'artificial intelligence marketing',
     excerpt: 'How AI is revolutionizing digital marketing strategies, from content creation to customer analytics.',
     readTime: '8 min read',
     category: 'Digital Marketing',
@@ -122,7 +125,7 @@ const homepageBlogPosts = [
   {
     slug: 'the-importance-of-user-experience-ux-in-web-design',
     title: 'The Importance of User Experience (UX) in Web Design',
-    imageUrl: 'https://placehold.co/600x400.png', dataAiHint: 'user experience interface',
+    imageUrl: 'https://placehold.co/600x400.png', dataAiHintImage: 'user experience interface',
     excerpt: 'A deep dive into why UX is paramount for website success and how to optimize it for your users.',
     readTime: '7 min read',
     category: 'Web Design',
@@ -132,7 +135,7 @@ const homepageBlogPosts = [
   {
     slug: 'wordpress-vs-headless-cms-which-is-right-for-you',
     title: 'WordPress vs. Headless CMS: Which is Right for You?',
-    imageUrl: 'https://placehold.co/600x400.png', dataAiHint: 'cms comparison chart',
+    imageUrl: 'https://placehold.co/600x400.png', dataAiHintImage: 'cms comparison chart',
     excerpt: 'Comparing traditional WordPress with modern headless CMS solutions to help you choose the best fit.',
     readTime: '9 min read',
     category: 'CMS',
@@ -171,7 +174,6 @@ export default function HomePage() {
         const marginRight = parseFloat(style.marginRight || '0');
         const marginLeft = parseFloat(style.marginLeft || '0');
         
-        // Use offsetWidth which includes borders and padding
         const calculatedWidth = cardElement.offsetWidth + marginRight + marginLeft;
 
         if (calculatedWidth > 0) {
@@ -191,9 +193,8 @@ export default function HomePage() {
       animationFrameId = requestAnimationFrame(runCalculation);
     };
     
-    // Defer initial calculation slightly
     animationFrameId = requestAnimationFrame(() => {
-      requestAnimationFrame(runCalculation); // Double RAF for good measure
+      requestAnimationFrame(runCalculation); 
     });
     
     if (container) {
@@ -236,7 +237,7 @@ export default function HomePage() {
           className="absolute bottom-[-5rem] right-[-10rem] w-[25rem] h-[25rem] md:w-[35rem] md:h-[35rem] bg-gradient-to-tl from-accent/20 to-primary/10 dark:from-accent/10 dark:to-primary/5 rounded-full opacity-50 blur-3xl -z-10"
         />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-         <div className="relative bg-background/50 dark:bg-neutral-900/50 backdrop-blur-xl rounded-3xl border border-white/10 dark:border-neutral-700/30 shadow-2xl p-8 md:p-12 lg:p-16">
+         <div className="relative bg-background/70 dark:bg-neutral-900/70 backdrop-blur-xl rounded-3xl border border-white/10 dark:border-neutral-700/30 shadow-2xl p-8 md:p-12 lg:p-16">
             <div className="mb-6">
               <div className="relative inline-grid place-items-center [transform-style:preserve-3d] [perspective:1000px]">
                 <div
@@ -477,7 +478,6 @@ export default function HomePage() {
                     className="block flex-shrink-0 w-[80vw] sm:w-[calc(50%-0.75rem)] md:w-[calc(33.333%-1rem)] group" 
                   >
                      <div ref={index === 0 ? cardRef : null} className="h-full">
-                      {/* Card component will inherit glassmorphism from ui/card.tsx */}
                       <Card className="h-full flex flex-col" data-interactive-cursor="true">
                         <Image
                           src={post.imageUrl}
@@ -485,7 +485,7 @@ export default function HomePage() {
                           width={600}
                           height={400}
                           className="w-full h-48 object-cover rounded-t-lg transition-transform duration-300 ease-in-out group-hover:scale-105"
-                          data-ai-hint={post.imageUrl.includes('placehold.co') ? post.dataAiHintImage : undefined}
+                          data-ai-hint={post.dataAiHintImage}
                         />
                         <CardContent className="p-4 flex-grow flex flex-col">
                           <p className="text-xs text-neutral-400 mb-1 flex items-center">
@@ -513,3 +513,4 @@ export default function HomePage() {
     </div>
   );
 }
+
