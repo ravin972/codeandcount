@@ -23,11 +23,9 @@ const footerSections = {
     title: "Learn",
     links: [
       { text: "About", href: "/about" },
-      { text: "Culture", href: "/placeholder-learn/culture" },
       { text: "Testimonials", href: "/placeholder-learn/testimonials" },
       { text: "Processes", href: "/placeholder-learn/processes" },
       { text: "FAQs", href: "/faq" },
-      { text: "Branding FAQs", href: "/placeholder-learn/branding-faqs" },
       { text: "Blog", href: "/blog" },
     ]
   },
@@ -37,8 +35,6 @@ const footerSections = {
       { text: "Home", href: "/" },
       { text: "Work", href: "/work", new: true },
       { text: "Services", href: "/services" },
-      { text: "Careers", href: "/placeholder-explore/careers" },
-      { text: "Sectors", href: "/placeholder-explore/sectors" },
       { text: "Hex Test", href: "/hex-test", new: true },
       { text: "Contact", href: "/contact" },
     ]
@@ -202,7 +198,7 @@ export function Footer() {
           <div className="border-t border-neutral-700 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-neutral-400">
             <div className="flex items-center space-x-2 mb-4 md:mb-0">
               <Link href="/" className="text-2xl font-bold text-white hover:opacity-80 transition-opacity">
-                C<span className="text-primary">2</span>
+                Code<span className="text-primary">&amp;</span>Count
               </Link>
               <span>&copy; CodeAndCount.com {currentYear}</span>
             </div>
