@@ -59,9 +59,9 @@ const CustomCursor: React.FC = () => {
         yPercent: -50, 
         opacity: 0, 
         scale: 1,
-        backgroundColor: primaryColorForFill, // Use resolved color
-        borderWidth: '0px', // Explicitly set initial border width
-        borderColor: 'transparent' // Explicitly set initial border color
+        backgroundColor: primaryColorForFill, 
+        borderWidth: '0px', 
+        borderColor: 'transparent' 
       });
 
       let firstMove = true;
@@ -88,10 +88,10 @@ const CustomCursor: React.FC = () => {
         const target = e.target as HTMLElement;
         if (target.closest('a, button, [role="button"], [data-interactive-cursor="true"]')) {
           gsap.to(cursorRef.current, {
-            scale: 2.8,
+            scale: 2.5, // Slightly reduced scale for better visual balance with thicker border
             backgroundColor: 'transparent',
-            borderWidth: '0.2px',
-            borderColor: '#ffffff', // White border on hover
+            borderWidth: '2px', // More prominent border
+            borderColor: primaryColorForFill, // Use theme's primary color for border
             duration: 0.3,
             ease: 'power2.out'
           });
@@ -138,7 +138,7 @@ const CustomCursor: React.FC = () => {
         gsap.to(cursorRef.current, { opacity: 0, scale: 0, duration: 0.2 });
       }
     };
-  }, [isMounted, isMobile, primaryColorForFill]); // primaryColorForFill ensures effect re-runs if color changes post-initialization
+  }, [isMounted, isMobile, primaryColorForFill]);
 
 
   if (!isMounted || isMobile === undefined || isMobile === true) {
@@ -149,8 +149,7 @@ const CustomCursor: React.FC = () => {
     <div
       ref={cursorRef}
       className={cn(
-        "fixed w-3 h-3 rounded-full pointer-events-none z-[9999]",
-        "border" 
+        "fixed w-4 h-4 rounded-full pointer-events-none z-[9999]" // Increased size from w-3 h-3
       )}
       style={{ opacity: 0 }} // Initial opacity set by style, then controlled by GSAP
     />
