@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ArrowLeft, ExternalLink, CheckCircle } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
+import { Card } from '@/components/ui/card'; // Import Card for consistency
 
 // Mock data - in a real app, this would come from a CMS or database
 const portfolioItems = [
@@ -45,20 +46,22 @@ export default function ProjectDetailPage({ params }: { params: { projectId: str
   if (!project) {
     return (
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
-        <h1 className="text-4xl font-bold">Project Not Found</h1>
-        <p className="mt-4 text-muted-foreground">The project you are looking for does not exist.</p>
-        <Button asChild className="mt-8">
-          <Link href="/work">
-            <ArrowLeft className="mr-2 h-4 w-4" /> Back to Portfolio
-          </Link>
-        </Button>
+        <div className="bg-background/70 dark:bg-neutral-900/70 backdrop-blur-lg rounded-xl shadow-xl p-8 md:p-12 border border-white/10 dark:border-neutral-700/30">
+          <h1 className="text-4xl font-bold">Project Not Found</h1>
+          <p className="mt-4 text-muted-foreground">The project you are looking for does not exist.</p>
+          <Button asChild className="mt-8">
+            <Link href="/work">
+              <ArrowLeft className="mr-2 h-4 w-4" /> Back to Portfolio
+            </Link>
+          </Button>
+        </div>
       </div>
     );
   }
 
   return (
     <div className="bg-background text-foreground">
-      <header className="py-12 bg-secondary">
+      <header className="py-12 bg-secondary/70 dark:bg-secondary/70 backdrop-blur-lg border-b border-white/10 dark:border-neutral-700/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <Button variant="outline" asChild className="mb-8">
             <Link href="/work">
@@ -75,7 +78,7 @@ export default function ProjectDetailPage({ params }: { params: { projectId: str
 
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
         <div className="grid lg:grid-cols-3 gap-12">
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-2 bg-background/70 dark:bg-neutral-900/70 backdrop-blur-lg rounded-xl shadow-xl p-6 md:p-8 border border-white/10 dark:border-neutral-700/30">
             <Image 
               src={project.imageUrl} 
               alt={project.title} 
@@ -113,7 +116,7 @@ export default function ProjectDetailPage({ params }: { params: { projectId: str
           </div>
 
           <aside className="lg:col-span-1 space-y-8">
-            <div className="p-6 border rounded-lg shadow-sm bg-card">
+            <Card className="p-6"> {/* Using Card component for glassmorphism */}
               <h3 className="text-xl font-semibold mb-4 text-card-foreground">Project Details</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li><strong>Client:</strong> {project.client}</li>
@@ -127,9 +130,9 @@ export default function ProjectDetailPage({ params }: { params: { projectId: str
                   </a>
                 </Button>
               )}
-            </div>
+            </Card>
 
-            <div className="p-6 border rounded-lg shadow-sm bg-card">
+            <Card className="p-6"> {/* Using Card component for glassmorphism */}
               <h3 className="text-xl font-semibold mb-4 text-card-foreground">Services Provided</h3>
               <ul className="space-y-2 text-sm">
                 {project.servicesProvided.map(service => (
@@ -139,15 +142,15 @@ export default function ProjectDetailPage({ params }: { params: { projectId: str
                   </li>
                 ))}
               </ul>
-            </div>
+            </Card>
 
             {project.results && (
-                 <div className="p-6 border rounded-lg shadow-sm bg-card">
+                 <Card className="p-6"> {/* Using Card component for glassmorphism */}
                     <h3 className="text-xl font-semibold mb-4 text-card-foreground">Key Results</h3>
                     <div className="prose prose-sm text-muted-foreground">
                         <p>{project.results}</p>
                     </div>
-                </div>
+                </Card>
             )}
           </aside>
         </div>
@@ -155,4 +158,3 @@ export default function ProjectDetailPage({ params }: { params: { projectId: str
     </div>
   );
 }
-

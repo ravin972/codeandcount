@@ -66,7 +66,7 @@ const portfolioItems = [
 export default function WorkPage() {
   return (
     <div className="bg-background text-foreground">
-      <header className="py-16 md:py-24 text-center bg-secondary">
+      <header className="py-16 md:py-24 text-center bg-secondary/70 dark:bg-secondary/70 backdrop-blur-lg border-b border-white/10 dark:border-neutral-700/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-4 flex items-center justify-center">
             <GalleryThumbnails className="h-12 w-12 mr-4 text-primary" />
@@ -80,38 +80,40 @@ export default function WorkPage() {
 
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {portfolioItems.map((item) => (
-              <Card key={item.id} className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out flex flex-col group hover:-translate-y-1" data-interactive-cursor="true">
-                <div className="relative overflow-hidden">
-                  <Image 
-                    src={item.imageUrl} 
-                    alt={item.title} 
-                    width={600} 
-                    height={450} 
-                    className="w-full h-72 object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
-                    data-ai-hint={item.dataAiHint} 
-                  />
-                </div>
-                <CardHeader>
-                  <CardTitle className="text-2xl font-semibold group-hover:text-primary transition-colors">{item.title}</CardTitle>
-                  <CardDescription>{item.category}</CardDescription>
-                </CardHeader>
-                <CardContent className="flex-grow">
-                  <p className="text-muted-foreground mb-4">{item.description}</p>
-                  <div className="flex flex-wrap gap-2">
-                    {item.tags.map(tag => <Badge key={tag} variant="secondary">{tag}</Badge>)}
+          <div className="bg-background/70 dark:bg-neutral-900/70 backdrop-blur-lg rounded-xl shadow-xl p-8 md:p-12 border border-white/10 dark:border-neutral-700/30">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {portfolioItems.map((item) => (
+                <Card key={item.id} className="overflow-hidden flex flex-col group hover:-translate-y-1" data-interactive-cursor="true">
+                  <div className="relative overflow-hidden">
+                    <Image 
+                      src={item.imageUrl} 
+                      alt={item.title} 
+                      width={600} 
+                      height={450} 
+                      className="w-full h-72 object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
+                      data-ai-hint={item.dataAiHint} 
+                    />
                   </div>
-                </CardContent>
-                <CardFooter>
-                  <Button variant="outline" asChild className="w-full">
-                    <Link href={`/work/${item.id}`}>
-                      View Project Details <Eye className="ml-2 h-4 w-4" />
-                    </Link>
-                  </Button>
-                </CardFooter>
-              </Card>
-            ))}
+                  <CardHeader>
+                    <CardTitle className="text-2xl font-semibold group-hover:text-primary transition-colors">{item.title}</CardTitle>
+                    <CardDescription>{item.category}</CardDescription>
+                  </CardHeader>
+                  <CardContent className="flex-grow">
+                    <p className="text-muted-foreground mb-4">{item.description}</p>
+                    <div className="flex flex-wrap gap-2">
+                      {item.tags.map(tag => <Badge key={tag} variant="secondary">{tag}</Badge>)}
+                    </div>
+                  </CardContent>
+                  <CardFooter>
+                    <Button variant="outline" asChild className="w-full">
+                      <Link href={`/work/${item.id}`}>
+                        View Project Details <Eye className="ml-2 h-4 w-4" />
+                      </Link>
+                    </Button>
+                  </CardFooter>
+                </Card>
+              ))}
+            </div>
           </div>
         </div>
       </section>

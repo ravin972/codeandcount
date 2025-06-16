@@ -8,7 +8,7 @@ export default function ContactPage() {
 
   return (
     <div className="bg-background text-foreground">
-      <header className="py-16 md:py-24 text-center bg-secondary">
+      <header className="py-16 md:py-24 text-center bg-secondary/70 dark:bg-secondary/70 backdrop-blur-lg border-b border-white/10 dark:border-neutral-700/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-4 flex items-center justify-center">
             <MailQuestion className="h-12 w-12 mr-4 text-primary" />
@@ -22,7 +22,7 @@ export default function ContactPage() {
 
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-12">
+          <div className="grid md:grid-cols-2 gap-12 bg-background/70 dark:bg-neutral-900/70 backdrop-blur-lg rounded-xl shadow-xl p-8 md:p-12 border border-white/10 dark:border-neutral-700/30">
             {/* Contact Form Section */}
             <div id="start-project">
               <h2 className="text-3xl font-bold mb-6">Send Us a Message</h2>
@@ -76,7 +76,7 @@ export default function ContactPage() {
               </div>
               
               {/* Embedded Map */}
-              <div className="mt-10 aspect-video rounded-lg shadow-md overflow-hidden">
+              <div className="mt-10 aspect-video rounded-lg shadow-md overflow-hidden border border-white/10 dark:border-neutral-700/30">
                  <iframe
                     src={mapEmbedUrl}
                     width="100%"

@@ -72,7 +72,7 @@ export function Footer() {
 
   return (
     <>
-      <footer className="bg-neutral-900 text-neutral-300 pt-16 md:pt-24 pb-8 relative">
+      <footer className="bg-neutral-900/80 backdrop-blur-md border-t border-neutral-700/50 text-neutral-300 pt-16 md:pt-24 pb-8 relative">
         {/* Social Media Bar - Absolute Positioned */}
         <div
           className={cn(

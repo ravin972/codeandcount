@@ -186,16 +186,19 @@ export default function HexTestPage() {
   return (
     <div className="bg-background text-foreground min-h-screen py-8 flex flex-col items-center">
       <header className="text-center mb-8 md:mb-12 w-full max-w-3xl px-4">
-        <h1 className="text-4xl md:text-5xl font-bold tracking-tight flex items-center justify-center">
-          <Eye className="h-10 w-10 mr-3 text-primary" />
-          HEX TEST
-        </h1>
-        <p className="text-lg text-muted-foreground mt-2">Test your colour vision</p>
+        <div className="bg-secondary/70 dark:bg-secondary/70 backdrop-blur-lg rounded-xl shadow-xl p-6 md:p-8 border border-white/10 dark:border-neutral-700/30">
+          <h1 className="text-4xl md:text-5xl font-bold tracking-tight flex items-center justify-center">
+            <Eye className="h-10 w-10 mr-3 text-primary" />
+            HEX TEST
+          </h1>
+          <p className="text-lg text-muted-foreground mt-2">Test your colour vision</p>
+        </div>
       </header>
 
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-md w-full">
         {!gameStarted || isGameOver ? (
-          <Card className="shadow-xl text-center" data-interactive-cursor="true">
+          // Card will inherit glassmorphism style
+          <Card className="text-center" data-interactive-cursor="true">
             <CardHeader>
               <CardTitle className="text-3xl">
                 {gameStarted && isGameOver ? <AlertTriangle className="inline h-8 w-8 mr-2 text-destructive" /> : <Gamepad2 className="inline h-8 w-8 mr-2 text-primary" />} 
@@ -213,7 +216,7 @@ export default function HexTestPage() {
               )}
               
               {(gameStarted && isGameOver && (revealCorrectHex || revealChosenHex)) && (
-                <div className="mt-4 text-sm text-left mx-auto max-w-xs p-3 bg-muted/50 rounded-md">
+                <div className="mt-4 text-sm text-left mx-auto max-w-xs p-3 bg-muted/70 backdrop-blur-sm rounded-md">
                   {revealCorrectHex && (
                     <p className="flex items-center justify-between">
                       <span>Correct:</span>
@@ -243,7 +246,8 @@ export default function HexTestPage() {
             </CardContent>
           </Card>
         ) : (
-          <Card className="shadow-xl" data-interactive-cursor="true">
+           // Card will inherit glassmorphism style
+          <Card data-interactive-cursor="true">
             <CardHeader className="p-4">
               <div className="flex justify-between items-center gap-4 mb-3">
                 <span className="text-sm font-semibold text-muted-foreground">LEVEL {level}</span>
@@ -253,9 +257,9 @@ export default function HexTestPage() {
                {message && (
                 <div className={cn(
                   "mt-3 p-2 rounded-md text-center text-xs font-semibold h-8 flex items-center justify-center", 
-                  message.type === 'success' && "bg-green-500/20 text-green-700 dark:text-green-300",
-                  message.type === 'error' && "bg-red-500/20 text-red-700 dark:text-red-300",
-                  message.type === 'info' && "bg-blue-500/20 text-blue-700 dark:text-blue-300"
+                  message.type === 'success' && "bg-green-500/30 backdrop-blur-sm text-green-700 dark:text-green-300",
+                  message.type === 'error' && "bg-red-500/30 backdrop-blur-sm text-red-700 dark:text-red-300",
+                  message.type === 'info' && "bg-blue-500/30 backdrop-blur-sm text-blue-700 dark:text-blue-300"
                 )}>
                   {message.text}
                 </div>
@@ -271,7 +275,7 @@ export default function HexTestPage() {
                   <div
                     key={index}
                     onClick={() => handleCardClick(index)}
-                    className="flex items-center justify-center cursor-pointer transition-all duration-150 ease-in-out hover:opacity-70 rounded-md"
+                    className="flex items-center justify-center cursor-pointer transition-all duration-150 ease-in-out hover:opacity-70 rounded-md border border-white/5 dark:border-black/10"
                     style={{
                       width: '100%', 
                       paddingBottom: '100%', 

@@ -20,7 +20,7 @@ const values = [
 export default function AboutPage() {
   return (
     <div className="bg-background text-foreground">
-      <header className="py-16 md:py-24 text-center bg-secondary">
+      <header className="py-16 md:py-24 text-center bg-secondary/70 dark:bg-secondary/70 backdrop-blur-lg border-b border-white/10 dark:border-neutral-700/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-4 flex items-center justify-center">
             <Info className="h-12 w-12 mr-4 text-primary" />
@@ -35,31 +35,33 @@ export default function AboutPage() {
       {/* Our Story Section */}
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">Our Story</h2>
-              <p className="text-lg text-muted-foreground mb-4">
-                Founded with a vision to merge creativity with technology, CodeAndCount.com has grown into a leading digital firm. We believe that great design and smart strategy are key to unlocking business potential. Our journey is one of continuous learning, innovation, and a relentless pursuit of excellence.
-              </p>
-              <p className="text-lg text-muted-foreground">
-                We partner with businesses of all sizes, from ambitious startups to established enterprises, helping them navigate the digital landscape and achieve their goals. Our personal approach ensures we understand your unique challenges and aspirations, delivering tailored solutions that make a real impact.
-              </p>
-            </div>
-            <div>
-              <Image 
-                src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600&h=400&fit=crop&q=80"
-                alt="Modern workspace with a laptop displaying a vibrant screen" 
-                width={600} 
-                height={400} 
-                className="rounded-lg shadow-xl transition-transform duration-300 ease-in-out hover:scale-105"
-              />
+          <div className="bg-background/70 dark:bg-neutral-900/70 backdrop-blur-lg rounded-xl shadow-xl p-8 md:p-12 border border-white/10 dark:border-neutral-700/30">
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              <div>
+                <h2 className="text-3xl md:text-4xl font-bold mb-6">Our Story</h2>
+                <p className="text-lg text-muted-foreground mb-4">
+                  Founded with a vision to merge creativity with technology, CodeAndCount.com has grown into a leading digital firm. We believe that great design and smart strategy are key to unlocking business potential. Our journey is one of continuous learning, innovation, and a relentless pursuit of excellence.
+                </p>
+                <p className="text-lg text-muted-foreground">
+                  We partner with businesses of all sizes, from ambitious startups to established enterprises, helping them navigate the digital landscape and achieve their goals. Our personal approach ensures we understand your unique challenges and aspirations, delivering tailored solutions that make a real impact.
+                </p>
+              </div>
+              <div>
+                <Image 
+                  src="https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=600&h=400&fit=crop&q=80"
+                  alt="Modern workspace with a laptop displaying a vibrant screen" 
+                  width={600} 
+                  height={400} 
+                  className="rounded-lg shadow-xl transition-transform duration-300 ease-in-out hover:scale-105"
+                />
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Our Values Section */}
-      <section className="py-16 md:py-24 bg-secondary">
+      <section className="py-16 md:py-24 bg-secondary/70 dark:bg-secondary/70 backdrop-blur-lg border-y border-white/10 dark:border-neutral-700/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Our Core Values</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -83,19 +85,21 @@ export default function AboutPage() {
       {/* Meet The Team Section */}
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Meet Our Experts</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {teamMembers.map((member) => (
-              <Card key={member.name} className="text-center shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out p-6 hover:-translate-y-1" data-interactive-cursor="true">
-                <Avatar className="w-24 h-24 mx-auto mb-4 border-4 border-primary transform transition-transform duration-300 ease-in-out hover:scale-110">
-                  <AvatarImage src={member.avatarSrc} alt={member.name} data-ai-hint={member.dataAiHint} />
-                  <AvatarFallback>{member.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
-                </Avatar>
-                <h3 className="text-xl font-semibold text-foreground">{member.name}</h3>
-                <p className="text-primary font-medium">{member.role}</p>
-                <p className="text-sm text-muted-foreground mt-2">{member.bio}</p>
-              </Card>
-            ))}
+          <div className="bg-background/70 dark:bg-neutral-900/70 backdrop-blur-lg rounded-xl shadow-xl p-8 md:p-12 border border-white/10 dark:border-neutral-700/30">
+            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Meet Our Experts</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {teamMembers.map((member) => (
+                <Card key={member.name} className="text-center shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out p-6 hover:-translate-y-1" data-interactive-cursor="true">
+                  <Avatar className="w-24 h-24 mx-auto mb-4 border-4 border-primary transform transition-transform duration-300 ease-in-out hover:scale-110">
+                    <AvatarImage src={member.avatarSrc} alt={member.name} data-ai-hint={member.dataAiHint} />
+                    <AvatarFallback>{member.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
+                  </Avatar>
+                  <h3 className="text-xl font-semibold text-foreground">{member.name}</h3>
+                  <p className="text-primary font-medium">{member.role}</p>
+                  <p className="text-sm text-muted-foreground mt-2">{member.bio}</p>
+                </Card>
+              ))}
+            </div>
           </div>
         </div>
       </section>

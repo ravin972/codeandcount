@@ -266,7 +266,7 @@ export default function BlogPage() {
 
   return (
     <div className="bg-background text-foreground">
-      <header className="py-16 md:py-24 text-center bg-secondary">
+      <header className="py-16 md:py-24 text-center bg-secondary/70 dark:bg-secondary/70 backdrop-blur-lg border-b border-white/10 dark:border-neutral-700/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-4">
             <h1 className="text-5xl md:text-6xl font-bold tracking-tight flex items-center justify-center">
@@ -330,56 +330,57 @@ export default function BlogPage() {
 
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {posts.map((post) => (
-              <Card key={post.slug} className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out flex flex-col group hover:-translate-y-1" data-interactive-cursor="true">
-                <Link href={`/blog/${post.slug}`} className="block">
-                  <Image 
-                    src={post.imageUrl} 
-                    alt={post.title} 
-                    width={600} 
-                    height={400} 
-                    className="w-full h-64 object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
-                    data-ai-hint={post.dataAiHintImage}
-                  />
-                </Link>
-                <CardHeader>
-                  <div className="flex items-center justify-between text-xs text-muted-foreground mb-2">
-                    <Badge variant="outline" className="w-fit">{post.category}</Badge>
-                    <span className="flex items-center">
-                       <Clock3 className="h-3.5 w-3.5 mr-1" /> {post.readTime}
-                    </span>
-                  </div>
+           <div className="bg-background/70 dark:bg-neutral-900/70 backdrop-blur-lg rounded-xl shadow-xl p-8 md:p-12 border border-white/10 dark:border-neutral-700/30">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {posts.map((post) => (
+                <Card key={post.slug} className="overflow-hidden flex flex-col group hover:-translate-y-1" data-interactive-cursor="true">
                   <Link href={`/blog/${post.slug}`} className="block">
-                    <CardTitle className="text-2xl font-semibold leading-tight group-hover:text-primary transition-colors">{post.title}</CardTitle>
+                    <Image 
+                      src={post.imageUrl} 
+                      alt={post.title} 
+                      width={600} 
+                      height={400} 
+                      className="w-full h-64 object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
+                      data-ai-hint={post.dataAiHintImage}
+                    />
                   </Link>
-                </CardHeader>
-                <CardContent className="flex-grow">
-                  <p className="text-muted-foreground line-clamp-3">{post.excerpt}</p>
-                </CardContent>
-                <CardFooter className="flex flex-col items-start space-y-4">
-                  <div className="flex items-center text-sm text-muted-foreground">
-                    <Avatar className="h-8 w-8 mr-2">
-                      <AvatarImage src={post.authorAvatar} alt={post.author} data-ai-hint={post.dataAiHintAuthor} />
-                      <AvatarFallback>{post.author.split(' ').map(n=>n[0]).join('')}</AvatarFallback>
-                    </Avatar>
-                    <span>By {post.author}</span>
-                    <Dot className="h-4 w-4 mx-1 opacity-50" />
-                    <CalendarDays className="h-4 w-4 mr-1" />
-                    <time dateTime={post.date}>{new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
-                  </div>
-                  <Button variant="link" asChild className="p-0 h-auto text-sm">
-                    <Link href={`/blog/${post.slug}`}>
-                      Read More <ArrowRight className="ml-1 h-4 w-4" />
+                  <CardHeader>
+                    <div className="flex items-center justify-between text-xs text-muted-foreground mb-2">
+                      <Badge variant="outline" className="w-fit">{post.category}</Badge>
+                      <span className="flex items-center">
+                         <Clock3 className="h-3.5 w-3.5 mr-1" /> {post.readTime}
+                      </span>
+                    </div>
+                    <Link href={`/blog/${post.slug}`} className="block">
+                      <CardTitle className="text-2xl font-semibold leading-tight group-hover:text-primary transition-colors">{post.title}</CardTitle>
                     </Link>
-                  </Button>
-                </CardFooter>
-              </Card>
-            ))}
+                  </CardHeader>
+                  <CardContent className="flex-grow">
+                    <p className="text-muted-foreground line-clamp-3">{post.excerpt}</p>
+                  </CardContent>
+                  <CardFooter className="flex flex-col items-start space-y-4">
+                    <div className="flex items-center text-sm text-muted-foreground">
+                      <Avatar className="h-8 w-8 mr-2">
+                        <AvatarImage src={post.authorAvatar} alt={post.author} data-ai-hint={post.dataAiHintAuthor} />
+                        <AvatarFallback>{post.author.split(' ').map(n=>n[0]).join('')}</AvatarFallback>
+                      </Avatar>
+                      <span>By {post.author}</span>
+                      <Dot className="h-4 w-4 mx-1 opacity-50" />
+                      <CalendarDays className="h-4 w-4 mr-1" />
+                      <time dateTime={post.date}>{new Date(post.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</time>
+                    </div>
+                    <Button variant="link" asChild className="p-0 h-auto text-sm">
+                      <Link href={`/blog/${post.slug}`}>
+                        Read More <ArrowRight className="ml-1 h-4 w-4" />
+                      </Link>
+                    </Button>
+                  </CardFooter>
+                </Card>
+              ))}
+            </div>
           </div>
         </div>
       </section>
     </div>
   );
 }
-

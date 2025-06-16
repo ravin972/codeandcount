@@ -236,7 +236,7 @@ export default function HomePage() {
           className="absolute bottom-[-5rem] right-[-10rem] w-[25rem] h-[25rem] md:w-[35rem] md:h-[35rem] bg-gradient-to-tl from-accent/20 to-primary/10 dark:from-accent/10 dark:to-primary/5 rounded-full opacity-50 blur-3xl -z-10"
         />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-         <div className="relative bg-background/30 dark:bg-neutral-900/30 backdrop-blur-xl rounded-3xl border border-white/10 dark:border-neutral-700/50 shadow-2xl p-8 md:p-12 lg:p-16">
+         <div className="relative bg-background/50 dark:bg-neutral-900/50 backdrop-blur-xl rounded-3xl border border-white/10 dark:border-neutral-700/30 shadow-2xl p-8 md:p-12 lg:p-16">
             <div className="mb-6">
               <div className="relative inline-grid place-items-center [transform-style:preserve-3d] [perspective:1000px]">
                 <div
@@ -264,7 +264,7 @@ export default function HomePage() {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-16 bg-secondary">
+      <section id="services" className="py-16 bg-secondary/70 dark:bg-secondary/70 backdrop-blur-lg border-y border-white/10 dark:border-neutral-700/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative inline-grid place-items-center [transform-style:preserve-3d] [perspective:1000px] w-full text-center mb-4">
             <h2 className="col-start-1 row-start-1 relative z-[1] text-4xl md:text-5xl font-bold text-center">Our Core Services</h2>
@@ -291,19 +291,21 @@ export default function HomePage() {
       {/* Client Logos Section */}
       <section id="trusted-by-leaders" className="py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-10">Trusted by Industry Leaders</h2>
-          <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
-            {clientLogos.map((logo) => (
-              <div key={logo.name} title={logo.name} className="opacity-70 hover:opacity-100 transition-opacity duration-300 ease-in-out transform hover:scale-105">
-                <Image src={logo.src} alt={logo.name} width={150} height={60} data-ai-hint={logo.dataAiHint} />
-              </div>
-            ))}
+          <div className="bg-background/70 dark:bg-neutral-900/70 backdrop-blur-lg rounded-xl shadow-xl p-8 md:p-12 border border-white/10 dark:border-neutral-700/30">
+            <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-10">Trusted by Industry Leaders</h2>
+            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
+              {clientLogos.map((logo) => (
+                <div key={logo.name} title={logo.name} className="opacity-70 hover:opacity-100 transition-opacity duration-300 ease-in-out transform hover:scale-105">
+                  <Image src={logo.src} alt={logo.name} width={150} height={60} data-ai-hint={logo.dataAiHint} />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* Case Studies Section */}
-      <section id="work" className="py-16 bg-secondary">
+      <section id="work" className="py-16 bg-secondary/70 dark:bg-secondary/70 backdrop-blur-lg border-y border-white/10 dark:border-neutral-700/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative inline-grid place-items-center [transform-style:preserve-3d] [perspective:1000px] w-full text-center mb-4">
             <div
@@ -351,41 +353,43 @@ export default function HomePage() {
       {/* Testimonials Section */}
       <section id="testimonials" className="py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-center mb-4">What Our Clients Say</h2>
-          <p className="text-xl md:text-2xl text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
-            Real stories from satisfied partners.
-          </p>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {testimonials.map((testimonial) => (
-              <Card key={testimonial.name} className="shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out hover:-translate-y-1" data-interactive-cursor="true">
-                <CardContent className="pt-6">
-                  <div className="flex items-start space-x-4 mb-4">
-                    <Avatar className="h-16 w-16">
-                      <AvatarImage src={testimonial.avatar} alt={testimonial.name} data-ai-hint={testimonial.dataAiHint} />
-                      <AvatarFallback>{testimonial.name.substring(0,2)}</AvatarFallback>
-                    </Avatar>
-                    <div>
-                      <h4 className="text-lg font-semibold text-foreground">{testimonial.name}</h4>
-                      <p className="text-sm text-muted-foreground">{testimonial.title}</p>
+          <div className="bg-background/70 dark:bg-neutral-900/70 backdrop-blur-lg rounded-xl shadow-xl p-8 md:p-12 border border-white/10 dark:border-neutral-700/30">
+            <h2 className="text-4xl font-bold text-center mb-4">What Our Clients Say</h2>
+            <p className="text-xl md:text-2xl text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
+              Real stories from satisfied partners.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {testimonials.map((testimonial) => (
+                <Card key={testimonial.name} className="shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out hover:-translate-y-1" data-interactive-cursor="true">
+                  <CardContent className="pt-6">
+                    <div className="flex items-start space-x-4 mb-4">
+                      <Avatar className="h-16 w-16">
+                        <AvatarImage src={testimonial.avatar} alt={testimonial.name} data-ai-hint={testimonial.dataAiHint} />
+                        <AvatarFallback>{testimonial.name.substring(0,2)}</AvatarFallback>
+                      </Avatar>
+                      <div>
+                        <h4 className="text-lg font-semibold text-foreground">{testimonial.name}</h4>
+                        <p className="text-sm text-muted-foreground">{testimonial.title}</p>
+                      </div>
                     </div>
-                  </div>
-                  <blockquote className="text-foreground italic border-l-4 border-primary pl-4 py-2">
-                    "{testimonial.quote}"
-                  </blockquote>
-                  <div className="mt-4">
-                    <div className="aspect-video bg-muted rounded-md flex items-center justify-center">
-                      <p className="text-muted-foreground">Vimeo Video Placeholder (View on <a href={testimonial.videoUrl} target="_blank" rel="noopener noreferrer" className="text-primary underline">Vimeo</a>)</p>
+                    <blockquote className="text-foreground italic border-l-4 border-primary pl-4 py-2">
+                      "{testimonial.quote}"
+                    </blockquote>
+                    <div className="mt-4">
+                      <div className="aspect-video bg-muted/80 backdrop-blur-sm rounded-md flex items-center justify-center">
+                        <p className="text-muted-foreground">Vimeo Video Placeholder (View on <a href={testimonial.videoUrl} target="_blank" rel="noopener noreferrer" className="text-primary underline">Vimeo</a>)</p>
+                      </div>
                     </div>
-                  </div>
-                </CardContent>
-              </Card>
-            ))}
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* SEO Optimizer Tool Section */}
-      <section id="seo-tool" className="py-16 md:py-20 bg-foreground text-background dark:bg-secondary dark:text-secondary-foreground">
+      <section id="seo-tool" className="py-16 md:py-20 bg-foreground/80 dark:bg-secondary/80 backdrop-blur-lg text-background dark:text-secondary-foreground border-y border-white/10 dark:border-neutral-700/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <Sparkles className="h-12 w-12 text-primary mx-auto mb-6" />
           <div className="relative inline-grid place-items-center [transform-style:preserve-3d] [perspective:1000px] w-full text-center mb-6">
@@ -410,7 +414,7 @@ export default function HomePage() {
       </section>
 
       {/* Ready to Elevate Section */}
-      <section className="py-20 bg-primary text-primary-foreground">
+      <section className="py-20 bg-primary/80 backdrop-blur-lg text-primary-foreground border-y border-primary/30 dark:border-primary/50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Elevate Your Brand?</h2>
           <p className="text-lg md:text-xl max-w-2xl mx-auto mb-10">
@@ -428,7 +432,7 @@ export default function HomePage() {
       <InfiniteScrollerWithMouseFollower />
       
       {/* Blog Section */}
-      <section className="py-16 md:py-24 bg-neutral-900 text-neutral-100">
+      <section className="py-16 md:py-24 bg-neutral-900/80 backdrop-blur-lg text-neutral-100 border-y border-neutral-700/50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-3 gap-12 items-center">
             <div className="md:col-span-1 space-y-6">
@@ -453,11 +457,11 @@ export default function HomePage() {
                   </Link>
                 </Button>
                 <div className="flex space-x-3">
-                  <Button variant="outline" size="icon" onClick={() => handleScroll('left')} disabled={!canScrollLeft || itemWidth === 0} className="bg-neutral-800 border-neutral-700 hover:bg-neutral-700 disabled:opacity-50 rounded-full">
+                  <Button variant="outline" size="icon" onClick={() => handleScroll('left')} disabled={!canScrollLeft || itemWidth === 0} className="bg-neutral-800/80 border-neutral-700 hover:bg-neutral-700/80 disabled:opacity-50 rounded-full">
                     <ChevronLeft className="h-5 w-5" />
                     <span className="sr-only">Scroll Left</span>
                   </Button>
-                  <Button variant="outline" size="icon" onClick={() => handleScroll('right')} disabled={!canScrollRight || itemWidth === 0} className="bg-neutral-800 border-neutral-700 hover:bg-neutral-700 disabled:opacity-50 rounded-full">
+                  <Button variant="outline" size="icon" onClick={() => handleScroll('right')} disabled={!canScrollRight || itemWidth === 0} className="bg-neutral-800/80 border-neutral-700 hover:bg-neutral-700/80 disabled:opacity-50 rounded-full">
                     <ChevronRight className="h-5 w-5" />
                     <span className="sr-only">Scroll Right</span>
                   </Button>
@@ -473,7 +477,8 @@ export default function HomePage() {
                     className="block flex-shrink-0 w-[80vw] sm:w-[calc(50%-0.75rem)] md:w-[calc(33.333%-1rem)] group" 
                   >
                      <div ref={index === 0 ? cardRef : null} className="h-full">
-                      <Card className="bg-neutral-800 border-neutral-700 hover:border-primary/50 transition-all duration-300 ease-in-out transform hover:-translate-y-1 h-full flex flex-col" data-interactive-cursor="true">
+                      {/* Card component will inherit glassmorphism from ui/card.tsx */}
+                      <Card className="h-full flex flex-col" data-interactive-cursor="true">
                         <Image
                           src={post.imageUrl}
                           alt={post.title}
@@ -508,7 +513,3 @@ export default function HomePage() {
     </div>
   );
 }
-
-    
-
-

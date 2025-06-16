@@ -50,7 +50,7 @@ const servicesDetails = [
   { 
     name: 'WordPress Solutions', 
     description: 'We build robust and scalable websites using WordPress, tailored to your business needs, from blogs and portfolios to complex platforms and e-commerce stores with WooCommerce.',
-    icon: <ShoppingCart className="h-12 w-12 mb-4 text-primary" />,
+    icon: <ShoppingCart className="h-12 w-12 mb-4 text-primary" />, // Replaced Wrench with ShoppingCart as Wrench used in header
     points: [
       "Custom WordPress Theme Development",
       "Plugin Customization & Development",
@@ -74,7 +74,7 @@ const servicesDetails = [
 export default function ServicesPage() {
   return (
     <div className="bg-background text-foreground">
-      <header className="py-16 md:py-24 text-center">
+      <header className="py-16 md:py-24 text-center bg-secondary/70 dark:bg-secondary/70 backdrop-blur-lg border-b border-white/10 dark:border-neutral-700/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-4 flex items-center justify-center">
             <Wrench className="h-12 w-12 mr-4 text-primary" />
@@ -90,8 +90,8 @@ export default function ServicesPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-8">
             {servicesDetails.map((service) => (
-              <Card key={service.name} className="bg-card text-card-foreground shadow-xl flex flex-col md:flex-row overflow-hidden transition-transform hover:scale-[1.02] duration-300" data-interactive-cursor="true">
-                <div className="md:w-1/3 p-6 flex flex-col items-center justify-center bg-secondary/30 md:border-r border-border">
+              <Card key={service.name} className="flex flex-col md:flex-row overflow-hidden transition-transform hover:scale-[1.02] duration-300" data-interactive-cursor="true">
+                <div className="md:w-1/3 p-6 flex flex-col items-center justify-center bg-secondary/30 md:border-r border-card-foreground/10">
                   {service.icon}
                   <CardTitle className="text-2xl font-semibold text-center">{service.name}</CardTitle>
                 </div>

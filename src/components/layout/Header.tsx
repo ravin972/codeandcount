@@ -47,7 +47,7 @@ export function Header() {
     >
       <div
         className={cn(
-          "flex items-center justify-between rounded-full shadow-xl backdrop-blur-lg bg-background/60 transition-all duration-300 ease-in-out",
+          "flex items-center justify-between rounded-full shadow-xl backdrop-blur-lg bg-background/70 dark:bg-neutral-900/70 border border-white/10 dark:border-neutral-700/30 transition-all duration-300 ease-in-out",
           "w-full", 
           isCondensed
             ? "h-14 px-3 py-1 sm:px-4 md:w-1/2 md:mx-auto" 
@@ -121,7 +121,7 @@ export function Header() {
                 <span className="sr-only">Open menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-full max-w-xs bg-background p-6">
+            <SheetContent side="right" className="w-full max-w-xs p-6">
               <SheetHeader>
                 <SheetTitle className="sr-only">Main Menu</SheetTitle>
               </SheetHeader>
@@ -166,4 +166,3 @@ export function Header() {
     </header>
   );
 }
-

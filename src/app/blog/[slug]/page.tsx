@@ -240,20 +240,22 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
   if (!post) {
     return (
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
-        <h1 className="text-4xl font-bold">Post Not Found</h1>
-        <p className="mt-4 text-muted-foreground">The blog post you are looking for does not exist.</p>
-        <Button asChild className="mt-8">
-          <Link href="/blog">
-            <ArrowLeft className="mr-2 h-4 w-4" /> Back to Blog
-          </Link>
-        </Button>
+        <div className="bg-background/70 dark:bg-neutral-900/70 backdrop-blur-lg rounded-xl shadow-xl p-8 md:p-12 border border-white/10 dark:border-neutral-700/30">
+          <h1 className="text-4xl font-bold">Post Not Found</h1>
+          <p className="mt-4 text-muted-foreground">The blog post you are looking for does not exist.</p>
+          <Button asChild className="mt-8">
+            <Link href="/blog">
+              <ArrowLeft className="mr-2 h-4 w-4" /> Back to Blog
+            </Link>
+          </Button>
+        </div>
       </div>
     );
   }
 
   return (
     <div className="bg-background text-foreground">
-      <header className="py-12 bg-secondary">
+      <header className="py-12 bg-secondary/70 dark:bg-secondary/70 backdrop-blur-lg border-b border-white/10 dark:border-neutral-700/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <Button variant="outline" asChild className="mb-8">
             <Link href="/blog">
@@ -286,7 +288,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
       </header>
       
       <article className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
-        <div className="max-w-3xl mx-auto">
+        <div className="max-w-3xl mx-auto bg-background/70 dark:bg-neutral-900/70 backdrop-blur-lg rounded-xl shadow-xl p-6 md:p-8 border border-white/10 dark:border-neutral-700/30">
           <Image 
             src={post.imageUrl} 
             alt={post.title} 
