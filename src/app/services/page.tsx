@@ -3,11 +3,26 @@
 
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { CheckCircle, Palette, Laptop, Search, Puzzle, ShoppingCart, Calculator, Wrench, GalleryThumbnails } from "lucide-react";
+import { CheckCircle, Palette, Laptop, Search, Puzzle, ShoppingCart, Calculator, Wrench, GalleryThumbnails, Brain } from "lucide-react";
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
-const servicesDetails = [
+interface DetailedPoint {
+  emoji: string;
+  title: string;
+  details: string[];
+}
+
+interface ServiceDetail {
+  name: string;
+  description: string;
+  icon: JSX.Element;
+  points: string[] | DetailedPoint[];
+  type: 'web_ai' | 'accounting';
+}
+
+
+const servicesDetails: ServiceDetail[] = [
   { 
     name: 'Brand Identity', 
     description: 'We craft compelling brand narratives and visual identities that capture attention and build lasting connections. From logo design to comprehensive brand guidelines, we define your unique voice.',
@@ -59,7 +74,7 @@ const servicesDetails = [
   { 
     name: 'WordPress Solutions', 
     description: 'We build robust and scalable websites using WordPress, tailored to your business needs, from blogs and portfolios to complex platforms and e-commerce stores with WooCommerce.',
-    icon: <ShoppingCart className="h-12 w-12 mb-4 text-primary" />,
+    icon: <ShoppingCart className="h-12 w-12 mb-4 text-primary" />, // Changed from Wrench to ShoppingCart as per previous context, Wrench might be better. Let's assume ShoppingCart is intentional.
     points: [
       "Custom WordPress Theme Development",
       "Plugin Customization & Development",
@@ -70,13 +85,99 @@ const servicesDetails = [
   },
   {
     name: 'Accounting',
-    description: 'Our expert accounting services ensure your finances are managed with precision, providing clarity and supporting your business growth with robust financial strategies.',
+    description: 'Comprehensive accounting solutions tailored to your business needs, covering a wide range of services to ensure financial health and compliance:',
     icon: <Calculator className="h-12 w-12 mb-4 text-primary" />,
     points: [
-      "Bookkeeping & Financial Reporting",
-      "Tax Planning & Preparation",
-      "Payroll Services",
-      "Financial Consulting & Analysis"
+      { 
+        emoji: '📄', 
+        title: 'Financial Reporting & Analysis', 
+        details: [
+          "Monthly & quarterly financial reports",
+          "Cash flow statements",
+          "Budget vs. actual analysis",
+          "Profit & loss summaries",
+          "Balance sheet preparation"
+        ] 
+      },
+      { 
+        emoji: '💰', 
+        title: 'Accounts Payable & Receivable', 
+        details: [
+          "Vendor invoice processing",
+          "Payment scheduling & approvals",
+          "Receivables tracking & aging reports",
+          "Credit control support",
+          "Client & vendor account reconciliation"
+        ] 
+      },
+      { 
+        emoji: '👨‍💼', 
+        title: 'Payroll Processing', 
+        details: [
+          "Employee salary calculations",
+          "Payslip generation",
+          "Statutory deductions (PF, ESI, TDS)",
+          "Bonus, leave, and overtime handling",
+          "Salary structuring & compliance"
+        ] 
+      },
+      { 
+        emoji: '🧾', 
+        title: 'Tax Preparation & Support', 
+        details: [
+          "GST/VAT filings & records",
+          "Income tax computation support",
+          "TDS return assistance",
+          "Advance tax calculation",
+          "Liaison with tax professionals"
+        ] 
+      },
+      { 
+        emoji: '📈', 
+        title: 'Custom Dashboards & Reports', 
+        details: [
+          "Real-time financial dashboards",
+          "KPI and performance tracking",
+          "Budget and cost reports",
+          "Google Sheets / Excel dashboard setup",
+          "Custom MIS reports"
+        ] 
+      },
+      { 
+        emoji: '📚', 
+        title: 'Compliance & Audit Support', 
+        details: [
+          "Internal & external audit coordination",
+          "Statutory reports & registers",
+          "Financial document verification",
+          "MCA, ROC, and SEBI compliance",
+          "Year-end financial closing support"
+        ] 
+      },
+      { 
+        emoji: '✍️', 
+        title: 'Data Entry & Bookkeeping Services', 
+        details: [
+          "Your data, perfectly organized.",
+          "Daily transaction entry",
+          "Voucher creation and classification",
+          "Ledger maintenance (sales, purchase, cash, bank)",
+          "Bank statement and expense entries",
+          "Manual to digital data conversion",
+          "Bills and receipts recording"
+        ] 
+      },
+      { 
+        emoji: '🧩', 
+        title: 'Additional Business-Critical Services', 
+        details: [
+          "🔹 Petty Cash Management: Cash log maintenance, Expense voucher handling, Daily reconciliation",
+          "🔹 Banking & Reconciliation: Bank statement reconciliation, Online banking operations, Cheque/NEFT/UPI records",
+          "🔹 Inventory & Asset Accounting: Inventory tracking, Stock valuation, Asset depreciation reports",
+          "🔹 Loan, EMI & Investment Monitoring: Loan schedules, Interest accounting, Investment yield tracking",
+          "🔹 Vendor & Client Master Management: KYC and contact details recording, Contract period tracking, Data validation and standardization"
+        ]
+      }
     ],
     type: 'accounting'
   },
@@ -149,12 +250,26 @@ export default function ServicesPage() {
                     <div className="md:w-2/3 p-6">
                       <CardContent className="pt-0">
                         <p className="text-muted-foreground mb-6">{service.description}</p>
-                        <ul className="space-y-2">
+                        <ul className="space-y-4">
                           {service.points.map((point, index) => (
-                            <li key={index} className="flex items-center">
-                              <CheckCircle className="h-5 w-5 text-primary mr-2 flex-shrink-0" />
-                              <span>{point}</span>
-                            </li>
+                            typeof point === 'string' ? (
+                              <li key={`${service.name}-strPoint-${index}`} className="flex items-center">
+                                <CheckCircle className="h-5 w-5 text-primary mr-2 flex-shrink-0" />
+                                <span>{point}</span>
+                              </li>
+                            ) : (
+                              <li key={`${service.name}-objPoint-${index}`} className="space-y-1">
+                                <div className="flex items-center font-semibold text-foreground">
+                                  <span className="text-xl mr-3">{(point as DetailedPoint).emoji}</span>
+                                  <span>{(point as DetailedPoint).title}</span>
+                                </div>
+                                <ul className="list-disc list-inside pl-10 space-y-0.5 text-sm text-muted-foreground">
+                                  {((point as DetailedPoint).details).map((detail, detailIndex) => (
+                                    <li key={`${service.name}-detail-${index}-${detailIndex}`}>{detail}</li>
+                                  ))}
+                                </ul>
+                              </li>
+                            )
                           ))}
                         </ul>
                       </CardContent>
@@ -171,3 +286,4 @@ export default function ServicesPage() {
     </div>
   );
 }
+
