@@ -71,7 +71,23 @@ const servicesDetails = [
   },
 ];
 
-export default function ServicesPage() {
+// Added searchParams to the function signature
+export default function ServicesPage({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) {
+  // Example of how to safely access searchParams if needed:
+  // const queryParams = new URLSearchParams(searchParams as any);
+  // const specificValue = queryParams.get('someKey');
+  //
+  // If you need to iterate or get all keys:
+  // const allKeys: string[] = [];
+  // if (searchParams) {
+  //   for (const key of new URLSearchParams(searchParams as any).keys()) {
+  //     allKeys.push(key);
+  //   }
+  //   // console.log("Search param keys:", allKeys);
+  // }
+  //
+  // Using Object.keys(searchParams) directly would cause the warning.
+
   return (
     <div className="bg-background text-foreground">
       <header className="py-16 md:py-24 text-center bg-secondary/70 dark:bg-secondary/70 backdrop-blur-lg border-b border-white/10 dark:border-neutral-700/30">
