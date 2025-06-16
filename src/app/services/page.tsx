@@ -205,32 +205,6 @@ const servicesDetails: ServiceDetail[] = [
     type: 'accounting'
   },
   {
-    name: 'Mobile App Development',
-    description: 'Custom apps that connect and convert.',
-    icon: <Smartphone className="h-12 w-12 mb-4 text-primary" />,
-    points: [
-      "Android & iOS native apps",
-      "Cross-platform solutions (Flutter, React Native)",
-      "API integration",
-      "App store deployment",
-      "UI/UX optimized for mobile"
-    ],
-    type: 'web_ai'
-  },
-  {
-    name: 'Web Development',
-    description: 'Websites that deliver speed, function, and results.',
-    icon: <Globe className="h-12 w-12 mb-4 text-primary" />,
-    points: [
-      "Custom business websites",
-      "E-commerce platforms (Shopify, WooCommerce, etc.)",
-      "Web portals and dashboards",
-      "Responsive design",
-      "CMS (WordPress, Joomla) solutions"
-    ],
-    type: 'web_ai'
-  },
-  {
     name: 'AI Chatbots & Agents (MCP)',
     description: 'Automate conversations and workflows with intelligence.',
     icon: <Bot className="h-12 w-12 mb-4 text-primary" />,
@@ -534,7 +508,6 @@ export default function ServicesPage() {
     if (activeFilter !== 'all') {
       servicesToDisplay = servicesDetails.filter(service => service.type === activeFilter);
     }
-    // Shuffle the filtered services before setting the state
     setDisplayedServices(shuffleArray(servicesToDisplay));
   }, [activeFilter]);
 
@@ -557,7 +530,6 @@ export default function ServicesPage() {
         </li>
       );
     }
-     // Handle "Ideal For:" and "Add-On Services:" in WhatsApp Business Services
     if (serviceName === 'WhatsApp Business Services' && (point.startsWith("Ideal For:") || point.startsWith("Add-On Services:"))) {
       const [titlePart, itemsPart] = point.split(/:(.*)/s);
       const items = itemsPart ? itemsPart.split(',').map(item => item.trim()) : [];
