@@ -7,7 +7,8 @@ import {
   CheckCircle, Palette, Laptop, Search, Puzzle, ShoppingCart, Calculator, Wrench, 
   GalleryThumbnails, Brain, BarChart3, ReceiptText, Users2, FileText, LayoutDashboard, 
   ShieldCheck, DatabaseZap, BriefcaseBusiness, Smartphone, Globe, Bot, Database,
-  ImageIcon, MailOpen, BarChartBig, BrainCircuit, SearchCode
+  ImageIcon, MailOpen, BarChartBig, BrainCircuit, SearchCode,
+  MousePointerClick, Share2, PenTool, Mail, TrendingUp, Star, Megaphone, Link, Clapperboard, Store, Volume2
 } from "lucide-react";
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -17,7 +18,7 @@ interface ServiceDetail {
   description: string;
   icon: JSX.Element;
   points: string[];
-  type: 'web_ai' | 'accounting';
+  type: 'web_ai' | 'accounting' | 'digital_marketing';
 }
 
 
@@ -56,7 +57,7 @@ const servicesDetails: ServiceDetail[] = [
       "Content Marketing Strategy",
       "PPC Campaign Management"
     ],
-    type: 'web_ai'
+    type: 'web_ai' 
   },
   { 
     name: 'Craft CMS Development', 
@@ -327,30 +328,166 @@ const servicesDetails: ServiceDetail[] = [
     type: 'web_ai'
   },
   {
-    name: 'SEO & Digital Marketing',
-    description: 'Boost your online presence and drive targeted traffic.',
+    name: 'Search Engine Optimization (Digital Marketing)',
+    description: 'Increase visibility and drive long-term traffic. (Included in Digital Marketing Offerings)',
     icon: <SearchCode className="h-12 w-12 mb-4 text-primary" />,
     points: [
-      "On-page and technical SEO",
-      "Google Ads / Meta Ads",
-      "Social media management",
-      "Email marketing campaigns",
-      "Analytics & reporting"
+      "Keyword research & competitor analysis",
+      "On-page SEO (titles, meta, URLs)",
+      "Technical SEO (speed, mobile, indexing)",
+      "Off-page SEO (backlinks, citations)",
+      "Local SEO for maps & listings"
     ],
-    type: 'web_ai'
+    type: 'digital_marketing' 
+  },
+  {
+    name: 'Pay-Per-Click (PPC) Advertising',
+    description: 'Drive targeted traffic and instant conversions with strategic ad campaigns.',
+    icon: <MousePointerClick className="h-12 w-12 mb-4 text-primary" />,
+    points: [
+      "Google Ads (Search, Display, Shopping)",
+      "Bing Ads",
+      "Remarketing & Retargeting",
+      "A/B Testing for Ad Copies",
+      "Conversion Tracking"
+    ],
+    type: 'digital_marketing'
+  },
+  {
+    name: 'Social Media Marketing (SMM)',
+    description: 'Engage your audience and boost brand presence across popular social platforms.',
+    icon: <Share2 className="h-12 w-12 mb-4 text-primary" />,
+    points: [
+      "Facebook, Instagram, LinkedIn, X (Twitter), Pinterest",
+      "Content strategy, design & publishing",
+      "Paid ad campaigns & targeting",
+      "Influencer collaborations",
+      "Performance tracking & reporting"
+    ],
+    type: 'digital_marketing'
+  },
+  {
+    name: 'Content Marketing',
+    description: 'Attract, inform, and convert your target audience through high-value, engaging content.',
+    icon: <PenTool className="h-12 w-12 mb-4 text-primary" />,
+    points: [
+      "SEO blog writing & web content",
+      "Infographics, eBooks, case studies",
+      "Video scripts & content strategy",
+      "Email newsletters",
+      "Content calendar management"
+    ],
+    type: 'digital_marketing'
+  },
+  {
+    name: 'Email Marketing & Automation',
+    description: 'Build and nurture customer relationships with personalized and automated email flows.',
+    icon: <Mail className="h-12 w-12 mb-4 text-primary" />,
+    points: [
+      "Lead list segmentation",
+      "Drip campaigns & auto-responders",
+      "Newsletters & promotional emails",
+      "A/B testing & performance analytics",
+      "Tools: Mailchimp, HubSpot, Zoho, etc."
+    ],
+    type: 'digital_marketing'
+  },
+  {
+    name: 'Conversion Rate Optimization (CRO)',
+    description: 'Maximize your return on investment by optimizing your existing website traffic for conversions.',
+    icon: <TrendingUp className="h-12 w-12 mb-4 text-primary" />,
+    points: [
+      "Landing page design & testing",
+      "Heatmaps & behavior tracking",
+      "Funnel analysis",
+      "CTA design & testing",
+      "Form/user journey optimization"
+    ],
+    type: 'digital_marketing'
+  },
+  {
+    name: 'Online Reputation Management (ORM)',
+    description: 'Protect and enhance your brand’s online image through proactive monitoring and strategic responses.',
+    icon: <Star className="h-12 w-12 mb-4 text-primary" />,
+    points: [
+      "Review generation & response strategy",
+      "Negative content removal/suppression",
+      "Sentiment monitoring & alerts",
+      "Online PR outreach"
+    ],
+    type: 'digital_marketing'
+  },
+  {
+    name: 'Influencer Marketing',
+    description: 'Boost your reach and credibility by collaborating with authentic voices in your niche.',
+    icon: <Megaphone className="h-12 w-12 mb-4 text-primary" />,
+    points: [
+      "Influencer research & vetting",
+      "Campaign strategy & execution",
+      "Co-branded content creation",
+      "ROI & engagement analytics"
+    ],
+    type: 'digital_marketing'
+  },
+  {
+    name: 'Affiliate Marketing',
+    description: 'Grow sales and expand your market reach through performance-based partnerships.',
+    icon: <Link className="h-12 w-12 mb-4 text-primary" />,
+    points: [
+      "Affiliate program setup",
+      "Partner onboarding & communication",
+      "Commission structure planning",
+      "Link tracking & reporting"
+    ],
+    type: 'digital_marketing'
+  },
+  {
+    name: 'Analytics & Reporting (Digital Marketing)',
+    description: 'Make data-driven marketing decisions with clear, actionable insights and comprehensive reporting.',
+    icon: <BarChartBig className="h-12 w-12 mb-4 text-primary" />,
+    points: [
+      "Google Analytics (GA4) setup",
+      "Tag Manager implementation",
+      "Monthly dashboards & KPIs",
+      "ROI-focused reporting"
+    ],
+    type: 'digital_marketing'
+  },
+  {
+    name: 'Video Marketing',
+    description: 'Engage your audience with compelling visual content that drives clicks and conversions.',
+    icon: <Clapperboard className="h-12 w-12 mb-4 text-primary" />,
+    points: [
+      "Brand & promo videos",
+      "Product demos & tutorials",
+      "Reels, Shorts, TikTok content",
+      "YouTube channel setup & optimization",
+      "Video SEO & keyword targeting"
+    ],
+    type: 'digital_marketing'
+  },
+  {
+    name: 'Marketplace Optimization',
+    description: 'Grow your visibility and sales on major e-commerce platforms like Amazon & Flipkart.',
+    icon: <Store className="h-12 w-12 mb-4 text-primary" />,
+    points: [
+      "Product listing optimization",
+      "Marketplace SEO & paid ads",
+      "Reviews & ratings management",
+      "Inventory and pricing sync"
+    ],
+    type: 'digital_marketing'
   }
 ];
 
-type FilterType = 'all' | 'accounting' | 'web_ai';
+type FilterType = 'all' | 'accounting' | 'web_ai' | 'digital_marketing';
 
 export default function ServicesPage() {
   const [activeFilter, setActiveFilter] = useState<FilterType>('all');
 
   const filteredServices = servicesDetails.filter(service => {
     if (activeFilter === 'all') return true;
-    if (activeFilter === 'accounting') return service.type === 'accounting';
-    if (activeFilter === 'web_ai') return service.type === 'web_ai';
-    return true;
+    return service.type === activeFilter;
   });
 
   return (
@@ -394,6 +531,14 @@ export default function ServicesPage() {
                 >
                   <Laptop className="mr-2 h-5 w-5" />
                   Web & AI Solutions
+                </Button>
+                <Button 
+                  onClick={() => setActiveFilter('digital_marketing')} 
+                  variant={activeFilter === 'digital_marketing' ? 'default' : 'outline'}
+                  className="rounded-full text-base h-12 px-10"
+                >
+                  <Volume2 className="mr-2 h-5 w-5" />
+                  Digital Marketing
                 </Button>
               </div>
 
@@ -447,3 +592,4 @@ export default function ServicesPage() {
     </div>
   );
 }
+
