@@ -8,7 +8,7 @@ import {
   GalleryThumbnails, Brain, BarChart3, ReceiptText, Users2, FileText, LayoutDashboard, 
   ShieldCheck, DatabaseZap, BriefcaseBusiness, Smartphone, Globe, Bot, Database,
   ImageIcon, MailOpen, BarChartBig, BrainCircuit, SearchCode,
-  MousePointerClick, Share2, PenTool, Mail, TrendingUp, Star, Megaphone, Link, Clapperboard, Store, Volume2
+  MousePointerClick, Share2, PenTool, Mail as MailIcon, TrendingUp, Star, Megaphone, Link as LinkIcon, Clapperboard, Store, Volume2, MessageSquareText
 } from "lucide-react";
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -180,11 +180,11 @@ const servicesDetails: ServiceDetail[] = [
     description: 'A suite of essential services to support various operational aspects of your business finances.',
     icon: <BriefcaseBusiness className="h-12 w-12 mb-4 text-primary" />,
     points: [
-      "Petty Cash Management: Cash log maintenance, Expense voucher handling, Daily reconciliation",
-      "Banking & Reconciliation: Bank statement reconciliation, Online banking operations, Cheque/NEFT/UPI records",
-      "Inventory & Asset Accounting: Inventory tracking, Stock valuation, Asset depreciation reports",
-      "Loan, EMI & Investment Monitoring: Loan schedules, Interest accounting, Investment yield tracking",
-      "Vendor & Client Master Management: KYC and contact details recording, Contract period tracking, Data validation and standardization"
+        "Petty Cash Management: Cash log maintenance, Expense voucher handling, Daily reconciliation",
+        "Banking & Reconciliation: Bank statement reconciliation, Online banking operations, Cheque/NEFT/UPI records",
+        "Inventory & Asset Accounting: Inventory tracking, Stock valuation, Asset depreciation reports",
+        "Loan, EMI & Investment Monitoring: Loan schedules, Interest accounting, Investment yield tracking",
+        "Vendor & Client Master Management: KYC and contact details recording, Contract period tracking, Data validation and standardization"
     ],
     type: 'accounting'
   },
@@ -397,7 +397,7 @@ const servicesDetails: ServiceDetail[] = [
   {
     name: 'Email Marketing & Automation',
     description: 'Build and nurture customer relationships with personalized and automated email flows.',
-    icon: <Mail className="h-12 w-12 mb-4 text-primary" />,
+    icon: <MailIcon className="h-12 w-12 mb-4 text-primary" />,
     points: [
       "Lead list segmentation",
       "Drip campaigns & auto-responders",
@@ -447,7 +447,7 @@ const servicesDetails: ServiceDetail[] = [
   {
     name: 'Affiliate Marketing',
     description: 'Grow sales and expand your market reach through performance-based partnerships.',
-    icon: <Link className="h-12 w-12 mb-4 text-primary" />,
+    icon: <LinkIcon className="h-12 w-12 mb-4 text-primary" />,
     points: [
       "Affiliate program setup",
       "Partner onboarding & communication",
@@ -481,7 +481,7 @@ const servicesDetails: ServiceDetail[] = [
     ],
     type: 'digital_marketing'
   },
-   {
+  {
     name: 'Search Engine Optimization (SEO)',
     description: 'Increase visibility and drive long-term traffic through strategic SEO.',
     icon: <SearchCode className="h-12 w-12 mb-4 text-primary" />,
@@ -505,6 +505,23 @@ const servicesDetails: ServiceDetail[] = [
       "Inventory and pricing sync"
     ],
     type: 'digital_marketing'
+  },
+  {
+    name: 'WhatsApp Business Services',
+    description: 'Leverage WhatsApp for enhanced customer communication, engagement, and automation. Our services cover profile setup, automated messaging, campaign management, and API integration to streamline your business operations on this popular platform.',
+    icon: <MessageSquareText className="h-12 w-12 mb-4 text-primary" />,
+    points: [
+      "WhatsApp Business Profile Setup (Verified Account, Info, Catalog)",
+      "Auto-Reply & Greeting Message System (Welcome, FAQ, Away)",
+      "Broadcast & Campaign Management (Segmentation, Scheduling, Templates)",
+      "Work Scheduling & Task Automation (Booking, Reminders, Calendar Sync)",
+      "WhatsApp API Integration (CRM, Website, ERP, Chatbots)",
+      "Analytics & Reporting (Delivery/Open Rates, Interactions, Campaign Performance)",
+      "Multi-Agent Chat System (Team Inbox, Assignments, Internal Notes)",
+      "Ideal For: E-commerce, Event Planners, Travel, Real Estate, Service Companies",
+      "Add-On Services: Custom Chatbot Development, Facebook/Instagram Integration, QR Codes, Payment Links"
+    ],
+    type: 'digital_marketing'
   }
 ];
 
@@ -517,6 +534,30 @@ export default function ServicesPage() {
     if (activeFilter === 'all') return true;
     return service.type === activeFilter;
   });
+
+  const renderServicePoint = (point: string, serviceName: string, pointIndex: number) => {
+    if (serviceName === 'Additional Business-Critical Services' && point.includes(':')) {
+      const [subService, detailsString] = point.split(/:(.*)/s);
+      const detailItems = detailsString.split(',').map(d => d.trim());
+      return (
+        <li key={`${serviceName}-point-${pointIndex}`} className="flex items-start">
+          <CheckCircle className="h-5 w-5 text-primary mr-2 mt-1 flex-shrink-0" />
+          <div>
+            <span className="font-medium text-foreground">{subService.trim()}:</span>
+            <ul className="list-disc list-inside pl-5 text-sm text-muted-foreground">
+              {detailItems.map((item, i) => <li key={`${serviceName}-detail-${pointIndex}-${i}`}>{item}</li>)}
+            </ul>
+          </div>
+        </li>
+      );
+    }
+    return (
+      <li key={`${serviceName}-point-${pointIndex}`} className="flex items-start">
+        <CheckCircle className="h-5 w-5 text-primary mr-2 mt-1 flex-shrink-0" />
+        <span>{point}</span>
+      </li>
+    );
+  };
 
   return (
     <div className="bg-background text-foreground">
@@ -582,29 +623,7 @@ export default function ServicesPage() {
                       <CardContent className="pt-0">
                         <p className="text-muted-foreground mb-6">{service.description}</p>
                         <ul className="space-y-3">
-                          {service.points.map((point, index) => {
-                            if (service.name === 'Additional Business-Critical Services' && point.includes(':')) {
-                              const [subService, details] = point.split(/:(.*)/s);
-                              const detailItems = details.split(',').map(d => d.trim());
-                              return (
-                                <li key={`${service.name}-point-${index}`} className="flex items-start">
-                                  <CheckCircle className="h-5 w-5 text-primary mr-2 mt-1 flex-shrink-0" />
-                                  <div>
-                                    <span className="font-medium text-foreground">{subService.replace('🔹 ', '')}:</span>
-                                    <ul className="list-disc list-inside pl-5 text-sm text-muted-foreground">
-                                      {detailItems.map((item, i) => <li key={i}>{item}</li>)}
-                                    </ul>
-                                  </div>
-                                </li>
-                              );
-                            }
-                            return (
-                              <li key={`${service.name}-point-${index}`} className="flex items-start">
-                                <CheckCircle className="h-5 w-5 text-primary mr-2 mt-1 flex-shrink-0" />
-                                <span>{point}</span>
-                              </li>
-                            );
-                          })}
+                          {service.points.map((point, index) => renderServicePoint(point, service.name, index))}
                         </ul>
                       </CardContent>
                     </div>
