@@ -8,6 +8,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { cn } from '@/lib/utils';
 import { ThemeProvider } from "@/components/ThemeProvider";
 import CustomCursor from '@/components/effects/CustomCursor';
+import FloatingWhatsAppButton from '@/components/common/FloatingWhatsAppButton';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -30,7 +31,7 @@ export const metadata: Metadata = {
     siteName: 'CodeAndCount.com',
     images: [
       {
-        url: 'https://placehold.co/1200x630.png', // Removed text parameter
+        url: 'https://placehold.co/1200x630.png', 
         width: 1200,
         height: 630,
         alt: 'CodeAndCount.com',
@@ -41,7 +42,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'CodeAndCount.com - Web & App Development',
     description: 'Modern web and app development solutions.',
-    images: ['https://placehold.co/1200x630.png'], // Removed text parameter
+    images: ['https://placehold.co/1200x630.png'], 
   },
   manifest: '/manifest.json',
   themeColor: '#b2ff03', 
@@ -66,6 +67,7 @@ export default function RootLayout({
           <main className="flex-grow">{children}</main>
           <Footer />
           <Toaster />
+          <FloatingWhatsAppButton />
         </ThemeProvider>
       </body>
     </html>
