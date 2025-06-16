@@ -23,8 +23,8 @@ const footerSections = {
     title: "Learn",
     links: [
       { text: "About", href: "/about" },
-      { text: "Testimonials", href: "/placeholder-learn/testimonials" },
-      { text: "Processes", href: "/placeholder-learn/processes" },
+      { text: "Testimonials", href: "/testimonials" },
+      { text: "Processes", href: "/processes" },
       { text: "FAQs", href: "/faq" },
       { text: "Blog", href: "/blog" },
     ]
@@ -35,7 +35,7 @@ const footerSections = {
       { text: "Home", href: "/" },
       { text: "Work", href: "/work", new: true },
       { text: "Services", href: "/services" },
-      { text: "Hex Test", href: "/hex-test", new: true },
+      { text: "Play Hex Eye Test!", href: "/hex-test", new: true },
       { text: "Contact", href: "/contact" },
     ]
   },
