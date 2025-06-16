@@ -26,118 +26,97 @@ export default function PrivacyPolicyPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
           <div className="bg-background/70 dark:bg-neutral-900/70 backdrop-blur-lg rounded-xl shadow-xl p-8 md:p-12 border border-white/10 dark:border-neutral-700/30 prose prose-lg lg:prose-xl max-w-none text-foreground prose-headings:text-foreground prose-a:text-primary hover:prose-a:text-primary/80">
             
-            <p>
-              CodeAndCount.com ("we," "us," or "our") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website codeandcount.com (the "Site"), including any other media form, media channel, mobile website, or mobile application related or connected thereto. Please read this privacy policy carefully. If you do not agree with the terms of this privacy policy, please do not access the site.
-            </p>
-            <p>
-              This Privacy Policy is framed in compliance with the Information Technology Act, 2000, and the Information Technology (Reasonable Security Practices and Procedures and Sensitive Personal Data or Information) Rules, 2011 (the "SPDI Rules"), and other applicable laws in India.
-            </p>
+            <p>Welcome to CodeAndCount.com! We care about your privacy. This policy explains what information we collect, how we use it, and how we keep it safe when you use our website (codeandcount.com, the "Site") and services. By using our Site, you agree to this policy.</p>
+            <p>We follow Indian laws, including the Information Technology Act, 2000, and the Information Technology (Reasonable Security Practices and Procedures and Sensitive Personal Data or Information) Rules, 2011 (the "SPDI Rules").</p>
 
-            <h2>1. Information We Collect</h2>
-            <p>We may collect information about you in a variety of ways. The information we may collect on the Site includes:</p>
-            <h3>Personal Data</h3>
+            <h2>What Information We Collect</h2>
+            <p>We collect information in a few ways:</p>
+            <h3>Information You Give Us</h3>
             <p>
-              Personally identifiable information, such as your name, shipping address, email address, and telephone number, and demographic information, such as your age, gender, hometown, and interests, that you voluntarily give to us when you register with the Site or when you choose to participate in various activities related to the Site, such as online chat and message boards. You are under no obligation to provide us with personal information of any kind, however, your refusal to do so may prevent you from using certain features of the Site.
+              This includes details like your name, email address, phone number, and any other information you provide when you:
             </p>
-            <h3>Derivative Data</h3>
+            <ul>
+              <li>Fill out forms (like our contact form).</li>
+              <li>Register for an account (if applicable).</li>
+              <li>Communicate with us directly.</li>
+            </ul>
+            <p>You don't have to give us this information, but some parts of our Site might not work as intended without it.</p>
+            
+            <h3>Information We Collect Automatically</h3>
             <p>
-              Information our servers automatically collect when you access the Site, such as your IP address, your browser type, your operating system, your access times, and the pages you have viewed directly before and after accessing the Site.
+              When you use our Site, we automatically gather some technical information, such as:
             </p>
-            <h3>Financial Data</h3>
+            <ul>
+              <li>Your IP address.</li>
+              <li>Your browser type and operating system.</li>
+              <li>The pages you visit on our Site and how long you spend on them.</li>
+              <li>How you interact with our Site.</li>
+            </ul>
+            <p>This helps us improve our Site and services.</p>
+
+            <h3>Financial Information</h3>
             <p>
-             We do not collect or store any financial information. All payment transactions are processed through secure third-party payment gateways. We are not responsible for the data-collection or privacy practices of these third-party payment gateways.
+              <strong>We do not collect or store your financial details like credit card numbers.</strong> If you make a payment related to our services, it’s processed by secure third-party payment providers. We are not responsible for their privacy practices, so we encourage you to review their policies.
             </p>
             
-            <h2>2. How We Use Your Information</h2>
-            <p>Having accurate information about you permits us to provide you with a smooth, efficient, and customized experience. Specifically, we may use information collected about you via the Site to:</p>
+            <h2>How We Use Your Information</h2>
+            <p>We use your information to:</p>
             <ul>
-              <li>Create and manage your account.</li>
-              <li>Email you regarding your account or order.</li>
-              <li>Enable user-to-user communications.</li>
-              <li>Fulfill and manage purchases, orders, payments, and other transactions related to the Site.</li>
-              <li>Generate a personal profile about you to make future visits to the Site more personalized.</li>
-              <li>Increase the efficiency and operation of the Site.</li>
-              <li>Monitor and analyze usage and trends to improve your experience with the Site.</li>
-              <li>Notify you of updates to the Site.</li>
-              <li>Offer new products, services, and/or recommendations to you.</li>
-              <li>Perform other business activities as needed.</li>
-              <li>Prevent fraudulent transactions, monitor against theft, and protect against criminal activity.</li>
-              <li>Process payments and refunds.</li>
-              <li>Request feedback and contact you about your use of the Site.</li>
-              <li>Resolve disputes and troubleshoot problems.</li>
-              <li>Respond to product and customer service requests.</li>
-              <li>Send you a newsletter.</li>
-              <li>Solicit support for the Site.</li>
+              <li>Provide, operate, and maintain our Site and services.</li>
+              <li>Improve, personalize, and expand our Site and services.</li>
+              <li>Understand and analyze how you use our Site.</li>
+              <li>Develop new products, services, features, and functionality.</li>
+              <li>Communicate with you, either directly or through one of our partners, including for customer service, to provide you with updates and other information relating to the Site, and for marketing and promotional purposes (if you've agreed).</li>
+              <li>Process your transactions (though payment details are handled by third parties).</li>
+              <li>Send you emails.</li>
+              <li>Find and prevent fraud.</li>
+              <li>Comply with legal obligations.</li>
             </ul>
 
-            <h2>3. Disclosure of Your Information</h2>
-            <p>We may share information we have collected about you in certain situations. Your information may be disclosed as follows:</p>
-            <h3>By Law or to Protect Rights</h3>
-            <p>
-              If we believe the release of information about you is necessary to respond to legal process, to investigate or remedy potential violations of our policies, or to protect the rights, property, and safety of others, we may share your information as permitted or required by any applicable law, rule, or regulation. This includes exchanging information with other entities for fraud protection and credit risk reduction.
-            </p>
-            <h3>Third-Party Service Providers</h3>
-            <p>
-              We may share your information with third parties that perform services for us or on our behalf, including payment processing, data analysis, email delivery, hosting services, customer service, and marketing assistance.
-            </p>
-            <h3>Business Transfers</h3>
-            <p>
-              We may share or transfer your information in connection with, or during negotiations of, any merger, sale of company assets, financing, or acquisition of all or a portion of our business to another company.
-            </p>
-
-            <h2>4. Data Security</h2>
-            <p>
-              We use administrative, technical, and physical security measures to help protect your personal information. While we have taken reasonable steps to secure the personal information you provide to us, please be aware that despite our efforts, no security measures are perfect or impenetrable, and no method of data transmission can be guaranteed against any interception or other type of misuse.
-            </p>
-
-            <h2>5. Data Retention</h2>
-            <p>
-              We will only retain your personal information for as long as necessary to fulfill the purposes we collected it for, including for the purposes of satisfying any legal, accounting, or reporting requirements.
-            </p>
-
-            <h2>6. Your Rights</h2>
-            <p>Under Indian law, you have certain rights regarding your personal data. These may include the right to:</p>
+            <h2>When We Might Share Your Information</h2>
+            <p>We don’t sell your personal information. However, we might share your information in these limited situations:</p>
             <ul>
-              <li>Access your personal data.</li>
-              <li>Correct any inaccurate or incomplete personal data.</li>
-              <li>Withdraw your consent to the processing of your personal data (where processing is based on consent).</li>
-              <li>Request the deletion of your personal data, subject to certain conditions.</li>
-              <li>Lodge a complaint with the relevant data protection authority.</li>
+              <li><strong>With Service Providers:</strong> We may share your information with trusted third-party companies that help us run our Site and business (e.g., website hosting, data analysis, email delivery, customer service). They are obligated to protect your information and can only use it for the services they provide to us.</li>
+              <li><strong>For Legal Reasons:</strong> If required by law or if we believe it's necessary to respond to legal process, protect our rights or property, prevent harm, or ensure the safety of any person, we may disclose your information.</li>
+              <li><strong>Business Transfers:</strong> If CodeAndCount.com is involved in a merger, acquisition, or sale of assets, your information may be transferred as part of that transaction. We will notify you if this happens.</li>
             </ul>
-            <p>To exercise these rights, please contact our Grievance Officer.</p>
 
-            <h2>7. Cookies and Tracking Technologies</h2>
-            <p>
-              We may use cookies, web beacons, tracking pixels, and other tracking technologies on the Site to help customize the Site and improve your experience. When you access the Site, your personal information is not collected through the use of tracking technology. Most browsers are set to accept cookies by default. You can remove or reject cookies, but be aware that such action could affect the availability and functionality of the Site.
-            </p>
+            <h2>Keeping Your Information Safe</h2>
+            <p>We take reasonable steps and use administrative, technical, and physical security measures to help protect your personal information from loss, theft, misuse, and unauthorized access, disclosure, alteration, and destruction. However, please remember that no method of transmission over the internet or method of electronic storage is 100% secure. While we strive to use commercially acceptable means to protect your personal information, we cannot guarantee its absolute security.</p>
 
-            <h2>8. Third-Party Links</h2>
-            <p>
-              The Site may contain links to third-party websites and applications of interest, including advertisements and external services, that are not affiliated with us. Once you have used these links to leave the Site, any information you provide to these third parties is not covered by this Privacy Policy, and we cannot guarantee the safety and privacy of your information.
-            </p>
+            <h2>How Long We Keep Your Information</h2>
+            <p>We keep your personal information only for as long as necessary to fulfill the purposes we collected it for, including for satisfying any legal, accounting, or reporting requirements. When we no longer need your information, we will securely delete or anonymize it.</p>
 
-            <h2>9. Grievance Officer</h2>
+            <h2>Your Privacy Rights (and Our Grievance Officer)</h2>
+            <p>Under Indian law, you have certain rights regarding your personal information. These may include the right to:</p>
+            <ul>
+              <li>Access the personal information we hold about you.</li>
+              <li>Request correction of any inaccurate or incomplete personal information.</li>
+              <li>Withdraw your consent to our processing of your personal information (where we rely on consent as the legal basis for processing).</li>
+              <li>Request the deletion or erasure of your personal information, under certain conditions.</li>
+              <li>Lodge a complaint with the relevant data protection authority if you are unhappy with how we’ve handled your personal information.</li>
+            </ul>
+            <p>To exercise these rights, or if you have any concerns or grievances regarding the processing of your personal information, please contact our Grievance Officer:</p>
             <p>
-              In accordance with the Information Technology Act, 2000 and rules made thereunder, the name and contact details of the Grievance Officer are provided below:
-            </p>
-            <p>
-              [Name of Grievance Officer]<br />
-              [Email Address of Grievance Officer]<br />
-              [Contact Number of Grievance Officer]<br />
+              <strong>Name: [PLEASE UPDATE - Name of Grievance Officer]</strong><br />
+              <strong>Email: [PLEASE UPDATE - Email Address of Grievance Officer]</strong><br />
+              <strong>Contact: [PLEASE UPDATE - Contact Number of Grievance Officer]</strong><br />
               CodeAndCount.com<br />
-              spaze i tech park, Sec-49, Gurugram, Haryana, India
-            </p>
-            <p>Please contact the Grievance Officer if you have any concerns or grievances regarding the processing of your personal information.</p>
-
-            <h2>10. Changes to This Privacy Policy</h2>
-            <p>
-              We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on the Site. You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.
+              Address: spaze i tech park, Sec-49, Gurugram, Haryana, India
             </p>
 
-            <h2>11. Contact Us</h2>
-            <p>
-              If you have questions or comments about this Privacy Policy, please contact us at:
-            </p>
+            <h2>Cookies and Similar Technologies</h2>
+            <p>We use cookies (small text files placed on your device) and similar tracking technologies to help our Site work better, analyze how you use it, and improve your experience. For example, cookies can remember your preferences or help us understand which parts of our Site are most popular. Your personal information is not typically collected through cookies unless you voluntarily provide it.</p>
+            <p>Most web browsers are set to accept cookies by default. You can usually choose to set your browser to remove or reject browser cookies. Please note that if you choose to remove or reject cookies, this could affect the availability and functionality of our Site.</p>
+
+            <h2>Links to Other Websites</h2>
+            <p>Our Site may contain links to other websites that are not operated by us. If you click on a third-party link, you will be directed to that third party's site. We strongly advise you to review the Privacy Policy of every site you visit. We have no control over and assume no responsibility for the content, privacy policies, or practices of any third-party sites or services.</p>
+
+            <h2>Updates to This Privacy Policy</h2>
+            <p>We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Effective Date" at the top. You are advised to review this Privacy Policy periodically for any changes. Changes to this Privacy Policy are effective when they are posted on this page.</p>
+
+            <h2>Contact Us</h2>
+            <p>If you have any questions or comments about this Privacy Policy, please feel free to contact us:</p>
             <p>
               CodeAndCount.com<br />
               Email: hello@codeandcount.com<br />
@@ -145,7 +124,7 @@ export default function PrivacyPolicyPage() {
             </p>
 
             <p className="mt-8 text-sm text-muted-foreground">
-              <strong>Disclaimer:</strong> This is a template Privacy Policy and may not be suitable for all circumstances. It is crucial to consult with a legal professional to ensure your Privacy Policy is compliant with all applicable laws and tailored to your specific business practices and data processing activities in India.
+              <strong>Important Disclaimer:</strong> This Privacy Policy is intended to provide general information and is a template. It is crucial to consult with a legal professional to ensure your Privacy Policy is fully compliant with all applicable Indian laws and accurately reflects your specific business practices and data processing activities.
             </p>
           </div>
         </div>
