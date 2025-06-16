@@ -1,6 +1,11 @@
 
+"use client";
+
+import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { CheckCircle, Palette, Laptop, Search, Puzzle, ShoppingCart, Calculator, Wrench } from "lucide-react";
+import { CheckCircle, Palette, Laptop, Search, Puzzle, ShoppingCart, Calculator, Wrench, GalleryThumbnails } from "lucide-react";
+import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 const servicesDetails = [
   { 
@@ -12,7 +17,8 @@ const servicesDetails = [
       "Brand Strategy & Positioning",
       "Visual Identity Guidelines",
       "Marketing Collateral Design"
-    ]
+    ],
+    type: 'web_ai'
   },
   { 
     name: 'Websites & Mobile Apps', 
@@ -23,7 +29,8 @@ const servicesDetails = [
       "Custom Web Development",
       "Mobile App Development (iOS & Android)",
       "Responsive Design & Accessibility"
-    ]
+    ],
+    type: 'web_ai'
   },
   { 
     name: 'SEO & Digital Marketing', 
@@ -34,7 +41,8 @@ const servicesDetails = [
       "On-Page & Off-Page SEO",
       "Content Marketing Strategy",
       "PPC Campaign Management"
-    ]
+    ],
+    type: 'web_ai'
   },
   { 
     name: 'Craft CMS Development', 
@@ -45,18 +53,20 @@ const servicesDetails = [
       "Plugin Development & Integration",
       "Craft Commerce Solutions",
       "Performance Optimization"
-    ]
+    ],
+    type: 'web_ai'
   },
   { 
     name: 'WordPress Solutions', 
     description: 'We build robust and scalable websites using WordPress, tailored to your business needs, from blogs and portfolios to complex platforms and e-commerce stores with WooCommerce.',
-    icon: <ShoppingCart className="h-12 w-12 mb-4 text-primary" />, // Replaced Wrench with ShoppingCart as Wrench used in header
+    icon: <ShoppingCart className="h-12 w-12 mb-4 text-primary" />,
     points: [
       "Custom WordPress Theme Development",
       "Plugin Customization & Development",
       "WooCommerce Integration & E-commerce",
       "Performance & Security Optimization"
-    ]
+    ],
+    type: 'web_ai'
   },
   {
     name: 'Accounting',
@@ -67,26 +77,22 @@ const servicesDetails = [
       "Tax Planning & Preparation",
       "Payroll Services",
       "Financial Consulting & Analysis"
-    ]
+    ],
+    type: 'accounting'
   },
 ];
 
-// Added searchParams to the function signature
-export default function ServicesPage({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) {
-  // Example of how to safely access searchParams if needed:
-  // const queryParams = new URLSearchParams(searchParams as any);
-  // const specificValue = queryParams.get('someKey');
-  //
-  // If you need to iterate or get all keys:
-  // const allKeys: string[] = [];
-  // if (searchParams) {
-  //   for (const key of new URLSearchParams(searchParams as any).keys()) {
-  //     allKeys.push(key);
-  //   }
-  //   // console.log("Search param keys:", allKeys);
-  // }
-  //
-  // Using Object.keys(searchParams) directly would cause the warning.
+type FilterType = 'all' | 'accounting' | 'web_ai';
+
+export default function ServicesPage() {
+  const [activeFilter, setActiveFilter] = useState<FilterType>('all');
+
+  const filteredServices = servicesDetails.filter(service => {
+    if (activeFilter === 'all') return true;
+    if (activeFilter === 'accounting') return service.type === 'accounting';
+    if (activeFilter === 'web_ai') return service.type === 'web_ai';
+    return true;
+  });
 
   return (
     <div className="bg-background text-foreground">
@@ -102,30 +108,63 @@ export default function ServicesPage({ searchParams }: { searchParams: { [key: s
         </div>
       </header>
 
-      <section className="pb-16 md:pb-24">
+      <section className="py-16 md:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-8">
-            {servicesDetails.map((service) => (
-              <Card key={service.name} className="flex flex-col md:flex-row overflow-hidden transition-transform hover:scale-[1.02] duration-300" data-interactive-cursor="true">
-                <div className="md:w-1/3 p-6 flex flex-col items-center justify-center bg-secondary/30 md:border-r border-card-foreground/10">
-                  {service.icon}
-                  <CardTitle className="text-2xl font-semibold text-center">{service.name}</CardTitle>
-                </div>
-                <div className="md:w-2/3 p-6">
-                  <CardContent className="pt-0">
-                    <p className="text-muted-foreground mb-6">{service.description}</p>
-                    <ul className="space-y-2">
-                      {service.points.map((point, index) => (
-                        <li key={index} className="flex items-center">
-                          <CheckCircle className="h-5 w-5 text-primary mr-2 flex-shrink-0" />
-                          <span>{point}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </CardContent>
-                </div>
-              </Card>
-            ))}
+           <div className="bg-background/70 dark:bg-neutral-900/70 backdrop-blur-lg rounded-xl shadow-xl p-8 md:p-12 border border-white/10 dark:border-neutral-700/30">
+            <div className="mb-12 flex flex-wrap justify-center items-center gap-3 sm:gap-4">
+                <Button 
+                  onClick={() => setActiveFilter('all')} 
+                  variant={activeFilter === 'all' ? 'default' : 'outline'}
+                  className="rounded-full text-base h-12 px-10"
+                >
+                  <GalleryThumbnails className="mr-2 h-5 w-5" />
+                  All Services
+                </Button>
+                <Button 
+                  onClick={() => setActiveFilter('accounting')} 
+                  variant={activeFilter === 'accounting' ? 'default' : 'outline'}
+                  className="rounded-full text-base h-12 px-10"
+                >
+                  <Calculator className="mr-2 h-5 w-5" />
+                  Account Management
+                </Button>
+                <Button 
+                  onClick={() => setActiveFilter('web_ai')} 
+                  variant={activeFilter === 'web_ai' ? 'default' : 'outline'}
+                  className="rounded-full text-base h-12 px-10"
+                >
+                  <Laptop className="mr-2 h-5 w-5" />
+                  Web & AI Solutions
+                </Button>
+              </div>
+
+            {filteredServices.length > 0 ? (
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-1 gap-8">
+                {filteredServices.map((service) => (
+                  <Card key={service.name} className="flex flex-col md:flex-row overflow-hidden transition-transform hover:scale-[1.02] duration-300" data-interactive-cursor="true">
+                    <div className="md:w-1/3 p-6 flex flex-col items-center justify-center bg-secondary/30 md:border-r border-card-foreground/10">
+                      {service.icon}
+                      <CardTitle className="text-2xl font-semibold text-center">{service.name}</CardTitle>
+                    </div>
+                    <div className="md:w-2/3 p-6">
+                      <CardContent className="pt-0">
+                        <p className="text-muted-foreground mb-6">{service.description}</p>
+                        <ul className="space-y-2">
+                          {service.points.map((point, index) => (
+                            <li key={index} className="flex items-center">
+                              <CheckCircle className="h-5 w-5 text-primary mr-2 flex-shrink-0" />
+                              <span>{point}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </CardContent>
+                    </div>
+                  </Card>
+                ))}
+              </div>
+            ) : (
+              <p className="text-center text-muted-foreground text-xl py-10">No services found in this category. Check back later or select another category!</p>
+            )}
           </div>
         </div>
       </section>
