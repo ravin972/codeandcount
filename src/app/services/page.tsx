@@ -24,18 +24,6 @@ interface ServiceDetail {
 
 const servicesDetails: ServiceDetail[] = [
   { 
-    name: 'Brand Identity', 
-    description: 'We craft compelling brand narratives and visual identities that capture attention and build lasting connections. From logo design to comprehensive brand guidelines, we define your unique voice.',
-    icon: <Palette className="h-12 w-12 mb-4 text-primary" />,
-    points: [
-      "Logo Design & Systems",
-      "Brand Strategy & Positioning",
-      "Visual Identity Guidelines",
-      "Marketing Collateral Design"
-    ],
-    type: 'web_ai'
-  },
-  { 
     name: 'Websites & Mobile Apps (Legacy)', 
     description: 'Our team designs and develops bespoke websites and mobile applications that are not only visually stunning but also highly functional, user-friendly, and optimized for performance across all devices.',
     icon: <Laptop className="h-12 w-12 mb-4 text-primary" />,
