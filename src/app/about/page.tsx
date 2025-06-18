@@ -17,6 +17,14 @@ const values = [
   { title: 'Client-Centric', icon: <Target className="h-8 w-8 text-primary" />, description: 'Our clients success is our success. We tailor our solutions to meet their unique needs and objectives.' },
 ];
 
+// Example of how to handle searchParams if this Server Component were to use them:
+// export default function AboutPage({ searchParams }: { searchParams?: { [key: string]: string | string[] | undefined } }) {
+  // To avoid the "keys of searchParams were accessed directly" error:
+  // 1. Access specific params directly:
+  //    const specificParam = searchParams?.yourParamName;
+  // 2. Avoid iterating all keys like Object.keys(searchParams) or {...searchParams}.
+  // 3. If you need all params on the client, pass relevant ones or let a Client Component use `useSearchParams()`.
+
 export default function AboutPage() {
   return (
     <div className="bg-background text-foreground">
