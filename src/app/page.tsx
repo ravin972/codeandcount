@@ -74,7 +74,6 @@ const testimonials = [
     avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=1080&h=1080&fit=crop&q=80',
     dataAiHint: 'indian woman professional',
     quote: "CodeAndCount.com has been pivotal for our digital growth. Their expertise and dedication are truly commendable. Our online sales have significantly increased!",
-    videoUrl: 'https://vimeo.com/placeholder',
   },
   {
     name: 'Rohan Mehra',
@@ -82,7 +81,6 @@ const testimonials = [
     avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=1080&h=1080&fit=crop&q=80',
     dataAiHint: 'indian man startup',
     quote: 'The team at CodeAndCount.com understood our vision perfectly and delivered a robust platform. Their innovative approach to web solutions is top-notch.',
-    videoUrl: 'https://vimeo.com/placeholder',
   },
 ];
 
@@ -384,11 +382,6 @@ export default function HomePage() {
                     <blockquote className="text-foreground italic border-l-4 border-primary pl-4 py-2">
                       "{testimonial.quote}"
                     </blockquote>
-                    <div className="mt-4">
-                      <div className="aspect-video bg-muted/80 backdrop-blur-sm rounded-md flex items-center justify-center">
-                        <p className="text-muted-foreground">Vimeo Video Placeholder (View on <a href={testimonial.videoUrl} target="_blank" rel="noopener noreferrer" className="text-primary underline">Vimeo</a>)</p>
-                      </div>
-                    </div>
                   </CardContent>
                 </Card>
               ))}
@@ -493,7 +486,7 @@ export default function HomePage() {
                           width={600}
                           height={400}
                           className="w-full h-48 object-cover rounded-t-lg transition-transform duration-300 ease-in-out group-hover:scale-105"
-                          data-ai-hint={post.dataAiHintImage}
+                          data-ai-hint={post.dataAiHint}
                         />
                         <CardContent className="p-4 flex-grow flex flex-col">
                           <p className="text-xs text-neutral-400 mb-1 flex items-center">

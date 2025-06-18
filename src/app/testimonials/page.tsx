@@ -10,7 +10,6 @@ const testimonialsData = [
     avatar: 'https://placehold.co/100x100.png',
     dataAiHint: 'person portrait',
     quote: "CodeAndCount.com transformed our online presence. Their team is professional, creative, and delivered outstanding results. We couldn't be happier!",
-    videoUrl: 'https://vimeo.com/placeholder',
   },
   {
     name: 'John Smith',
@@ -18,7 +17,6 @@ const testimonialsData = [
     avatar: 'https://placehold.co/100x100.png',
     dataAiHint: 'man smiling',
     quote: 'Working with CodeAndCount.com was a game-changer. Their insights into branding and web development are unparalleled. Highly recommended!',
-    videoUrl: 'https://vimeo.com/placeholder',
   },
   {
     name: 'Alice Johnson',
@@ -26,7 +24,6 @@ const testimonialsData = [
     avatar: 'https://placehold.co/100x100.png',
     dataAiHint: 'professional woman',
     quote: 'The attention to detail and commitment to our project goals were exceptional. The final product exceeded all our expectations.',
-    videoUrl: 'https://vimeo.com/placeholder',
   },
   {
     name: 'Robert Brown',
@@ -34,7 +31,6 @@ const testimonialsData = [
     avatar: 'https://placehold.co/100x100.png',
     dataAiHint: 'tech executive',
     quote: 'From initial concept to final deployment, the CodeAndCount team was a pleasure to work with. Their technical expertise is top-notch.',
-    videoUrl: 'https://vimeo.com/placeholder',
   },
 ];
 
@@ -73,14 +69,6 @@ export default function TestimonialsPage() {
                     <blockquote className="text-foreground italic border-l-4 border-primary pl-4 py-2">
                       "{testimonial.quote}"
                     </blockquote>
-                    <div className="mt-6">
-                      <h5 className="text-sm font-semibold mb-2 text-muted-foreground">Watch their story:</h5>
-                      <div className="aspect-video bg-muted/80 backdrop-blur-sm rounded-md flex items-center justify-center border border-card-foreground/10">
-                        <p className="text-muted-foreground text-sm">
-                          Video from {testimonial.name} (View on <a href={testimonial.videoUrl} target="_blank" rel="noopener noreferrer" className="text-primary underline hover:text-primary/80">Vimeo</a>)
-                        </p>
-                      </div>
-                    </div>
                   </CardContent>
                 </Card>
               ))}
