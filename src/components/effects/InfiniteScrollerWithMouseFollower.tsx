@@ -55,8 +55,7 @@ const InfiniteScrollerWithMouseFollower: React.FC = () => {
 
         const elWidth1 = el1_1.offsetWidth;
         if (elWidth1 === 0) {
-          // console.warn("GSAP Scroller: Row 1 text width is 0. Animation might not be seamless yet.");
-          return; // Wait for width
+          return; 
         }
         
         gsap.set(el1_2, { x: elWidth1 });
@@ -78,8 +77,7 @@ const InfiniteScrollerWithMouseFollower: React.FC = () => {
 
         const elWidth2 = el2_1.offsetWidth;
         if (elWidth2 === 0) {
-          // console.warn("GSAP Scroller: Row 2 text width is 0. Animation might not be seamless yet.");
-          return; // Wait for width
+          return; 
         }
             
         gsap.set(el2_2, { x: -elWidth2 }); 
@@ -98,17 +96,13 @@ const InfiniteScrollerWithMouseFollower: React.FC = () => {
         setupRow1Animation();
         setupRow2Animation();
       } else {
-        // If elements don't have width yet (e.g., fonts not loaded), try again next frame
         rafId = requestAnimationFrame(attemptInitialization);
       }
     };
     
-    // Use document.fonts.ready for font loading, then attempt initialization.
     document.fonts.ready.then(() => {
         attemptInitialization();
-    }).catch(error => {
-        // console.error("Font loading error or timeout for scroller, attempting init anyway:", error);
-        // Fallback to attempt initialization even if fonts.ready fails (e.g. timeout)
+    }).catch(() => {
         attemptInitialization();
     });
 
@@ -127,7 +121,7 @@ const InfiniteScrollerWithMouseFollower: React.FC = () => {
   return (
     <section 
       ref={interactiveSectionRef}
-      className="relative bg-background dark:bg-neutral-900 py-20 md:py-32 overflow-hidden"
+      className="relative bg-background dark:bg-neutral-900 py-20 md:py-32 overflow-x-hidden"
       data-interactive-cursor="true"
     >
       {/* Row 1: Right-to-Left Scroll */}
@@ -153,4 +147,3 @@ const InfiniteScrollerWithMouseFollower: React.FC = () => {
 };
 
 export default InfiniteScrollerWithMouseFollower;
-
