@@ -9,12 +9,12 @@ import { cn } from '@/lib/utils';
 
 const InfiniteScrollerWithMouseFollower: React.FC = () => {
   const scrollerContainerRef1 = useRef<HTMLDivElement>(null);
-  const textRef1_1 = useRef<HTMLDivElement>(null); // Changed to HTMLDivElement for consistency
-  const textRef1_2 = useRef<HTMLDivElement>(null); // Changed to HTMLDivElement
+  const textRef1_1 = useRef<HTMLDivElement>(null);
+  const textRef1_2 = useRef<HTMLDivElement>(null);
 
   const scrollerContainerRef2 = useRef<HTMLDivElement>(null);
-  const textRef2_1 = useRef<HTMLDivElement>(null); // Changed to HTMLDivElement
-  const textRef2_2 = useRef<HTMLDivElement>(null); // Changed to HTMLDivElement
+  const textRef2_1 = useRef<HTMLDivElement>(null);
+  const textRef2_2 = useRef<HTMLDivElement>(null);
   
   const interactiveSectionRef = useRef<HTMLDivElement>(null);
 
@@ -124,19 +124,19 @@ const InfiniteScrollerWithMouseFollower: React.FC = () => {
     >
       {/* Row 1: Right-to-Left Scroll */}
       <div className="relative flex whitespace-nowrap" ref={scrollerContainerRef1}>
-        <div ref={textRef1_1} className="inline-block px-2 md:px-3 lg:px-4">
+        <div ref={textRef1_1} className="inline-block">
           {scrollTextContent}
         </div>
-        <div ref={textRef1_2} className="inline-block px-2 md:px-3 lg:px-4">
+        <div ref={textRef1_2} className="inline-block">
           {scrollTextContent}
         </div>
       </div>
       {/* Row 2: Left-to-Right Scroll */}
       <div className="relative flex whitespace-nowrap mt-2 md:mt-4" ref={scrollerContainerRef2}>
-        <div ref={textRef2_1} className="inline-block px-2 md:px-3 lg:px-4">
+        <div ref={textRef2_1} className="inline-block">
           {scrollTextContent}
         </div>
-        <div ref={textRef2_2} className="inline-block px-2 md:px-3 lg:px-4">
+        <div ref={textRef2_2} className="inline-block">
           {scrollTextContent}
         </div>
       </div>
