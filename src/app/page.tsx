@@ -6,9 +6,8 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { ArrowUpRight, Sparkles, ArrowRight, Eye, Dot, ChevronLeft, ChevronRight } from 'lucide-react';
+import { ArrowUpRight, Sparkles, ArrowRight, Eye, Dot, ChevronLeft, ChevronRight, Calculator, Laptop, Volume2 } from 'lucide-react';
 import InfiniteScrollerWithMouseFollower from '@/components/effects/InfiniteScrollerWithMouseFollower';
-import { CircleCheckBig, ShoppingCart, Puzzle, Wrench, Calculator } from 'lucide-react'; 
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
@@ -16,12 +15,21 @@ import { Input } from '@/components/ui/input';
 
 
 const services = [
-  { name: 'Brand Identity', description: 'Crafting unique visual identities that resonate.', icon: <CircleCheckBig className="h-10 w-10 text-primary mb-4" /> },
-  { name: 'Websites & Apps', description: 'Designing and developing high-performance digital platforms.', icon: <CircleCheckBig className="h-10 w-10 text-primary mb-4" /> },
-  { name: 'SEO Strategy', description: 'Optimizing your online presence for maximum visibility.', icon: <CircleCheckBig className="h-10 w-10 text-primary mb-4" /> },
-  { name: 'Craft CMS Development', description: 'Building flexible and powerful websites with Craft CMS.', icon: <CircleCheckBig className="h-10 w-10 text-primary mb-4" /> },
-  { name: 'WordPress Solutions', description: 'Building powerful and scalable websites with WordPress.', icon: <Wrench className="h-10 w-10 text-primary mb-4" /> },
-  { name: 'Accounting', description: 'Managing your finances with precision and expertise.', icon: <Calculator className="h-10 w-10 text-primary mb-4" /> },
+  {
+    name: 'Account Management',
+    description: 'Expert financial management, compliance, and strategic accounting services to ensure your business thrives.',
+    icon: <Calculator className="h-10 w-10 text-primary mb-4" />
+  },
+  {
+    name: 'Web & AI Solutions',
+    description: 'Cutting-edge web development, AI-powered tools, and creative design to build exceptional digital experiences.',
+    icon: <Laptop className="h-10 w-10 text-primary mb-4" />
+  },
+  {
+    name: 'Digital Marketing',
+    description: 'Strategic digital marketing services to boost your online presence, engage audiences, and drive growth.',
+    icon: <Volume2 className="h-10 w-10 text-primary mb-4" />
+  }
 ];
 
 const clientLogos = [
@@ -88,7 +96,7 @@ const homepageBlogPosts = [
     category: 'Web Design',
     date: '2024-07-15',
     author: 'Alex Chen',
-    dataAiHintImage: 'futuristic design',
+    dataAiHint: 'futuristic design',
   },
   {
     slug: 'unlocking-seo-success-a-comprehensive-guide',
@@ -99,7 +107,7 @@ const homepageBlogPosts = [
     category: 'SEO',
     date: '2024-07-01',
     author: 'Sam Lee',
-    dataAiHintImage: 'seo chart graph',
+    dataAiHint: 'seo chart graph',
   },
   {
     slug: 'why-craft-cms-is-our-go-to-for-flexible-websites',
@@ -110,12 +118,12 @@ const homepageBlogPosts = [
     category: 'Craft CMS',
     date: '2024-06-20',
     author: 'Maria Rodriguez',
-    dataAiHintImage: 'cms interface',
+    dataAiHint: 'cms interface',
   },
   {
     slug: 'ai-in-digital-marketing-the-new-frontier',
     title: 'AI in Digital Marketing: The New Frontier',
-    imageUrl: 'https://placehold.co/600x400.png', dataAiHintImage: 'artificial intelligence marketing',
+    imageUrl: 'https://placehold.co/600x400.png', dataAiHint: 'artificial intelligence marketing',
     excerpt: 'How AI is revolutionizing digital marketing strategies, from content creation to customer analytics.',
     readTime: '8 min read',
     category: 'Digital Marketing',
@@ -125,7 +133,7 @@ const homepageBlogPosts = [
   {
     slug: 'the-importance-of-user-experience-ux-in-web-design',
     title: 'The Importance of User Experience (UX) in Web Design',
-    imageUrl: 'https://placehold.co/600x400.png', dataAiHintImage: 'user experience interface',
+    imageUrl: 'https://placehold.co/600x400.png', dataAiHint: 'user experience interface',
     excerpt: 'A deep dive into why UX is paramount for website success and how to optimize it for your users.',
     readTime: '7 min read',
     category: 'Web Design',
@@ -135,7 +143,7 @@ const homepageBlogPosts = [
   {
     slug: 'wordpress-vs-headless-cms-which-is-right-for-you',
     title: 'WordPress vs. Headless CMS: Which is Right for You?',
-    imageUrl: 'https://placehold.co/600x400.png', dataAiHintImage: 'cms comparison chart',
+    imageUrl: 'https://placehold.co/600x400.png', dataAiHint: 'cms comparison chart',
     excerpt: 'Comparing traditional WordPress with modern headless CMS solutions to help you choose the best fit.',
     readTime: '9 min read',
     category: 'CMS',
