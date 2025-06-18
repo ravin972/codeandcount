@@ -69,19 +69,19 @@ const caseStudies = [
 
 const testimonials = [
   {
-    name: 'Jane Doe',
-    title: 'CEO, Alpha Corp',
-    avatar: 'https://images.unsplash.com/photo-1540569014015-19a7be504e3a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxwZXJzb24lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NTAwMzk3NTV8MA&ixlib=rb-4.1.0&q=80&w=1080',
-    dataAiHint: 'person portrait',
-    quote: "CodeAndCount.com transformed our online presence. Their team is professional, creative, and delivered outstanding results. We couldn't be happier!",
+    name: 'Priya Sharma',
+    title: 'Managing Director, Jaipur Handlooms Pvt. Ltd.',
+    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=1080&h=1080&fit=crop&q=80',
+    dataAiHint: 'indian woman professional',
+    quote: "CodeAndCount.com has been pivotal for our digital growth. Their expertise and dedication are truly commendable. Our online sales have significantly increased!",
     videoUrl: 'https://vimeo.com/placeholder',
   },
   {
-    name: 'John Smith',
-    title: 'Founder, Beta Solutions',
-    avatar: 'https://images.unsplash.com/photo-1639747280804-dd2d6b3d88ac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxtYW4lMjBzbWlsaW5nfGVufDB8fHx8MTc1MDA2MzY2OHww&ixlib=rb-4.1.0&q=80&w=1080',
-    dataAiHint: 'man smiling',
-    quote: 'Working with CodeAndCount.com was a game-changer. Their insights into branding and web development are unparalleled. Highly recommended!',
+    name: 'Rohan Mehra',
+    title: 'Founder, Bangalore Tech Startups',
+    avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=1080&h=1080&fit=crop&q=80',
+    dataAiHint: 'indian man startup',
+    quote: 'The team at CodeAndCount.com understood our vision perfectly and delivered a robust platform. Their innovative approach to web solutions is top-notch.',
     videoUrl: 'https://vimeo.com/placeholder',
   },
 ];
