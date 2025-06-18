@@ -55,8 +55,8 @@ const InfiniteScrollerWithMouseFollower: React.FC = () => {
 
         const elWidth1 = el1_1.offsetWidth;
         if (elWidth1 === 0) {
-          console.warn("GSAP Scroller: Row 1 text width is 0. Animation skipped.");
-          return;
+          // console.warn("GSAP Scroller: Row 1 text width is 0. Animation might not be seamless yet.");
+          return; // Wait for width
         }
         
         gsap.set(el1_2, { x: elWidth1 });
@@ -78,8 +78,8 @@ const InfiniteScrollerWithMouseFollower: React.FC = () => {
 
         const elWidth2 = el2_1.offsetWidth;
         if (elWidth2 === 0) {
-          console.warn("GSAP Scroller: Row 2 text width is 0. Animation skipped.");
-          return;
+          // console.warn("GSAP Scroller: Row 2 text width is 0. Animation might not be seamless yet.");
+          return; // Wait for width
         }
             
         gsap.set(el2_2, { x: -elWidth2 }); 
@@ -92,24 +92,31 @@ const InfiniteScrollerWithMouseFollower: React.FC = () => {
       }
     };
     
-    const initOrReinitAnimations = () => {
-      gsap.delayedCall(0.1, () => {
+    let rafId: number;
+    const attemptInitialization = () => {
+      if (textRef1_1.current && textRef1_1.current.offsetWidth > 0 && textRef2_1.current && textRef2_1.current.offsetWidth > 0) {
         setupRow1Animation();
         setupRow2Animation();
-      });
+      } else {
+        // If elements don't have width yet (e.g., fonts not loaded), try again next frame
+        rafId = requestAnimationFrame(attemptInitialization);
+      }
     };
-
+    
+    // Use document.fonts.ready for font loading, then attempt initialization.
     document.fonts.ready.then(() => {
-        initOrReinitAnimations();
+        attemptInitialization();
     }).catch(error => {
-        console.error("Font loading error or timeout for scroller, initializing anyway:", error);
-        initOrReinitAnimations(); 
+        // console.error("Font loading error or timeout for scroller, attempting init anyway:", error);
+        // Fallback to attempt initialization even if fonts.ready fails (e.g. timeout)
+        attemptInitialization();
     });
 
-    window.addEventListener('resize', initOrReinitAnimations);
+    window.addEventListener('resize', attemptInitialization);
 
     return () => {
-        window.removeEventListener('resize', initOrReinitAnimations);
+        window.removeEventListener('resize', attemptInitialization);
+        cancelAnimationFrame(rafId);
         anim1?.kill();
         anim2?.kill();
         if (container1) gsap.killTweensOf(container1);
@@ -121,6 +128,7 @@ const InfiniteScrollerWithMouseFollower: React.FC = () => {
     <section 
       ref={interactiveSectionRef}
       className="relative bg-background dark:bg-neutral-900 py-20 md:py-32 overflow-hidden"
+      data-interactive-cursor="true"
     >
       {/* Row 1: Right-to-Left Scroll */}
       <div className="relative flex whitespace-nowrap" ref={scrollerContainerRef1}>
@@ -145,3 +153,4 @@ const InfiniteScrollerWithMouseFollower: React.FC = () => {
 };
 
 export default InfiniteScrollerWithMouseFollower;
+
