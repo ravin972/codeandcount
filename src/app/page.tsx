@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { ArrowUpRight, Sparkles, ArrowRight, Eye, Dot, ChevronLeft, ChevronRight, Calculator, Laptop, Volume2 } from 'lucide-react';
+import { ArrowUpRight, Sparkles, ArrowRight, Eye, Dot, ChevronLeft, ChevronRight, Calculator, Laptop, Volume2, Building, Briefcase, Network, Users, Globe } from 'lucide-react';
 import InfiniteScrollerWithMouseFollower from '@/components/effects/InfiniteScrollerWithMouseFollower';
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { Label } from '@/components/ui/label';
@@ -33,11 +33,11 @@ const services = [
 ];
 
 const clientLogos = [
-  { name: 'Client Alpha', src: 'https://images.unsplash.com/photo-1615935319449-e3287a4bbf4f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8bG9nbyUyMGFic3RyYWN0fGVufDB8fHx8MTc1MDA2MzY2OHww&ixlib=rb-4.1.0&q=80&w=1080', dataAiHint: 'logo abstract' },
-  { name: 'Client Beta', src: 'https://images.unsplash.com/photo-1640342538716-286e4e27e104?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxsb2dvJTIwZ2VvbWV0cmljfGVufDB8fHx8MTc1MDA2MzY2OHww&ixlib=rb-4.1.0&q=80&w=1080', dataAiHint: 'logo geometric' },
-  { name: 'Client Gamma', src: 'https://images.unsplash.com/photo-1693374925575-ac8fa3ffab14?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxsb2dvJTIwbW9kZXJufGVufDB8fHx8MTc1MDA2MzY2OHww&ixlib=rb-4.1.0&q=80&w=1080', dataAiHint: 'logo modern' },
-  { name: 'Client Delta', src: 'https://images.unsplash.com/photo-1618242556516-6858a8f34cb0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxsb2dvJTIwbWluaW1hbGlzdHxlbnwwfHx8fDE3NTAwNjM2Njh8MA&ixlib=rb-4.1.0&q=80&w=1080', dataAiHint: 'logo minimalist' },
-  { name: 'Client Epsilon', src: 'https://images.unsplash.com/photo-1554774853-d50f9c681ae2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxsb2dvJTIwY29ycG9yYXRlfGVufDB8fHx8MTc1MDA2MzY2OHww&ixlib=rb-4.1.0&q=80&w=1080', dataAiHint: 'logo corporate' },
+  { name: 'Client Alpha', icon: <Building className="h-12 w-12 text-muted-foreground group-hover:text-primary transition-colors" /> },
+  { name: 'Client Beta', icon: <Briefcase className="h-12 w-12 text-muted-foreground group-hover:text-primary transition-colors" /> },
+  { name: 'Client Gamma', icon: <Network className="h-12 w-12 text-muted-foreground group-hover:text-primary transition-colors" /> },
+  { name: 'Client Delta', icon: <Users className="h-12 w-12 text-muted-foreground group-hover:text-primary transition-colors" /> },
+  { name: 'Client Epsilon', icon: <Globe className="h-12 w-12 text-muted-foreground group-hover:text-primary transition-colors" /> },
 ];
 
 const caseStudies = [
@@ -304,8 +304,8 @@ export default function HomePage() {
             <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-10">Trusted by Industry Leaders</h2>
             <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
               {clientLogos.map((logo) => (
-                <div key={logo.name} title={logo.name} className="opacity-70 hover:opacity-100 transition-opacity duration-300 ease-in-out transform hover:scale-105">
-                  <Image src={logo.src} alt={logo.name} width={150} height={60} data-ai-hint={logo.dataAiHint} />
+                <div key={logo.name} title={logo.name} className="transition-transform duration-300 ease-in-out transform hover:scale-110 group" data-interactive-cursor="true">
+                  {logo.icon}
                 </div>
               ))}
             </div>
