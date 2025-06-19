@@ -53,12 +53,12 @@ export function Footer() {
 
   return (
     <footer className={cn(
-      "relative text-primary-foreground pt-16 md:pt-20 pb-8 md:pb-12 overflow-hidden", // Adjusted padding
-      "bg-gradient-bloom-cta dark:bg-gradient-bloom-cta"
+      "relative text-primary-foreground pt-16 md:pt-20 pb-8 md:pb-12 overflow-hidden",
+      "bg-gradient-bloom-cta dark:bg-gradient-bloom-cta" // Using the vibrant green/gold gradient
     )}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
         {/* Main CTA */}
-        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">{footerSections.cta.title}</h2>
+        <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 text-primary-foreground">{footerSections.cta.title}</h2>
         <p className="text-lg md:text-xl max-w-2xl mx-auto mb-10 text-primary-foreground/90">
           {footerSections.cta.description}
         </p>
@@ -67,6 +67,7 @@ export function Footer() {
           asChild 
           className={cn(
             "rounded-full group text-base md:text-lg py-3 px-8 md:py-4 md:px-10",
+             // Light button on dark gradient: White/light gray bg, primary (green) text
             "bg-primary-foreground text-primary hover:bg-primary-foreground/90 dark:bg-primary-foreground dark:text-primary dark:hover:bg-primary-foreground/90"
           )}
         >
@@ -79,16 +80,6 @@ export function Footer() {
         {/* Divider */}
         <div className="my-10 md:my-14 border-t border-primary-foreground/20 w-1/2 mx-auto"></div>
         
-        {/* Back To Top Button - New Position */}
-        <div className="mt-6 mb-6 md:mb-8 flex justify-center">
-          <BackToTopButton
-            className={cn(
-              "bg-primary-foreground/10 text-primary-foreground hover:bg-primary-foreground/20 focus:ring-primary-foreground/50 focus:ring-offset-transparent",
-              "dark:bg-primary-foreground/10 dark:text-primary-foreground dark:hover:bg-primary-foreground/20 dark:focus:ring-primary-foreground/50 dark:focus:ring-offset-transparent"
-            )}
-          />
-        </div>
-
         {/* Footer Links & Info Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 text-sm">
           {/* Quick Links */}
@@ -133,7 +124,9 @@ export function Footer() {
           
           {/* Social Links */}
           <div className="md:text-left">
-            <h3 className="text-xl font-semibold text-primary-foreground mb-4">Connect With Us</h3>
+             <div className="flex items-center justify-between mb-4">
+                <h3 className="text-xl font-semibold text-primary-foreground">Connect With Us</h3>
+             </div>
             <div className="flex md:justify-start justify-center space-x-4">
               {footerSections.socialLinks.map((social) => (
                 <Link 
@@ -150,6 +143,12 @@ export function Footer() {
             </div>
           </div>
         </div>
+        
+        {/* Back To Top Button - New Position */}
+        <div className="mt-10 md:mt-14 flex justify-center">
+          <BackToTopButton className="bg-primary-foreground/10 text-primary-foreground hover:bg-primary-foreground/20 focus:ring-primary-foreground/50 focus:ring-offset-transparent dark:bg-primary-foreground/10 dark:text-primary-foreground dark:hover:bg-primary-foreground/20 dark:focus:ring-primary-foreground/50 dark:focus:ring-offset-transparent" />
+        </div>
+
 
         {/* Bottom Bar */}
         <div className="mt-10 md:mt-14 pt-8 border-t border-primary-foreground/20 text-xs text-primary-foreground/70">
