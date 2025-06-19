@@ -3,7 +3,7 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { MessageSquareText } from 'lucide-react'; // Using MessageSquareText for a slightly different look
+import { MessageSquareText } from 'lucide-react'; 
 import { cn } from '@/lib/utils';
 
 export default function FloatingWhatsAppButton() {
@@ -16,7 +16,7 @@ export default function FloatingWhatsAppButton() {
       asChild
       className={cn(
         "fixed bottom-6 right-6 z-40 h-14 w-auto min-w-[60px] p-4 rounded-full shadow-xl transition-all duration-300 ease-in-out transform hover:scale-105",
-        "bg-[#25D366] hover:bg-[#1DAE51] text-white focus:ring-2 focus:ring-offset-2 focus:ring-[#25D366]/80"
+        "bg-primary hover:bg-primary/90 text-primary-foreground focus:ring-2 focus:ring-offset-2 focus:ring-primary/80"
       )}
       aria-label="Chat on WhatsApp"
       data-interactive-cursor="true"
