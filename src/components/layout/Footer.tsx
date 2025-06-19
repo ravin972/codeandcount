@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowUpRight, Phone, Mail, MapPin, Copyright, Github, Linkedin, Instagram } from 'lucide-react'; 
 import React from 'react';
 import { cn } from '@/lib/utils';
+import { BackToTopButton } from '@/components/layout/BackToTopButton'; // Added import
 
 // Define X/Twitter Icon as SVG
 const XIcon = () => (
@@ -52,7 +53,7 @@ export function Footer() {
 
   return (
     <footer className={cn(
-      "relative text-primary-foreground py-16 md:py-24 overflow-hidden",
+      "relative text-primary-foreground py-16 md:py-20 overflow-hidden", // Adjusted padding
       "bg-gradient-bloom-cta dark:bg-gradient-bloom-cta"
     )}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
@@ -66,7 +67,8 @@ export function Footer() {
           asChild 
           className={cn(
             "rounded-full group text-base md:text-lg py-3 px-8 md:py-4 md:px-10",
-            "bg-primary-foreground text-primary hover:bg-primary-foreground/90 dark:bg-background dark:text-foreground dark:hover:bg-background/90"
+            // Switched colors for better CTA contrast on vibrant gradient
+            "bg-primary-foreground text-primary hover:bg-primary-foreground/90 dark:bg-primary-foreground dark:text-primary dark:hover:bg-primary-foreground/90"
           )}
         >
           <Link href={footerSections.cta.buttonLink}>
@@ -76,7 +78,7 @@ export function Footer() {
         </Button>
 
         {/* Divider */}
-        <div className="my-12 md:my-16 border-t border-primary-foreground/20 w-1/2 mx-auto"></div>
+        <div className="my-10 md:my-14 border-t border-primary-foreground/20 w-1/2 mx-auto"></div>
 
         {/* Footer Links & Info Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 text-sm">
@@ -140,8 +142,18 @@ export function Footer() {
           </div>
         </div>
 
+        {/* Back to Top Button */}
+        <div className="mt-10 md:mt-14 text-center">
+          <BackToTopButton 
+            className={cn(
+              "bg-primary-foreground/10 text-primary-foreground hover:bg-primary-foreground/20 focus:ring-primary-foreground/50 focus:ring-offset-transparent",
+              "dark:bg-primary-foreground/10 dark:text-primary-foreground dark:hover:bg-primary-foreground/20 dark:focus:ring-primary-foreground/50 dark:focus:ring-offset-transparent"
+            )} 
+          />
+        </div>
+
         {/* Bottom Bar */}
-        <div className="mt-12 md:mt-16 pt-8 border-t border-primary-foreground/20 text-xs text-primary-foreground/70">
+        <div className="mt-10 md:mt-14 pt-8 border-t border-primary-foreground/20 text-xs text-primary-foreground/70">
           <div className="flex flex-col sm:flex-row justify-between items-center">
             <div className="mb-2 sm:mb-0">
               <span>&copy; CodeAndCount.com {foundingYear} - {currentYear}. All Rights Reserved.</span>
