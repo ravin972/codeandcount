@@ -42,28 +42,28 @@ const clientLogos = [
 
 const caseStudies = [
   {
-    id: 'project-genesis',
-    title: 'Project Genesis Rebrand',
-    category: 'Brand Identity',
-    imageUrl: 'https://images.unsplash.com/photo-1597873618537-64a04f9e1fb3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxicmFuZGluZyUyMHBvcnRmb2xpb3xlbnwwfHx8fDE3NTAwNjM2Njh8MA&ixlib=rb-4.1.0&q=80&w=1080',
-    dataAiHint: 'branding portfolio',
-    description: 'A complete overhaul of a tech startup\'s brand identity, resulting in a 200% increase in recognition.',
+    id: 'divyasangrah-spiritual-marketplace',
+    title: 'DivyaSangrah Spiritual Marketplace',
+    category: 'E‑commerce · Spiritual Services',
+    imageUrl: 'https://placehold.co/600x450.png', // Matching placeholder from work page
+    dataAiHint: 'spiritual storefront',
+    description: 'An all-in-one online store offering puja items, astrology consultations, and religious service bookings. Crafted for spiritual ambience and performance.',
   },
   {
-    id: 'e-commerce-nova',
-    title: 'E-commerce Nova Platform',
-    category: 'Websites',
-    imageUrl: 'https://images.unsplash.com/photo-1559028012-481c04fa702d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHx3ZWJzaXRlJTIwZGVzaWdufGVufDB8fHx8MTc1MDA2MzY2OHww&ixlib=rb-4.1.0&q=80&w=1080',
-    dataAiHint: 'website design',
-    description: 'Launched a scalable e-commerce platform for a fashion retailer, boosting sales by 150%.',
+    id: 'itverbs-technology-solutions',
+    title: 'ITVerbs Technology Solutions',
+    category: 'Corporate IT Solutions',
+    imageUrl: 'https://placehold.co/600x450.png', // Matching placeholder from work page
+    dataAiHint: 'corporate it',
+    description: 'Corporate portal for AI solutions, cloud services, and development projects. Includes career hub, portfolio sections, and contact workflows.',
   },
   {
-    id: 'seo-summit',
-    title: 'SEO Summit Campaign',
-    category: 'SEO',
-    imageUrl: 'https://images.unsplash.com/photo-1643894440616-59735a6db1ae?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxzZW8lMjByZXN1bHRzfGVufDB8fHx8MTc1MDA2MzY2OHww&ixlib=rb-4.1.0&q=80&w=1080',
-    dataAiHint: 'seo results',
-    description: 'Elevated a local business to the top of search rankings for competitive keywords.',
+    id: 'buztrix-traveltech',
+    title: 'BuzTrix TravelTech India Pvt. Ltd.',
+    category: 'Travel SaaS Platform',
+    imageUrl: 'https://placehold.co/600x450.png', // Matching placeholder from work page
+    dataAiHint: 'travel saas',
+    description: 'Developed for B2B travel operations. Offers hotel & flight APIs, lead tracking dashboards, and bulk booking systems.',
   },
 ];
 
@@ -71,14 +71,14 @@ const testimonials = [
   {
     name: 'Priya Sharma',
     title: 'Managing Director, Jaipur Handlooms Pvt. Ltd.',
-    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=1080&h=1080&fit=crop&q=80',
+    avatar: 'https://images.unsplash.com/photo-1544264796-acfb69e05b37?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxpbmRpYW4lMjB3b21hbiUyMHByb2Zlc3Npb25hbHxlbnwwfHx8fDE3NTAzMTAyODF8MA&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHint: 'indian woman professional',
     quote: "CodeAndCount.com has been pivotal for our digital growth. Their expertise and dedication are truly commendable. Our online sales have significantly increased!",
   },
   {
     name: 'Rohan Mehra',
     title: 'Founder, Bangalore Tech Startups',
-    avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=1080&h=1080&fit=crop&q=80',
+    avatar: 'https://images.unsplash.com/photo-1681165558305-6e65c7e85d51?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxpbmRpYW4lMjBtYW4lMjBzdGFydHVwfGVufDB8fHx8MTc1MDMxMDI4MXww&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHint: 'indian man startup',
     quote: 'The team at CodeAndCount.com understood our vision perfectly and delivered a robust platform. Their innovative approach to web solutions is top-notch.',
   },
@@ -88,7 +88,7 @@ const homepageBlogPosts = [
   {
     slug: 'the-future-of-web-design-trends-for-2024',
     title: 'The Future of Web Design: Trends for 2024',
-    imageUrl: 'https://images.unsplash.com/photo-1547398123-828a28902e57?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxmdXR1cmlzdGljJTIwZGVzaWdufGVufDB8fHx8MTc0NzM3NjYzN3ww&ixlib=rb-4.1.0&q=80&w=1080',
+    imageUrl: 'https://images.unsplash.com/photo-1636884181111-25072dba4c19?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxmdXR1cmlzdGljJTIwZGVzaWdufGVufDB8fHx8MTc1MDMxMDI4MXww&ixlib=rb-4.1.0&q=80&w=1080',
     excerpt: 'Discover the cutting-edge web design trends shaping the digital landscape in 2024, from AI integration to immersive experiences.',
     readTime: '6 min read',
     category: 'Web Design',
@@ -99,7 +99,7 @@ const homepageBlogPosts = [
   {
     slug: 'unlocking-seo-success-a-comprehensive-guide',
     title: 'Unlocking SEO Success: A Comprehensive Guide',
-    imageUrl: 'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzZW8lMjBjaGFydCUyMGdyYXBofGVufDB8fHx8MTc0NzM3NjYzN3ww&ixlib=rb-4.1.0&q=80&w=1080',
+    imageUrl: 'https://images.unsplash.com/photo-1626234736261-f50c9ff94bef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxzZW8lMjBjaGFydCUyMGdyYXBofGVufDB8fHx8MTc1MDMxMDI4MXww&ixlib=rb-4.1.0&q=80&w=1080',
     excerpt: 'Navigate the complexities of SEO with our in-depth guide, covering everything from keyword research to technical optimization.',
     readTime: '10 min read',
     category: 'SEO',
@@ -110,7 +110,7 @@ const homepageBlogPosts = [
   {
     slug: 'why-craft-cms-is-our-go-to-for-flexible-websites',
     title: 'Why Craft CMS is Our Go-To for Flexible Websites',
-    imageUrl: 'https://images.unsplash.com/photo-1698621193747-e8788c620dbc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxjbXMlMjBpbnRlcmZhY2V8ZW58MHx8fHwxNzQ3Mzc2NjM3fDA&ixlib=rb-4.1.0&q=80&w=1080',
+    imageUrl: 'https://images.unsplash.com/photo-1641567535859-c58187ac4954?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxjbXMlMjBpbnRlcmZhY2V8ZW58MHx8fHwxNzUwMzEwMjgxfDA&ixlib=rb-4.1.0&q=80&w=1080',
     excerpt: 'Explore the benefits of Craft CMS and why it stands out as a powerful, flexible, and user-friendly content management system.',
     readTime: '4 min read',
     category: 'Craft CMS',
@@ -121,7 +121,7 @@ const homepageBlogPosts = [
   {
     slug: 'ai-in-digital-marketing-the-new-frontier',
     title: 'AI in Digital Marketing: The New Frontier',
-    imageUrl: 'https://placehold.co/600x400.png', dataAiHint: 'artificial intelligence marketing',
+    imageUrl: 'https://images.unsplash.com/photo-1633311905139-7b6088a69e33?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxhcnRpZmljaWFsJTIwaW50ZWxsaWdlbmNlJTIwbWFya2V0aW5nfGVufDB8fHx8MTc1MDMxMDI4Mnww&ixlib=rb-4.1.0&q=80&w=1080', dataAiHint: 'artificial intelligence marketing',
     excerpt: 'How AI is revolutionizing digital marketing strategies, from content creation to customer analytics.',
     readTime: '8 min read',
     category: 'Digital Marketing',
@@ -131,7 +131,7 @@ const homepageBlogPosts = [
   {
     slug: 'the-importance-of-user-experience-ux-in-web-design',
     title: 'The Importance of User Experience (UX) in Web Design',
-    imageUrl: 'https://placehold.co/600x400.png', dataAiHint: 'user experience interface',
+    imageUrl: 'https://images.unsplash.com/photo-1582689276107-81361ca655f5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHx1c2VyJTIwZXhwZXJpZW5jZSUyMGludGVyZmFjZXxlbnwwfHx8fDE3NTAzMTAyODF8MA&ixlib=rb-4.1.0&q=80&w=1080', dataAiHint: 'user experience interface',
     excerpt: 'A deep dive into why UX is paramount for website success and how to optimize it for your users.',
     readTime: '7 min read',
     category: 'Web Design',
@@ -141,7 +141,7 @@ const homepageBlogPosts = [
   {
     slug: 'wordpress-vs-headless-cms-which-is-right-for-you',
     title: 'WordPress vs. Headless CMS: Which is Right for You?',
-    imageUrl: 'https://placehold.co/600x400.png', dataAiHint: 'cms comparison chart',
+    imageUrl: 'https://images.unsplash.com/photo-1666537072206-6a7a01ecb7d9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxjbXMlMjBjb21wYXJpc29uJTIwY2hhcnR8ZW58MHx8fHwxNzUwMzEwMjgxfDA&ixlib=rb-4.1.0&q=80&w=1080', dataAiHint: 'cms comparison chart',
     excerpt: 'Comparing traditional WordPress with modern headless CMS solutions to help you choose the best fit.',
     readTime: '9 min read',
     category: 'CMS',
@@ -236,26 +236,18 @@ export default function HomePage() {
       <section className="py-20 md:py-32 relative overflow-hidden">
         <div
           aria-hidden="true"
-          className="absolute top-[-10rem] left-[-15rem] w-[30rem] h-[30rem] md:w-[40rem] md:h-[40rem] bg-gradient-to-br from-primary/20 to-secondary/20 dark:from-primary/10 dark:to-secondary/10 rounded-full opacity-60 blur-3xl -z-10"
+          className="absolute top-[-10rem] left-[-15rem] w-[30rem] h-[30rem] md:w-[40rem] md:h-[40rem] bg-gradient-blob-1 rounded-full opacity-30 blur-3xl -z-10"
         />
         <div
           aria-hidden="true"
-          className="absolute bottom-[-5rem] right-[-10rem] w-[25rem] h-[25rem] md:w-[35rem] md:h-[35rem] bg-gradient-to-tl from-accent/20 to-primary/10 dark:from-accent/10 dark:to-primary/5 rounded-full opacity-50 blur-3xl -z-10"
+          className="absolute bottom-[-5rem] right-[-10rem] w-[25rem] h-[25rem] md:w-[35rem] md:h-[35rem] bg-gradient-blob-2 rounded-full opacity-20 blur-3xl -z-10"
         />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-         <div className="relative bg-background/70 dark:bg-neutral-900/70 backdrop-blur-xl rounded-3xl border border-white/10 dark:border-neutral-700/30 shadow-2xl p-8 md:p-12 lg:p-16">
+         <div className="relative bg-gradient-main-hero backdrop-blur-xl rounded-3xl border border-white/10 dark:border-neutral-700/30 shadow-2xl p-8 md:p-12 lg:p-16">
             <div className="mb-6">
-              <div className="relative inline-grid place-items-center [transform-style:preserve-3d] [perspective:1000px]">
-                <div
-                  aria-hidden="true"
-                  className="col-start-1 row-start-1 text-5xl md:text-7xl font-bold tracking-tight text-primary blur-xl opacity-60 brightness-150 [transform:translateZ(-30px)_scale(1.1)] pointer-events-none"
-                >
-                  Crafting <span className="text-primary">Digital Excellence</span>.
-                </div>
-                <h1 className="col-start-1 row-start-1 relative z-[1] text-5xl md:text-7xl font-bold tracking-tight">
-                  Crafting <span className="text-primary">Digital Excellence</span>.
-                </h1>
-              </div>
+              <h1 className="text-5xl md:text-7xl font-bold tracking-tight bg-gradient-text-dynamic bg-clip-text text-transparent">
+                Crafting Digital Excellence.
+              </h1>
             </div>
 
             <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-10">
@@ -271,9 +263,9 @@ export default function HomePage() {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-16 bg-secondary/70 dark:bg-secondary/70 backdrop-blur-lg border-y border-white/10 dark:border-neutral-700/30">
+      <section id="services" className="py-16 bg-gradient-subtle-bg backdrop-blur-lg border-y border-white/10 dark:border-neutral-700/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative inline-grid place-items-center [transform-style:preserve-3d] [perspective:1000px] w-full text-center mb-4">
+        <div className="relative inline-grid place-items-center w-full text-center mb-4">
             <h2 className="col-start-1 row-start-1 relative z-[1] text-4xl md:text-5xl font-bold text-center">Our Core Services</h2>
           </div>
           <p className="text-xl md:text-2xl text-muted-foreground text-center mt-4 mb-12 max-w-2xl mx-auto">
@@ -298,7 +290,7 @@ export default function HomePage() {
       {/* Client Logos Section */}
       <section id="trusted-by-leaders" className="py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-background/70 dark:bg-neutral-900/70 backdrop-blur-lg rounded-xl shadow-xl p-8 md:p-12 border border-white/10 dark:border-neutral-700/30">
+          <div className="bg-gradient-subtle-bg backdrop-blur-lg rounded-xl shadow-xl p-8 md:p-12 border border-white/10 dark:border-neutral-700/30">
             <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-10">Trusted by Industry Leaders</h2>
             <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
               {clientLogos.map((logo) => (
@@ -312,15 +304,9 @@ export default function HomePage() {
       </section>
 
       {/* Case Studies Section */}
-      <section id="work" className="py-16 bg-secondary/70 dark:bg-secondary/70 backdrop-blur-lg border-y border-white/10 dark:border-neutral-700/30">
+      <section id="work" className="py-16 bg-gradient-subtle-bg backdrop-blur-lg border-y border-white/10 dark:border-neutral-700/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative inline-grid place-items-center [transform-style:preserve-3d] [perspective:1000px] w-full text-center mb-4">
-            <div
-              aria-hidden="true"
-              className="col-start-1 row-start-1 text-4xl font-bold tracking-tight text-primary blur-lg opacity-60 brightness-150 [transform:translateZ(-20px)_scale(1.05)] pointer-events-none"
-            >
-              Featured Work
-            </div>
+          <div className="relative inline-grid place-items-center w-full text-center mb-4">
             <h2 className="col-start-1 row-start-1 relative z-[1] text-4xl md:text-5xl font-bold text-center">Featured Work</h2>
           </div>
           <p className="text-xl md:text-2xl text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
@@ -394,13 +380,7 @@ export default function HomePage() {
       <section id="seo-tool" className="py-16 md:py-20 bg-foreground/80 dark:bg-secondary/80 backdrop-blur-lg text-background dark:text-secondary-foreground border-y border-white/10 dark:border-neutral-700/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <Sparkles className="h-12 w-12 text-primary mx-auto mb-6" />
-          <div className="relative inline-grid place-items-center [transform-style:preserve-3d] [perspective:1000px] w-full text-center mb-6">
-            <div
-              aria-hidden="true"
-              className="col-start-1 row-start-1 text-4xl md:text-5xl font-bold tracking-tight text-primary blur-lg opacity-60 brightness-150 [transform:translateZ(-20px)_scale(1.05)] pointer-events-none"
-            >
-              Boost Your SEO with Our AI Optimizer
-            </div>
+          <div className="relative inline-grid place-items-center w-full text-center mb-6">
             <h2 className="col-start-1 row-start-1 relative z-[1] text-4xl md:text-5xl font-bold">Boost Your SEO with Our AI Optimizer</h2>
           </div>
           <p className="text-lg md:text-xl text-background/80 dark:text-muted-foreground max-w-2xl mx-auto mb-10">
