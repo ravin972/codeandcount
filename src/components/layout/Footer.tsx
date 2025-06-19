@@ -3,9 +3,16 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowUpRight, Phone, Mail, MapPin, Copyright } from 'lucide-react'; 
+import { ArrowUpRight, Phone, Mail, MapPin, Copyright, Github, Linkedin, Instagram } from 'lucide-react'; 
 import React from 'react';
 import { cn } from '@/lib/utils';
+
+// Define X/Twitter Icon as SVG
+const XIcon = () => (
+  <svg viewBox="0 0 1200 1227" fill="none" xmlns="http://www.w3.org/2000/svg" className="h-5 w-5">
+    <path d="M714.163 519.284L1160.89 0H1055.03L667.137 450.887L357.328 0H0L468.492 681.821L0 1226.37H105.866L515.491 750.218L842.672 1226.37H1200L714.137 519.284H714.163ZM569.165 687.828L521.697 619.934L144.011 79.6905H306.438L611.412 515.685L658.88 583.579L1055.08 1150.3H892.656L569.141 687.854L569.165 687.828Z" fill="currentColor"/>
+  </svg>
+);
 
 const footerSections = {
   cta: {
@@ -29,7 +36,13 @@ const footerSections = {
     email: "hello@codeandcount.com",
     addressLine1: "spaze i tech park, Sec-49",
     addressLine2: "Gurugram, Haryana, India"
-  }
+  },
+  socialLinks: [
+    { name: "GitHub", href: "https://github.com/codeandcount", icon: <Github /> },
+    { name: "LinkedIn", href: "https://linkedin.com/company/codeandcount", icon: <Linkedin /> },
+    { name: "X", href: "https://x.com/codeandcount", icon: <XIcon /> },
+    { name: "Instagram", href: "https://instagram.com/codeandcount", icon: <Instagram /> },
+  ]
 };
 
 const foundingYear = 2020;
@@ -40,7 +53,7 @@ export function Footer() {
   return (
     <footer className={cn(
       "relative text-primary-foreground py-16 md:py-24 overflow-hidden",
-      "bg-gradient-bloom-cta-light dark:bg-gradient-bloom-cta" 
+      "bg-gradient-bloom-cta dark:bg-gradient-bloom-cta"
     )}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
         {/* Main CTA */}
@@ -54,7 +67,6 @@ export function Footer() {
           className={cn(
             "rounded-full group text-base md:text-lg py-3 px-8 md:py-4 md:px-10",
             "bg-primary-foreground text-primary hover:bg-primary-foreground/90 dark:bg-background dark:text-foreground dark:hover:bg-background/90"
-            // For light theme: White button, primary text. For dark theme: Dark button, light text.
           )}
         >
           <Link href={footerSections.cta.buttonLink}>
@@ -66,43 +78,65 @@ export function Footer() {
         {/* Divider */}
         <div className="my-12 md:my-16 border-t border-primary-foreground/20 w-1/2 mx-auto"></div>
 
-        {/* Quick Links & Contact Info */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-sm">
-          <div>
-            <h3 className="text-xl font-semibold mb-4">Quick Links</h3>
+        {/* Footer Links & Info Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 text-sm">
+          {/* Quick Links */}
+          <div className="md:text-left">
+            <h3 className="text-xl font-semibold mb-4 text-primary-foreground">Quick Links</h3>
             <ul className="space-y-2">
               {footerSections.quickLinks.map((link) => (
                 <li key={link.text}>
-                  <Link href={link.href} className="hover:text-primary-foreground/70 transition-colors duration-200">
+                  <Link href={link.href} className="text-primary-foreground/80 hover:text-primary-foreground transition-colors duration-200">
                     {link.text}
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
-          <div>
-            <h3 className="text-xl font-semibold mb-4">Contact Us</h3>
+
+          {/* Contact Info */}
+          <div className="md:text-left">
+            <h3 className="text-xl font-semibold mb-4 text-primary-foreground">Contact Us</h3>
             <ul className="space-y-2">
               <li>
-                <a href={`tel:${footerSections.contactInfo.phone1.replace(/\s/g, '')}`} className="flex items-center justify-center hover:text-primary-foreground/70 transition-colors duration-200">
+                <a href={`tel:${footerSections.contactInfo.phone1.replace(/\s/g, '')}`} className="flex items-center md:justify-start justify-center text-primary-foreground/80 hover:text-primary-foreground transition-colors duration-200">
                   <Phone className="h-4 w-4 mr-2 flex-shrink-0" /> {footerSections.contactInfo.phone1}
                 </a>
               </li>
                <li>
-                <a href={`tel:${footerSections.contactInfo.phone2.replace(/\s/g, '')}`} className="flex items-center justify-center hover:text-primary-foreground/70 transition-colors duration-200">
+                <a href={`tel:${footerSections.contactInfo.phone2.replace(/\s/g, '')}`} className="flex items-center md:justify-start justify-center text-primary-foreground/80 hover:text-primary-foreground transition-colors duration-200">
                   <Phone className="h-4 w-4 mr-2 flex-shrink-0" /> {footerSections.contactInfo.phone2}
                 </a>
               </li>
               <li>
-                <a href={`mailto:${footerSections.contactInfo.email}`} className="flex items-center justify-center hover:text-primary-foreground/70 transition-colors duration-200">
+                <a href={`mailto:${footerSections.contactInfo.email}`} className="flex items-center md:justify-start justify-center text-primary-foreground/80 hover:text-primary-foreground transition-colors duration-200">
                   <Mail className="h-4 w-4 mr-2 flex-shrink-0" /> {footerSections.contactInfo.email}
                 </a>
               </li>
-              <li className="flex items-center justify-center">
-                <MapPin className="h-4 w-4 mr-2 flex-shrink-0" /> 
-                <span>{footerSections.contactInfo.addressLine1}, {footerSections.contactInfo.addressLine2}</span>
+              <li className="flex items-start md:justify-start justify-center text-primary-foreground/80">
+                <MapPin className="h-4 w-4 mr-2 mt-0.5 flex-shrink-0" /> 
+                <span className="text-left">{footerSections.contactInfo.addressLine1},<br/>{footerSections.contactInfo.addressLine2}</span>
               </li>
             </ul>
+          </div>
+          
+          {/* Social Links */}
+          <div className="md:text-left">
+            <h3 className="text-xl font-semibold mb-4 text-primary-foreground">Connect With Us</h3>
+            <div className="flex md:justify-start justify-center space-x-4">
+              {footerSections.socialLinks.map((social) => (
+                <Link 
+                  key={social.name} 
+                  href={social.href} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="text-primary-foreground/80 hover:text-primary-foreground transition-colors duration-200"
+                  aria-label={social.name}
+                >
+                  {React.cloneElement(social.icon, { className: "h-6 w-6" })}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
 
@@ -119,8 +153,8 @@ export function Footer() {
             </div>
           </div>
            <div className="mt-4">
-            <Link href="/" className="text-lg font-bold hover:opacity-80 transition-opacity">
-              Code<span className="text-accent dark:text-accent">And</span>Count {/* Using accent for 'And' */}
+            <Link href="/" className="text-lg font-bold text-primary-foreground hover:opacity-80 transition-opacity">
+              Code<span className="text-accent dark:text-accent">And</span>Count
             </Link>
           </div>
         </div>
