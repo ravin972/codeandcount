@@ -45,7 +45,7 @@ const caseStudies = [
     id: 'divyasangrah-spiritual-marketplace',
     title: 'DivyaSangrah Spiritual Marketplace',
     category: 'E‑commerce · Spiritual Services',
-    imageUrl: 'https://placehold.co/600x450.png', // Matching placeholder from work page
+    imageUrl: 'https://images.unsplash.com/photo-1725075236549-cb936c4a8c21?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxzcGlyaXR1YWwlMjBzdG9yZWZyb250fGVufDB8fHx8MTc1MDMxMjQ4N3ww&ixlib=rb-4.1.0&q=80&w=1080', 
     dataAiHint: 'spiritual storefront',
     description: 'An all-in-one online store offering puja items, astrology consultations, and religious service bookings. Crafted for spiritual ambience and performance.',
   },
@@ -53,7 +53,7 @@ const caseStudies = [
     id: 'itverbs-technology-solutions',
     title: 'ITVerbs Technology Solutions',
     category: 'Corporate IT Solutions',
-    imageUrl: 'https://placehold.co/600x450.png', // Matching placeholder from work page
+    imageUrl: 'https://images.unsplash.com/photo-1608908271749-40decee4f0e3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxjb3Jwb3JhdGUlMjBpdHxlbnwwfHx8fDE3NTAzMTI0ODZ8MA&ixlib=rb-4.1.0&q=80&w=1080', 
     dataAiHint: 'corporate it',
     description: 'Corporate portal for AI solutions, cloud services, and development projects. Includes career hub, portfolio sections, and contact workflows.',
   },
@@ -61,7 +61,7 @@ const caseStudies = [
     id: 'buztrix-traveltech',
     title: 'BuzTrix TravelTech India Pvt. Ltd.',
     category: 'Travel SaaS Platform',
-    imageUrl: 'https://placehold.co/600x450.png', // Matching placeholder from work page
+    imageUrl: 'https://images.unsplash.com/photo-1663832669455-9a5ff27107ef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHx0cmF2ZWwlMjBzYWFzfGVufDB8fHx8MTc1MDMxMjQ4Nnww&ixlib=rb-4.1.0&q=80&w=1080', 
     dataAiHint: 'travel saas',
     description: 'Developed for B2B travel operations. Offers hotel & flight APIs, lead tracking dashboards, and bulk booking systems.',
   },
@@ -71,14 +71,14 @@ const testimonials = [
   {
     name: 'Priya Sharma',
     title: 'Managing Director, Jaipur Handlooms Pvt. Ltd.',
-    avatar: 'https://images.unsplash.com/photo-1544264796-acfb69e05b37?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxpbmRpYW4lMjB3b21hbiUyMHByb2Zlc3Npb25hbHxlbnwwfHx8fDE3NTAzMTAyODF8MA&ixlib=rb-4.1.0&q=80&w=1080',
+    avatar: 'https://images.unsplash.com/flagged/photo-1559289142-e88aab8191d7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxpbmRpYW4lMjB3b21hbiUyMHByb2Zlc3Npb25hbHxlbnwwfHx8fDE3NTAzMTAyODF8MA&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHint: 'indian woman professional',
     quote: "CodeAndCount.com has been pivotal for our digital growth. Their expertise and dedication are truly commendable. Our online sales have significantly increased!",
   },
   {
     name: 'Rohan Mehra',
     title: 'Founder, Bangalore Tech Startups',
-    avatar: 'https://images.unsplash.com/photo-1681165558305-6e65c7e85d51?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxpbmRpYW4lMjBtYW4lMjBzdGFydHVwfGVufDB8fHx8MTc1MDMxMDI4MXww&ixlib=rb-4.1.0&q=80&w=1080',
+    avatar: 'https://images.unsplash.com/photo-1654262609484-76d1a8f3b016?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxpbmRpYW4lMjBtYW4lMjBzdGFydHVwfGVufDB8fHx8MTc1MDMxMDI4MXww&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHint: 'indian man startup',
     quote: 'The team at CodeAndCount.com understood our vision perfectly and delivered a robust platform. Their innovative approach to web solutions is top-notch.',
   },
@@ -88,7 +88,7 @@ const homepageBlogPosts = [
   {
     slug: 'the-future-of-web-design-trends-for-2024',
     title: 'The Future of Web Design: Trends for 2024',
-    imageUrl: 'https://images.unsplash.com/photo-1636884181111-25072dba4c19?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxmdXR1cmlzdGljJTIwZGVzaWdufGVufDB8fHx8MTc1MDMxMDI4MXww&ixlib=rb-4.1.0&q=80&w=1080',
+    imageUrl: 'https://images.unsplash.com/photo-1675044794037-9262cedb6d5d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxmdXR1cmlzdGljJTIwZGVzaWdufGVufDB8fHx8MTc1MDMxMDI4MXww&ixlib=rb-4.1.0&q=80&w=1080',
     excerpt: 'Discover the cutting-edge web design trends shaping the digital landscape in 2024, from AI integration to immersive experiences.',
     readTime: '6 min read',
     category: 'Web Design',
@@ -99,7 +99,7 @@ const homepageBlogPosts = [
   {
     slug: 'unlocking-seo-success-a-comprehensive-guide',
     title: 'Unlocking SEO Success: A Comprehensive Guide',
-    imageUrl: 'https://images.unsplash.com/photo-1626234736261-f50c9ff94bef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxzZW8lMjBjaGFydCUyMGdyYXBofGVufDB8fHx8MTc1MDMxMDI4MXww&ixlib=rb-4.1.0&q=80&w=1080',
+    imageUrl: 'https://images.unsplash.com/photo-1666537072157-440346cea066?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxzZW8lMjBjaGFydCUyMGdyYXBofGVufDB8fHx8MTc1MDMxMDI4MXww&ixlib=rb-4.1.0&q=80&w=1080',
     excerpt: 'Navigate the complexities of SEO with our in-depth guide, covering everything from keyword research to technical optimization.',
     readTime: '10 min read',
     category: 'SEO',
@@ -121,7 +121,8 @@ const homepageBlogPosts = [
   {
     slug: 'ai-in-digital-marketing-the-new-frontier',
     title: 'AI in Digital Marketing: The New Frontier',
-    imageUrl: 'https://images.unsplash.com/photo-1633311905139-7b6088a69e33?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxhcnRpZmljaWFsJTIwaW50ZWxsaWdlbmNlJTIwbWFya2V0aW5nfGVufDB8fHx8MTc1MDMxMDI4Mnww&ixlib=rb-4.1.0&q=80&w=1080', dataAiHint: 'artificial intelligence marketing',
+    imageUrl: 'https://images.unsplash.com/photo-1571934732896-f47880a8bdfc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8YXJ0aWZpY2lhbCUyMGludGVsbGlnZW5jZSUyMG1hcmtldGluZ3xlbnwwfHx8fDE3NTAzMTAyODJ8MA&ixlib=rb-4.1.0&q=80&w=1080', 
+    dataAiHint: 'artificial intelligence marketing',
     excerpt: 'How AI is revolutionizing digital marketing strategies, from content creation to customer analytics.',
     readTime: '8 min read',
     category: 'Digital Marketing',
@@ -131,7 +132,8 @@ const homepageBlogPosts = [
   {
     slug: 'the-importance-of-user-experience-ux-in-web-design',
     title: 'The Importance of User Experience (UX) in Web Design',
-    imageUrl: 'https://images.unsplash.com/photo-1582689276107-81361ca655f5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHx1c2VyJTIwZXhwZXJpZW5jZSUyMGludGVyZmFjZXxlbnwwfHx8fDE3NTAzMTAyODF8MA&ixlib=rb-4.1.0&q=80&w=1080', dataAiHint: 'user experience interface',
+    imageUrl: 'https://images.unsplash.com/photo-1618761714954-0b8cd0026356?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHx1c2VyJTIwZXhwZXJpZW5jZSUyMGludGVyZmFjZXxlbnwwfHx8fDE3NTAzMTAyODF8MA&ixlib=rb-4.1.0&q=80&w=1080', 
+    dataAiHint: 'user experience interface',
     excerpt: 'A deep dive into why UX is paramount for website success and how to optimize it for your users.',
     readTime: '7 min read',
     category: 'Web Design',
@@ -141,7 +143,8 @@ const homepageBlogPosts = [
   {
     slug: 'wordpress-vs-headless-cms-which-is-right-for-you',
     title: 'WordPress vs. Headless CMS: Which is Right for You?',
-    imageUrl: 'https://images.unsplash.com/photo-1666537072206-6a7a01ecb7d9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxjbXMlMjBjb21wYXJpc29uJTIwY2hhcnR8ZW58MHx8fHwxNzUwMzEwMjgxfDA&ixlib=rb-4.1.0&q=80&w=1080', dataAiHint: 'cms comparison chart',
+    imageUrl: 'https://images.unsplash.com/photo-1560306990-18fa759c8713?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxjbXMlMjBjb21wYXJpc29uJTIwY2hhcnR8ZW58MHx8fHwxNzUwMzEwMjgxfDA&ixlib=rb-4.1.0&q=80&w=1080', 
+    dataAiHint: 'cms comparison chart',
     excerpt: 'Comparing traditional WordPress with modern headless CMS solutions to help you choose the best fit.',
     readTime: '9 min read',
     category: 'CMS',
