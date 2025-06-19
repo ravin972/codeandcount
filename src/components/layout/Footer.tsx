@@ -3,7 +3,7 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowUpRight, Phone, Mail, MapPin, Copyright, Github, Linkedin, Instagram } from 'lucide-react'; 
+import { ArrowUpRight, Phone, Mail, MapPin, Copyright, Github, Linkedin, Instagram } from 'lucide-react';
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { BackToTopButton } from '@/components/layout/BackToTopButton';
@@ -18,7 +18,6 @@ const XIcon = () => (
 const footerSections = {
   cta: {
     title: "Do you like what you see?",
-    description: "Let's discuss how CodeAndCount.com can help you achieve your business goals. We partner with clients of all sizes, across diverse industries, to deliver exceptional results.",
     buttonText: "Start a project",
     buttonLink: "/contact#start-project",
   },
@@ -54,26 +53,24 @@ export function Footer() {
   return (
     <footer className={cn(
       "relative pt-16 md:pt-20 pb-8 md:pb-12 overflow-hidden",
-      "bg-gradient-bloom-cta-light dark:bg-gradient-bloom-cta" 
+      "bg-gradient-bloom-cta-light dark:bg-gradient-bloom-cta"
     )}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
         {/* Main CTA */}
         <h2 className={cn(
           "text-4xl md:text-5xl lg:text-6xl font-bold mb-6",
-          "dark:text-primary-foreground text-foreground"
+          "text-foreground dark:text-primary-foreground"
         )}>{footerSections.cta.title}</h2>
-        <p className={cn(
-          "text-lg md:text-xl max-w-2xl mx-auto mb-10",
-          "dark:text-primary-foreground/90 text-muted-foreground"
-        )}>
-          {footerSections.cta.description}
-        </p>
-        <Button 
-          size="lg" 
-          asChild 
+
+        <Button
+          size="lg"
+          asChild
           className={cn(
             "rounded-full group text-base md:text-lg py-3 px-8 md:py-4 md:px-10",
-            "bg-primary-foreground text-primary hover:bg-primary-foreground/90" // This should work for both light (white bg, primary text) and dark (white bg, primary text)
+            // Light mode: Green background, White text
+            "bg-primary text-primary-foreground hover:bg-primary/90",
+            // Dark mode: White background, Green text (for better contrast on dark bloom)
+            "dark:bg-primary-foreground dark:text-primary dark:hover:bg-primary-foreground/90"
           )}
         >
           <Link href={footerSections.cta.buttonLink}>
@@ -84,26 +81,16 @@ export function Footer() {
 
         {/* Divider */}
         <div className="my-10 md:my-14 border-t dark:border-primary-foreground/20 border-foreground/20 w-1/2 mx-auto"></div>
-        
-         <div className="mt-6 mb-10 md:mb-14 flex justify-center">
-          <BackToTopButton 
-            className={cn(
-              "dark:bg-primary-foreground/10 dark:text-primary-foreground dark:hover:bg-primary-foreground/20 dark:focus:ring-primary-foreground/50",
-              "bg-foreground/10 text-foreground hover:bg-foreground/20 focus:ring-foreground/50",
-              "focus:ring-offset-transparent" 
-            )}
-          />
-        </div>
 
         {/* Footer Links & Info Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 text-sm">
           {/* Quick Links */}
           <div className="md:text-left">
-            <h3 className={cn("text-xl font-semibold mb-4", "dark:text-primary-foreground text-foreground")}>Quick Links</h3>
+            <h3 className={cn("text-xl font-semibold mb-4", "text-foreground dark:text-primary-foreground")}>Quick Links</h3>
             <ul className="space-y-2">
               {footerSections.quickLinks.map((link) => (
                 <li key={link.text}>
-                  <Link href={link.href} className={cn("transition-colors duration-200", "dark:text-primary-foreground/80 text-muted-foreground hover:dark:text-primary-foreground hover:text-primary")}>
+                  <Link href={link.href} className={cn("transition-colors duration-200", "text-muted-foreground dark:text-primary-foreground/80 hover:text-primary dark:hover:text-primary-foreground")}>
                     {link.text}
                   </Link>
                 </li>
@@ -113,43 +100,43 @@ export function Footer() {
 
           {/* Contact Info */}
           <div className="md:text-left">
-            <h3 className={cn("text-xl font-semibold mb-4", "dark:text-primary-foreground text-foreground")}>Contact Us</h3>
+            <h3 className={cn("text-xl font-semibold mb-4", "text-foreground dark:text-primary-foreground")}>Contact Us</h3>
             <ul className="space-y-2">
               <li>
-                <a href={`tel:${footerSections.contactInfo.phone1.replace(/\s/g, '')}`} className={cn("flex items-center md:justify-start justify-center transition-colors duration-200", "dark:text-primary-foreground/80 text-muted-foreground hover:dark:text-primary-foreground hover:text-primary")}>
+                <a href={`tel:${footerSections.contactInfo.phone1.replace(/\s/g, '')}`} className={cn("flex items-center md:justify-start justify-center transition-colors duration-200", "text-muted-foreground dark:text-primary-foreground/80 hover:text-primary dark:hover:text-primary-foreground")}>
                   <Phone className="h-4 w-4 mr-2 flex-shrink-0" /> {footerSections.contactInfo.phone1}
                 </a>
               </li>
                <li>
-                <a href={`tel:${footerSections.contactInfo.phone2.replace(/\s/g, '')}`} className={cn("flex items-center md:justify-start justify-center transition-colors duration-200", "dark:text-primary-foreground/80 text-muted-foreground hover:dark:text-primary-foreground hover:text-primary")}>
+                <a href={`tel:${footerSections.contactInfo.phone2.replace(/\s/g, '')}`} className={cn("flex items-center md:justify-start justify-center transition-colors duration-200", "text-muted-foreground dark:text-primary-foreground/80 hover:text-primary dark:hover:text-primary-foreground")}>
                   <Phone className="h-4 w-4 mr-2 flex-shrink-0" /> {footerSections.contactInfo.phone2}
                 </a>
               </li>
               <li>
-                <a href={`mailto:${footerSections.contactInfo.email}`} className={cn("flex items-center md:justify-start justify-center transition-colors duration-200", "dark:text-primary-foreground/80 text-muted-foreground hover:dark:text-primary-foreground hover:text-primary")}>
+                <a href={`mailto:${footerSections.contactInfo.email}`} className={cn("flex items-center md:justify-start justify-center transition-colors duration-200", "text-muted-foreground dark:text-primary-foreground/80 hover:text-primary dark:hover:text-primary-foreground")}>
                   <Mail className="h-4 w-4 mr-2 flex-shrink-0" /> {footerSections.contactInfo.email}
                 </a>
               </li>
-              <li className={cn("flex items-start md:justify-start justify-center", "dark:text-primary-foreground/80 text-muted-foreground")}>
-                <MapPin className="h-4 w-4 mr-2 mt-0.5 flex-shrink-0" /> 
+              <li className={cn("flex items-start md:justify-start justify-center", "text-muted-foreground dark:text-primary-foreground/80")}>
+                <MapPin className="h-4 w-4 mr-2 mt-0.5 flex-shrink-0" />
                 <span className="text-left">{footerSections.contactInfo.addressLine1},<br/>{footerSections.contactInfo.addressLine2}</span>
               </li>
             </ul>
           </div>
-          
+
           {/* Social Links */}
           <div className="md:text-left">
-            <div className="flex items-center justify-center md:justify-between mb-4">
-                <h3 className={cn("text-xl font-semibold", "dark:text-primary-foreground text-foreground")}>Connect With Us</h3>
+             <div className="flex items-center justify-center md:justify-start mb-4">
+                <h3 className={cn("text-xl font-semibold", "text-foreground dark:text-primary-foreground")}>Connect With Us</h3>
              </div>
             <div className="flex md:justify-start justify-center space-x-4">
               {footerSections.socialLinks.map((social) => (
-                <Link 
-                  key={social.name} 
-                  href={social.href} 
-                  target="_blank" 
-                  rel="noopener noreferrer" 
-                  className={cn("transition-colors duration-200", "dark:text-primary-foreground/80 text-muted-foreground hover:dark:text-primary-foreground hover:text-primary")}
+                <Link
+                  key={social.name}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={cn("transition-colors duration-200", "text-muted-foreground dark:text-primary-foreground/80 hover:text-primary dark:hover:text-primary-foreground")}
                   aria-label={social.name}
                 >
                   {React.cloneElement(social.icon, { className: "h-6 w-6" })}
@@ -159,20 +146,33 @@ export function Footer() {
           </div>
         </div>
 
+        <div className="mt-10 mb-6 flex justify-center">
+           <BackToTopButton
+            className={cn(
+              // Light theme styles
+              "bg-foreground/10 text-foreground hover:bg-foreground/20 focus:ring-foreground/50",
+              // Dark theme styles
+              "dark:bg-primary-foreground/10 dark:text-primary-foreground dark:hover:bg-primary-foreground/20 dark:focus:ring-primary-foreground/50",
+              // Common focus offset
+              "focus:ring-offset-transparent"
+            )}
+          />
+        </div>
+
         {/* Bottom Bar */}
-        <div className={cn("mt-10 md:mt-14 pt-8 border-t text-xs", "dark:border-primary-foreground/20 border-foreground/20 dark:text-primary-foreground/70 text-muted-foreground")}>
+        <div className={cn("mt-8 pt-8 border-t text-xs", "dark:border-primary-foreground/20 border-foreground/20 text-muted-foreground dark:text-primary-foreground/70")}>
           <div className="flex flex-col sm:flex-row justify-between items-center">
             <div className="mb-2 sm:mb-0">
               <span>&copy; CodeAndCount.com {foundingYear} - {currentYear}. All Rights Reserved.</span>
             </div>
             <div>
-              <Link href="/privacy-policy" className={cn("transition-colors duration-200", "hover:dark:text-primary-foreground/50 hover:text-foreground/80")}>
+              <Link href="/privacy-policy" className={cn("transition-colors duration-200", "hover:text-foreground/80 dark:hover:text-primary-foreground/50")}>
                 Privacy Policy
               </Link>
             </div>
           </div>
            <div className="mt-4">
-            <Link href="/" className={cn("text-lg font-bold transition-opacity", "dark:text-primary-foreground text-foreground hover:opacity-80")}>
+            <Link href="/" className={cn("text-lg font-bold transition-opacity", "text-foreground dark:text-primary-foreground hover:opacity-80")}>
               Code<span className="text-accent dark:text-accent">And</span>Count
             </Link>
           </div>
