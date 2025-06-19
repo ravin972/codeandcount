@@ -53,24 +53,23 @@ export function Footer() {
   return (
     <footer className={cn(
       "relative pt-16 md:pt-20 pb-8 md:pb-12 overflow-hidden",
-      "bg-gradient-bloom-cta-light dark:bg-gradient-bloom-cta" // Ensures theme-aware gradient
+      "bg-gradient-bloom-cta-light dark:bg-gradient-bloom-cta"
     )}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
         {/* Main CTA */}
         <h2 className={cn(
           "text-4xl md:text-5xl lg:text-6xl font-bold mb-6",
-          "text-foreground dark:text-primary-foreground" // Adapts for light/dark
+          "text-foreground dark:text-primary-foreground" 
         )}>{footerSections.cta.title}</h2>
 
         <Button
           size="lg"
           asChild
           className={cn(
-            "rounded-full group text-base md:text-lg py-3 px-8 md:py-4 md:px-10 transition-all duration-200 ease-in-out shadow-lg hover:shadow-xl active:shadow-md hover:-translate-y-px active:translate-y-px",
-            // Light Mode: Green gradient background, White text
-            "bg-gradient-to-br from-primary to-primary/80 text-primary-foreground hover:from-primary/90 hover:to-primary/70",
-            // Dark Mode: White gradient background, Green text
-            "dark:bg-gradient-to-br dark:from-primary-foreground dark:to-neutral-200 dark:text-primary dark:hover:from-neutral-100 dark:hover:to-neutral-300"
+            "rounded-full group text-base md:text-lg py-3 px-8 md:py-4 md:px-10 transition-all duration-300 ease-in-out shadow-lg hover:shadow-2xl active:shadow-md transform hover:-translate-y-0.5 active:translate-y-px",
+            "dark:bg-primary-foreground dark:text-primary dark:hover:bg-neutral-100 dark:hover:to-neutral-300",
+            "bg-primary text-primary-foreground hover:bg-primary/90", // Primary button style for light theme
+            "bg-gradient-to-br from-primary to-green-400 dark:from-primary-foreground dark:to-neutral-200" // Subtle gradient for 3D effect
           )}
         >
           <Link href={footerSections.cta.buttonLink}>
@@ -136,7 +135,10 @@ export function Footer() {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={cn("transition-colors duration-200", "text-muted-foreground dark:text-primary-foreground/80 hover:text-primary dark:hover:text-primary-foreground")}
+                  className={cn(
+                    "transition-all duration-200 ease-in-out",
+                    "text-muted-foreground dark:text-primary-foreground/80 hover:text-primary dark:hover:text-primary-foreground hover:scale-110"
+                  )}
                   aria-label={social.name}
                 >
                   {React.cloneElement(social.icon, { className: "h-6 w-6" })}
@@ -147,15 +149,11 @@ export function Footer() {
         </div>
 
         {/* Back to Top Button - Centered, after the grid, before copyright */}
-        <div className="mt-10 mb-6 flex justify-center">
+         <div className="mt-10 mb-6 flex justify-center">
           <BackToTopButton
             className={cn(
-              // Light theme styles for button on gradient
-              "bg-foreground/10 text-foreground hover:bg-foreground/20 focus:ring-foreground/50",
-              // Dark theme styles for button on gradient
-              "dark:bg-primary-foreground/10 dark:text-primary-foreground dark:hover:bg-primary-foreground/20 dark:focus:ring-primary-foreground/50",
-              // Common focus offset
-              "focus:ring-offset-transparent"
+              "bg-foreground/10 text-foreground hover:bg-foreground/20 focus:ring-foreground/50 dark:bg-primary-foreground/10 dark:text-primary-foreground dark:hover:bg-primary-foreground/20 dark:focus:ring-primary-foreground/50",
+              "focus:ring-offset-transparent" 
             )}
           />
         </div>
