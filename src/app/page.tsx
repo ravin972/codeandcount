@@ -400,10 +400,10 @@ export default function HomePage() {
       </section>
 
       {/* Ready to Elevate Section */}
-      <section className="py-20 relative overflow-hidden bg-background">
+      <section className="py-20 relative overflow-hidden bg-gradient-bloom-cta-light dark:bg-gradient-bloom-cta">
          <div 
           aria-hidden="true"
-          className="absolute inset-0 w-full h-full bg-gradient-bloom-cta-light dark:bg-gradient-bloom-cta -z-10"
+          className="absolute inset-0 w-full h-full -z-10" 
         />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-primary-foreground">Ready to Elevate Your Brand?</h2>
