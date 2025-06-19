@@ -240,16 +240,16 @@ export default function HomePage() {
       <section className="py-20 md:py-32 relative overflow-hidden">
         <div
           aria-hidden="true"
-          className="absolute top-[-10rem] left-[-15rem] w-[30rem] h-[30rem] md:w-[40rem] md:h-[40rem] bg-gradient-blob-1 dark:bg-gradient-blob-1 opacity-30 dark:opacity-20 blur-3xl -z-10"
+          className="absolute top-[-10rem] left-[-15rem] w-[30rem] h-[30rem] md:w-[40rem] md:h-[40rem] bg-gradient-blob-1 dark:bg-gradient-blob-1-light opacity-30 dark:opacity-20 blur-3xl -z-10"
         />
         <div
           aria-hidden="true"
-          className="absolute bottom-[-5rem] right-[-10rem] w-[25rem] h-[25rem] md:w-[35rem] md:h-[35rem] bg-gradient-blob-2 dark:bg-gradient-blob-2 opacity-20 dark:opacity-15 blur-3xl -z-10"
+          className="absolute bottom-[-5rem] right-[-10rem] w-[25rem] h-[25rem] md:w-[35rem] md:h-[35rem] bg-gradient-blob-2 dark:bg-gradient-blob-2-light opacity-20 dark:opacity-15 blur-3xl -z-10"
         />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
          <div className="relative bg-gradient-main-hero-light dark:bg-gradient-main-hero backdrop-blur-xl rounded-3xl border border-white/10 dark:border-neutral-700/30 shadow-2xl p-8 md:p-12 lg:p-16">
             <div className="mb-6">
-              <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-primary">
+              <h1 className="text-5xl md:text-7xl font-bold tracking-tight bg-gradient-text-dynamic bg-clip-text text-transparent">
                 Crafting digital experience.
               </h1>
             </div>
