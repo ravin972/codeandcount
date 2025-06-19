@@ -67,14 +67,26 @@ export default {
   			}
   		},
       backgroundImage: {
-        'gradient-main-hero': "linear-gradient(140deg, hsl(var(--primary) / 0.20) 0%, hsl(var(--background)) 50%)",
-        'gradient-main-hero-light': "linear-gradient(140deg, hsl(var(--primary) / 0.10) 0%, hsl(var(--background)) 50%)",
+        // Dark mode hero: very dark top, subtle warm glow from bottom
+        'gradient-main-hero': "linear-gradient(180deg, hsl(var(--background)) 20%, hsl(var(--primary)/0.05) 80%, hsl(var(--primary)/0.15) 100%)",
+        // Light mode hero: subtle warm glow from bottom
+        'gradient-main-hero-light': "linear-gradient(180deg, hsl(var(--background)) 70%, hsl(var(--primary)/0.03) 100%)",
+        
+        // CTA Bloom for dark mode (Orange/Amber focused)
+        'gradient-bloom-cta': "radial-gradient(ellipse 70% 80% at 50% 120%, hsl(var(--primary)/0.6) 0%, hsl(var(--primary)/0.2) 40%, transparent 70%)",
+        // CTA Bloom for light mode (Softer Orange/Amber)
+        'gradient-bloom-cta-light': "radial-gradient(ellipse 80% 70% at 50% 110%, hsl(var(--primary)/0.3) 0%, hsl(var(--primary)/0.1) 35%, transparent 65%)",
+
+        // General subtle background, might not be used if sections are solid dark
         'gradient-subtle-bg': "linear-gradient(180deg, hsl(var(--secondary) / 0.5) 0%, hsl(var(--background)) 100%)",
         'gradient-subtle-bg-light': "linear-gradient(180deg, hsl(var(--secondary) / 0.5) 0%, hsl(var(--background)) 100%)",
-        'gradient-blob-1': "radial-gradient(ellipse 40% 40% at 25% 75%, hsl(var(--primary) / 0.15) 0%, transparent 70%)",
-        'gradient-blob-1-light': "radial-gradient(ellipse 40% 40% at 25% 75%, hsl(var(--primary) / 0.08) 0%, transparent 70%)",
-        'gradient-blob-2': "radial-gradient(ellipse 40% 40% at 75% 25%, hsl(var(--accent) / 0.15) 0%, transparent 70%)",
-        'gradient-blob-2-light': "radial-gradient(ellipse 40% 40% at 75% 25%, hsl(var(--accent) / 0.08) 0%, transparent 70%)",
+        
+        // Blob gradients, can be used for subtle lighting effects
+        'gradient-blob-1': "radial-gradient(ellipse 40% 40% at 25% 75%, hsl(var(--primary) / 0.1) 0%, transparent 70%)",
+        'gradient-blob-1-light': "radial-gradient(ellipse 40% 40% at 25% 75%, hsl(var(--primary) / 0.05) 0%, transparent 70%)",
+        'gradient-blob-2': "radial-gradient(ellipse 40% 40% at 75% 25%, hsl(var(--accent) / 0.1) 0%, transparent 70%)",
+        'gradient-blob-2-light': "radial-gradient(ellipse 40% 40% at 75% 25%, hsl(var(--accent) / 0.05) 0%, transparent 70%)",
+        
         'gradient-text-dynamic': "linear-gradient(60deg, hsl(var(--primary)) 30%, hsl(var(--accent)) 100%)",
       },
   		borderRadius: {

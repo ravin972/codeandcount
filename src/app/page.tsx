@@ -237,19 +237,19 @@ export default function HomePage() {
   return (
     <div className="bg-background text-foreground">
       {/* Hero Section */}
-      <section className="py-20 md:py-32 relative overflow-hidden">
+      <section className="py-20 md:py-32 relative overflow-hidden bg-gradient-main-hero-light dark:bg-gradient-main-hero">
         <div
           aria-hidden="true"
-          className="absolute top-[-10rem] left-[-15rem] w-[30rem] h-[30rem] md:w-[40rem] md:h-[40rem] bg-gradient-blob-1 dark:bg-gradient-blob-1-light opacity-30 dark:opacity-20 blur-3xl -z-10"
+          className="absolute top-[-10rem] left-[-15rem] w-[30rem] h-[30rem] md:w-[40rem] md:h-[40rem] bg-gradient-blob-1 opacity-30 dark:opacity-20 blur-3xl -z-10"
         />
         <div
           aria-hidden="true"
-          className="absolute bottom-[-5rem] right-[-10rem] w-[25rem] h-[25rem] md:w-[35rem] md:h-[35rem] bg-gradient-blob-2 dark:bg-gradient-blob-2-light opacity-20 dark:opacity-15 blur-3xl -z-10"
+          className="absolute bottom-[-5rem] right-[-10rem] w-[25rem] h-[25rem] md:w-[35rem] md:h-[35rem] bg-gradient-blob-2 opacity-20 dark:opacity-15 blur-3xl -z-10"
         />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-         <div className="relative bg-gradient-main-hero-light dark:bg-gradient-main-hero rounded-3xl border border-border shadow-2xl p-8 md:p-12 lg:p-16">
+         <div className="relative rounded-3xl p-8 md:p-12 lg:p-16">
             <div className="mb-6">
-              <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-primary">
+              <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-primary-foreground">
                 Crafting digital experience.
               </h1>
             </div>
@@ -267,10 +267,10 @@ export default function HomePage() {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-16 bg-secondary border-y border-border">
+      <section id="services" className="py-16 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative inline-grid place-items-center w-full text-center mb-4">
-            <h2 className="col-start-1 row-start-1 relative z-[1] text-4xl md:text-5xl font-bold text-center">Our Core Services</h2>
+            <h2 className="col-start-1 row-start-1 relative z-[1] text-4xl md:text-5xl font-bold text-center text-foreground">Our Core Services</h2>
           </div>
           <p className="text-xl md:text-2xl text-muted-foreground text-center mt-4 mb-12 max-w-2xl mx-auto">
             We offer a comprehensive suite of services to bring your vision to life.
@@ -308,10 +308,10 @@ export default function HomePage() {
       </section>
 
       {/* Case Studies Section */}
-      <section id="work" className="py-16 bg-secondary border-y border-border">
+      <section id="work" className="py-16 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative inline-grid place-items-center w-full text-center mb-4">
-            <h2 className="col-start-1 row-start-1 relative z-[1] text-4xl md:text-5xl font-bold text-center">Featured Work</h2>
+            <h2 className="col-start-1 row-start-1 relative z-[1] text-4xl md:text-5xl font-bold text-center text-foreground">Featured Work</h2>
           </div>
           <p className="text-xl md:text-2xl text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
             Explore how we've helped businesses like yours succeed.
@@ -351,7 +351,7 @@ export default function HomePage() {
       <section id="testimonials" className="py-16 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-card rounded-xl shadow-xl p-8 md:p-12 border border-border">
-            <h2 className="text-4xl font-bold text-center mb-4">What Our Clients Say</h2>
+            <h2 className="text-4xl font-bold text-center mb-4 text-foreground">What Our Clients Say</h2>
             <p className="text-xl md:text-2xl text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
               Real stories from satisfied partners.
             </p>
@@ -381,7 +381,7 @@ export default function HomePage() {
       </section>
 
       {/* SEO Optimizer Tool Section */}
-      <section id="seo-tool" className="py-16 md:py-20 bg-secondary text-secondary-foreground border-y border-border">
+      <section id="seo-tool" className="py-16 md:py-20 bg-background text-foreground">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <Sparkles className="h-12 w-12 text-primary mx-auto mb-6" />
           <div className="relative inline-grid place-items-center w-full text-center mb-6">
@@ -400,13 +400,17 @@ export default function HomePage() {
       </section>
 
       {/* Ready to Elevate Section */}
-      <section className="py-20 bg-primary text-primary-foreground border-y border-primary/50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Elevate Your Brand?</h2>
-          <p className="text-lg md:text-xl max-w-2xl mx-auto mb-10">
+      <section className="py-20 relative overflow-hidden bg-background">
+         <div 
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full bg-gradient-bloom-cta-light dark:bg-gradient-bloom-cta -z-10"
+        />
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-primary-foreground">Ready to Elevate Your Brand?</h2>
+          <p className="text-lg md:text-xl max-w-2xl mx-auto mb-10 text-primary-foreground/90">
             Let's discuss how CodeAndCount.com can help you achieve your business goals. We partner with clients of all sizes, across diverse industries, to deliver exceptional results.
           </p>
-          <Button size="lg" variant="secondary" asChild className="rounded-full">
+          <Button size="lg" variant="default" asChild className="rounded-full bg-primary-foreground text-primary hover:bg-primary-foreground/90">
             <Link href="/contact#start-project">
               Get in Touch <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
@@ -418,7 +422,7 @@ export default function HomePage() {
       <InfiniteScrollerWithMouseFollower />
       
       {/* Blog Section */}
-      <section className="py-16 md:py-24 bg-muted text-muted-foreground border-y border-border">
+      <section className="py-16 md:py-24 bg-background text-foreground">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-3 gap-12 items-center">
             <div className="md:col-span-1 space-y-6">
