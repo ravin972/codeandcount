@@ -1,60 +1,19 @@
 
 "use client";
 
-import React, { useEffect } from 'react';
-import Script from 'next/script';
+import React from 'react';
+import Link from 'next/link'; // Added Link import
 import { ContactForm } from '@/components/forms/ContactForm';
-import { Mail, Phone, MapPin, CalendarDays, MessageSquare } from 'lucide-react';
+import { Mail, Phone, MapPin, CalendarDays, MessageSquare, ExternalLink } from 'lucide-react'; // Added ExternalLink
+import { Button } from '@/components/ui/button'; // Added Button import
 
 export default function ContactPage() {
   const mapAddress = "spaze i tech park, Sec-49, Gurugram, Haryana, India";
   const mapEmbedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(mapAddress)}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
-  const calComCalLink = "sackinyasar/meeting-with-developers"; // REPLACE WITH YOUR ACTUAL CAL.COM LINK
-
-  useEffect(() => {
-    // Ensure this runs only on the client after the component mounts
-    // And specifically after the script is expected to be loaded (handled by onLoad)
-    // This useEffect is kept for potential future client-side logic,
-    // but primary initialization is in the script's onLoad.
-  }, []);
+  const calComCalLink = "sackinyasar/meeting-with-developers"; // Kept for direct link
 
   return (
     <>
-      <Script
-        src="https://app.cal.com/embed/embed.js"
-        strategy="beforeInteractive" // Changed strategy
-        onLoad={() => {
-          requestAnimationFrame(() => {
-            if (typeof (window as any).Cal === "function") {
-              try {
-                (window as any).Cal("inline", {
-                  elementOrSelector: "#cal-com-embed",
-                  calLink: calComCalLink,
-                  layout: "month_view", // Options: "month_view", "week_view", "column_view"
-                  config: {
-                    name: "Meeting with Developers", // Will be overridden by your Cal.com event name
-                    notes: "Discussing project details and requirements.",
-                    theme: "auto", // Options: "light", "dark", "auto"
-                  },
-                });
-                (window as any).Cal("ui", {
-                  theme: "auto",
-                  styles: { branding: { brandColor: "hsl(var(--primary))" } }, // Use theme primary color
-                  hideEventTypeDetails: false,
-                  layout: "month_view",
-                });
-              } catch (e) {
-                console.error("Error initializing Cal.com embed (using beforeInteractive):", e);
-              }
-            } else {
-              console.error("Cal.com script not loaded yet or window.Cal is not a function (using beforeInteractive).");
-            }
-          });
-        }}
-        onError={(e) => {
-          console.error('Error loading Cal.com script (using beforeInteractive):', e);
-        }}
-      />
       <div className="bg-background text-foreground">
         <header className="py-16 md:py-24 text-center bg-secondary border-b border-border">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -68,22 +27,19 @@ export default function ContactPage() {
           </div>
         </header>
 
-        {/* Cal.com Booking Section */}
+        {/* Booking Section with Direct Link */}
         <section className="py-16 md:py-20">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Book a Meeting</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10">
              Choose a time that works for you to discuss your project requirements and how we can help.
             </p>
-            <div className="bg-card rounded-xl shadow-xl p-4 md:p-6 border border-border max-w-4xl mx-auto">
-              <div
-                id="cal-com-embed"
-                style={{ width: '100%', height: '100%', overflow: 'auto' }}
-                className="min-h-[650px]"
-              >
-                {/* Cal.com embed will be injected here by the script */}
-              </div>
-            </div>
+            <Button asChild size="lg" className="rounded-full text-base py-3 px-6">
+              <Link href={`https://cal.com/${calComCalLink}`} target="_blank" rel="noopener noreferrer">
+                Schedule Your Meeting
+                <ExternalLink className="ml-2 h-5 w-5" />
+              </Link>
+            </Button>
           </div>
         </section>
 
