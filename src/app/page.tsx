@@ -12,6 +12,7 @@ import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
+import { cn } from '@/lib/utils';
 
 
 const services = [
@@ -239,14 +240,14 @@ export default function HomePage() {
       <section className="py-20 md:py-32 relative overflow-hidden">
         <div
           aria-hidden="true"
-          className="absolute top-[-10rem] left-[-15rem] w-[30rem] h-[30rem] md:w-[40rem] md:h-[40rem] bg-gradient-blob-1 rounded-full opacity-30 blur-3xl -z-10"
+          className="absolute top-[-10rem] left-[-15rem] w-[30rem] h-[30rem] md:w-[40rem] md:h-[40rem] bg-gradient-blob-1 dark:bg-gradient-blob-1 opacity-30 dark:opacity-20 blur-3xl -z-10"
         />
         <div
           aria-hidden="true"
-          className="absolute bottom-[-5rem] right-[-10rem] w-[25rem] h-[25rem] md:w-[35rem] md:h-[35rem] bg-gradient-blob-2 rounded-full opacity-20 blur-3xl -z-10"
+          className="absolute bottom-[-5rem] right-[-10rem] w-[25rem] h-[25rem] md:w-[35rem] md:h-[35rem] bg-gradient-blob-2 dark:bg-gradient-blob-2 opacity-20 dark:opacity-15 blur-3xl -z-10"
         />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-         <div className="relative bg-gradient-main-hero backdrop-blur-xl rounded-3xl border border-white/10 dark:border-neutral-700/30 shadow-2xl p-8 md:p-12 lg:p-16">
+         <div className="relative bg-gradient-main-hero-light dark:bg-gradient-main-hero backdrop-blur-xl rounded-3xl border border-white/10 dark:border-neutral-700/30 shadow-2xl p-8 md:p-12 lg:p-16">
             <div className="mb-6">
               <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-primary">
                 Crafting digital experience.
@@ -266,7 +267,7 @@ export default function HomePage() {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-16 bg-gradient-subtle-bg backdrop-blur-lg border-y border-white/10 dark:border-neutral-700/30">
+      <section id="services" className="py-16 bg-gradient-subtle-bg-light dark:bg-gradient-subtle-bg backdrop-blur-lg border-y border-white/10 dark:border-neutral-700/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative inline-grid place-items-center w-full text-center mb-4">
             <h2 className="col-start-1 row-start-1 relative z-[1] text-4xl md:text-5xl font-bold text-center">Our Core Services</h2>
@@ -293,7 +294,7 @@ export default function HomePage() {
       {/* Client Logos Section */}
       <section id="trusted-by-leaders" className="py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-gradient-subtle-bg backdrop-blur-lg rounded-xl shadow-xl p-8 md:p-12 border border-white/10 dark:border-neutral-700/30">
+          <div className="bg-gradient-subtle-bg-light dark:bg-gradient-subtle-bg backdrop-blur-lg rounded-xl shadow-xl p-8 md:p-12 border border-white/10 dark:border-neutral-700/30">
             <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-10">Trusted by Industry Leaders</h2>
             <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
               {clientLogos.map((logo) => (
@@ -307,7 +308,7 @@ export default function HomePage() {
       </section>
 
       {/* Case Studies Section */}
-      <section id="work" className="py-16 bg-gradient-subtle-bg backdrop-blur-lg border-y border-white/10 dark:border-neutral-700/30">
+      <section id="work" className="py-16 bg-gradient-subtle-bg-light dark:bg-gradient-subtle-bg backdrop-blur-lg border-y border-white/10 dark:border-neutral-700/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative inline-grid place-items-center w-full text-center mb-4">
             <h2 className="col-start-1 row-start-1 relative z-[1] text-4xl md:text-5xl font-bold text-center">Featured Work</h2>
@@ -497,4 +498,3 @@ export default function HomePage() {
     </div>
   );
 }
-

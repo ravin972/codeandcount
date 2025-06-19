@@ -12,7 +12,7 @@ export default {
   theme: {
   	extend: {
       fontFamily: {
-        sans: ['var(--font-inter)', ...defaultTheme.fontFamily.sans], // Changed from --font-oldschoolGrotesk
+        sans: ['var(--font-inter)', ...defaultTheme.fontFamily.sans],
       },
   		colors: {
   			background: 'hsl(var(--background))',
@@ -66,6 +66,17 @@ export default {
   				ring: 'hsl(var(--sidebar-ring))'
   			}
   		},
+      backgroundImage: {
+        'gradient-main-hero': "linear-gradient(150deg, hsl(var(--primary)) 5%, hsl(var(--accent) / 0.8) 50%, hsl(var(--background)) 95%)",
+        'gradient-main-hero-light': "linear-gradient(150deg, hsl(var(--primary)) 5%, hsl(var(--accent) / 0.7) 50%, hsl(var(--card)) 95%)",
+        'gradient-subtle-bg': "linear-gradient(180deg, hsl(var(--secondary) / 0.7) 0%, hsl(var(--background)) 100%)",
+        'gradient-subtle-bg-light': "linear-gradient(180deg, hsl(var(--secondary) / 0.5) 0%, hsl(var(--background)) 100%)",
+        'gradient-blob-1': "radial-gradient(ellipse 50% 50% at 25% 25%, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.3) 40%, transparent 70%)",
+        'gradient-blob-1-light': "radial-gradient(ellipse 50% 50% at 25% 25%, hsl(var(--primary) / 0.8) 0%, hsl(var(--primary) / 0.1) 40%, transparent 70%)",
+        'gradient-blob-2': "radial-gradient(ellipse 50% 50% at 75% 75%, hsl(var(--accent)) 0%, hsl(var(--accent) / 0.3) 40%, transparent 70%)",
+        'gradient-blob-2-light': "radial-gradient(ellipse 50% 50% at 75% 75%, hsl(var(--accent) / 0.7) 0%, hsl(var(--accent) / 0.1) 40%, transparent 70%)",
+        'gradient-text-dynamic': "linear-gradient(70deg, hsl(var(--primary)) 20%, hsl(var(--accent)) 80%)",
+      },
   		borderRadius: {
   			lg: 'var(--radius)',
   			md: 'calc(var(--radius) - 2px)',
