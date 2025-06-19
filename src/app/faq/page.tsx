@@ -40,10 +40,14 @@ const faqItems = [
   }
 ];
 
-export default function FAQPage() {
+interface FAQPageProps {
+  searchParams?: { [key: string]: string | string[] | undefined };
+}
+
+export default function FAQPage({ searchParams }: FAQPageProps) {
   return (
     <div className="bg-background text-foreground">
-      <header className="py-16 md:py-24 text-center bg-secondary/70 dark:bg-secondary/70 backdrop-blur-lg border-b border-white/10 dark:border-neutral-700/30">
+      <header className="py-16 md:py-24 text-center bg-gradient-subtle-bg backdrop-blur-lg border-b border-white/10 dark:border-neutral-700/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-4 flex items-center justify-center">
             <HelpCircle className="h-12 w-12 mr-4 text-primary" />
@@ -57,7 +61,7 @@ export default function FAQPage() {
 
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
-          <div className="bg-background/70 dark:bg-neutral-900/70 backdrop-blur-lg rounded-xl shadow-xl p-8 md:p-12 border border-white/10 dark:border-neutral-700/30">
+          <div className="bg-card/80 dark:bg-card/80 backdrop-blur-lg rounded-xl shadow-xl p-8 md:p-12 border border-card-foreground/10 dark:border-neutral-700/30">
             <Accordion type="single" collapsible className="w-full">
               {faqItems.map(item => (
                 <AccordionItem key={item.id} value={item.id}>

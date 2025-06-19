@@ -17,18 +17,14 @@ const values = [
   { title: 'Client-Centric', icon: <Target className="h-8 w-8 text-primary" />, description: 'Our clients success is our success. We tailor our solutions to meet their unique needs and objectives.' },
 ];
 
-// Example of how to handle searchParams if this Server Component were to use them:
-// export default function AboutPage({ searchParams }: { searchParams?: { [key: string]: string | string[] | undefined } }) {
-  // To avoid the "keys of searchParams were accessed directly" error:
-  // 1. Access specific params directly:
-  //    const specificParam = searchParams?.yourParamName;
-  // 2. Avoid iterating all keys like Object.keys(searchParams) or {...searchParams}.
-  // 3. If you need all params on the client, pass relevant ones or let a Client Component use `useSearchParams()`.
+interface AboutPageProps {
+  searchParams?: { [key: string]: string | string[] | undefined };
+}
 
-export default function AboutPage() {
+export default function AboutPage({ searchParams }: AboutPageProps) {
   return (
     <div className="bg-background text-foreground">
-      <header className="py-16 md:py-24 text-center bg-secondary/70 dark:bg-secondary/70 backdrop-blur-lg border-b border-white/10 dark:border-neutral-700/30">
+      <header className="py-16 md:py-24 text-center bg-gradient-subtle-bg backdrop-blur-lg border-b border-white/10 dark:border-neutral-700/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-4 flex items-center justify-center">
             <Info className="h-12 w-12 mr-4 text-primary" />
@@ -43,7 +39,7 @@ export default function AboutPage() {
       {/* Our Story Section */}
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-background/70 dark:bg-neutral-900/70 backdrop-blur-lg rounded-xl shadow-xl p-8 md:p-12 border border-white/10 dark:border-neutral-700/30">
+          <div className="bg-card/80 dark:bg-card/80 backdrop-blur-lg rounded-xl shadow-xl p-8 md:p-12 border border-card-foreground/10 dark:border-neutral-700/30">
             <div className="grid md:grid-cols-2 gap-12 items-center">
               <div>
                 <h2 className="text-3xl md:text-4xl font-bold mb-6">Our Story</h2>
@@ -61,6 +57,7 @@ export default function AboutPage() {
                   width={600} 
                   height={400} 
                   className="rounded-lg shadow-xl transition-transform duration-300 ease-in-out hover:scale-105"
+                  data-ai-hint="modern workspace"
                 />
               </div>
             </div>
@@ -69,7 +66,7 @@ export default function AboutPage() {
       </section>
 
       {/* Our Values Section */}
-      <section className="py-16 md:py-24 bg-secondary/70 dark:bg-secondary/70 backdrop-blur-lg border-y border-white/10 dark:border-neutral-700/30">
+      <section className="py-16 md:py-24 bg-gradient-subtle-bg backdrop-blur-lg border-y border-white/10 dark:border-neutral-700/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Our Core Values</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -93,7 +90,7 @@ export default function AboutPage() {
       {/* Meet The Team Section */}
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-background/70 dark:bg-neutral-900/70 backdrop-blur-lg rounded-xl shadow-xl p-8 md:p-12 border border-white/10 dark:border-neutral-700/30">
+          <div className="bg-card/80 dark:bg-card/80 backdrop-blur-lg rounded-xl shadow-xl p-8 md:p-12 border border-card-foreground/10 dark:border-neutral-700/30">
             <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Meet Our Experts</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {teamMembers.map((member) => (
