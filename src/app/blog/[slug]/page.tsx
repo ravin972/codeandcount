@@ -233,9 +233,14 @@ export async function generateStaticParams() {
     }));
 }
 
+interface BlogPostPageProps {
+  params: { slug: string };
+  searchParams?: { [key: string]: string | string[] | undefined };
+}
 
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
-  const post = blogPosts.find(p => p.slug === params.slug);
+export default function BlogPostPage({ params, searchParams }: BlogPostPageProps) {
+  const { slug } = params;
+  const post = blogPosts.find(p => p.slug === slug);
 
   if (!post) {
     return (

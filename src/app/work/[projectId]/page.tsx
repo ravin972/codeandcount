@@ -417,8 +417,14 @@ export async function generateStaticParams() {
     }));
 }
 
-export default function ProjectDetailPage({ params }: { params: { projectId: string } }) {
-  const project = portfolioItems.find(item => item.id === params.projectId);
+interface ProjectDetailPageProps {
+  params: { projectId: string };
+  searchParams?: { [key: string]: string | string[] | undefined };
+}
+
+export default function ProjectDetailPage({ params, searchParams }: ProjectDetailPageProps) {
+  const { projectId } = params;
+  const project = portfolioItems.find(item => item.id === projectId);
 
   if (!project) {
     return (
