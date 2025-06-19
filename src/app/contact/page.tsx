@@ -6,11 +6,7 @@ import Script from 'next/script';
 import { ContactForm } from '@/components/forms/ContactForm';
 import { Mail, Phone, MapPin, CalendarDays, MessageSquare } from 'lucide-react';
 
-interface ContactPageProps {
-  searchParams?: { [key: string]: string | string[] | undefined };
-}
-
-export default function ContactPage({ searchParams }: ContactPageProps) {
+export default function ContactPage() {
   const mapAddress = "spaze i tech park, Sec-49, Gurugram, Haryana, India";
   const mapEmbedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(mapAddress)}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
   const calComCalLink = "sackinyasar/meeting-with-developers"; // REPLACE WITH YOUR ACTUAL CAL.COM LINK

@@ -499,11 +499,7 @@ const shuffleArray = <T extends any[]>(array: T): T => {
   return newArray;
 };
 
-interface ServicesPageProps {
-  searchParams?: { [key: string]: string | string[] | undefined };
-}
-
-export default function ServicesPage({ searchParams }: ServicesPageProps) {
+export default function ServicesPage() {
   const [activeFilter, setActiveFilter] = useState<FilterType>('all');
   const [displayedServices, setDisplayedServices] = useState<ServiceDetail[]>([]);
 

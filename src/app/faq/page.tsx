@@ -40,11 +40,7 @@ const faqItems = [
   }
 ];
 
-interface FAQPageProps {
-  searchParams?: { [key: string]: string | string[] | undefined };
-}
-
-export default function FAQPage({ searchParams }: FAQPageProps) {
+export default function FAQPage() {
   return (
     <div className="bg-background text-foreground">
       <header className="py-16 md:py-24 text-center bg-secondary border-b border-border">

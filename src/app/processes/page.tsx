@@ -2,11 +2,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Workflow, Users, Laptop, CheckCircle } from "lucide-react";
 
-interface ProcessesPageProps {
-  searchParams?: { [key: string]: string | string[] | undefined };
-}
-
-export default function ProcessesPage({ searchParams }: ProcessesPageProps) {
+export default function ProcessesPage() {
   return (
     <div className="bg-background text-foreground">
       <header className="py-16 md:py-24 text-center bg-secondary border-b border-border">

@@ -419,10 +419,9 @@ export async function generateStaticParams() {
 
 interface ProjectDetailPageProps {
   params: { projectId: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
 }
 
-export default function ProjectDetailPage({ params, searchParams }: ProjectDetailPageProps) {
+export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
   const { projectId } = params;
   const project = portfolioItems.find(item => item.id === projectId);
 

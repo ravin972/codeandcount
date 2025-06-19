@@ -17,11 +17,7 @@ const values = [
   { title: 'Client-Centric', icon: <Target className="h-8 w-8 text-primary" />, description: 'Our clients success is our success. We tailor our solutions to meet their unique needs and objectives.' },
 ];
 
-interface AboutPageProps {
-  searchParams?: { [key: string]: string | string[] | undefined };
-}
-
-export default function AboutPage({ searchParams }: AboutPageProps) {
+export default function AboutPage() {
   return (
     <div className="bg-background text-foreground">
       <header className="py-16 md:py-24 text-center bg-secondary border-b border-border">

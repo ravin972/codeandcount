@@ -7,11 +7,7 @@ export const metadata: Metadata = {
   description: 'Privacy Policy for CodeAndCount.com, compliant with Indian law.',
 };
 
-interface PrivacyPolicyPageProps {
-  searchParams?: { [key: string]: string | string[] | undefined };
-}
-
-export default function PrivacyPolicyPage({ searchParams }: PrivacyPolicyPageProps) {
+export default function PrivacyPolicyPage() {
   return (
     <div className="bg-background text-foreground">
       <header className="py-16 md:py-24 text-center bg-secondary border-b border-border">

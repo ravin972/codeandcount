@@ -236,10 +236,9 @@ export async function generateStaticParams() {
 
 interface BlogPostPageProps {
   params: { slug: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
 }
 
-export default function BlogPostPage({ params, searchParams }: BlogPostPageProps) {
+export default function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = params;
   const post = blogPosts.find(p => p.slug === slug);
 

@@ -34,11 +34,7 @@ const testimonialsData = [
   },
 ];
 
-interface TestimonialsPageProps {
-  searchParams?: { [key: string]: string | string[] | undefined };
-}
-
-export default function TestimonialsPage({ searchParams }: TestimonialsPageProps) {
+export default function TestimonialsPage() {
   return (
     <div className="bg-background text-foreground">
       <header className="py-16 md:py-24 text-center bg-secondary border-b border-border">
