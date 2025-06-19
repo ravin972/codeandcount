@@ -499,7 +499,11 @@ const shuffleArray = <T extends any[]>(array: T): T => {
   return newArray;
 };
 
-export default function ServicesPage() {
+interface ServicesPageProps {
+  searchParams?: { [key: string]: string | string[] | undefined };
+}
+
+export default function ServicesPage({ searchParams }: ServicesPageProps) {
   const [activeFilter, setActiveFilter] = useState<FilterType>('all');
   const [displayedServices, setDisplayedServices] = useState<ServiceDetail[]>([]);
 
@@ -610,7 +614,7 @@ export default function ServicesPage() {
             {displayedServices.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-8">
                 {displayedServices.map((service) => (
-                  <Card key={service.name} className="flex flex-col md:flex-row overflow-hidden transition-transform hover:scale-[1.01] duration-300" data-interactive-cursor="true">
+                  <Card key={service.name} className="flex flex-col md:flex-row overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out hover:-translate-y-1" data-interactive-cursor="true">
                     <div className="md:w-1/4 p-6 flex flex-col items-center justify-center bg-secondary/50 dark:bg-secondary/30 md:border-r border-border">
                       {service.icon}
                       <CardTitle className="text-xl font-semibold text-center mt-2">{service.name}</CardTitle>

@@ -285,7 +285,7 @@ export default function BlogPage() {
                   <PlusCircle className="mr-2 h-5 w-5" /> Create New Post
                 </Button>
               </DialogTrigger>
-              <DialogContent className="sm:max-w-[600px]"> {/* Dialog uses solid bg */}
+              <DialogContent className="sm:max-w-[600px]">
                 <DialogHeader>
                   <DialogTitle>Create a New Blog Post</DialogTitle>
                   <DialogDescription>
@@ -333,7 +333,7 @@ export default function BlogPage() {
            <div className="bg-card rounded-xl shadow-xl p-8 md:p-12 border border-border">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {posts.map((post) => (
-                <Card key={post.slug} className="overflow-hidden flex flex-col group hover:-translate-y-1" data-interactive-cursor="true"> {/* Card uses solid bg */}
+                <Card key={post.slug} className="overflow-hidden flex flex-col group shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out hover:-translate-y-1" data-interactive-cursor="true">
                   <Link href={`/blog/${post.slug}`} className="block">
                     <Image 
                       src={post.imageUrl} 

@@ -463,7 +463,7 @@ export default function HomePage() {
                     className="block flex-shrink-0 w-[80vw] sm:w-[calc(50%-0.75rem)] md:w-[calc(33.333%-1rem)] group" 
                   >
                      <div ref={index === 0 ? cardRef : null} className="h-full">
-                      <Card className="h-full flex flex-col" data-interactive-cursor="true"> {/* Card uses solid bg */}
+                      <Card className="h-full flex flex-col shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out hover:-translate-y-1" data-interactive-cursor="true">
                         <Image
                           src={post.imageUrl}
                           alt={post.title}
