@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowUpRight, Phone, Mail, MapPin, Copyright, Github, Linkedin, Instagram } from 'lucide-react'; 
 import React from 'react';
 import { cn } from '@/lib/utils';
-import { BackToTopButton } from '@/components/layout/BackToTopButton'; // Added import
+import { BackToTopButton } from '@/components/layout/BackToTopButton';
 
 // Define X/Twitter Icon as SVG
 const XIcon = () => (
@@ -53,7 +53,7 @@ export function Footer() {
 
   return (
     <footer className={cn(
-      "relative text-primary-foreground py-16 md:py-20 overflow-hidden", // Adjusted padding
+      "relative text-primary-foreground py-16 md:py-20 overflow-hidden",
       "bg-gradient-bloom-cta dark:bg-gradient-bloom-cta"
     )}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
@@ -67,7 +67,6 @@ export function Footer() {
           asChild 
           className={cn(
             "rounded-full group text-base md:text-lg py-3 px-8 md:py-4 md:px-10",
-            // Switched colors for better CTA contrast on vibrant gradient
             "bg-primary-foreground text-primary hover:bg-primary-foreground/90 dark:bg-primary-foreground dark:text-primary dark:hover:bg-primary-foreground/90"
           )}
         >
@@ -122,9 +121,18 @@ export function Footer() {
             </ul>
           </div>
           
-          {/* Social Links */}
+          {/* Social Links & Back To Top */}
           <div className="md:text-left">
-            <h3 className="text-xl font-semibold mb-4 text-primary-foreground">Connect With Us</h3>
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-4">
+              <h3 className="text-xl font-semibold text-primary-foreground mb-2 md:mb-0">Connect With Us</h3>
+              <BackToTopButton
+                className={cn(
+                  "bg-primary-foreground/10 text-primary-foreground hover:bg-primary-foreground/20 focus:ring-primary-foreground/50 focus:ring-offset-transparent",
+                  "dark:bg-primary-foreground/10 dark:text-primary-foreground dark:hover:bg-primary-foreground/20 dark:focus:ring-primary-foreground/50 dark:focus:ring-offset-transparent",
+                  "p-2 md:ml-4" // Adjusted padding and margin for better fit
+                )}
+              />
+            </div>
             <div className="flex md:justify-start justify-center space-x-4">
               {footerSections.socialLinks.map((social) => (
                 <Link 
@@ -140,16 +148,6 @@ export function Footer() {
               ))}
             </div>
           </div>
-        </div>
-
-        {/* Back to Top Button */}
-        <div className="mt-10 md:mt-14 text-center">
-          <BackToTopButton 
-            className={cn(
-              "bg-primary-foreground/10 text-primary-foreground hover:bg-primary-foreground/20 focus:ring-primary-foreground/50 focus:ring-offset-transparent",
-              "dark:bg-primary-foreground/10 dark:text-primary-foreground dark:hover:bg-primary-foreground/20 dark:focus:ring-primary-foreground/50 dark:focus:ring-offset-transparent"
-            )} 
-          />
         </div>
 
         {/* Bottom Bar */}
@@ -174,3 +172,4 @@ export function Footer() {
     </footer>
   );
 }
+
