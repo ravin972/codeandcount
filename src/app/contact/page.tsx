@@ -23,160 +23,160 @@ export default function ContactPage({ searchParams }: ContactPageProps) {
   }, []);
 
   return (
-    <div className="bg-background text-foreground">
-      <header className="py-16 md:py-24 text-center bg-secondary border-b border-border">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-4 flex items-center justify-center">
-            <CalendarDays className="h-12 w-12 mr-4 text-primary" />
-            Let's Connect
-          </h1>
-          <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
-            Schedule a call or send us a message. We're excited to hear about your project.
-          </p>
-        </div>
-      </header>
+    <>
+      <Script
+        src="https://app.cal.com/embed/embed.js"
+        strategy="lazyOnload" // Changed strategy from afterInteractive
+        onLoad={() => {
+          requestAnimationFrame(() => {
+            if (typeof (window as any).Cal === "function") {
+              try {
+                (window as any).Cal("inline", {
+                  elementOrSelector: "#cal-com-embed",
+                  calLink: calComCalLink,
+                  layout: "month_view", // Options: "month_view", "week_view", "column_view"
+                  config: {
+                    name: "Meeting with Developers", // Will be overridden by your Cal.com event name
+                    notes: "Discussing project details and requirements.",
+                    theme: "auto", // Options: "light", "dark", "auto"
+                  },
+                });
+                (window as any).Cal("ui", {
+                  theme: "auto",
+                  styles: { branding: { brandColor: "hsl(var(--primary))" } }, // Use theme primary color
+                  hideEventTypeDetails: false,
+                  layout: "month_view",
+                });
+              } catch (e) {
+                console.error("Error initializing Cal.com embed:", e);
+              }
+            } else {
+              console.error("Cal.com script not loaded yet or window.Cal is not a function (using lazyOnload).");
+            }
+          });
+        }}
+        onError={(e) => {
+          console.error('Error loading Cal.com script (using lazyOnload):', e);
+        }}
+      />
+      <div className="bg-background text-foreground">
+        <header className="py-16 md:py-24 text-center bg-secondary border-b border-border">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-4 flex items-center justify-center">
+              <CalendarDays className="h-12 w-12 mr-4 text-primary" />
+              Let's Connect
+            </h1>
+            <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
+              Schedule a call or send us a message. We're excited to hear about your project.
+            </p>
+          </div>
+        </header>
 
-      {/* Cal.com Booking Section */}
-      <section className="py-16 md:py-20">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Let's Talk About Your Project</h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10">
-            Share your project details with us, and we'll provide the support and expertise you need to make it online.
-            Book a quick video meeting below to get started.
-          </p>
-          <div className="bg-card rounded-xl shadow-xl p-4 md:p-6 border border-border max-w-4xl mx-auto">
-            <div
-              id="cal-com-embed"
-              style={{ width: '100%', height: '100%', overflow: 'auto' }}
-              className="min-h-[650px]"
-            >
-              {/* Cal.com embed will be injected here by the script */}
+        {/* Cal.com Booking Section */}
+        <section className="py-16 md:py-20">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Book a Meeting</h2>
+            <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10">
+             Choose a time that works for you to discuss your project requirements and how we can help.
+            </p>
+            <div className="bg-card rounded-xl shadow-xl p-4 md:p-6 border border-border max-w-4xl mx-auto">
+              <div
+                id="cal-com-embed"
+                style={{ width: '100%', height: '100%', overflow: 'auto' }}
+                className="min-h-[650px]"
+              >
+                {/* Cal.com embed will be injected here by the script */}
+              </div>
             </div>
           </div>
-          <Script
-            src="https://app.cal.com/embed/embed.js"
-            strategy="afterInteractive" // Load after page becomes interactive
-            onLoad={() => {
-              requestAnimationFrame(() => {
-                if (typeof (window as any).Cal === "function") {
-                  try {
-                    (window as any).Cal("inline", {
-                      elementOrSelector: "#cal-com-embed",
-                      calLink: calComCalLink,
-                      layout: "month_view", // Options: "month_view", "week_view", "column_view"
-                      config: {
-                        name: "Meeting with Developers", // Will be overridden by your Cal.com event name
-                        notes: "Discussing project details and requirements.",
-                        theme: "auto", // Options: "light", "dark", "auto"
-                        // You can add more config options here as per Cal.com documentation
-                      },
-                    });
-                    (window as any).Cal("ui", {
-                      theme: "auto",
-                      styles: { branding: { brandColor: "hsl(var(--primary))" } }, // Use theme primary color
-                      hideEventTypeDetails: false,
-                      layout: "month_view",
-                    });
-                  } catch (e) {
-                    console.error("Error initializing Cal.com embed:", e);
-                  }
-                } else {
-                  console.error("Cal.com script not loaded yet or window.Cal is not a function.");
-                }
-              });
-            }}
-            onError={(e) => {
-              console.error('Error loading Cal.com script:', e);
-            }}
-          />
-        </div>
-      </section>
+        </section>
 
-      {/* Separator */}
-      <div className="my-8 md:my-12 text-center">
-        <p className="text-2xl font-semibold text-muted-foreground">- OR -</p>
+        {/* Separator */}
+        <div className="my-8 md:my-12 text-center">
+          <p className="text-2xl font-semibold text-muted-foreground">- OR -</p>
+        </div>
+
+        {/* Contact Form & Details Section */}
+        <section className="pb-16 md:pb-24">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid md:grid-cols-2 gap-12 bg-card rounded-xl shadow-xl p-8 md:p-12 border border-border">
+              {/* Contact Form Section */}
+              <div id="start-project">
+                <h2 className="text-3xl font-bold mb-6 flex items-center">
+                  <MessageSquare className="h-8 w-8 mr-3 text-primary" />
+                  Or Send Us a Message
+                </h2>
+                <p className="text-muted-foreground mb-8">
+                  Fill out the form below, and one of our team members will get back to you shortly.
+                </p>
+                <ContactForm />
+              </div>
+
+              {/* Contact Information Section */}
+              <div>
+                <h2 className="text-3xl font-bold mb-6">Other Ways to Reach Us</h2>
+                <p className="text-muted-foreground mb-8">
+                  Alternatively, you can reach us through the following channels:
+                </p>
+                <div className="space-y-6">
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0 bg-primary/10 p-3 rounded-md">
+                      <Mail className="h-6 w-6 text-primary" />
+                    </div>
+                    <div className="ml-4">
+                      <h3 className="text-lg font-semibold text-foreground">Email Us</h3>
+                      <a href="mailto:hello@codeandcount.com" className="text-muted-foreground hover:text-primary transition-colors">
+                        hello@codeandcount.com
+                      </a>
+                    </div>
+                  </div>
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0 bg-primary/10 p-3 rounded-md">
+                      <Phone className="h-6 w-6 text-primary" />
+                    </div>
+                    <div className="ml-4">
+                      <h3 className="text-lg font-semibold text-foreground">Call Us</h3>
+                      <a href="tel:+918685941423" className="text-muted-foreground hover:text-primary transition-colors">
+                        +91-8685941423
+                      </a>
+                       <br/>
+                      <a href="tel:+917737770374" className="text-muted-foreground hover:text-primary transition-colors">
+                        +91-7737770374
+                      </a>
+                    </div>
+                  </div>
+                  <div className="flex items-start">
+                    <div className="flex-shrink-0 bg-primary/10 p-3 rounded-md">
+                      <MapPin className="h-6 w-6 text-primary" />
+                    </div>
+                    <div className="ml-4">
+                      <h3 className="text-lg font-semibold text-foreground">Visit Us</h3>
+                      <p className="text-muted-foreground">
+                        {mapAddress.split(', Sec-')[0]}<br />
+                        {mapAddress.split(', ').slice(1).join(', ')}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Embedded Map */}
+                <div className="mt-10 aspect-video rounded-lg shadow-md overflow-hidden border border-border">
+                   <iframe
+                      src={mapEmbedUrl}
+                      width="100%"
+                      height="100%"
+                      style={{ border:0 }}
+                      allowFullScreen={true}
+                      loading="lazy"
+                      referrerPolicy="no-referrer-when-downgrade"
+                      title="Office Location Map - Spaze iTech Park, Gurugram"
+                    ></iframe>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
-
-      {/* Contact Form & Details Section */}
-      <section className="pb-16 md:pb-24">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-12 bg-card rounded-xl shadow-xl p-8 md:p-12 border border-border">
-            {/* Contact Form Section */}
-            <div id="start-project">
-              <h2 className="text-3xl font-bold mb-6 flex items-center">
-                <MessageSquare className="h-8 w-8 mr-3 text-primary" />
-                Send Us a Message
-              </h2>
-              <p className="text-muted-foreground mb-8">
-                Fill out the form below, and one of our team members will get back to you shortly.
-              </p>
-              <ContactForm />
-            </div>
-
-            {/* Contact Information Section */}
-            <div>
-              <h2 className="text-3xl font-bold mb-6">Other Ways to Reach Us</h2>
-              <p className="text-muted-foreground mb-8">
-                Alternatively, you can reach us through the following channels:
-              </p>
-              <div className="space-y-6">
-                <div className="flex items-start">
-                  <div className="flex-shrink-0 bg-primary/10 p-3 rounded-md">
-                    <Mail className="h-6 w-6 text-primary" />
-                  </div>
-                  <div className="ml-4">
-                    <h3 className="text-lg font-semibold text-foreground">Email Us</h3>
-                    <a href="mailto:hello@codeandcount.com" className="text-muted-foreground hover:text-primary transition-colors">
-                      hello@codeandcount.com
-                    </a>
-                  </div>
-                </div>
-                <div className="flex items-start">
-                  <div className="flex-shrink-0 bg-primary/10 p-3 rounded-md">
-                    <Phone className="h-6 w-6 text-primary" />
-                  </div>
-                  <div className="ml-4">
-                    <h3 className="text-lg font-semibold text-foreground">Call Us</h3>
-                    <a href="tel:+918685941423" className="text-muted-foreground hover:text-primary transition-colors">
-                      +91-8685941423
-                    </a>
-                     <br/>
-                    <a href="tel:+917737770374" className="text-muted-foreground hover:text-primary transition-colors">
-                      +91-7737770374
-                    </a>
-                  </div>
-                </div>
-                <div className="flex items-start">
-                  <div className="flex-shrink-0 bg-primary/10 p-3 rounded-md">
-                    <MapPin className="h-6 w-6 text-primary" />
-                  </div>
-                  <div className="ml-4">
-                    <h3 className="text-lg font-semibold text-foreground">Visit Us</h3>
-                    <p className="text-muted-foreground">
-                      {mapAddress.split(', Sec-')[0]}<br />
-                      {mapAddress.split(', ').slice(1).join(', ')}
-                    </p>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Embedded Map */}
-              <div className="mt-10 aspect-video rounded-lg shadow-md overflow-hidden border border-border">
-                 <iframe
-                    src={mapEmbedUrl}
-                    width="100%"
-                    height="100%"
-                    style={{ border:0 }}
-                    allowFullScreen={true}
-                    loading="lazy"
-                    referrerPolicy="no-referrer-when-downgrade"
-                    title="Office Location Map - Spaze iTech Park, Gurugram"
-                  ></iframe>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-    </div>
+    </>
   );
 }
