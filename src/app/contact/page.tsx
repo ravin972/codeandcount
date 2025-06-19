@@ -26,7 +26,7 @@ export default function ContactPage({ searchParams }: ContactPageProps) {
     <>
       <Script
         src="https://app.cal.com/embed/embed.js"
-        strategy="lazyOnload" // Changed strategy from afterInteractive
+        strategy="beforeInteractive" // Changed strategy
         onLoad={() => {
           requestAnimationFrame(() => {
             if (typeof (window as any).Cal === "function") {
@@ -48,15 +48,15 @@ export default function ContactPage({ searchParams }: ContactPageProps) {
                   layout: "month_view",
                 });
               } catch (e) {
-                console.error("Error initializing Cal.com embed:", e);
+                console.error("Error initializing Cal.com embed (using beforeInteractive):", e);
               }
             } else {
-              console.error("Cal.com script not loaded yet or window.Cal is not a function (using lazyOnload).");
+              console.error("Cal.com script not loaded yet or window.Cal is not a function (using beforeInteractive).");
             }
           });
         }}
         onError={(e) => {
-          console.error('Error loading Cal.com script (using lazyOnload):', e);
+          console.error('Error loading Cal.com script (using beforeInteractive):', e);
         }}
       />
       <div className="bg-background text-foreground">
