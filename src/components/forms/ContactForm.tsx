@@ -66,7 +66,7 @@ export function ContactForm() {
   async function onSubmit(values: ContactFormValues) {
     setIsSubmitting(true);
     try {
-      const recipient = "pandeyravinder078@gmail.com";
+      const recipients = "pandeyravinder078@gmail.com,hello@codeandcount.com";
       const subject = encodeURIComponent(
         `${values.queryType} - Contact from ${values.name}`
       );
@@ -81,7 +81,7 @@ export function ContactForm() {
       ];
       const body = encodeURIComponent(bodyLines.join("\n"));
 
-      window.location.href = `mailto:${recipient}?subject=${subject}&body=${body}`;
+      window.location.href = `mailto:${recipients}?subject=${subject}&body=${body}`;
 
       toast({
         title: "Email Client Opened",
