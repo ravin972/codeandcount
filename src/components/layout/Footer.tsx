@@ -67,7 +67,7 @@ export function Footer() {
 
   return (
     <>
-      <footer className="bg-muted text-muted-foreground border-t border-border pt-16 md:pt-24 pb-8 relative">
+      <footer className="bg-background text-muted-foreground border-t border-border pt-16 md:pt-24 pb-8 relative">
         {/* Social Media Bar - Absolute Positioned */}
         <div
           className={cn(
@@ -225,3 +225,4 @@ export function Footer() {
     </>
   );
 }
+
