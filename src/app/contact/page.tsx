@@ -2,15 +2,15 @@
 "use client";
 
 import React from 'react';
-import Link from 'next/link'; // Added Link import
+import Link from 'next/link'; 
+import { Mail, Phone, MapPin, CalendarDays, MessageSquare, ExternalLink } from 'lucide-react'; 
+import { Button } from '@/components/ui/button'; 
 import { ContactForm } from '@/components/forms/ContactForm';
-import { Mail, Phone, MapPin, CalendarDays, MessageSquare, ExternalLink } from 'lucide-react'; // Added ExternalLink
-import { Button } from '@/components/ui/button'; // Added Button import
 
 export default function ContactPage() {
   const mapAddress = "spaze i tech park, Sec-49, Gurugram, Haryana, India";
   const mapEmbedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(mapAddress)}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
-  const calComCalLink = "sackinyasar/meeting-with-developers"; // Kept for direct link
+  const calComCalLink = "ravin-pandey-f7vkoq/30min"; // Updated Cal.com link
 
   return (
     <>
