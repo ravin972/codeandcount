@@ -1,0 +1,139 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Light Mode Colors - Vibrant Green & Gold/Yellow */
+    --background: 0 0% 98%; /* Very Light Gray / Almost White */
+    --foreground: 160 25% 10%; /* Dark Slate Green/Charcoal for text */
+
+    --card: 0 0% 100%; /* White */
+    --card-foreground: 160 25% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 160 25% 10%;
+
+    --primary: 145 65% 40%; /* Vibrant Green (slightly darker for light mode contrast) */
+    --primary-foreground: 0 0% 100%; /* White */
+
+    --secondary: 160 30% 95%; /* Very Light Cool Greenish Gray */
+    --secondary-foreground: 160 25% 25%;
+
+    --muted: 160 25% 90%; /* Slightly darker light cool greenish gray */
+    --muted-foreground: 160 20% 45%;
+
+    --accent: 45 100% 48%; /* Vibrant Gold/Yellow (adjusted for light mode) */
+    --accent-foreground: 45 100% 15%; /* Dark Brown/Black for text on gold */
+    
+    --destructive: 0 72% 51%; /* Standard Red */
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 160 20% 88%; /* Light Cool Greenish Gray Border */
+    --input: 160 20% 88%;
+    --ring: 145 65% 45%; /* Brighter Green for focus rings */
+
+    --radius: 0.5rem;
+
+    /* Sidebar specific colors - Light Mode */
+    --sidebar-background: hsl(var(--card));
+    --sidebar-foreground: hsl(var(--card-foreground));
+    --sidebar-primary: hsl(var(--primary));
+    --sidebar-primary-foreground: hsl(var(--primary-foreground));
+    --sidebar-accent: hsl(var(--accent));
+    --sidebar-accent-foreground: hsl(var(--accent-foreground));
+    --sidebar-border: hsl(var(--border));
+    --sidebar-ring: hsl(var(--ring));
+
+    /* Chart colors for light mode */
+    --chart-1: hsl(var(--primary)); 
+    --chart-2: hsl(var(--accent)); 
+    --chart-3: 210 70% 50%; /* Complementary Blue */
+    --chart-4: 30 80% 60%; /* Orange */
+    --chart-5: 270 70% 55%;  /* Purple */
+  }
+
+  .dark {
+    /* Dark Mode Colors - Vibrant Green & Gold/Yellow */
+    --background: 160 15% 8%; /* Very Dark Desaturated Cool Green */
+    --foreground: 0 0% 98%; /* White/Very Light Gray */
+
+    --card: 160 12% 12%; /* Darker Desaturated Cool Green */
+    --card-foreground: 0 0% 95%;
+
+    --popover: 160 10% 10%; /* Darker Popover */
+    --popover-foreground: 0 0% 95%;
+
+    --primary: 145 65% 45%; /* Vibrant Green */
+    --primary-foreground: 0 0% 100%; /* White */
+
+    --secondary: 160 10% 15%; /* Darker, more desaturated Cool Green */
+    --secondary-foreground: 0 0% 85%; 
+
+    --muted: 160 8% 20%; /* Slightly lighter dark desaturated cool green */
+    --muted-foreground: 0 0% 65%; 
+
+    --accent: 45 100% 50%; /* Vibrant Gold/Yellow */
+    --accent-foreground: 45 100% 15%; /* Dark Brown/Black for text on gold */
+
+    --destructive: 0 70% 55%; /* Adjusted Red for dark */
+    --destructive-foreground: 0 0% 98%;
+
+    --border: 160 10% 20%; /* Very Subtle Dark Border */
+    --input: 160 10% 20%; 
+    --ring: 145 65% 50%; /* Brighter Green for focus rings */
+    
+    /* Sidebar specific colors - Dark Mode */
+    --sidebar-background: hsl(var(--card));
+    --sidebar-foreground: hsl(var(--card-foreground));
+    --sidebar-primary: hsl(var(--primary));
+    --sidebar-primary-foreground: hsl(var(--primary-foreground));
+    --sidebar-accent: hsl(var(--accent));
+    --sidebar-accent-foreground: hsl(var(--accent-foreground));
+    --sidebar-border: hsl(var(--border));
+    --sidebar-ring: hsl(var(--ring));
+    
+    /* Chart colors for dark mode */
+    --chart-1: hsl(var(--primary)); 
+    --chart-2: hsl(var(--accent));
+    --chart-3: 210 70% 55%; /* Complementary Blue */
+    --chart-4: 30 80% 65%; /* Orange */
+    --chart-5: 270 70% 60%;  /* Purple */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+
+  /* Conditional cursor hiding for non-touch devices */
+  @media (hover: hover) and (pointer: fine) {
+    body {
+      cursor: none; /* Hide default system cursor only on devices with hover/fine pointer */
+    }
+  }
+  
+  /* Global Text Selection Styles */
+  ::selection {
+    background-color: hsl(var(--primary) / 0.7); 
+    color: hsl(var(--primary-foreground)); 
+  }
+  ::-moz-selection { /* Firefox */
+    background-color: hsl(var(--primary) / 0.7);
+    color: hsl(var(--primary-foreground));
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  .scrollbar-hide {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+}
