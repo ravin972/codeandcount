@@ -11,7 +11,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { generateImage, GenerateImageInput } from '@/ai/flows/generate-image-flow';
-import { Loader2, Sparkles, Image as ImageIcon } from 'lucide-react';
+import { Loader2, Sparkles, Image as ImageIcon, Download } from 'lucide-react';
 import NextImage from 'next/image'; // Renamed to avoid conflict with Lucide icon
 
 const imageGeneratorSchema = z.object({
@@ -66,6 +66,39 @@ export default function AIImageGeneratorPage() {
       });
     }
     setIsLoading(false);
+  };
+
+  const handleDownloadImage = () => {
+    if (!generatedImageDataUri) {
+      toast({
+        title: "Error",
+        description: "No image to download.",
+        variant: "destructive",
+      });
+      return;
+    }
+    try {
+      const link = document.createElement('a');
+      link.href = generatedImageDataUri;
+      // Extract file extension from MIME type, default to png
+      const mimeType = generatedImageDataUri.substring(generatedImageDataUri.indexOf(':') + 1, generatedImageDataUri.indexOf(';'));
+      const extension = mimeType.split('/')[1] || 'png';
+      link.download = `ai-generated-image-${Date.now()}.${extension}`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      toast({
+        title: "Downloading...",
+        description: "Your image has started downloading.",
+      });
+    } catch (error) {
+      console.error("Download error:", error);
+      toast({
+        title: "Download Failed",
+        description: "Could not download the image. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
@@ -153,13 +186,19 @@ export default function AIImageGeneratorPage() {
                     src={generatedImageDataUri} 
                     alt="AI generated image" 
                     layout="fill"
-                    objectFit="contain" // Changed to contain to show full image without cropping
-                    unoptimized={generatedImageDataUri.startsWith('data:')} // Important for data URIs
+                    objectFit="contain"
+                    unoptimized={generatedImageDataUri.startsWith('data:')} 
                   />
                 </div>
               </CardContent>
-              <CardFooter>
-                <p className="text-xs text-muted-foreground">Image generated using Gemini. Refresh the page or submit a new prompt to create another.</p>
+              <CardFooter className="flex flex-col sm:flex-row justify-between items-center gap-4">
+                <Button onClick={handleDownloadImage} variant="outline">
+                  <Download className="mr-2 h-4 w-4" />
+                  Download Image
+                </Button>
+                <p className="text-xs text-muted-foreground text-center sm:text-right">
+                  Image generated using Gemini. Refresh the page or submit a new prompt to create another.
+                </p>
               </CardFooter>
             </Card>
           )}
