@@ -406,8 +406,8 @@ export default function HomePage() {
           className="absolute inset-0 w-full h-full -z-10" 
         />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-primary-foreground">Ready to Elevate Your Brand?</h2>
-          <p className="text-lg md:text-xl max-w-2xl mx-auto mb-10 text-primary-foreground/90">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground dark:text-primary-foreground">Ready to Elevate Your Brand?</h2>
+          <p className="text-lg md:text-xl max-w-2xl mx-auto mb-10 text-muted-foreground dark:text-primary-foreground/90">
             Let's discuss how CodeAndCount.com can help you achieve your business goals. We partner with clients of all sizes, across diverse industries, to deliver exceptional results.
           </p>
           <Button size="lg" variant="default" asChild className="rounded-full bg-primary-foreground text-primary hover:bg-primary-foreground/90">
