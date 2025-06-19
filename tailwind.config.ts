@@ -69,25 +69,25 @@ export default {
       backgroundImage: {
         // Dark mode hero: Green primary to Gold accent, blending into dark background
         'gradient-main-hero': "linear-gradient(180deg, hsl(var(--background)) 20%, hsl(var(--primary)/0.1) 70%, hsl(var(--accent)/0.15) 100%)",
-        // Light mode hero: Similar gradient but lighter
-        'gradient-main-hero-light': "linear-gradient(180deg, hsl(var(--background)) 60%, hsl(var(--primary)/0.05) 90%, hsl(var(--accent)/0.08) 100%)",
+        // Light mode hero: Similar gradient but lighter and slightly more vibrant
+        'gradient-main-hero-light': "linear-gradient(180deg, hsl(var(--background)) 40%, hsl(var(--primary)/0.1) 75%, hsl(var(--accent)/0.12) 100%)",
         
         // CTA Bloom for dark mode (Green and Gold focused)
         'gradient-bloom-cta': "radial-gradient(ellipse 70% 80% at 50% 120%, hsl(var(--primary)/0.5) 0%, hsl(var(--accent)/0.3) 40%, transparent 70%)",
-        // CTA Bloom for light mode (Softer Green and Gold)
-        'gradient-bloom-cta-light': "radial-gradient(ellipse 80% 70% at 50% 110%, hsl(var(--primary)/0.25) 0%, hsl(var(--accent)/0.15) 35%, transparent 65%)",
+        // CTA Bloom for light mode (Softer Green and Gold, slightly more vibrant)
+        'gradient-bloom-cta-light': "radial-gradient(ellipse 70% 60% at 50% 100%, hsl(var(--primary)/0.35) 0%, hsl(var(--accent)/0.25) 40%, transparent 70%)",
 
         // General subtle background, blending secondary into background
         'gradient-subtle-bg': "linear-gradient(180deg, hsl(var(--secondary)) 0%, hsl(var(--background)) 100%)",
         'gradient-subtle-bg-light': "linear-gradient(180deg, hsl(var(--secondary)) 0%, hsl(var(--background)) 100%)",
         
         // Blob gradients using new primary (Green) and accent (Gold)
-        'gradient-blob-1': "radial-gradient(ellipse 40% 40% at 25% 75%, hsl(var(--primary) / 0.15) 0%, transparent 70%)", // Green blob
-        'gradient-blob-1-light': "radial-gradient(ellipse 40% 40% at 25% 75%, hsl(var(--primary) / 0.08) 0%, transparent 70%)",
-        'gradient-blob-2': "radial-gradient(ellipse 40% 40% at 75% 25%, hsl(var(--accent) / 0.15) 0%, transparent 70%)", // Gold blob
-        'gradient-blob-2-light': "radial-gradient(ellipse 40% 40% at 75% 25%, hsl(var(--accent) / 0.08) 0%, transparent 70%)",
+        'gradient-blob-1': "radial-gradient(ellipse 40% 40% at 25% 75%, hsl(var(--primary) / 0.15) 0%, transparent 70%)", 
+        'gradient-blob-1-light': "radial-gradient(ellipse 40% 40% at 25% 75%, hsl(var(--primary) / 0.12) 0%, transparent 70%)",
+        'gradient-blob-2': "radial-gradient(ellipse 40% 40% at 75% 25%, hsl(var(--accent) / 0.15) 0%, transparent 70%)", 
+        'gradient-blob-2-light': "radial-gradient(ellipse 40% 40% at 75% 25%, hsl(var(--accent) / 0.12) 0%, transparent 70%)",
         
-        'gradient-text-dynamic': "linear-gradient(60deg, hsl(var(--primary)) 30%, hsl(var(--accent)) 100%)", // Green to Gold text
+        'gradient-text-dynamic': "linear-gradient(60deg, hsl(var(--primary)) 30%, hsl(var(--accent)) 100%)", 
       },
   		borderRadius: {
   			lg: 'var(--radius)',
