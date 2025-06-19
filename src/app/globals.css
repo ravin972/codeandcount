@@ -4,34 +4,34 @@
 
 @layer base {
   :root {
-    /* Light Mode Colors - Firebase Inspired */
+    /* Light Mode Colors - Vibrant Teal & Green */
     --background: 0 0% 100%; /* White */
-    --foreground: 220 25% 10%; /* Dark Slate Blue/Charcoal for text */
+    --foreground: 200 25% 10%; /* Dark Slate Blue/Charcoal for text */
 
     --card: 0 0% 98%; /* Very Light Gray / Almost White */
-    --card-foreground: 220 25% 10%;
+    --card-foreground: 200 25% 10%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 25% 10%;
+    --popover-foreground: 200 25% 10%;
 
-    --primary: 28 100% 55%; /* Vibrant Orange (Firebase Primary CTA) */
+    --primary: 180 70% 45%; /* Vibrant Teal/Cyan */
     --primary-foreground: 0 0% 100%; /* White */
 
-    --secondary: 0 0% 96.1%; /* Light gray for secondary elements */
-    --secondary-foreground: 220 25% 25%;
+    --secondary: 200 30% 96%; /* Very Light Cool Gray */
+    --secondary-foreground: 200 25% 25%;
 
-    --muted: 0 0% 90%; /* Slightly darker light gray */
-    --muted-foreground: 220 20% 45%;
+    --muted: 200 25% 90%; /* Slightly darker light cool gray */
+    --muted-foreground: 200 20% 45%;
 
-    --accent: 200 100% 55%; /* Vibrant Blue (Firebase Secondary Accent) */
+    --accent: 145 65% 40%; /* Bright Green */
     --accent-foreground: 0 0% 100%; 
     
     --destructive: 0 72% 51%; /* Standard Red */
     --destructive-foreground: 0 0% 98%;
 
-    --border: 0 0% 89.8%; /* Light Gray Border */
-    --input: 0 0% 89.8%;
-    --ring: 28 100% 60%; /* Brighter Orange for focus rings */
+    --border: 200 20% 88%; /* Light Cool Gray Border */
+    --input: 200 20% 88%;
+    --ring: 180 70% 50%; /* Brighter Teal/Cyan for focus rings */
 
     --radius: 0.5rem;
 
@@ -48,40 +48,40 @@
     /* Chart colors for light mode */
     --chart-1: hsl(var(--primary)); 
     --chart-2: hsl(var(--accent)); 
-    --chart-3: 150 70% 45%; /* Greenish Teal */
-    --chart-4: 330 80% 60%; /* Pink/Magenta */
-    --chart-5: 50 90% 55%;  /* Yellow-Orange */
+    --chart-3: 210 70% 50%; /* Complementary Blue */
+    --chart-4: 30 80% 60%; /* Orange */
+    --chart-5: 270 70% 55%;  /* Purple */
   }
 
   .dark {
-    /* Dark Mode Colors - Firebase Inspired */
-    --background: 0 0% 4%; /* Almost Black */
+    /* Dark Mode Colors - Vibrant Teal & Green */
+    --background: 200 25% 6%; /* Very Dark Desaturated Cyan-Blue */
     --foreground: 0 0% 98%; /* White/Very Light Gray */
 
-    --card: 220 10% 8%; /* Very Dark Gray (slightly lighter than bg) */
+    --card: 200 20% 10%; /* Darker Desaturated Cyan-Blue */
     --card-foreground: 0 0% 95%;
 
-    --popover: 220 10% 7%; /* Darker Popover */
+    --popover: 200 18% 9%; /* Darker Popover */
     --popover-foreground: 0 0% 95%;
 
-    --primary: 28 100% 55%; /* Vibrant Orange (Firebase Primary CTA) */
+    --primary: 180 70% 50%; /* Vibrant Teal/Cyan */
     --primary-foreground: 0 0% 100%; /* White */
 
-    --secondary: 220 10% 12%; /* Dark gray for secondary elements */
+    --secondary: 200 15% 12%; /* Darker, more desaturated Cyan-Blue */
     --secondary-foreground: 0 0% 85%; 
 
-    --muted: 220 10% 15%; /* Slightly lighter dark gray */
+    --muted: 200 10% 15%; /* Slightly lighter dark desaturated cyan-blue */
     --muted-foreground: 0 0% 65%; 
 
-    --accent: 200 100% 55%; /* Vibrant Blue (Firebase Secondary Accent) */
+    --accent: 145 65% 45%; /* Bright Green */
     --accent-foreground: 0 0% 100%;
 
     --destructive: 0 70% 55%; /* Adjusted Red for dark */
     --destructive-foreground: 0 0% 98%;
 
-    --border: 220 10% 15%; /* Very Subtle Dark Border */
-    --input: 220 10% 15%; 
-    --ring: 28 100% 60%; /* Brighter Orange for focus rings */
+    --border: 200 15% 18%; /* Very Subtle Dark Border */
+    --input: 200 15% 18%; 
+    --ring: 180 70% 55%; /* Brighter Teal/Cyan for focus rings */
     
     /* Sidebar specific colors - Dark Mode */
     --sidebar-background: hsl(var(--card));
@@ -96,9 +96,9 @@
     /* Chart colors for dark mode */
     --chart-1: hsl(var(--primary)); 
     --chart-2: hsl(var(--accent));
-    --chart-3: 150 70% 50%; /* Greenish Teal */
-    --chart-4: 330 80% 65%; /* Pink/Magenta */
-    --chart-5: 50 90% 60%;  /* Yellow-Orange */
+    --chart-3: 210 70% 55%; /* Complementary Blue */
+    --chart-4: 30 80% 65%; /* Orange */
+    --chart-5: 270 70% 60%;  /* Purple */
   }
 }
 

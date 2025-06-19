@@ -249,7 +249,7 @@ export default function HomePage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
          <div className="relative rounded-3xl p-8 md:p-12 lg:p-16">
             <div className="mb-6">
-              <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-primary-foreground">
+              <h1 className="text-5xl md:text-7xl font-bold tracking-tight bg-gradient-text-dynamic bg-clip-text text-transparent">
                 Crafting digital experience.
               </h1>
             </div>
