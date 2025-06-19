@@ -4,34 +4,34 @@
 
 @layer base {
   :root {
-    /* Light Mode Colors - Aurora Glass Theme */
-    --background: 220 40% 97%; /* Very light cool gray */
-    --foreground: 220 25% 20%; /* Dark desaturated blue/charcoal */
+    /* Light Mode Colors - Solid, Smooth, Vibrant Theme */
+    --background: 220 20% 98%; /* Very light cool gray */
+    --foreground: 220 25% 15%; /* Dark desaturated blue/charcoal */
 
-    --card: 0 0% 100%; /* White base for card (alpha applied in components) */
+    --card: 0 0% 100%; /* Solid White */
     --card-foreground: 220 25% 15%;
 
-    --popover: 0 0% 100%; /* White base for popover */
+    --popover: 0 0% 100%; /* Solid White */
     --popover-foreground: 220 25% 15%;
 
-    --primary: 175 65% 45%; /* Vibrant Teal (adjusted for light bg) */
-    --primary-foreground: 0 0% 100%; /* White text on primary */
+    --primary: 210 90% 55%; /* Vibrant Electric Blue */
+    --primary-foreground: 0 0% 100%; /* White */
 
-    --secondary: 220 30% 92%; /* Light cool gray for secondary elements */
-    --secondary-foreground: 220 25% 25%; /* Darker text for secondary elements */
+    --secondary: 220 20% 94%; /* Light Gray */
+    --secondary-foreground: 220 25% 25%; 
 
-    --muted: 220 30% 92%;
-    --muted-foreground: 220 20% 45%; /* Softer gray for muted text */
+    --muted: 220 20% 90%; /* Slightly darker light gray for muted elements */
+    --muted-foreground: 220 20% 45%; 
 
-    --accent: 330 75% 60%; /* Luminous Pink/Magenta (adjusted for light bg) */
-    --accent-foreground: 0 0% 100%; /* White text on accent */
+    --accent: 180 70% 50%; /* Vibrant Teal-Cyan */
+    --accent-foreground: 0 0% 100%; /* White */
     
     --destructive: 0 72% 51%; /* Standard Red */
-    --destructive-foreground: 0 0% 98%; /* Almost White */
+    --destructive-foreground: 0 0% 98%;
 
-    --border: 220 20% 88%; /* Light gray border */
-    --input: 220 20% 88%;
-    --ring: 175 70% 50%; /* Brighter version of primary for focus rings */
+    --border: 220 15% 88%; /* Light gray border */
+    --input: 220 15% 88%;
+    --ring: 210 90% 60%; /* Brighter version of primary for focus rings */
 
     --radius: 0.5rem;
 
@@ -54,34 +54,34 @@
   }
 
   .dark {
-    /* Dark Mode Colors - Aurora Glass Theme */
-    --background: 220 25% 10%; /* Deep, slightly desaturated blue-black */
-    --foreground: 210 40% 90%; /* Soft off-white for less harsh contrast */
+    /* Dark Mode Colors - Solid, Smooth, Vibrant Theme */
+    --background: 220 30% 8%; /* Deep cool blue-black */
+    --foreground: 210 30% 95%; /* Light neutral gray/off-white */
 
-    --card: 220 20% 15%; /* Slightly lighter than background (alpha applied in components) */
-    --card-foreground: 210 40% 90%;
+    --card: 220 25% 12%; /* Dark, slightly lighter than background */
+    --card-foreground: 210 30% 95%;
 
-    --popover: 220 20% 12%; 
-    --popover-foreground: 210 40% 90%;
+    --popover: 220 25% 10%; /* Even darker for popovers */
+    --popover-foreground: 210 30% 95%;
 
-    --primary: 175 70% 50%; /* Vibrant Teal */
-    --primary-foreground: 210 40% 98%; /* Almost White */
+    --primary: 210 90% 60%; /* Vibrant Electric Blue */
+    --primary-foreground: 0 0% 100%; /* White */
 
-    --secondary: 220 15% 25%; /* Muted, dark blue-gray for subtle backgrounds */
-    --secondary-foreground: 210 30% 80%; 
+    --secondary: 220 15% 20%; /* Medium-dark gray */
+    --secondary-foreground: 210 30% 85%; 
 
-    --muted: 220 15% 25%; 
-    --muted-foreground: 210 25% 65%; /* Softer gray for muted text */
+    --muted: 220 15% 18%; /* Darker muted color */
+    --muted-foreground: 210 25% 70%; 
 
-    --accent: 330 85% 65%; /* Luminous Pink/Magenta */
-    --accent-foreground: 210 40% 98%; /* Almost White */
+    --accent: 180 70% 55%; /* Vibrant Teal-Cyan */
+    --accent-foreground: 0 0% 100%; /* White */
 
-    --destructive: 0 62% 50%; /* Adjusted Red for dark */
+    --destructive: 0 70% 55%; /* Adjusted Red for dark */
     --destructive-foreground: 0 0% 98%;
 
-    --border: 220 15% 30%; /* Subtle, dark border for glass edges */
-    --input: 220 15% 30%; 
-    --ring: 175 75% 55%; /* Brighter version of primary for focus rings */
+    --border: 220 15% 25%; /* Subtle, dark border */
+    --input: 220 15% 25%; 
+    --ring: 210 90% 65%; /* Brighter version of primary for focus rings */
     
     /* Sidebar specific colors - Dark Mode */
     --sidebar-background: hsl(var(--card));

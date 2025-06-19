@@ -67,7 +67,7 @@ export function Footer() {
 
   return (
     <>
-      <footer className="bg-neutral-900/80 backdrop-blur-md border-t border-neutral-700/50 text-neutral-300 pt-16 md:pt-24 pb-8 relative">
+      <footer className="bg-muted text-muted-foreground border-t border-border pt-16 md:pt-24 pb-8 relative">
         {/* Social Media Bar - Absolute Positioned */}
         <div
           className={cn(
@@ -91,7 +91,7 @@ export function Footer() {
         </div>
 
         {/* Back To Top Button - Absolute Positioned */}
-        <BackToTopButton className="absolute top-2 right-6 z-10 hidden md:flex" />
+        <BackToTopButton className="absolute top-2 right-6 z-10 hidden md:flex !bg-neutral-700 !text-neutral-100 hover:!bg-neutral-600 focus:!ring-offset-muted" />
 
 
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -99,7 +99,7 @@ export function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16 md:mb-24">
             {/* Column 1: CTA */}
             <div>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">{footerSections.cta.title}</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-6 leading-tight">{footerSections.cta.title}</h2>
               <Button size="lg" asChild className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full mb-6 group">
                 <Link href={footerSections.cta.buttonLink}>
                   {footerSections.cta.buttonText}
@@ -125,7 +125,7 @@ export function Footer() {
                     ))}
                     <StarHalf key="half" className="h-4 w-4 text-yellow-400 fill-yellow-400" />
                   </div>
-                  <p className="text-xs text-neutral-400">
+                  <p className="text-xs text-muted-foreground/80">
                     {footerSections.cta.reviews.rating} from {footerSections.cta.reviews.count}
                   </p>
                 </div>
@@ -134,7 +134,7 @@ export function Footer() {
 
             {/* Column 2: Learn */}
             <div>
-              <h3 className="text-lg font-semibold text-white mb-4">{footerSections.learn.title}</h3>
+              <h3 className="text-lg font-semibold text-foreground mb-4">{footerSections.learn.title}</h3>
               <ul className="space-y-2">
                 {footerSections.learn.links.map((link) => (
                   <li key={link.text}>
@@ -148,7 +148,7 @@ export function Footer() {
 
             {/* Column 3: Explore */}
             <div>
-              <h3 className="text-lg font-semibold text-white mb-4">{footerSections.explore.title}</h3>
+              <h3 className="text-lg font-semibold text-foreground mb-4">{footerSections.explore.title}</h3>
               <ul className="space-y-2">
                 {footerSections.explore.links.map((link) => (
                   <li key={link.text}>
@@ -165,7 +165,7 @@ export function Footer() {
 
             {/* Column 4: Get in touch */}
             <div>
-              <h3 className="text-lg font-semibold text-white mb-4">{footerSections.getInTouch.title}</h3>
+              <h3 className="text-lg font-semibold text-foreground mb-4">{footerSections.getInTouch.title}</h3>
               <ul className="space-y-3">
                 <li className="flex items-center">
                   <Phone className="h-5 w-5 mr-3 text-primary flex-shrink-0" />
@@ -199,22 +199,22 @@ export function Footer() {
 
           {/* Crafting Since Section */}
           <div className="text-center mb-16 md:mb-24">
-            <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold text-white leading-none">
+            <h1 className="text-6xl sm:text-7xl md:text-8xl lg:text-9xl font-bold text-foreground leading-none">
               Crafting since {foundingYear}
             </h1>
           </div>
 
           {/* Bottom Bar */}
-          <div className="border-t border-neutral-700 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-neutral-400">
+          <div className="border-t border-border pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-muted-foreground/80">
             <div className="flex items-center space-x-2 mb-4 md:mb-0">
-              <Link href="/" className="text-2xl font-bold text-white hover:opacity-80 transition-opacity">
+              <Link href="/" className="text-2xl font-bold text-foreground hover:opacity-80 transition-opacity">
                 Code<span className="text-primary">&amp;</span>Count
               </Link>
               <span>&copy; CodeAndCount.com {currentYear}</span>
             </div>
             <div className="flex space-x-4">
               <span>All Rights Reserved</span>
-              <span className="text-neutral-600">|</span>
+              <span className="text-muted-foreground/50">|</span>
               <Link href="/privacy-policy" className="hover:text-primary transition-colors duration-200">
                 Privacy Policy
               </Link>
@@ -225,4 +225,3 @@ export function Footer() {
     </>
   );
 }
-

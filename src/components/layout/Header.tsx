@@ -47,7 +47,7 @@ export function Header() {
     >
       <div
         className={cn(
-          "flex items-center justify-between rounded-full shadow-xl backdrop-blur-lg bg-background/70 dark:bg-neutral-900/70 border border-white/10 dark:border-neutral-700/30 transition-all duration-300 ease-in-out",
+          "flex items-center justify-between rounded-full shadow-xl bg-card text-card-foreground border border-border transition-all duration-300 ease-in-out",
           "w-full", 
           isCondensed
             ? "h-14 px-3 py-1 sm:px-4 md:w-1/2 md:mx-auto" 
@@ -78,7 +78,7 @@ export function Header() {
               className={cn(
                 "font-medium transition-all duration-300 ease-in-out hover:text-primary rounded-md relative text-sm",
                 isCondensed ? "px-2 py-1" : "px-2.5 py-1.5", 
-                pathname === link.href || pathname.startsWith(link.href + '/') ? "text-primary bg-primary/10" : "text-foreground/80 hover:bg-accent/50"
+                pathname === link.href || pathname.startsWith(link.href + '/') ? "text-primary bg-primary/10" : "text-card-foreground/80 hover:bg-accent/50"
               )}
             >
               {link.label}
@@ -121,7 +121,7 @@ export function Header() {
                 <span className="sr-only">Open menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-full max-w-xs p-6">
+            <SheetContent side="right" className="w-full max-w-xs p-6"> {/* Uses solid background from sheetVariants */}
               <SheetHeader>
                 <SheetTitle className="sr-only">Main Menu</SheetTitle>
               </SheetHeader>

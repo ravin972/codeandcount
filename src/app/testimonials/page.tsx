@@ -41,7 +41,7 @@ interface TestimonialsPageProps {
 export default function TestimonialsPage({ searchParams }: TestimonialsPageProps) {
   return (
     <div className="bg-background text-foreground">
-      <header className="py-16 md:py-24 text-center bg-gradient-subtle-bg backdrop-blur-lg border-b border-white/10 dark:border-neutral-700/30">
+      <header className="py-16 md:py-24 text-center bg-secondary border-b border-border">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-4 flex items-center justify-center">
             <MessageSquareQuote className="h-12 w-12 mr-4 text-primary" />
@@ -55,7 +55,7 @@ export default function TestimonialsPage({ searchParams }: TestimonialsPageProps
 
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-card/80 dark:bg-card/80 backdrop-blur-lg rounded-xl shadow-xl p-8 md:p-12 border border-card-foreground/10 dark:border-neutral-700/30">
+          <div className="bg-card rounded-xl shadow-xl p-8 md:p-12 border border-border">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {testimonialsData.map((testimonial) => (
                 <Card key={testimonial.name} className="shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out hover:-translate-y-1" data-interactive-cursor="true">

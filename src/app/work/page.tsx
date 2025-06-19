@@ -236,7 +236,7 @@ const portfolioItems = [
 type FilterType = 'all' | 'accounting' | 'web_ai';
 
 const ProjectCard = ({ item }: { item: typeof portfolioItems[0] }) => (
-  <Card key={item.id} className="overflow-hidden flex flex-col group hover:-translate-y-1" data-interactive-cursor="true">
+  <Card key={item.id} className="overflow-hidden flex flex-col group hover:-translate-y-1" data-interactive-cursor="true"> {/* Card uses solid bg */}
     <div className="relative overflow-hidden">
       <Image 
         src={item.imageUrl} 
@@ -279,7 +279,7 @@ export default function WorkPage() {
 
   return (
     <div className="bg-background text-foreground">
-      <header className="py-16 md:py-24 text-center bg-secondary/70 dark:bg-secondary/70 backdrop-blur-lg border-b border-white/10 dark:border-neutral-700/30">
+      <header className="py-16 md:py-24 text-center bg-secondary border-b border-border">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-4 flex items-center justify-center">
             <GalleryThumbnails className="h-12 w-12 mr-4 text-primary" />
@@ -293,7 +293,7 @@ export default function WorkPage() {
 
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-background/70 dark:bg-neutral-900/70 backdrop-blur-lg rounded-xl shadow-xl p-8 md:p-12 border border-white/10 dark:border-neutral-700/30">
+          <div className="bg-card rounded-xl shadow-xl p-8 md:p-12 border border-border">
             
             <div className="mb-12 flex flex-wrap justify-center items-center gap-3 sm:gap-4">
               <Button 

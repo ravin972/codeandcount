@@ -429,7 +429,7 @@ export default function ProjectDetailPage({ params, searchParams }: ProjectDetai
   if (!project) {
     return (
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
-        <div className="bg-background/70 dark:bg-neutral-900/70 backdrop-blur-lg rounded-xl shadow-xl p-8 md:p-12 border border-white/10 dark:border-neutral-700/30">
+        <div className="bg-card rounded-xl shadow-xl p-8 md:p-12 border border-border">
           <h1 className="text-4xl font-bold">Project Not Found</h1>
           <p className="mt-4 text-muted-foreground">The project you are looking for does not exist.</p>
           <Button asChild className="mt-8">
@@ -444,7 +444,7 @@ export default function ProjectDetailPage({ params, searchParams }: ProjectDetai
 
   return (
     <div className="bg-background text-foreground">
-      <header className="py-12 bg-gradient-subtle-bg backdrop-blur-lg border-b border-white/10 dark:border-neutral-700/30">
+      <header className="py-12 bg-secondary border-b border-border">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <Button variant="outline" asChild className="mb-8">
             <Link href="/work">
@@ -461,7 +461,7 @@ export default function ProjectDetailPage({ params, searchParams }: ProjectDetai
 
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
         <div className="grid lg:grid-cols-3 gap-12">
-          <div className="lg:col-span-2 bg-background/70 dark:bg-neutral-900/70 backdrop-blur-lg rounded-xl shadow-xl p-6 md:p-8 border border-white/10 dark:border-neutral-700/30">
+          <div className="lg:col-span-2 bg-card rounded-xl shadow-xl p-6 md:p-8 border border-border">
             <Image 
               src={project.imageUrl} 
               alt={project.title} 
@@ -481,7 +481,7 @@ export default function ProjectDetailPage({ params, searchParams }: ProjectDetai
                 <h3 className="text-2xl font-semibold mb-6">Project Gallery</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
                   {project.gallery.map((image, index) => (
-                    <div key={index} className="overflow-hidden rounded-lg shadow-md border border-white/10 dark:border-neutral-700/30">
+                    <div key={index} className="overflow-hidden rounded-lg shadow-md border border-border">
                       <Image 
                         src={image.src} 
                         alt={image.alt} 
@@ -498,7 +498,7 @@ export default function ProjectDetailPage({ params, searchParams }: ProjectDetai
           </div>
 
           <aside className="lg:col-span-1 space-y-8">
-            <Card className="p-6">
+            <Card className="p-6"> {/* Card uses solid bg */}
               <h3 className="text-xl font-semibold mb-4 text-card-foreground">Project Details</h3>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li><strong>Client:</strong> {project.client}</li>
@@ -519,7 +519,7 @@ export default function ProjectDetailPage({ params, searchParams }: ProjectDetai
               )}
             </Card>
 
-            <Card className="p-6">
+            <Card className="p-6"> {/* Card uses solid bg */}
               <h3 className="text-xl font-semibold mb-4 text-card-foreground">Services Provided</h3>
               <ul className="space-y-2 text-sm">
                 {project.servicesProvided.map(service => (
@@ -532,7 +532,7 @@ export default function ProjectDetailPage({ params, searchParams }: ProjectDetai
             </Card>
 
             {project.results && (
-                 <Card className="p-6">
+                 <Card className="p-6"> {/* Card uses solid bg */}
                     <h3 className="text-xl font-semibold mb-4 text-card-foreground">Key Results</h3>
                     <div className="prose prose-sm text-muted-foreground">
                         <p>{project.results}</p>

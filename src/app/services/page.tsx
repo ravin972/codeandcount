@@ -557,7 +557,7 @@ export default function ServicesPage() {
 
   return (
     <div className="bg-background text-foreground">
-      <header className="py-16 md:py-24 text-center bg-secondary/70 dark:bg-secondary/70 backdrop-blur-lg border-b border-white/10 dark:border-neutral-700/30">
+      <header className="py-16 md:py-24 text-center bg-secondary border-b border-border">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-4 flex items-center justify-center">
             <Wrench className="h-12 w-12 mr-4 text-primary" />
@@ -571,7 +571,7 @@ export default function ServicesPage() {
 
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-           <div className="bg-background/70 dark:bg-neutral-900/70 backdrop-blur-lg rounded-xl shadow-xl p-8 md:p-12 border border-white/10 dark:border-neutral-700/30">
+           <div className="bg-card rounded-xl shadow-xl p-8 md:p-12 border border-border">
             <div className="mb-12 flex flex-wrap justify-center items-center gap-3 sm:gap-4">
                 <Button 
                   onClick={() => setActiveFilter('all')} 
@@ -611,7 +611,7 @@ export default function ServicesPage() {
               <div className="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-8">
                 {displayedServices.map((service) => (
                   <Card key={service.name} className="flex flex-col md:flex-row overflow-hidden transition-transform hover:scale-[1.01] duration-300" data-interactive-cursor="true">
-                    <div className="md:w-1/4 p-6 flex flex-col items-center justify-center bg-secondary/30 md:border-r border-card-foreground/10">
+                    <div className="md:w-1/4 p-6 flex flex-col items-center justify-center bg-secondary/50 dark:bg-secondary/30 md:border-r border-border">
                       {service.icon}
                       <CardTitle className="text-xl font-semibold text-center mt-2">{service.name}</CardTitle>
                     </div>
@@ -635,4 +635,3 @@ export default function ServicesPage() {
     </div>
   );
 }
-

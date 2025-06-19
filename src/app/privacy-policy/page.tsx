@@ -14,7 +14,7 @@ interface PrivacyPolicyPageProps {
 export default function PrivacyPolicyPage({ searchParams }: PrivacyPolicyPageProps) {
   return (
     <div className="bg-background text-foreground">
-      <header className="py-16 md:py-24 text-center bg-gradient-subtle-bg backdrop-blur-lg border-b border-white/10 dark:border-neutral-700/30">
+      <header className="py-16 md:py-24 text-center bg-secondary border-b border-border">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-4 flex items-center justify-center">
             <ShieldAlert className="h-12 w-12 mr-4 text-primary" />
@@ -28,7 +28,7 @@ export default function PrivacyPolicyPage({ searchParams }: PrivacyPolicyPagePro
 
       <section className="py-12 md:py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
-          <div className="bg-card/80 dark:bg-card/80 backdrop-blur-lg rounded-xl shadow-xl p-8 md:p-12 border border-card-foreground/10 dark:border-neutral-700/30 prose prose-lg lg:prose-xl max-w-none text-foreground prose-headings:text-foreground prose-a:text-primary hover:prose-a:text-primary/80">
+          <div className="bg-card rounded-xl shadow-xl p-8 md:p-12 border border-border prose prose-lg lg:prose-xl max-w-none text-foreground prose-headings:text-foreground prose-a:text-primary hover:prose-a:text-primary/80">
             
             <p>Welcome to CodeAndCount.com! We care about your privacy. This policy explains what information we collect, how we use it, and how we keep it safe when you use our website (codeandcount.com, the "Site") and services. By using our Site, you agree to this policy.</p>
             <p>We follow Indian laws, including the Information Technology Act, 2000, and the Information Technology (Reasonable Security Practices and Procedures and Sensitive Personal Data or Information) Rules, 2011 (the "SPDI Rules").</p>

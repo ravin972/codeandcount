@@ -180,7 +180,7 @@ export default function HomePage() {
     const calculateAndUpdateAll = () => {
       if (cardRef.current && container) {
         const cardElement = cardRef.current;
-        const style = window.getComputedStyle(cardElement.parentElement!); // Get style of parent Link
+        const style = window.getComputedStyle(cardElement.parentElement!); 
         const marginRight = parseFloat(style.marginRight || '0');
         const marginLeft = parseFloat(style.marginLeft || '0');
         
@@ -247,9 +247,9 @@ export default function HomePage() {
           className="absolute bottom-[-5rem] right-[-10rem] w-[25rem] h-[25rem] md:w-[35rem] md:h-[35rem] bg-gradient-blob-2 dark:bg-gradient-blob-2-light opacity-20 dark:opacity-15 blur-3xl -z-10"
         />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-         <div className="relative bg-gradient-main-hero-light dark:bg-gradient-main-hero backdrop-blur-xl rounded-3xl border border-white/10 dark:border-neutral-700/30 shadow-2xl p-8 md:p-12 lg:p-16">
+         <div className="relative bg-gradient-main-hero-light dark:bg-gradient-main-hero rounded-3xl border border-border shadow-2xl p-8 md:p-12 lg:p-16">
             <div className="mb-6">
-              <h1 className="text-5xl md:text-7xl font-bold tracking-tight bg-gradient-text-dynamic bg-clip-text text-transparent">
+              <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-primary">
                 Crafting digital experience.
               </h1>
             </div>
@@ -267,7 +267,7 @@ export default function HomePage() {
       </section>
 
       {/* Services Section */}
-      <section id="services" className="py-16 bg-gradient-subtle-bg-light dark:bg-gradient-subtle-bg backdrop-blur-lg border-y border-white/10 dark:border-neutral-700/30">
+      <section id="services" className="py-16 bg-secondary border-y border-border">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="relative inline-grid place-items-center w-full text-center mb-4">
             <h2 className="col-start-1 row-start-1 relative z-[1] text-4xl md:text-5xl font-bold text-center">Our Core Services</h2>
@@ -292,9 +292,9 @@ export default function HomePage() {
       </section>
 
       {/* Client Logos Section */}
-      <section id="trusted-by-leaders" className="py-16">
+      <section id="trusted-by-leaders" className="py-16 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-gradient-subtle-bg-light dark:bg-gradient-subtle-bg backdrop-blur-lg rounded-xl shadow-xl p-8 md:p-12 border border-white/10 dark:border-neutral-700/30">
+          <div className="bg-card rounded-xl shadow-xl p-8 md:p-12 border border-border">
             <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-10">Trusted by Industry Leaders</h2>
             <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
               {clientLogos.map((logo) => (
@@ -308,7 +308,7 @@ export default function HomePage() {
       </section>
 
       {/* Case Studies Section */}
-      <section id="work" className="py-16 bg-gradient-subtle-bg-light dark:bg-gradient-subtle-bg backdrop-blur-lg border-y border-white/10 dark:border-neutral-700/30">
+      <section id="work" className="py-16 bg-secondary border-y border-border">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="relative inline-grid place-items-center w-full text-center mb-4">
             <h2 className="col-start-1 row-start-1 relative z-[1] text-4xl md:text-5xl font-bold text-center">Featured Work</h2>
@@ -348,9 +348,9 @@ export default function HomePage() {
       </section>
 
       {/* Testimonials Section */}
-      <section id="testimonials" className="py-16">
+      <section id="testimonials" className="py-16 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-background/70 dark:bg-neutral-900/70 backdrop-blur-lg rounded-xl shadow-xl p-8 md:p-12 border border-white/10 dark:border-neutral-700/30">
+          <div className="bg-card rounded-xl shadow-xl p-8 md:p-12 border border-border">
             <h2 className="text-4xl font-bold text-center mb-4">What Our Clients Say</h2>
             <p className="text-xl md:text-2xl text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
               Real stories from satisfied partners.
@@ -381,13 +381,13 @@ export default function HomePage() {
       </section>
 
       {/* SEO Optimizer Tool Section */}
-      <section id="seo-tool" className="py-16 md:py-20 bg-foreground/80 dark:bg-secondary/80 backdrop-blur-lg text-background dark:text-secondary-foreground border-y border-white/10 dark:border-neutral-700/30">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <section id="seo-tool" className="py-16 md:py-20 bg-secondary text-secondary-foreground border-y border-border">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <Sparkles className="h-12 w-12 text-primary mx-auto mb-6" />
           <div className="relative inline-grid place-items-center w-full text-center mb-6">
             <h2 className="col-start-1 row-start-1 relative z-[1] text-4xl md:text-5xl font-bold">Boost Your SEO with Our AI Optimizer</h2>
           </div>
-          <p className="text-lg md:text-xl text-background/80 dark:text-muted-foreground max-w-2xl mx-auto mb-10">
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
             Unlock the power of AI to rewrite your content, incorporate strategic keywords, and climb search engine rankings. Try our free SEO Optimizer tool today!
           </p>
           
@@ -400,7 +400,7 @@ export default function HomePage() {
       </section>
 
       {/* Ready to Elevate Section */}
-      <section className="py-20 bg-primary/80 backdrop-blur-lg text-primary-foreground border-y border-primary/30 dark:border-primary/50">
+      <section className="py-20 bg-primary text-primary-foreground border-y border-primary/50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl md:text-5xl font-bold mb-6">Ready to Elevate Your Brand?</h2>
           <p className="text-lg md:text-xl max-w-2xl mx-auto mb-10">
@@ -418,14 +418,14 @@ export default function HomePage() {
       <InfiniteScrollerWithMouseFollower />
       
       {/* Blog Section */}
-      <section className="py-16 md:py-24 bg-neutral-900/80 backdrop-blur-lg text-neutral-100 border-y border-neutral-700/50">
+      <section className="py-16 md:py-24 bg-muted text-muted-foreground border-y border-border">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-3 gap-12 items-center">
             <div className="md:col-span-1 space-y-6">
               <p className="text-sm font-semibold text-primary flex items-center">
                 <Dot className="h-5 w-5 mr-1 -ml-1" /> Blog
               </p>
-              <h2 className="text-4xl md:text-5xl font-bold leading-tight">
+              <h2 className="text-4xl md:text-5xl font-bold leading-tight text-foreground">
                 The latest from CodeAndCount.com
               </h2>
               <div className="space-y-4">
@@ -443,11 +443,11 @@ export default function HomePage() {
                   </Link>
                 </Button>
                 <div className="flex space-x-3">
-                  <Button variant="outline" size="icon" onClick={() => handleScroll('left')} disabled={!canScrollLeft || itemWidth === 0} className="bg-neutral-800/80 border-neutral-700 hover:bg-neutral-700/80 disabled:opacity-50 rounded-full">
+                  <Button variant="outline" size="icon" onClick={() => handleScroll('left')} disabled={!canScrollLeft || itemWidth === 0} className="bg-card border-border hover:bg-accent disabled:opacity-50 rounded-full">
                     <ChevronLeft className="h-5 w-5" />
                     <span className="sr-only">Scroll Left</span>
                   </Button>
-                  <Button variant="outline" size="icon" onClick={() => handleScroll('right')} disabled={!canScrollRight || itemWidth === 0} className="bg-neutral-800/80 border-neutral-700 hover:bg-neutral-700/80 disabled:opacity-50 rounded-full">
+                  <Button variant="outline" size="icon" onClick={() => handleScroll('right')} disabled={!canScrollRight || itemWidth === 0} className="bg-card border-border hover:bg-accent disabled:opacity-50 rounded-full">
                     <ChevronRight className="h-5 w-5" />
                     <span className="sr-only">Scroll Right</span>
                   </Button>
@@ -463,7 +463,7 @@ export default function HomePage() {
                     className="block flex-shrink-0 w-[80vw] sm:w-[calc(50%-0.75rem)] md:w-[calc(33.333%-1rem)] group" 
                   >
                      <div ref={index === 0 ? cardRef : null} className="h-full">
-                      <Card className="h-full flex flex-col" data-interactive-cursor="true">
+                      <Card className="h-full flex flex-col" data-interactive-cursor="true"> {/* Card uses solid bg */}
                         <Image
                           src={post.imageUrl}
                           alt={post.title}
@@ -473,13 +473,13 @@ export default function HomePage() {
                           data-ai-hint={post.dataAiHint}
                         />
                         <CardContent className="p-4 flex-grow flex flex-col">
-                          <p className="text-xs text-neutral-400 mb-1 flex items-center">
+                          <p className="text-xs text-muted-foreground mb-1 flex items-center">
                             <Dot className="h-4 w-4 mr-0.5 -ml-1 text-primary" /> {post.readTime}
                           </p>
-                          <h3 className="text-lg font-semibold text-neutral-100 group-hover:text-primary transition-colors line-clamp-2 mb-2">
+                          <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-2 mb-2">
                             {post.title}
                           </h3>
-                          <p className="text-sm text-neutral-300 line-clamp-3 flex-grow">
+                          <p className="text-sm text-muted-foreground line-clamp-3 flex-grow">
                             {post.excerpt}
                           </p>
                         </CardContent>

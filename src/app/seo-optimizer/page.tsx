@@ -79,7 +79,7 @@ export default function SEOOptimizerPage() {
 
   return (
     <div className="bg-background text-foreground">
-      <header className="py-16 text-center bg-secondary/70 dark:bg-secondary/70 backdrop-blur-lg border-b border-white/10 dark:border-neutral-700/30">
+      <header className="py-16 text-center bg-secondary border-b border-border">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 flex items-center justify-center">
             <Sparkles className="h-10 w-10 mr-3 text-primary" />
@@ -93,8 +93,7 @@ export default function SEOOptimizerPage() {
 
       <section className="py-12 md:py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
-          {/* Card will inherit glassmorphism style */}
-          <Card data-interactive-cursor="true">
+          <Card data-interactive-cursor="true"> {/* Card uses solid bg */}
             <CardHeader>
               <CardTitle>Rewrite Your Content</CardTitle>
               <CardDescription>
@@ -146,8 +145,7 @@ export default function SEOOptimizerPage() {
           </Card>
 
           {rewrittenText && (
-            // Card will inherit glassmorphism style
-            <Card className="mt-10" data-interactive-cursor="true">
+            <Card className="mt-10" data-interactive-cursor="true"> {/* Card uses solid bg */}
               <CardHeader className="flex flex-row items-center justify-between">
                 <div>
                   <CardTitle>Optimized Content</CardTitle>
@@ -160,7 +158,7 @@ export default function SEOOptimizerPage() {
                 </Button>
               </CardHeader>
               <CardContent>
-                <div className="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none p-4 border rounded-md bg-muted/70 backdrop-blur-sm min-h-[150px] whitespace-pre-wrap">
+                <div className="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none p-4 border rounded-md bg-muted min-h-[150px] whitespace-pre-wrap">
                   {rewrittenText}
                 </div>
               </CardContent>

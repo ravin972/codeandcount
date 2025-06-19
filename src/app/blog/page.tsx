@@ -266,7 +266,7 @@ export default function BlogPage() {
 
   return (
     <div className="bg-background text-foreground">
-      <header className="py-16 md:py-24 text-center bg-secondary/70 dark:bg-secondary/70 backdrop-blur-lg border-b border-white/10 dark:border-neutral-700/30">
+      <header className="py-16 md:py-24 text-center bg-secondary border-b border-border">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="mb-4">
             <h1 className="text-5xl md:text-6xl font-bold tracking-tight flex items-center justify-center">
@@ -285,7 +285,7 @@ export default function BlogPage() {
                   <PlusCircle className="mr-2 h-5 w-5" /> Create New Post
                 </Button>
               </DialogTrigger>
-              <DialogContent className="sm:max-w-[600px]">
+              <DialogContent className="sm:max-w-[600px]"> {/* Dialog uses solid bg */}
                 <DialogHeader>
                   <DialogTitle>Create a New Blog Post</DialogTitle>
                   <DialogDescription>
@@ -330,10 +330,10 @@ export default function BlogPage() {
 
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-           <div className="bg-background/70 dark:bg-neutral-900/70 backdrop-blur-lg rounded-xl shadow-xl p-8 md:p-12 border border-white/10 dark:border-neutral-700/30">
+           <div className="bg-card rounded-xl shadow-xl p-8 md:p-12 border border-border">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {posts.map((post) => (
-                <Card key={post.slug} className="overflow-hidden flex flex-col group hover:-translate-y-1" data-interactive-cursor="true">
+                <Card key={post.slug} className="overflow-hidden flex flex-col group hover:-translate-y-1" data-interactive-cursor="true"> {/* Card uses solid bg */}
                   <Link href={`/blog/${post.slug}`} className="block">
                     <Image 
                       src={post.imageUrl} 
