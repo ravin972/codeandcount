@@ -4,7 +4,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, Briefcase, Users, Rss, Mail, Sparkles, ArrowUpRight } from 'lucide-react';
+import { Menu, Briefcase, Users, Rss, Mail, Sparkles, ArrowUpRight, ImageIcon } from 'lucide-react'; // Added ImageIcon
 import { usePathname, useRouter } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import React, { useState, useEffect, useRef, useCallback } from 'react';
@@ -13,6 +13,7 @@ import { ThemeToggle } from '@/components/ThemeToggle';
 const navLinks = [
   { href: '/services', label: 'Services', icon: <Briefcase className="h-5 w-5" /> },
   { href: '/work', label: 'Work', icon: <Sparkles className="h-5 w-5" /> },
+  { href: '/ai-image-generator', label: 'AI Image Gen', icon: <ImageIcon className="h-5 w-5" /> },
   { href: '/about', label: 'About', icon: <Users className="h-5 w-5" /> },
   { href: '/blog', label: 'Blog', icon: <Rss className="h-5 w-5" /> },
   { href: '/contact', label: 'Contact', icon: <Mail className="h-5 w-5" /> },
@@ -69,15 +70,15 @@ export function Header() {
         {/* Desktop Nav */}
         <nav className={cn(
           "hidden md:flex flex-grow justify-center items-center transition-all duration-300 ease-in-out",
-          isCondensed ? "space-x-3 lg:space-x-4" : "space-x-2 lg:space-x-3"
+          isCondensed ? "space-x-2 lg:space-x-3" : "space-x-1.5 lg:space-x-2.5" // Adjusted spacing for new item
         )}>
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               className={cn(
-                "font-medium transition-all duration-300 ease-in-out hover:text-primary rounded-md relative text-sm",
-                isCondensed ? "px-2 py-1" : "px-2.5 py-1.5", 
+                "font-medium transition-all duration-300 ease-in-out hover:text-primary rounded-md relative text-xs lg:text-sm", // Made text slightly smaller
+                isCondensed ? "px-1.5 py-1 lg:px-2" : "px-2 py-1.5 lg:px-2.5", 
                 pathname === link.href || pathname.startsWith(link.href + '/') ? "text-primary bg-primary/10" : "text-card-foreground/80 hover:bg-accent/50"
               )}
             >
@@ -89,7 +90,7 @@ export function Header() {
         {/* CTA and Theme Toggle */}
         <div className={cn(
           "hidden md:flex items-center transition-all duration-300 ease-in-out group", 
-          isCondensed ? "space-x-2.5 lg:space-x-3" : "space-x-3 lg:space-x-4"
+          isCondensed ? "space-x-2 lg:space-x-2.5" : "space-x-2.5 lg:space-x-3" // Adjusted spacing
         )}>
           <Button
             variant="default"
@@ -121,7 +122,7 @@ export function Header() {
                 <span className="sr-only">Open menu</span>
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-full max-w-xs p-6"> {/* Uses solid background from sheetVariants */}
+            <SheetContent side="right" className="w-full max-w-xs p-6"> 
               <SheetHeader>
                 <SheetTitle className="sr-only">Main Menu</SheetTitle>
               </SheetHeader>
