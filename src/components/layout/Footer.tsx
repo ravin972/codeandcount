@@ -53,24 +53,24 @@ export function Footer() {
   return (
     <footer className={cn(
       "relative pt-16 md:pt-20 pb-8 md:pb-12 overflow-hidden",
-      "bg-gradient-bloom-cta-light dark:bg-gradient-bloom-cta"
+      "bg-gradient-bloom-cta-light dark:bg-gradient-bloom-cta" // Ensures theme-aware gradient
     )}>
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
         {/* Main CTA */}
         <h2 className={cn(
           "text-4xl md:text-5xl lg:text-6xl font-bold mb-6",
-          "text-foreground dark:text-primary-foreground"
+          "text-foreground dark:text-primary-foreground" // Adapts for light/dark
         )}>{footerSections.cta.title}</h2>
 
         <Button
           size="lg"
           asChild
           className={cn(
-            "rounded-full group text-base md:text-lg py-3 px-8 md:py-4 md:px-10",
-            // Light mode: Green background, White text
-            "bg-primary text-primary-foreground hover:bg-primary/90",
-            // Dark mode: White background, Green text (for better contrast on dark bloom)
-            "dark:bg-primary-foreground dark:text-primary dark:hover:bg-primary-foreground/90"
+            "rounded-full group text-base md:text-lg py-3 px-8 md:py-4 md:px-10 transition-all duration-200 ease-in-out shadow-lg hover:shadow-xl active:shadow-md hover:-translate-y-px active:translate-y-px",
+            // Light Mode: Green gradient background, White text
+            "bg-gradient-to-br from-primary to-primary/80 text-primary-foreground hover:from-primary/90 hover:to-primary/70",
+            // Dark Mode: White gradient background, Green text
+            "dark:bg-gradient-to-br dark:from-primary-foreground dark:to-neutral-200 dark:text-primary dark:hover:from-neutral-100 dark:hover:to-neutral-300"
           )}
         >
           <Link href={footerSections.cta.buttonLink}>
@@ -126,9 +126,9 @@ export function Footer() {
 
           {/* Social Links */}
           <div className="md:text-left">
-             <div className="flex items-center justify-center md:justify-start mb-4">
-                <h3 className={cn("text-xl font-semibold", "text-foreground dark:text-primary-foreground")}>Connect With Us</h3>
-             </div>
+            <div className="flex items-center justify-center md:justify-start mb-4">
+              <h3 className={cn("text-xl font-semibold", "text-foreground dark:text-primary-foreground")}>Connect With Us</h3>
+            </div>
             <div className="flex md:justify-start justify-center space-x-4">
               {footerSections.socialLinks.map((social) => (
                 <Link
@@ -146,12 +146,13 @@ export function Footer() {
           </div>
         </div>
 
+        {/* Back to Top Button - Centered, after the grid, before copyright */}
         <div className="mt-10 mb-6 flex justify-center">
-           <BackToTopButton
+          <BackToTopButton
             className={cn(
-              // Light theme styles
+              // Light theme styles for button on gradient
               "bg-foreground/10 text-foreground hover:bg-foreground/20 focus:ring-foreground/50",
-              // Dark theme styles
+              // Dark theme styles for button on gradient
               "dark:bg-primary-foreground/10 dark:text-primary-foreground dark:hover:bg-primary-foreground/20 dark:focus:ring-primary-foreground/50",
               // Common focus offset
               "focus:ring-offset-transparent"
