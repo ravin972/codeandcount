@@ -249,7 +249,7 @@ export default function HomePage() {
          <div className="relative bg-gradient-main-hero backdrop-blur-xl rounded-3xl border border-white/10 dark:border-neutral-700/30 shadow-2xl p-8 md:p-12 lg:p-16">
             <div className="mb-6">
               <h1 className="text-5xl md:text-7xl font-bold tracking-tight bg-gradient-text-dynamic bg-clip-text text-transparent">
-                Crafting Digital Excellence.
+                Crafting digital experience.
               </h1>
             </div>
 
