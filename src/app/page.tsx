@@ -6,13 +6,17 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
-import { ArrowUpRight, Sparkles, ArrowRight, Eye, Dot, ChevronLeft, ChevronRight, Calculator, Laptop, Volume2, Building, Briefcase, Network, Users, Globe } from 'lucide-react';
+import { ArrowUpRight, Sparkles, ArrowRight, Eye, Dot, ChevronLeft, ChevronRight, Calculator, Laptop, Volume2, Building, Briefcase, Network, Users, Globe, ImageIcon } from 'lucide-react';
 import InfiniteScrollerWithMouseFollower from '@/components/effects/InfiniteScrollerWithMouseFollower';
 import React, { useRef, useState, useEffect, useCallback } from 'react';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
 
 
 const services = [
@@ -162,6 +166,92 @@ export default function HomePage() {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
 
+  // Animations
+  useEffect(() => {
+    // Helper function for creating animations
+    const createAnimation = (target: gsap.TweenTarget, vars: gsap.TweenVars) => {
+      gsap.from(target, {
+        opacity: 0,
+        y: 50,
+        duration: 0.8,
+        ease: 'power3.out',
+        scrollTrigger: {
+          trigger: target as gsap.DOMTarget,
+          start: 'top 85%',
+          toggleActions: 'play none none none',
+          once: true,
+        },
+        ...vars,
+      });
+    };
+
+    // Hero Section
+    createAnimation('.hero-title', { delay: 0.2 });
+    createAnimation('.hero-paragraph', { delay: 0.4 });
+    createAnimation('.hero-button', { delay: 0.6 });
+
+    // Services Section
+    createAnimation('.services-title', {});
+    createAnimation('.services-description', { delay: 0.2 });
+    gsap.utils.toArray<HTMLElement>('.service-card').forEach((card, index) => {
+      createAnimation(card, { delay: 0.1 * index });
+    });
+    
+    // Client Logos Section
+    createAnimation('.client-logos-title', {});
+    gsap.utils.toArray<HTMLElement>('.client-logo-item').forEach((logo, index) => {
+      createAnimation(logo, { delay: 0.1 * index, y: 20 });
+    });
+
+    // Case Studies Section
+    createAnimation('.case-studies-title', {});
+    createAnimation('.case-studies-description', { delay: 0.2 });
+    gsap.utils.toArray<HTMLElement>('.case-study-card').forEach((card, index) => {
+      createAnimation(card, { delay: 0.1 * index });
+    });
+    createAnimation('.case-studies-button', { delay: 0.3 });
+
+    // Testimonials Section
+    createAnimation('.testimonials-section .bg-card', { y:0, opacity:1, duration: 0.1, delay:0}); // Animate the container card first
+    createAnimation('.testimonials-title', {delay: 0.1});
+    createAnimation('.testimonials-description', { delay: 0.2});
+    gsap.utils.toArray<HTMLElement>('.testimonial-card').forEach((card, index) => {
+      createAnimation(card, { delay: 0.1 * index + 0.2 });
+    });
+    
+    // SEO Optimizer Tool Section
+    createAnimation('.seo-tool-section .text-primary', { y:0, opacity: 1, scale: 0.8, duration: 0.6, ease: 'elastic.out(1, 0.5)'});
+    createAnimation('.seo-tool-section h2', { delay: 0.2 });
+    createAnimation('.seo-tool-section p', { delay: 0.3 });
+    createAnimation('.seo-tool-section .rounded-full', { delay: 0.4 });
+
+    // AI Image Generator Tool Section
+    createAnimation('.image-gen-tool-section .text-primary', { y:0, opacity: 1, scale: 0.8, duration: 0.6, ease: 'elastic.out(1, 0.5)'});
+    createAnimation('.image-gen-tool-section h2', { delay: 0.2 });
+    createAnimation('.image-gen-tool-section p', { delay: 0.3 });
+    createAnimation('.image-gen-tool-section .rounded-full', { delay: 0.4 });
+
+    // Ready to Elevate Section
+    createAnimation('.ready-to-elevate-section h2', {});
+    createAnimation('.ready-to-elevate-section p', { delay: 0.2 });
+    createAnimation('.ready-to-elevate-section .rounded-full', { delay: 0.3 });
+    
+    // Blog Section
+    createAnimation('.blog-section-intro', {});
+    // Note: Horizontal scroll items might need different/no scrolltrigger or careful trigger points.
+    // For simplicity, the individual cards inside the scroller are not animated here with scrolltrigger
+    // to avoid conflicts with the horizontal scrolling itself.
+    createAnimation('.blog-section-controls', { delay: 0.2 });
+
+
+    // Cleanup ScrollTrigger instances on component unmount
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
+  }, []);
+
+
+
   const checkScrollability = useCallback(() => {
     if (scrollContainerRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = scrollContainerRef.current;
@@ -175,49 +265,40 @@ export default function HomePage() {
 
   useEffect(() => {
     const container = scrollContainerRef.current;
-    let animationFrameId: number;
-
-    const calculateAndUpdateAll = () => {
+    
+    const calculateItemWidth = () => {
       if (cardRef.current && container) {
         const cardElement = cardRef.current;
-        const style = window.getComputedStyle(cardElement.parentElement!); 
+        const style = window.getComputedStyle(cardElement.parentElement!); // Get parent to include margin
         const marginRight = parseFloat(style.marginRight || '0');
-        const marginLeft = parseFloat(style.marginLeft || '0');
+        const marginLeft = parseFloat(style.marginLeft || '0'); // Though we use space-x, good to be robust
         
         const calculatedWidth = cardElement.offsetWidth + marginRight + marginLeft;
 
         if (calculatedWidth > 0) {
           setItemWidth(calculatedWidth);
         } else {
-          setItemWidth(0); 
+          setItemWidth(300); // Fallback width if calculation fails early
         }
         checkScrollability(); 
       } else {
-        setItemWidth(0);
+        setItemWidth(300); // Fallback
         checkScrollability();
       }
     };
     
-    const runCalculation = () => {
-      calculateAndUpdateAll();
-      animationFrameId = requestAnimationFrame(runCalculation);
-    };
-    
-    animationFrameId = requestAnimationFrame(() => {
-      requestAnimationFrame(runCalculation); 
-    });
+    calculateItemWidth(); // Initial calculation
     
     if (container) {
       container.addEventListener('scroll', checkScrollability, { passive: true });
     }
-    window.addEventListener('resize', calculateAndUpdateAll); 
+    window.addEventListener('resize', calculateItemWidth); 
 
     return () => {
-      cancelAnimationFrame(animationFrameId);
       if (container) {
         container.removeEventListener('scroll', checkScrollability);
       }
-      window.removeEventListener('resize', calculateAndUpdateAll);
+      window.removeEventListener('resize', calculateItemWidth);
     };
   }, [checkScrollability]);
 
@@ -229,7 +310,9 @@ export default function HomePage() {
         left: scrollValue,
         behavior: 'smooth',
       });
-      setTimeout(checkScrollability, 350); 
+      // checkScrollability might not update immediately after scrollBy due to 'smooth'
+      // It's better to rely on the scroll event listener or a timeout if immediate update is critical
+      setTimeout(checkScrollability, 350); // Give time for smooth scroll to progress
     }
   };
 
@@ -248,16 +331,16 @@ export default function HomePage() {
         />
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
          <div className="relative rounded-3xl p-8 md:p-12 lg:p-16">
-            <div className="mb-6">
+            <div className="mb-6 hero-title">
               <h1 className="text-5xl md:text-7xl font-bold tracking-tight bg-gradient-text-dynamic bg-clip-text text-transparent">
                 Crafting digital experience.
               </h1>
             </div>
 
-            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-10">
+            <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-10 hero-paragraph">
             CodeAndCount.com helps turn your ideas into reality — from web development to smart accounting. We simplify success with digital innovation, custom software, and expert financial solutions.
             </p>
-            <Button size="lg" asChild className="rounded-full">
+            <Button size="lg" asChild className="rounded-full hero-button">
               <Link href="/contact#start-project">
                 Start Your Project <ArrowRight className="ml-2 h-5 w-5" />
               </Link>
@@ -269,15 +352,15 @@ export default function HomePage() {
       {/* Services Section */}
       <section id="services" className="py-16 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative inline-grid place-items-center w-full text-center mb-4">
+        <div className="relative inline-grid place-items-center w-full text-center mb-4 services-title">
             <h2 className="col-start-1 row-start-1 relative z-[1] text-4xl md:text-5xl font-bold text-center text-foreground">Our Core Services</h2>
           </div>
-          <p className="text-xl md:text-2xl text-muted-foreground text-center mt-4 mb-12 max-w-2xl mx-auto">
+          <p className="text-xl md:text-2xl text-muted-foreground text-center mt-4 mb-12 max-w-2xl mx-auto services-description">
             We offer a comprehensive suite of services to bring your vision to life.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service) => (
-              <Card key={service.name} className="shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out hover:-translate-y-1" data-interactive-cursor="true">
+              <Card key={service.name} className="shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out hover:-translate-y-1 service-card" data-interactive-cursor="true">
                 <CardHeader>
                   {service.icon}
                   <CardTitle className="text-2xl font-semibold">{service.name}</CardTitle>
@@ -295,10 +378,10 @@ export default function HomePage() {
       <section id="trusted-by-leaders" className="py-16 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-card rounded-xl shadow-xl p-8 md:p-12 border border-border">
-            <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-10">Trusted by Industry Leaders</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-10 client-logos-title">Trusted by Industry Leaders</h2>
             <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
               {clientLogos.map((logo) => (
-                <div key={logo.name} title={logo.name} className="transition-transform duration-300 ease-in-out transform hover:scale-110 group" data-interactive-cursor="true">
+                <div key={logo.name} title={logo.name} className="transition-transform duration-300 ease-in-out transform hover:scale-110 group client-logo-item" data-interactive-cursor="true">
                   {logo.icon}
                 </div>
               ))}
@@ -310,15 +393,15 @@ export default function HomePage() {
       {/* Case Studies Section */}
       <section id="work" className="py-16 bg-background">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="relative inline-grid place-items-center w-full text-center mb-4">
+          <div className="relative inline-grid place-items-center w-full text-center mb-4 case-studies-title">
             <h2 className="col-start-1 row-start-1 relative z-[1] text-4xl md:text-5xl font-bold text-center text-foreground">Featured Work</h2>
           </div>
-          <p className="text-xl md:text-2xl text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
+          <p className="text-xl md:text-2xl text-muted-foreground text-center mb-12 max-w-2xl mx-auto case-studies-description">
             Explore how we've helped businesses like yours succeed.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {caseStudies.map((study) => (
-              <Card key={study.id} className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out flex flex-col group hover:-translate-y-1" data-interactive-cursor="true">
+              <Card key={study.id} className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out flex flex-col group hover:-translate-y-1 case-study-card" data-interactive-cursor="true">
                 <Image src={study.imageUrl} alt={study.title} width={600} height={400} className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out" data-ai-hint={study.dataAiHint} />
                 <CardHeader>
                   <CardTitle className="text-2xl font-semibold">{study.title}</CardTitle>
@@ -337,7 +420,7 @@ export default function HomePage() {
               </Card>
             ))}
           </div>
-          <div className="text-center mt-12">
+          <div className="text-center mt-12 case-studies-button">
             <Button size="lg" variant="outline" asChild className="rounded-full group">
               <Link href="/work">
                 Explore All Projects <ArrowRight className="ml-2 h-5 w-5" />
@@ -348,16 +431,16 @@ export default function HomePage() {
       </section>
 
       {/* Testimonials Section */}
-      <section id="testimonials" className="py-16 bg-background">
+      <section id="testimonials" className="py-16 bg-background testimonials-section">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="bg-card rounded-xl shadow-xl p-8 md:p-12 border border-border">
-            <h2 className="text-4xl font-bold text-center mb-4 text-foreground">What Our Clients Say</h2>
-            <p className="text-xl md:text-2xl text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
+            <h2 className="text-4xl font-bold text-center mb-4 text-foreground testimonials-title">What Our Clients Say</h2>
+            <p className="text-xl md:text-2xl text-muted-foreground text-center mb-12 max-w-2xl mx-auto testimonials-description">
               Real stories from satisfied partners.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {testimonials.map((testimonial) => (
-                <Card key={testimonial.name} className="shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out hover:-translate-y-1" data-interactive-cursor="true">
+                <Card key={testimonial.name} className="shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out hover:-translate-y-1 testimonial-card" data-interactive-cursor="true">
                   <CardContent className="pt-6">
                     <div className="flex items-start space-x-4 mb-4">
                       <Avatar className="h-16 w-16">
@@ -381,7 +464,7 @@ export default function HomePage() {
       </section>
 
       {/* SEO Optimizer Tool Section */}
-      <section id="seo-tool" className="py-16 md:py-20 bg-background text-foreground">
+      <section id="seo-tool" className="py-16 md:py-20 bg-background text-foreground seo-tool-section">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <Sparkles className="h-12 w-12 text-primary mx-auto mb-6" />
           <div className="relative inline-grid place-items-center w-full text-center mb-6">
@@ -399,8 +482,27 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* AI Image Generator Tool Section */}
+      <section id="image-gen-tool" className="py-16 md:py-20 bg-secondary text-foreground image-gen-tool-section">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <ImageIcon className="h-12 w-12 text-primary mx-auto mb-6" />
+            <div className="relative inline-grid place-items-center w-full text-center mb-6">
+              <h2 className="col-start-1 row-start-1 relative z-[1] text-4xl md:text-5xl font-bold">Unleash Creativity with AI Image Generation</h2>
+            </div>
+            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
+              Transform your ideas into stunning visuals. Describe any image, and our AI will bring it to life. Explore the future of digital art!
+            </p>
+            
+            <Button size="lg" asChild className="rounded-full">
+              <Link href="/ai-image-generator">
+                Try AI Image Generator <ArrowRight className="ml-2 h-5 w-5" />
+              </Link>
+            </Button>
+          </div>
+      </section>
+
       {/* Ready to Elevate Section */}
-      <section className="py-20 relative overflow-hidden bg-gradient-bloom-cta-light dark:bg-gradient-bloom-cta">
+      <section className="py-20 relative overflow-hidden bg-gradient-bloom-cta-light dark:bg-gradient-bloom-cta ready-to-elevate-section">
          <div 
           aria-hidden="true"
           className="absolute inset-0 w-full h-full -z-10" 
@@ -410,7 +512,15 @@ export default function HomePage() {
           <p className="text-lg md:text-xl max-w-2xl mx-auto mb-10 text-muted-foreground dark:text-primary-foreground/90">
             Let's discuss how CodeAndCount.com can help you achieve your business goals. We partner with clients of all sizes, across diverse industries, to deliver exceptional results.
           </p>
-          <Button size="lg" variant="default" asChild className="rounded-full bg-primary-foreground text-primary hover:bg-primary-foreground/90">
+          <Button 
+            size="lg" 
+            asChild 
+            variant="default"
+            className={cn(
+                "rounded-full shadow-lg hover:shadow-2xl active:shadow-md transform hover:-translate-y-0.5 active:translate-y-px",
+                "bg-primary-foreground text-primary hover:bg-primary-foreground/90 dark:bg-primary dark:text-primary-foreground dark:hover:bg-primary/90"
+             )}
+           >
             <Link href="/contact#start-project">
               Get in Touch <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
@@ -425,7 +535,7 @@ export default function HomePage() {
       <section className="py-16 md:py-24 bg-background text-foreground">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-3 gap-12 items-center">
-            <div className="md:col-span-1 space-y-6">
+            <div className="md:col-span-1 space-y-6 blog-section-intro">
               <p className="text-sm font-semibold text-primary flex items-center">
                 <Dot className="h-5 w-5 mr-1 -ml-1" /> Blog
               </p>
@@ -446,7 +556,7 @@ export default function HomePage() {
                     </span>
                   </Link>
                 </Button>
-                <div className="flex space-x-3">
+                <div className="flex space-x-3 blog-section-controls">
                   <Button variant="outline" size="icon" onClick={() => handleScroll('left')} disabled={!canScrollLeft || itemWidth === 0} className="bg-card border-border hover:bg-accent disabled:opacity-50 rounded-full">
                     <ChevronLeft className="h-5 w-5" />
                     <span className="sr-only">Scroll Left</span>
@@ -502,3 +612,4 @@ export default function HomePage() {
     </div>
   );
 }
+
