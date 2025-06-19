@@ -444,7 +444,7 @@ export default function ProjectDetailPage({ params, searchParams }: ProjectDetai
 
   return (
     <div className="bg-background text-foreground">
-      <header className="py-12 bg-secondary/70 dark:bg-secondary/70 backdrop-blur-lg border-b border-white/10 dark:border-neutral-700/30">
+      <header className="py-12 bg-gradient-subtle-bg backdrop-blur-lg border-b border-white/10 dark:border-neutral-700/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <Button variant="outline" asChild className="mb-8">
             <Link href="/work">

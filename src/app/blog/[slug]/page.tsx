@@ -17,7 +17,7 @@ const blogPosts = [
     authorAvatar: 'https://placehold.co/40x40.png',
     dataAiHintAuthor: 'professional person',
     excerpt: 'Discover the cutting-edge web design trends shaping the digital landscape in 2024, from AI integration to immersive experiences.',
-    imageUrl: 'https://images.unsplash.com/photo-1547398123-828a28902e57?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxmdXR1cmlzdGljJTIwZGVzaWdufGVufDB8fHx8MTc0NzM3NjYzN3ww&ixlib=rb-4.1.0&q=80&w=1080',
+    imageUrl: 'https://images.unsplash.com/photo-1636884181111-25072dba4c19?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxmdXR1cmlzdGljJTIwZGVzaWdufGVufDB8fHx8MTc1MDMxMDI4MXww&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHintImage: 'futuristic design',
     category: 'Web Design',
     readTime: '6 min read',
@@ -51,7 +51,7 @@ const blogPosts = [
     authorAvatar: 'https://placehold.co/40x40.png',
     dataAiHintAuthor: 'marketing expert',
     excerpt: 'Navigate the complexities of SEO with our in-depth guide, covering everything from keyword research to technical optimization.',
-    imageUrl: 'https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzZW8lMjBjaGFydCUyMGdyYXBofGVufDB8fHx8MTc0NzM3NjYzN3ww&ixlib=rb-4.1.0&q=80&w=1080',
+    imageUrl: 'https://images.unsplash.com/photo-1626234736261-f50c9ff94bef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxzZW8lMjBjaGFydCUyMGdyYXBofGVufDB8fHx8MTc1MDMxMDI4MXww&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHintImage: 'seo chart graph',
     category: 'SEO',
     readTime: '10 min read',
@@ -66,7 +66,7 @@ const blogPosts = [
     authorAvatar: 'https://placehold.co/40x40.png',
     dataAiHintAuthor: 'software developer',
     excerpt: 'Explore the benefits of Craft CMS and why it stands out as a powerful, flexible, and user-friendly content management system.',
-    imageUrl: 'https://images.unsplash.com/photo-1698621193747-e8788c620dbc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxjbXMlMjBpbnRlcmZhY2V8ZW58MHx8fHwxNzQ3Mzc2NjM3fDA&ixlib=rb-4.1.0&q=80&w=1080',
+    imageUrl: 'https://images.unsplash.com/photo-1641567535859-c58187ac4954?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxjbXMlMjBpbnRlcmZhY2V8ZW58MHx8fHwxNzUwMzEwMjgxfDA&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHintImage: 'cms interface',
     category: 'Craft CMS',
     readTime: '4 min read',
@@ -96,7 +96,7 @@ const blogPosts = [
     authorAvatar: 'https://placehold.co/40x40.png',
     dataAiHintAuthor: 'marketing expert',
     excerpt: 'How AI is revolutionizing digital marketing strategies, from content creation to customer analytics.',
-    imageUrl: 'https://placehold.co/1200x600.png',
+    imageUrl: 'https://images.unsplash.com/photo-1633311905139-7b6088a69e33?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxhcnRpZmljaWFsJTIwaW50ZWxsaWdlbmNlJTIwbWFya2V0aW5nfGVufDB8fHx8MTc1MDMxMDI4Mnww&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHintImage: 'artificial intelligence marketing',
     category: 'Digital Marketing',
     readTime: '8 min read',
@@ -111,7 +111,7 @@ const blogPosts = [
     authorAvatar: 'https://placehold.co/40x40.png',
     dataAiHintAuthor: 'professional person',
     excerpt: 'A deep dive into why UX is paramount for website success and how to optimize it for your users.',
-    imageUrl: 'https://placehold.co/1200x600.png',
+    imageUrl: 'https://images.unsplash.com/photo-1582689276107-81361ca655f5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHx1c2VyJTIwZXhwZXJpZW5jZSUyMGludGVyZmFjZXxlbnwwfHx8fDE3NTAzMTAyODF8MA&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHintImage: 'user experience interface',
     category: 'Web Design',
     readTime: '7 min read',
@@ -126,7 +126,7 @@ const blogPosts = [
     authorAvatar: 'https://placehold.co/40x40.png',
     dataAiHintAuthor: 'software developer',
     excerpt: 'Comparing traditional WordPress with modern headless CMS solutions to help you choose the best fit.',
-    imageUrl: 'https://placehold.co/1200x600.png',
+    imageUrl: 'https://images.unsplash.com/photo-1666537072206-6a7a01ecb7d9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxjbXMlMjBjb21wYXJpc29uJTIwY2hhcnR8ZW58MHx8fHwxNzUwMzEwMjgxfDA&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHintImage: 'cms comparison chart',
     category: 'CMS',
     readTime: '9 min read',
@@ -157,6 +157,7 @@ const blogPosts = [
     dataAiHintAuthor: 'software developer',
     excerpt: 'Understanding Next.js Server Components and how they are changing the landscape of React development.',
     imageUrl: 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=1200&h=600&fit=crop&q=80',
+    dataAiHintImage: 'server components code',
     category: 'Next.js',
     readTime: '8 min read',
     content: '<p>Content for Next.js Server Components...</p>',
@@ -260,7 +261,7 @@ export default function BlogPostPage({ params, searchParams }: BlogPostPageProps
 
   return (
     <div className="bg-background text-foreground">
-      <header className="py-12 bg-secondary/70 dark:bg-secondary/70 backdrop-blur-lg border-b border-white/10 dark:border-neutral-700/30">
+      <header className="py-12 bg-gradient-subtle-bg backdrop-blur-lg border-b border-white/10 dark:border-neutral-700/30">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <Button variant="outline" asChild className="mb-8">
             <Link href="/blog">
