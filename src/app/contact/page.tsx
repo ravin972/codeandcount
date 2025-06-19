@@ -1,16 +1,39 @@
 
 "use client";
 
-import React from 'react';
-import Link from 'next/link'; 
-import { Mail, Phone, MapPin, CalendarDays, MessageSquare, ExternalLink } from 'lucide-react'; 
-import { Button } from '@/components/ui/button'; 
+import React, { useEffect } from 'react';
+import { getCalApi } from "@calcom/embed-react";
+import { Mail, Phone, MapPin, CalendarDays, MessageSquare } from 'lucide-react'; 
 import { ContactForm } from '@/components/forms/ContactForm';
 
 export default function ContactPage() {
   const mapAddress = "spaze i tech park, Sec-49, Gurugram, Haryana, India";
   const mapEmbedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(mapAddress)}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
-  const calComCalLink = "ravin-pandey-f7vkoq/30min"; // Updated Cal.com link
+  const calComCalLink = "ravin-pandey-f7vkoq/30min"; 
+
+  useEffect(() => {
+    (async function () {
+      try {
+        const cal = await getCalApi({ namespace: "contactPageCalEmbed" }); // Unique namespace for this embed
+        if (cal && typeof cal === 'function') {
+          cal("inline", {
+            elementOrSelector: "#cal-embed-container",
+            calLink: calComCalLink,
+            config: { layout: "month_view", hideEventTypeDetails: false }
+          });
+          // Apply theme and primary color styling after inline embed is initialized
+          cal("ui", {
+            theme: "auto", // Respects light/dark mode of the parent page
+            styles: { branding: { brandColor: "hsl(var(--primary))" } } // Uses your site's primary color
+          });
+        } else {
+          console.error("Cal.com API (cal function) not available or not a function after getCalApi.");
+        }
+      } catch (e) {
+        console.error("Error initializing Cal.com embed:", e);
+      }
+    })();
+  }, [calComCalLink]); // Rerun if calComCalLink changes, though it's static here
 
   return (
     <>
@@ -27,19 +50,16 @@ export default function ContactPage() {
           </div>
         </header>
 
-        {/* Booking Section with Direct Link */}
+        {/* Booking Section with Cal.com Embed */}
         <section className="py-16 md:py-20">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Book a Meeting</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10">
              Choose a time that works for you to discuss your project requirements and how we can help.
             </p>
-            <Button asChild size="lg" className="rounded-full text-base py-3 px-6">
-              <Link href={`https://cal.com/${calComCalLink}`} target="_blank" rel="noopener noreferrer">
-                Schedule Your Meeting
-                <ExternalLink className="ml-2 h-5 w-5" />
-              </Link>
-            </Button>
+            <div id="cal-embed-container" className="min-h-[700px] w-full max-w-4xl mx-auto rounded-lg overflow-hidden border border-border shadow-xl bg-card">
+              {/* Cal.com inline embed will be rendered here */}
+            </div>
           </div>
         </section>
 
