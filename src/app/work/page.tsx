@@ -78,11 +78,11 @@ const portfolioItems = [
     liveUrl: 'https://parivartan.divyasangrah.com',
   },
   {
-    id: 'anandam-wellness-hub',
+    id: 'anandam-wellness-hub', // ID remains the same for now
     title: 'Anandam by DivyaSangrah',
     category: 'Food & Restaurant · Online Ordering',
     type: 'webdev',
-    imageUrl: 'https://placehold.co/600x450.png', 
+    imageUrl: 'https://images.unsplash.com/photo-1625398407796-82650a8c135f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxpbmRpYW4lMjBmb29kfGVufDB8fHx8MTc1MDQxMjQ4M3ww&ixlib=rb-4.1.0&q=80&w=1080', 
     dataAiHint: 'food restaurant', 
     description: 'Online store for delicious meals and restaurant services. Features menu display, online ordering, and table reservations.', 
     tags: ['Online Ordering', 'Restaurant Website', 'Food Delivery', 'Menu Management'], 
