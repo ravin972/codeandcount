@@ -42,25 +42,29 @@ export default function AIImageGeneratorPage() {
       const result = await generateImage(input);
       if (result && result.imageDataUri) {
         setGeneratedImageDataUri(result.imageDataUri);
-        toast({
-          title: "Success!",
-          description: "Image generated successfully.",
-        });
+        // Toast for success is removed as per guidelines (only for errors)
       } else {
         toast({
-          title: "Error",
-          description: "Failed to generate image. The AI might not have returned a result.",
+          title: "Error Generating Image",
+          description: "Failed to generate image. The AI might not have returned a result or the data URI was invalid.",
           variant: "destructive",
         });
       }
     } catch (error) {
-      console.error("AI Image Generation Error:", error);
-      let errorMessage = "An error occurred while generating the image. Please try again.";
+      let errorMessage = "An unexpected error occurred while generating the image. Please try again.";
       if (error instanceof Error) {
         errorMessage = error.message;
+        if (error.cause && typeof error.cause === 'string') {
+          errorMessage += ` (Cause: ${error.cause})`;
+        } else if (error.cause && typeof (error.cause as any).message === 'string') {
+          errorMessage += ` (Cause: ${(error.cause as any).message})`;
+        }
+      } else if (typeof error === 'object' && error !== null && 'message' in error) {
+        errorMessage = String((error as {message: string}).message);
       }
+      console.error("AI Image Generation Error Details:", error);
       toast({
-        title: "Error",
+        title: "Image Generation Error",
         description: errorMessage,
         variant: "destructive",
       });
@@ -80,17 +84,17 @@ export default function AIImageGeneratorPage() {
     try {
       const link = document.createElement('a');
       link.href = generatedImageDataUri;
-      // Extract file extension from MIME type, default to png
       const mimeType = generatedImageDataUri.substring(generatedImageDataUri.indexOf(':') + 1, generatedImageDataUri.indexOf(';'));
       const extension = mimeType.split('/')[1] || 'png';
       link.download = `ai-generated-image-${Date.now()}.${extension}`;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      toast({
-        title: "Downloading...",
-        description: "Your image has started downloading.",
-      });
+      // Toast for download initiation can be kept if considered a user action feedback rather than generic notification
+      // toast({
+      //   title: "Downloading...",
+      //   description: "Your image has started downloading.",
+      // });
     } catch (error) {
       console.error("Download error:", error);
       toast({
@@ -185,8 +189,8 @@ export default function AIImageGeneratorPage() {
                   <NextImage 
                     src={generatedImageDataUri} 
                     alt="AI generated image" 
-                    layout="fill"
-                    objectFit="contain"
+                    fill // Changed from layout="fill"
+                    style={{ objectFit: "contain" }} // Changed from objectFit="contain"
                     unoptimized={generatedImageDataUri.startsWith('data:')} 
                   />
                 </div>

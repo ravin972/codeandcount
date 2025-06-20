@@ -45,22 +45,30 @@ export default function SEOOptimizerPage() {
       const result = await rewriteCopyForSEO(input);
       if (result && result.rewrittenText) {
         setRewrittenText(result.rewrittenText);
-        toast({
-          title: "Success!",
-          description: "Text rewritten successfully.",
-        });
+        // Toast for success is removed as per guidelines (only for errors)
       } else {
         toast({
-          title: "Error",
+          title: "Error Rewriting Text",
           description: "Failed to rewrite text. The AI might not have returned a result.",
           variant: "destructive",
         });
       }
     } catch (error) {
-      console.error("SEO Rewrite Error:", error);
+      let errorMessage = "An unexpected error occurred while rewriting the text. Please try again.";
+       if (error instanceof Error) {
+        errorMessage = error.message;
+        if (error.cause && typeof error.cause === 'string') {
+          errorMessage += ` (Cause: ${error.cause})`;
+        } else if (error.cause && typeof (error.cause as any).message === 'string') {
+          errorMessage += ` (Cause: ${(error.cause as any).message})`;
+        }
+      } else if (typeof error === 'object' && error !== null && 'message' in error) {
+        errorMessage = String((error as {message: string}).message);
+      }
+      console.error("SEO Rewrite Error Details:", error);
       toast({
-        title: "Error",
-        description: "An error occurred while rewriting the text. Please try again.",
+        title: "SEO Rewrite Error",
+        description: errorMessage,
         variant: "destructive",
       });
     }
@@ -70,10 +78,11 @@ export default function SEOOptimizerPage() {
   const handleCopyToClipboard = () => {
     if (rewrittenText) {
       navigator.clipboard.writeText(rewrittenText);
-      toast({
-        title: "Copied!",
-        description: "Rewritten text copied to clipboard.",
-      });
+      // Toast for copy action can be kept if considered user action feedback
+      // toast({
+      //   title: "Copied!",
+      //   description: "Rewritten text copied to clipboard.",
+      // });
     }
   };
 
@@ -93,7 +102,7 @@ export default function SEOOptimizerPage() {
 
       <section className="py-12 md:py-16">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-3xl">
-          <Card data-interactive-cursor="true"> {/* Card uses solid bg */}
+          <Card data-interactive-cursor="true">
             <CardHeader>
               <CardTitle>Rewrite Your Content</CardTitle>
               <CardDescription>
@@ -145,7 +154,7 @@ export default function SEOOptimizerPage() {
           </Card>
 
           {rewrittenText && (
-            <Card className="mt-10" data-interactive-cursor="true"> {/* Card uses solid bg */}
+            <Card className="mt-10" data-interactive-cursor="true">
               <CardHeader className="flex flex-row items-center justify-between">
                 <div>
                   <CardTitle>Optimized Content</CardTitle>
