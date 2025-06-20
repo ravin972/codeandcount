@@ -85,7 +85,7 @@ const portfolioItems = [
     imageUrl: 'https://images.unsplash.com/photo-1625398407796-82650a8c135f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxpbmRpYW4lMjBmb29kfGVufDB8fHx8MTc1MDQxMjQ4M3ww&ixlib=rb-4.1.0&q=80&w=1080', 
     dataAiHint: 'food restaurant', 
     description: 'Online store for delicious meals and restaurant services. Features menu display, online ordering, and table reservations.', 
-    tags: ['Online Ordering', 'Restaurant Website', 'Food Delivery', 'Menu Management'], 
+    tags: ['Online Ordering', 'Restaurant Website', 'Food Delivery'], 
     liveUrl: 'https://anandam.divyasangrah.com', 
   },
   {
@@ -115,7 +115,7 @@ const portfolioItems = [
     title: 'TalentGrowth ID',
     category: 'Career & HR Tech',
     type: 'webdev',
-    imageUrl: 'https://placehold.co/600x450.png',
+    imageUrl: 'https://images.unsplash.com/photo-1675654567523-b19d60eb4d3d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx0YWxlbnQlMjBncm93dGglMjBpdHxlbnwwfHx8fDE3NTA0MzM5NDl8MA&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHint: 'career platform',
     description: 'Indonesia-based talent development platform. Personalized job matching, growth tracking, and candidate profiling system.',
     tags: ['EdTech', 'Career Platform', 'Job Board'],

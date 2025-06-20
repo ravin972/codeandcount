@@ -191,7 +191,7 @@ const portfolioItems = [
     id: 'talentgrowth-id',
     title: 'TalentGrowth ID',
     category: 'Career & HR Tech',
-    imageUrl: 'https://placehold.co/1200x800.png',
+    imageUrl: 'https://images.unsplash.com/photo-1675654567523-b19d60eb4d3d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx0YWxlbnQlMjBncm93dGglMjBpdHxlbnwwfHx8fDE3NTA0MzM5NDl8MA&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHint: 'career platform',
     description: 'Indonesia-based talent development platform. Personalized job matching, growth tracking, and candidate profiling system.',
     longDescription: 'TalentGrowth ID is an innovative Indonesian platform for talent development. It offers personalized job matching, career growth tracking, and detailed candidate profiling systems to connect job seekers with opportunities and help companies find the right talent.',
