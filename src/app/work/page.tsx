@@ -38,7 +38,7 @@ const portfolioItems = [
     title: 'BuzTrix TravelTech India Pvt. Ltd.',
     category: 'Travel SaaS Platform',
     type: 'webdev',
-    imageUrl: 'https://placehold.co/600x450.png',
+    imageUrl: 'https://images.unsplash.com/photo-1726197799856-cdff7a9037b9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxNXx8dHJhdmVsJTIwYW5kJTIwdG91cnxlbnwwfHx8fDE3NTA0MTEyNTV8MA&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHint: 'travel saas',
     description: 'Developed for B2B travel operations. Offers hotel & flight APIs, lead tracking dashboards, and bulk booking systems.',
     tags: ['API Integration', 'Travel CRM', 'Booking Portal'],
@@ -336,3 +336,5 @@ export default function WorkPage() {
     </div>
   );
 }
+
+    
