@@ -48,7 +48,11 @@ const clientLogos: { name: string; icon?: JSX.Element; imageUrl?: string; dataAi
     imageUrl: 'https://divyasangrah.com/wp-content/uploads/2025/03/cropped-retinal-ds-1-e1743144896585-163x88.webp',
     dataAiHint: 'spiritual logo',
   },
-  { name: 'Client Gamma', icon: <Network className="h-12 w-12 text-muted-foreground group-hover:text-primary transition-colors" /> },
+  { 
+    name: 'Brista', 
+    imageUrl: 'https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=336,fit=crop,q=95/dJoZM81RP9czxrg9/upscalemedia-brista---edited-mk3vP2Nz3LfxQ76o.png',
+    dataAiHint: 'travel company logo', 
+  },
   { name: 'Client Delta', icon: <Users className="h-12 w-12 text-muted-foreground group-hover:text-primary transition-colors" /> },
   { name: 'Client Epsilon', icon: <Globe className="h-12 w-12 text-muted-foreground group-hover:text-primary transition-colors" /> },
 ];
