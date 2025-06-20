@@ -104,7 +104,7 @@ const portfolioItems = [
     title: 'Venkwara Infotech Pvt. Ltd.',
     category: 'IT & Web Services',
     type: 'webdev',
-    imageUrl: 'https://placehold.co/600x450.png',
+    imageUrl: 'https://images.unsplash.com/photo-1554224154-26032ffc0d07?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxhY2NvdW50YW5jeXxlbnwwfHx8fDE3NTA0MTM1Njh8MA&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHint: 'it services website',
     description: 'Technology-focused site showcasing development and infrastructure projects. Includes client portfolios and contact automation.',
     tags: ['Enterprise Web', 'Tech Branding', 'DevOps'],
