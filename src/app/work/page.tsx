@@ -49,7 +49,7 @@ const portfolioItems = [
     title: 'Brista Travels Pvt. Ltd.',
     category: 'Travel & Tours Website',
     type: 'webdev',
-    imageUrl: 'https://placehold.co/600x450.png',
+    imageUrl: 'https://images.unsplash.com/photo-1500835556837-99ac94a94552?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHx0cmF2ZWx8ZW58MHx8fHwxNzUwNDExMzM5fDA&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHint: 'travel booking',
     description: 'Travel booking site highlighting packages, destination guides, and lead forms with WhatsApp integration.',
     tags: ['UX Design', 'Lead Funnels', 'Destination Portfolio'],
