@@ -43,7 +43,11 @@ const clientLogos: { name: string; icon?: JSX.Element; imageUrl?: string; dataAi
     imageUrl: 'https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=460,fit=crop,q=95/AR0LWLPr10FjjMp5/pvt-ltd-A3Q29lnwxEtZzMMb.png',
     dataAiHint: 'company logo',
   },
-  { name: 'Client Beta', icon: <Briefcase className="h-12 w-12 text-muted-foreground group-hover:text-primary transition-colors" /> },
+  {
+    name: 'DivyaSangrah',
+    imageUrl: 'https://divyasangrah.com/wp-content/uploads/2025/03/cropped-retinal-ds-1-e1743144896585-163x88.webp',
+    dataAiHint: 'spiritual logo',
+  },
   { name: 'Client Gamma', icon: <Network className="h-12 w-12 text-muted-foreground group-hover:text-primary transition-colors" /> },
   { name: 'Client Delta', icon: <Users className="h-12 w-12 text-muted-foreground group-hover:text-primary transition-colors" /> },
   { name: 'Client Epsilon', icon: <Globe className="h-12 w-12 text-muted-foreground group-hover:text-primary transition-colors" /> },
@@ -627,4 +631,3 @@ export default function HomePage() {
     </div>
   );
 }
-
