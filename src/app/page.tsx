@@ -58,7 +58,11 @@ const clientLogos: { name: string; icon?: JSX.Element; imageUrl?: string; dataAi
     imageUrl: 'https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=506,fit=crop,q=95/A3Q2voGEaNURrw8k/buztrix-traveltech-india-pvt-ltd-2-dWxvZaL7bGT6XrLb.png',
     dataAiHint: 'travel tech logo', 
   },
-  { name: 'Client Epsilon', icon: <Globe className="h-12 w-12 text-muted-foreground group-hover:text-primary transition-colors" /> },
+  { 
+    name: 'Parivartan by DivyaSangrah', 
+    imageUrl: 'https://parivartan.divyasangrah.com/wp-content/uploads/2025/06/cropped-parivartan_black_logo-removebg-preview.png',
+    dataAiHint: 'ngo logo', 
+  },
 ];
 
 const caseStudies = [

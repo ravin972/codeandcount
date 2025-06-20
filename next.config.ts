@@ -34,6 +34,12 @@ const nextConfig: NextConfig = {
         hostname: 'divyasangrah.com',
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'parivartan.divyasangrah.com',
+        port: '',
+        pathname: '/**',
       }
     ],
   },
