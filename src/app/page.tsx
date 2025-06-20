@@ -70,7 +70,7 @@ const caseStudies = [
     id: 'divyasangrah-spiritual-marketplace',
     title: 'DivyaSangrah Spiritual Marketplace',
     category: 'E‑commerce · Spiritual Services',
-    imageUrl: 'https://images.unsplash.com/photo-1725075236549-cb936c4a8c21?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxzcGlyaXR1YWwlMjBzdG9yZWZyb250fGVufDB8fHx8MTc1MDMxMjQ4N3ww&ixlib=rb-4.1.0&q=80&w=1080', 
+    imageUrl: 'https://images.unsplash.com/photo-1603166868295-4ae2cba14063?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyMHx8c3Bpcml0dWFsfGVufDB8fHx8MTc1MDQwNTIwOHww&ixlib=rb-4.1.0&q=80&w=1080', 
     dataAiHint: 'spiritual storefront',
     description: 'An all-in-one online store offering puja items, astrology consultations, and religious service bookings. Crafted for spiritual ambience and performance.',
   },
