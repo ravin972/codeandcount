@@ -45,7 +45,7 @@ const clientLogos: { name: string; icon?: JSX.Element; imageUrl?: string; dataAi
   },
   {
     name: 'DivyaSangrah',
-    imageUrl: 'https://placehold.co/150x48.png', 
+    imageUrl: 'https://divyasangrah.com/wp-content/uploads/2025/03/cropped-retinal-ds-1-e1743144896585-163x88.webp', 
     dataAiHint: 'divyasangrah logo', 
   },
   { 
@@ -645,5 +645,7 @@ export default function HomePage() {
 }
 
 
+
+    
 
     
