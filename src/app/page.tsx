@@ -37,8 +37,12 @@ const services = [
   }
 ];
 
-const clientLogos = [
-  { name: 'Client Alpha', icon: <Building className="h-12 w-12 text-muted-foreground group-hover:text-primary transition-colors" /> },
+const clientLogos: { name: string; icon?: JSX.Element; imageUrl?: string; dataAiHint?: string }[] = [
+  {
+    name: 'PVT LTD',
+    imageUrl: 'https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=460,fit=crop,q=95/AR0LWLPr10FjjMp5/pvt-ltd-A3Q29lnwxEtZzMMb.png',
+    dataAiHint: 'company logo',
+  },
   { name: 'Client Beta', icon: <Briefcase className="h-12 w-12 text-muted-foreground group-hover:text-primary transition-colors" /> },
   { name: 'Client Gamma', icon: <Network className="h-12 w-12 text-muted-foreground group-hover:text-primary transition-colors" /> },
   { name: 'Client Delta', icon: <Users className="h-12 w-12 text-muted-foreground group-hover:text-primary transition-colors" /> },
@@ -382,7 +386,18 @@ export default function HomePage() {
             <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
               {clientLogos.map((logo) => (
                 <div key={logo.name} title={logo.name} className="transition-transform duration-300 ease-in-out transform hover:scale-110 group client-logo-item" data-interactive-cursor="true">
-                  {logo.icon}
+                  {logo.imageUrl ? (
+                    <Image
+                      src={logo.imageUrl}
+                      alt={logo.name}
+                      width={120}
+                      height={48}
+                      className="object-contain h-12 w-auto max-w-[150px] group-hover:opacity-80 transition-opacity"
+                      data-ai-hint={logo.dataAiHint}
+                    />
+                  ) : (
+                    logo.icon
+                  )}
                 </div>
               ))}
             </div>
