@@ -45,8 +45,8 @@ const clientLogos: { name: string; icon?: JSX.Element; imageUrl?: string; dataAi
   },
   {
     name: 'DivyaSangrah',
-    imageUrl: 'https://www.divyasangrah.com/wp-content/uploads/2025/03/cropped-retinal-ds-1-e1743144896585-163x88.webp',
-    dataAiHint: 'spiritual logo',
+    imageUrl: 'https://placehold.co/150x48.png', // Updated placeholder
+    dataAiHint: 'divyasangrah logo', // Updated hint
   },
   { 
     name: 'Brista', 
