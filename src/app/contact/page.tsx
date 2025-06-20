@@ -11,7 +11,7 @@ export default function ContactPage() {
   const mapAddress = "spaze i tech park, Sec-49, Gurugram, Haryana, India";
   const mapEmbedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(mapAddress)}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
   const calComCalLink = "ravin-pandey-f7vkoq/30min"; 
-  const calComNamespace = "30min";
+  const calComNamespace = "30min"; // Namespace used in Cal("init") and for the button
 
   return (
     <>
@@ -21,18 +21,24 @@ export default function ContactPage() {
         onLoad={() => {
           try {
             if (typeof (window as any).Cal === 'function') {
+              // Initialize Cal.com with the specific namespace
               (window as any).Cal("init", calComNamespace, { origin: "https://cal.com" });
               
+              // Now that the namespace is initialized (or Cal is globally initialized), configure its UI
+              // Check if Cal.ns and the specific namespace exist before configuring UI for that namespace
               if ((window as any).Cal.ns && (window as any).Cal.ns[calComNamespace] && typeof (window as any).Cal.ns[calComNamespace] === 'function') {
                 (window as any).Cal.ns[calComNamespace]("ui", {
                   "theme": "auto",
-                  "styles": {"branding":{"brandColor":"hsl(var(--primary))"}},
+                  "styles": {"branding":{"brandColor":"hsl(var(--primary))"}}, // Use theme primary color
                   "hideEventTypeDetails": false,
                   "layout": "month_view"
                 });
               } else {
-                 console.warn(`Cal.com namespace '${calComNamespace}' not found or not a function. Applying UI settings globally if possible.`);
-                 (window as any).Cal("ui", {
+                 // This case might happen if the init didn't set up the namespace as expected,
+                 // or if trying to configure UI for a namespace that wasn't explicitly initted for UI separately.
+                 // Fallback to global UI settings if namespace specific is not available or if Cal.com handles it this way.
+                 console.warn(`Cal.com namespace '${calComNamespace}' not found or not a function after init. Applying UI settings globally if possible or relying on button config.`);
+                 (window as any).Cal("ui", { // This would be a global UI config
                     "theme": "auto",
                     "styles": {"branding":{"brandColor":"hsl(var(--primary))"}},
                     "hideEventTypeDetails":false,
@@ -40,14 +46,14 @@ export default function ContactPage() {
                   });
               }
             } else {
-              console.error("Cal.com 'Cal' function not available after script load.");
+              console.error("Cal.com 'Cal' function not available after script load (lazyOnload strategy).");
             }
           } catch (e) {
-            console.error("Error initializing Cal.com embed in onLoad:", e);
+            console.error("Error initializing Cal.com embed in onLoad (lazyOnload strategy):", e);
           }
         }}
         onError={(e) => {
-            console.error("Error loading Cal.com script:", e);
+            console.error("Error loading Cal.com script (lazyOnload strategy):", e);
         }}
       />
       <div className="bg-background text-foreground">
