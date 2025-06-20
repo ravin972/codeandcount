@@ -16,7 +16,7 @@ const portfolioItems = [
     title: 'DivyaSangrah Spiritual Marketplace',
     category: 'E‑commerce · Spiritual Services',
     type: 'webdev',
-    imageUrl: 'https://placehold.co/600x450.png',
+    imageUrl: 'https://images.unsplash.com/photo-1639575668826-d6378418b110?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxwYW5kaXR8ZW58MHx8fHwxNzUwNDExMTIxfDA&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHint: 'spiritual storefront',
     description: 'An all-in-one online store offering puja items, astrology consultations, and religious service bookings. Crafted for spiritual ambience and performance.',
     tags: ['Shopify', 'Religious E-commerce', 'Booking System'],
