@@ -60,7 +60,7 @@ const clientLogos: { name: string; icon?: JSX.Element; imageUrl?: string; dataAi
   },
   { 
     name: 'Parivartan by DivyaSangrah', 
-    imageUrl: 'https://parivartan.divyasangrah.com/wp-content/uploads/2025/06/cropped-parivartan_black_logo-removebg-preview.png',
+    imageUrl: 'https://parivartan.divyasangrah.com/wp-content/uploads/2025/06/parivartan_white_logo-removebg-preview-e1750404043261.png',
     dataAiHint: 'ngo logo', 
   },
 ];
