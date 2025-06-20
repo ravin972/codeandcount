@@ -11,50 +11,28 @@ export default function ContactPage() {
   const mapAddress = "spaze i tech park, Sec-49, Gurugram, Haryana, India";
   const mapEmbedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(mapAddress)}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
   const calComCalLink = "ravin-pandey-f7vkoq/30min"; 
-  const calComNamespace = "30min"; // Namespace used in Cal("init") and for the button
+  const calComNamespace = "30min";
+
+  const calComScriptContent = `
+    (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+    if (typeof Cal !== "undefined") {
+      Cal("init", "${calComNamespace}", {origin:"https://cal.com"});
+      if (Cal.ns && Cal.ns["${calComNamespace}"]) {
+        Cal.ns["${calComNamespace}"]("ui", {"theme":"auto","styles":{"branding":{"brandColor":"hsl(var(--primary))"}},"hideEventTypeDetails":false,"layout":"month_view"});
+      } else {
+        console.warn("Cal.com namespace '${calComNamespace}' not available for UI config immediately after init. This might indicate an issue or a race condition.");
+      }
+    } else {
+      console.error("Cal function was not defined after IIFE execution.");
+    }
+  `;
 
   return (
     <>
       <Script
-        src="https://app.cal.com/embed/embed.js"
-        strategy="lazyOnload"
-        onLoad={() => {
-          try {
-            if (typeof (window as any).Cal === 'function') {
-              // Initialize Cal.com with the specific namespace
-              (window as any).Cal("init", calComNamespace, { origin: "https://cal.com" });
-              
-              // Now that the namespace is initialized (or Cal is globally initialized), configure its UI
-              // Check if Cal.ns and the specific namespace exist before configuring UI for that namespace
-              if ((window as any).Cal.ns && (window as any).Cal.ns[calComNamespace] && typeof (window as any).Cal.ns[calComNamespace] === 'function') {
-                (window as any).Cal.ns[calComNamespace]("ui", {
-                  "theme": "auto",
-                  "styles": {"branding":{"brandColor":"hsl(var(--primary))"}}, // Use theme primary color
-                  "hideEventTypeDetails": false,
-                  "layout": "month_view"
-                });
-              } else {
-                 // This case might happen if the init didn't set up the namespace as expected,
-                 // or if trying to configure UI for a namespace that wasn't explicitly initted for UI separately.
-                 // Fallback to global UI settings if namespace specific is not available or if Cal.com handles it this way.
-                 console.warn(`Cal.com namespace '${calComNamespace}' not found or not a function after init. Applying UI settings globally if possible or relying on button config.`);
-                 (window as any).Cal("ui", { // This would be a global UI config
-                    "theme": "auto",
-                    "styles": {"branding":{"brandColor":"hsl(var(--primary))"}},
-                    "hideEventTypeDetails":false,
-                    "layout":"month_view"
-                  });
-              }
-            } else {
-              console.error("Cal.com 'Cal' function not available after script load (lazyOnload strategy).");
-            }
-          } catch (e) {
-            console.error("Error initializing Cal.com embed in onLoad (lazyOnload strategy):", e);
-          }
-        }}
-        onError={(e) => {
-            console.error("Error loading Cal.com script (lazyOnload strategy):", e);
-        }}
+        id="cal-com-embed-script"
+        strategy="lazyOnload" // Or "afterInteractive"
+        dangerouslySetInnerHTML={{ __html: calComScriptContent }}
       />
       <div className="bg-background text-foreground">
         <header className="py-16 md:py-24 text-center bg-secondary border-b border-border">
