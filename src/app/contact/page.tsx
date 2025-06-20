@@ -1,42 +1,55 @@
 
 "use client";
 
-import React, { useEffect } from 'react';
-import { getCalApi } from "@calcom/embed-react";
-import { Mail, Phone, MapPin, CalendarDays, MessageSquare } from 'lucide-react'; 
+import React from 'react';
+import Script from 'next/script';
+import { Mail, Phone, MapPin, CalendarDays, MessageSquare, ExternalLink } from 'lucide-react'; 
 import { ContactForm } from '@/components/forms/ContactForm';
+import { Button } from '@/components/ui/button';
 
 export default function ContactPage() {
   const mapAddress = "spaze i tech park, Sec-49, Gurugram, Haryana, India";
   const mapEmbedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(mapAddress)}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
   const calComCalLink = "ravin-pandey-f7vkoq/30min"; 
-
-  useEffect(() => {
-    (async function () {
-      try {
-        const cal = await getCalApi({ namespace: "contactPageCalEmbed" }); // Unique namespace for this embed
-        if (cal && typeof cal === 'function') {
-          cal("inline", {
-            elementOrSelector: "#cal-embed-container",
-            calLink: calComCalLink,
-            config: { layout: "month_view", hideEventTypeDetails: false }
-          });
-          // Apply theme and primary color styling after inline embed is initialized
-          cal("ui", {
-            theme: "auto", // Respects light/dark mode of the parent page
-            styles: { branding: { brandColor: "hsl(var(--primary))" } } // Uses your site's primary color
-          });
-        } else {
-          console.error("Cal.com API (cal function) not available or not a function after getCalApi.");
-        }
-      } catch (e) {
-        console.error("Error initializing Cal.com embed:", e);
-      }
-    })();
-  }, [calComCalLink]); // Rerun if calComCalLink changes, though it's static here
+  const calComNamespace = "30min";
 
   return (
     <>
+      <Script
+        src="https://app.cal.com/embed/embed.js"
+        strategy="lazyOnload"
+        onLoad={() => {
+          try {
+            if (typeof (window as any).Cal === 'function') {
+              (window as any).Cal("init", calComNamespace, { origin: "https://cal.com" });
+              
+              if ((window as any).Cal.ns && (window as any).Cal.ns[calComNamespace] && typeof (window as any).Cal.ns[calComNamespace] === 'function') {
+                (window as any).Cal.ns[calComNamespace]("ui", {
+                  "theme": "auto",
+                  "styles": {"branding":{"brandColor":"hsl(var(--primary))"}},
+                  "hideEventTypeDetails": false,
+                  "layout": "month_view"
+                });
+              } else {
+                 console.warn(`Cal.com namespace '${calComNamespace}' not found or not a function. Applying UI settings globally if possible.`);
+                 (window as any).Cal("ui", {
+                    "theme": "auto",
+                    "styles": {"branding":{"brandColor":"hsl(var(--primary))"}},
+                    "hideEventTypeDetails":false,
+                    "layout":"month_view"
+                  });
+              }
+            } else {
+              console.error("Cal.com 'Cal' function not available after script load.");
+            }
+          } catch (e) {
+            console.error("Error initializing Cal.com embed in onLoad:", e);
+          }
+        }}
+        onError={(e) => {
+            console.error("Error loading Cal.com script:", e);
+        }}
+      />
       <div className="bg-background text-foreground">
         <header className="py-16 md:py-24 text-center bg-secondary border-b border-border">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -50,16 +63,25 @@ export default function ContactPage() {
           </div>
         </header>
 
-        {/* Booking Section with Cal.com Embed */}
+        {/* Booking Section with Cal.com Element Click */}
         <section className="py-16 md:py-20">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">Book a Meeting</h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10">
              Choose a time that works for you to discuss your project requirements and how we can help.
             </p>
-            <div id="cal-embed-container" className="min-h-[700px] w-full max-w-4xl mx-auto rounded-lg overflow-hidden border border-border shadow-xl bg-card">
-              {/* Cal.com inline embed will be rendered here */}
-            </div>
+            <Button
+              data-cal-namespace={calComNamespace}
+              data-cal-link={calComCalLink}
+              data-cal-config='{"layout":"month_view"}'
+              variant="default"
+              size="lg"
+              className="min-h-[50px] w-full max-w-xs mx-auto rounded-lg text-lg shadow-lg hover:shadow-xl transition-shadow"
+              data-interactive-cursor="true"
+            >
+              Schedule Your Meeting
+              <ExternalLink className="ml-2 h-5 w-5" />
+            </Button>
           </div>
         </section>
 
