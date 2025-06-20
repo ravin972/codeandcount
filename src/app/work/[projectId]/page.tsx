@@ -128,7 +128,7 @@ const portfolioItems = [
     ]
   },
   {
-    id: 'anandam-wellness-hub', // ID remains the same
+    id: 'anandam-wellness-hub', 
     title: 'Anandam by DivyaSangrah',
     category: 'Food & Restaurant · Online Ordering',
     imageUrl: 'https://images.unsplash.com/photo-1625398407796-82650a8c135f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxpbmRpYW4lMjBmb29kfGVufDB8fHx8MTc1MDQxMjQ4M3ww&ixlib=rb-4.1.0&q=80&w=1080', 
@@ -151,7 +151,7 @@ const portfolioItems = [
     id: 'divinepartners-consulting',
     title: 'DivinePartners Consulting',
     category: 'Corporate · Consulting',
-    imageUrl: 'https://placehold.co/1200x800.png',
+    imageUrl: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjb25zdWx0YW5jeXxlbnwwfHx8fDE3NTA0MTI2NTZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHint: 'consulting website',
     description: 'Clean and professional consultancy website. Features services, dynamic forms, and CRM integrations.',
     longDescription: 'DivinePartners Consulting required a polished and professional online presence. We delivered a clean website that clearly outlines their services, incorporates dynamic lead capture forms, and integrates seamlessly with their CRM for efficient client management.',

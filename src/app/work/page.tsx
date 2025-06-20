@@ -78,7 +78,7 @@ const portfolioItems = [
     liveUrl: 'https://parivartan.divyasangrah.com',
   },
   {
-    id: 'anandam-wellness-hub', // ID remains the same for now
+    id: 'anandam-wellness-hub',
     title: 'Anandam by DivyaSangrah',
     category: 'Food & Restaurant · Online Ordering',
     type: 'webdev',
@@ -93,7 +93,7 @@ const portfolioItems = [
     title: 'DivinePartners Consulting',
     category: 'Corporate · Consulting',
     type: 'webdev',
-    imageUrl: 'https://placehold.co/600x450.png',
+    imageUrl: 'https://images.unsplash.com/photo-1553877522-43269d4ea984?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjb25zdWx0YW5jeXxlbnwwfHx8fDE3NTA0MTI2NTZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHint: 'consulting website',
     description: 'Clean and professional consultancy website. Features services, dynamic forms, and CRM integrations.',
     tags: ['Corporate Design', 'Forms', 'Client Management'],
