@@ -40,7 +40,7 @@ const services = [
 const clientLogos: { name: string; icon?: JSX.Element; imageUrl?: string; dataAiHint?: string }[] = [
   {
     name: 'PVT LTD',
-    imageUrl: 'https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=460,fit=crop,q=95/AR0LWLPr10FjjMp5/pvt-ltd-A3Q29lnwxEtZzMMb.png',
+    imageUrl: 'https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=372,h=96,fit=crop,trim=142.47311827956992;0;228.49462365591398;0/AR0LWLPr10FjjMp5/2-removebg-preview-A3Q2jb6yZziVroXJ.png',
     dataAiHint: 'company logo',
   },
   {
