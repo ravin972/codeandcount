@@ -27,7 +27,7 @@ const portfolioItems = [
     title: 'ITVerbs Technology Solutions',
     category: 'Corporate IT Solutions',
     type: 'webdev',
-    imageUrl: 'https://placehold.co/600x450.png',
+    imageUrl: 'https://images.unsplash.com/photo-1556740714-a8395b3bf30f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MXwxfHNlYXJjaHw4fHxpdCUyMHRlY2glMjB8ZW58MHx8fHwxNzUwNDExMTg1fDA&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHint: 'corporate it',
     description: 'Corporate portal for AI solutions, cloud services, and development projects. Includes career hub, portfolio sections, and contact workflows.',
     tags: ['IT Website', 'AI Services', 'Tech Branding'],
