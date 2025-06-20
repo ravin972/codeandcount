@@ -45,8 +45,8 @@ const clientLogos: { name: string; icon?: JSX.Element; imageUrl?: string; dataAi
   },
   {
     name: 'DivyaSangrah',
-    imageUrl: 'https://placehold.co/150x48.png', // Updated placeholder
-    dataAiHint: 'divyasangrah logo', // Updated hint
+    imageUrl: 'https://placehold.co/150x48.png', 
+    dataAiHint: 'divyasangrah logo', 
   },
   { 
     name: 'Brista', 
@@ -86,7 +86,7 @@ const caseStudies = [
     id: 'buztrix-traveltech',
     title: 'BuzTrix TravelTech India Pvt. Ltd.',
     category: 'Travel SaaS Platform',
-    imageUrl: 'https://images.unsplash.com/photo-1663832669455-9a5ff27107ef?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHx0cmF2ZWwlMjBzYWFzfGVufDB8fHx8MTc1MDMxMjQ4Nnww&ixlib=rb-4.1.0&q=80&w=1080', 
+    imageUrl: 'https://images.unsplash.com/photo-1502791451862-7bd8c1df43a7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHx0cmF2ZWwlMjBpbWFnZXxlbnwwfHx8fDE3NTA0MDk5MjJ8MA&ixlib=rb-4.1.0&q=80&w=1080', 
     dataAiHint: 'travel saas',
     description: 'Developed for B2B travel operations. Offers hotel & flight APIs, lead tracking dashboards, and bulk booking systems.',
   },
