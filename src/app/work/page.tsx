@@ -126,7 +126,7 @@ const portfolioItems = [
     title: 'Nirogitanman Healthcare',
     category: 'Health Portal · Ayurvedic Wellness',
     type: 'webdev',
-    imageUrl: 'https://placehold.co/600x450.png',
+    imageUrl: 'https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxoZWFsdGglMjB8ZW58MHx8fHwxNzUwNDM0MjcwfDA&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHint: 'ayurvedic healthcare',
     description: 'Online consultation portal with Ayurveda-based health products and doctor booking. Simple UI and multilingual support.',
     tags: ['Healthcare UX', 'Booking Integration', 'Ayurvedic E‑commerce'],
