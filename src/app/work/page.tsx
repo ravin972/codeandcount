@@ -71,10 +71,10 @@ const portfolioItems = [
     title: 'Parivartan by DivyaSangrah',
     category: 'E-commerce · Apparel Store',
     type: 'webdev',
-    imageUrl: 'https://placehold.co/600x450.png',
+    imageUrl: 'https://images.unsplash.com/photo-1555529771-835f59fc5efe?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxhcHBhcmVsfGVufDB8fHx8MTc1MDQxMTgzOHww&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHint: 'apparel store',
     description: 'An online apparel store by DivyaSangrah, offering a unique collection of clothing and accessories. Designed for a seamless shopping experience.',
-    tags: ['E-commerce', 'Apparel', 'Fashion', 'Online Shopping'],
+    tags: ['E-commerce', 'Apparel', 'Fashion'],
     liveUrl: 'https://parivartan.divyasangrah.com',
   },
   {
@@ -338,3 +338,4 @@ export default function WorkPage() {
 }
 
     
+
