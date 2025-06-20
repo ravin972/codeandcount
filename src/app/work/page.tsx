@@ -78,15 +78,15 @@ const portfolioItems = [
     liveUrl: 'https://parivartan.divyasangrah.com',
   },
   {
-    id: 'anandam-wellness-hub',
-    title: 'Anandam Wellness Hub',
-    category: 'Health & Spirituality',
+    id: 'anandam-wellness-hub', // ID remains the same
+    title: 'Anandam Food & Restaurant', // Updated title
+    category: 'Food & Restaurant · Online Ordering', // Updated category
     type: 'webdev',
-    imageUrl: 'https://placehold.co/600x450.png',
-    dataAiHint: 'wellness portal',
-    description: 'Wellness portal with articles, guided meditations, and subscription content. Calm UI with blog and member area.',
-    tags: ['CMS', 'Wellness UX', 'Blog Membership'],
-    liveUrl: 'https://anandam.divyasangrah.com',
+    imageUrl: 'https://placehold.co/600x450.png', // Kept placeholder, can be updated
+    dataAiHint: 'food restaurant', // Updated hint
+    description: 'Online store for delicious meals and restaurant services. Features menu display, online ordering, and table reservations.', // Updated description
+    tags: ['Online Ordering', 'Restaurant Website', 'Food Delivery', 'Menu Management'], // Updated tags
+    liveUrl: 'https://anandam.divyasangrah.com', // Kept original URL
   },
   {
     id: 'divinepartners-consulting',
@@ -336,6 +336,4 @@ export default function WorkPage() {
     </div>
   );
 }
-
     
-
