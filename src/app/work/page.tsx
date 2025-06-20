@@ -60,7 +60,7 @@ const portfolioItems = [
     title: 'TaskSlate Productivity Tool',
     category: 'Productivity SaaS',
     type: 'webdev',
-    imageUrl: 'https://placehold.co/600x450.png',
+    imageUrl: 'https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHx0ZWNofGVufDB8fHx8MTc1MDQwNTQyNnww&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHint: 'productivity app',
     description: 'Multi-user task manager with role permissions, calendar views, and file sharing. Built for freelancers and small businesses.',
     tags: ['Web App', 'Workflow SaaS', 'Productivity Tools'],
