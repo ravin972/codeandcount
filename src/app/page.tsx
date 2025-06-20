@@ -78,7 +78,7 @@ const caseStudies = [
     id: 'itverbs-technology-solutions',
     title: 'ITVerbs Technology Solutions',
     category: 'Corporate IT Solutions',
-    imageUrl: 'https://images.unsplash.com/photo-1608908271749-40decee4f0e3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxjb3Jwb3JhdGUlMjBpdHxlbnwwfHx8fDE3NTAzMTI0ODZ8MA&ixlib=rb-4.1.0&q=80&w=1080', 
+    imageUrl: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHx0ZWNofGVufDB8fHx8MTc1MDQwNTQyNnww&ixlib=rb-4.1.0&q=80&w=1080', 
     dataAiHint: 'corporate it',
     description: 'Corporate portal for AI solutions, cloud services, and development projects. Includes career hub, portfolio sections, and contact workflows.',
   },
