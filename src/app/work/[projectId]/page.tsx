@@ -128,20 +128,20 @@ const portfolioItems = [
     ]
   },
   {
-    id: 'anandam-wellness-hub', // ID remains the same
-    title: 'Anandam Food & Restaurant', // Updated title
-    category: 'Food & Restaurant · Online Ordering', // Updated category
-    imageUrl: 'https://placehold.co/1200x800.png', // Kept placeholder
-    dataAiHint: 'food restaurant', // Updated hint
-    description: 'Online store for delicious meals and restaurant services. Features menu display, online ordering, and table reservations.', // Updated short description
-    longDescription: 'Anandam Food & Restaurant offers a delightful online experience for food lovers. Browse our extensive menu, place orders for delivery or pickup, and even book a table. The platform is designed for ease of use, showcasing delicious food photography and providing a seamless ordering process.', // Updated long description
-    tags: ['Online Ordering', 'Restaurant Website', 'Food Delivery', 'Menu Management'], // Updated tags
-    client: 'Anandam Wellness', // Kept client name
-    date: '2023-08-01', // Kept date
-    liveUrl: 'https://anandam.divyasangrah.com', // Kept URL
-    servicesProvided: ['Online Ordering System', 'Menu Management Integration', 'Restaurant Website Design', 'Payment Gateway Setup', 'Table Reservation Feature'], // Updated services
-    results: 'Successfully launched an intuitive online food ordering platform, increasing takeaway orders and streamlining the reservation process. Positive customer feedback on ease of use and menu presentation.', // Updated results
-    gallery: [ // Updated gallery
+    id: 'anandam-wellness-hub', 
+    title: 'Anandam by DivyaSangrah', 
+    category: 'Food & Restaurant · Online Ordering', 
+    imageUrl: 'https://placehold.co/1200x800.png', 
+    dataAiHint: 'food restaurant', 
+    description: 'Online store for delicious meals and restaurant services. Features menu display, online ordering, and table reservations.', 
+    longDescription: 'Anandam by DivyaSangrah offers a delightful online experience for food lovers. Browse our extensive menu, place orders for delivery or pickup, and even book a table. The platform is designed for ease of use, showcasing delicious food photography and providing a seamless ordering process.', 
+    tags: ['Online Ordering', 'Restaurant Website', 'Food Delivery', 'Menu Management'], 
+    client: 'DivyaSangrah', 
+    date: '2023-08-01', 
+    liveUrl: 'https://anandam.divyasangrah.com', 
+    servicesProvided: ['Online Ordering System', 'Menu Management Integration', 'Restaurant Website Design', 'Payment Gateway Setup', 'Table Reservation Feature'], 
+    results: 'Successfully launched an intuitive online food ordering platform, increasing takeaway orders and streamlining the reservation process. Positive customer feedback on ease of use and menu presentation.', 
+    gallery: [ 
         { src: 'https://placehold.co/800x600.png', alt: 'Restaurant Menu Page', dataAiHint: 'food menu' },
         { src: 'https://placehold.co/800x600.png', alt: 'Online Ordering System', dataAiHint: 'order food' },
         { src: 'https://placehold.co/800x600.png', alt: 'Table Reservation Interface', dataAiHint: 'restaurant booking' },

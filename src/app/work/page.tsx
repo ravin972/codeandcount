@@ -78,15 +78,15 @@ const portfolioItems = [
     liveUrl: 'https://parivartan.divyasangrah.com',
   },
   {
-    id: 'anandam-wellness-hub', // ID remains the same
-    title: 'Anandam Food & Restaurant', // Updated title
-    category: 'Food & Restaurant · Online Ordering', // Updated category
+    id: 'anandam-wellness-hub',
+    title: 'Anandam by DivyaSangrah',
+    category: 'Food & Restaurant · Online Ordering',
     type: 'webdev',
-    imageUrl: 'https://placehold.co/600x450.png', // Kept placeholder, can be updated
-    dataAiHint: 'food restaurant', // Updated hint
-    description: 'Online store for delicious meals and restaurant services. Features menu display, online ordering, and table reservations.', // Updated description
-    tags: ['Online Ordering', 'Restaurant Website', 'Food Delivery', 'Menu Management'], // Updated tags
-    liveUrl: 'https://anandam.divyasangrah.com', // Kept original URL
+    imageUrl: 'https://placehold.co/600x450.png', 
+    dataAiHint: 'food restaurant', 
+    description: 'Online store for delicious meals and restaurant services. Features menu display, online ordering, and table reservations.', 
+    tags: ['Online Ordering', 'Restaurant Website', 'Food Delivery', 'Menu Management'], 
+    liveUrl: 'https://anandam.divyasangrah.com', 
   },
   {
     id: 'divinepartners-consulting',
