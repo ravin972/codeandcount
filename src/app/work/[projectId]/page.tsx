@@ -110,21 +110,21 @@ const portfolioItems = [
   {
     id: 'parivartan-by-divyasangrah',
     title: 'Parivartan by DivyaSangrah',
-    category: 'NGO · Community Portal',
+    category: 'E-commerce · Apparel Store',
     imageUrl: 'https://placehold.co/1200x800.png',
-    dataAiHint: 'ngo community',
-    description: 'Platform for event listings, donations, and volunteer participation. Built for scalability and public involvement.',
-    longDescription: 'Parivartan is a community portal for DivyaSangrah\'s NGO activities, featuring event listings, secure donation processing, and volunteer management. The platform is designed for scalability to support growing public involvement and outreach programs.',
-    tags: ['NGO Website', 'Donation Integration', 'Event Platform', 'Community Building', 'Volunteer Management'],
-    client: 'DivyaSangrah (NGO Wing)',
+    dataAiHint: 'apparel store',
+    description: 'An online apparel store by DivyaSangrah, offering a unique collection of clothing and accessories. Designed for a seamless shopping experience.',
+    longDescription: "Parivartan by DivyaSangrah is an e-commerce platform dedicated to apparel, offering a unique collection of clothing and accessories. The store is designed to provide a seamless and enjoyable online shopping experience, showcasing fashion items with style and elegance.",
+    tags: ['E-commerce', 'Apparel', 'Fashion', 'Online Shopping', 'Clothing Store'],
+    client: 'DivyaSangrah',
     date: '2023-09-15',
     liveUrl: 'https://parivartan.divyasangrah.com',
-    servicesProvided: ['Community Portal Dev', 'Online Donation System', 'Event Management', 'Volunteer Sign-up', 'NGO CMS'],
-    results: 'Facilitated increased community engagement, volunteer participation, and successful fundraising for various social initiatives.',
+    servicesProvided: ['E-commerce Platform Development', 'Online Store Design', 'Product Catalog Management', 'Payment Gateway Integration', 'Fashion E-commerce'],
+    results: "Successfully launched a stylish online apparel store, attracting fashion-conscious customers and increasing online sales.",
     gallery: [
-        { src: 'https://placehold.co/800x600.png', alt: 'NGO Event Listing', dataAiHint: 'ngo events' },
-        { src: 'https://placehold.co/800x600.png', alt: 'Donation Page', dataAiHint: 'charity donate' },
-        { src: 'https://placehold.co/800x600.png', alt: 'Volunteer Portal', dataAiHint: 'volunteer hub' },
+        { src: 'https://placehold.co/800x600.png', alt: 'Apparel Collection Showcase', dataAiHint: 'clothing collection' },
+        { src: 'https://placehold.co/800x600.png', alt: 'Product Detail Page', dataAiHint: 'fashion product' },
+        { src: 'https://placehold.co/800x600.png', alt: 'Online Store Checkout', dataAiHint: 'ecommerce checkout' },
     ]
   },
   {
@@ -430,7 +430,7 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
         <div className="bg-card rounded-xl shadow-xl p-8 md:p-12 border border-border">
           <h1 className="text-4xl font-bold">Project Not Found</h1>
-          <p className="mt-4 text-muted-foreground">The project you are looking for does not exist.</p>
+          <p className="mt-4 text-muted-foreground">The blog post you are looking for does not exist.</p>
           <Button asChild className="mt-8">
             <Link href="/work">
               <ArrowLeft className="mr-2 h-4 w-4" /> Back to Portfolio

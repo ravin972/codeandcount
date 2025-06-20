@@ -69,12 +69,12 @@ const portfolioItems = [
   {
     id: 'parivartan-by-divyasangrah',
     title: 'Parivartan by DivyaSangrah',
-    category: 'NGO · Community Portal',
+    category: 'E-commerce · Apparel Store',
     type: 'webdev',
     imageUrl: 'https://placehold.co/600x450.png',
-    dataAiHint: 'ngo community',
-    description: 'Platform for event listings, donations, and volunteer participation. Built for scalability and public involvement.',
-    tags: ['NGO Website', 'Donation Integration', 'Event Platform'],
+    dataAiHint: 'apparel store',
+    description: 'An online apparel store by DivyaSangrah, offering a unique collection of clothing and accessories. Designed for a seamless shopping experience.',
+    tags: ['E-commerce', 'Apparel', 'Fashion', 'Online Shopping'],
     liveUrl: 'https://parivartan.divyasangrah.com',
   },
   {
