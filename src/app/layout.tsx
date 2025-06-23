@@ -45,7 +45,10 @@ export const metadata: Metadata = {
     images: ['https://placehold.co/1200x630.png'], 
   },
   manifest: '/manifest.json',
-  themeColor: '#b2ff03', 
+  themeColor: '#b2ff03',
+  icons: {
+    icon: "data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3e%3crect width='100' height='100' rx='20' fill='%234AD685' /%3e%3ctext x='50' y='50' dy='.3em' font-size='70' font-weight='bold' text-anchor='middle' fill='white'%3eC%3c/text%3e%3c/svg%3e",
+  },
 };
 
 export default function RootLayout({
