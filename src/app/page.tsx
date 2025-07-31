@@ -559,7 +559,6 @@ export default function HomePage() {
         </div>
       </section>
       
-      <div className="h-0.5 w-1/3 sm:w-1/4 md:w-1/6 mx-auto my-12 md:my-16 lg:my-20 bg-primary rounded-full" />
       <InfiniteScrollerWithMouseFollower />
       
       {/* Blog Section */}
