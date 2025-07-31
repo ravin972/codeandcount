@@ -93,20 +93,125 @@ const caseStudies = [
 ];
 
 const testimonials = [
-  {
-    name: 'Priya Sharma',
-    title: 'Managing Director, Jaipur Handlooms Pvt. Ltd.',
-    avatar: 'https://images.unsplash.com/flagged/photo-1559289142-e88aab8191d7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxpbmRpYW4lMjB3b21hbiUyMHByb2Zlc3Npb25hbHxlbnwwfHx8fDE3NTAzMTAyODF8MA&ixlib=rb-4.1.0&q=80&w=1080',
-    dataAiHint: 'indian woman professional',
-    quote: "CodeAndCount.com has been pivotal for our digital growth. Their expertise and dedication are truly commendable. Our online sales have significantly increased!",
-  },
-  {
-    name: 'Rohan Mehra',
-    title: 'Founder, Bangalore Tech Startups',
-    avatar: 'https://images.unsplash.com/photo-1654262609484-76d1a8f3b016?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxpbmRpYW4lMjBtYW4lMjBzdGFydHVwfGVufDB8fHx8MTc1MDMxMDI4MXww&ixlib=rb-4.1.0&q=80&w=1080',
-    dataAiHint: 'indian man startup',
-    quote: 'The team at CodeAndCount.com understood our vision perfectly and delivered a robust platform. Their innovative approach to web solutions is top-notch.',
-  },
+    {
+        name: 'Priya Sharma',
+        title: 'MD, Jaipur Handlooms',
+        avatar: 'https://images.unsplash.com/flagged/photo-1559289142-e88aab8191d7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxpbmRpYW4lMjB3b21hbiUyMHByb2Zlc3Npb25hbHxlbnwwfHx8fDE3NTAzMTAyODF8MA&ixlib=rb-4.1.0&q=80&w=1080',
+        dataAiHint: 'indian woman professional',
+        quote: "CodeAndCount has been pivotal for our digital growth. Their web and AI solutions are truly commendable.",
+    },
+    {
+        name: 'Rohan Mehra',
+        title: 'Founder, Bangalore Tech Startups',
+        avatar: 'https://images.unsplash.com/photo-1654262609484-76d1a8f3b016?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxpbmRpYW4lMjBtYW4lMjBzdGFydHVwfGVufDB8fHx8MTc1MDMxMDI4MXww&ixlib=rb-4.1.0&q=80&w=1080',
+        dataAiHint: 'indian man startup',
+        quote: 'The team understood our vision perfectly. Their innovative approach to web solutions is top-notch.',
+    },
+    {
+        name: 'Chloe Dubois',
+        title: 'Art Director, Paris Design House',
+        avatar: 'https://images.unsplash.com/photo-1509967419530-da38b4704bc6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxwYXJpcyUyMHdvbWFufGVufDB8fHx8fDE3NTQxNTg2MDZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
+        dataAiHint: 'Parisian woman',
+        quote: "An exceptional partner for our branding needs. The creativity and precision they bring are unparalleled.",
+    },
+    {
+        name: 'Aditya Rao',
+        title: 'CEO, Mumbai FinTech',
+        avatar: 'https://images.unsplash.com/photo-1593325639333-287c2b535805?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxNXx8aW5kaWFuJTIwbWFuJTIwc3VpdHxlbnwwfHx8fDE3NTQxNTg2MDd8MA&ixlib=rb-4.1.0&q=80&w=1080',
+        dataAiHint: 'Indian man suit',
+        quote: "Their accounting services streamlined our finances, allowing us to focus on scaling our business.",
+    },
+    {
+        name: 'Kenji Tanaka',
+        title: 'CTO, Tokyo Innovations',
+        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxqYXBhbmVzZSUyMG1hbnxlbnwwfHx8fDE3NTQxNTg2MDd8MA&ixlib=rb-4.1.0&q=80&w=1080',
+        dataAiHint: 'Japanese man',
+        quote: 'The AI integration they developed for our platform has revolutionized our user experience.',
+    },
+    {
+        name: 'Fatima Al-Jamil',
+        title: 'E-commerce Head, Dubai Retail',
+        avatar: 'https://images.unsplash.com/photo-1548358217-35aa143f434b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxhcmFiJTIwd29tYW58ZW58MHx8fHwxNzU0MTU4NjA3fDA&ixlib=rb-4.1.0&q=80&w=1080',
+        dataAiHint: 'Arab woman',
+        quote: "Our online sales have doubled since CodeAndCount redesigned our e-commerce site. A fantastic result!",
+    },
+    {
+        name: 'Vikram Singh',
+        title: 'Restaurateur, Delhi Chains',
+        avatar: 'https://images.unsplash.com/photo-1615995203923-3b1a80c93563?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxpbmRpYW4lMjBtYW4lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NTQxNTg2MDd8MA&ixlib=rb-4.1.0&q=80&w=1080',
+        dataAiHint: 'Indian man portrait',
+        quote: "The digital marketing campaign they ran was brilliant. Our footfall increased by over 40%.",
+    },
+    {
+        name: 'Sofia Rossi',
+        title: 'Founder, Milan Fashion Tech',
+        avatar: 'https://images.unsplash.com/photo-1594744806549-83a3a6344068?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxpdGFsaWFuJTIwd29tYW58ZW58MHx8fHwxNzU0MTU4NjA3fDA&ixlib=rb-4.1.0&q=80&w=1080',
+        dataAiHint: 'Italian woman',
+        quote: 'A perfect blend of technical skill and creative flair. They are my go-to for all digital projects.',
+    },
+    {
+        name: 'Arjun Desai',
+        title: 'Filmmaker, Bollywood',
+        avatar: 'https://images.unsplash.com/photo-1618085222619-64a9a059c1b3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxib2xseXdvb2QlMjBkaXJlY3RvcnxlbnwwfHx8fDE3NTQxNTg5Mjd8MA&ixlib=rb-4.1.0&q=80&w=1080',
+        dataAiHint: 'Bollywood director',
+        quote: "They designed a stunning portfolio website for my production house. It truly captures our cinematic style.",
+    },
+    {
+        name: 'Liam Murphy',
+        title: 'Pub Owner, Dublin',
+        avatar: 'https://images.unsplash.com/photo-1542065435-d72e3a73b578?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxpcmlzaCUyMG1hbnxlbnwwfHx8fDE3NTQxNTg5Mjd8MA&ixlib=rb-4.1.0&q=80&w=1080',
+        dataAiHint: 'Irish man',
+        quote: "Our new booking system is a breeze to use. The CodeAndCount team was professional and efficient.",
+    },
+    {
+        name: 'Ananya Reddy',
+        title: 'Startup Founder, Hyderabad',
+        avatar: 'https://images.unsplash.com/photo-1618765278183-b26a6f19972b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxpbmRpYW4lMjB3b21hbiUyMGxhcHRvcHxlbnwwfHx8fDE3NTQxNTg5Mjd8MA&ixlib=rb-4.1.0&q=80&w=1080',
+        dataAiHint: 'Indian woman laptop',
+        quote: "Their full-service package, from accounting to web dev, has been a lifesaver for my startup.",
+    },
+    {
+        name: 'Carlos Gomez',
+        title: 'Architect, Madrid Studio',
+        avatar: 'https://images.unsplash.com/photo-1612250109403-91c6858a721d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzcGFuaXNoJTIwbWFufGVufDB8fHx8fDE3NTQxNTg5Mjd8MA&ixlib=rb-4.1.0&q=80&w=1080',
+        dataAiHint: 'Spanish man',
+        quote: "A talented team that delivers sophisticated design and flawless functionality. Highly recommended.",
+    },
+    {
+        name: 'Isha Patel',
+        title: 'Yoga Instructor, Goa',
+        avatar: 'https://images.unsplash.com/photo-1603988239243-982875c74222?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxpbmlhbiUyMHlvZ2F8ZW58MHx8fHwxNzU0MTU4OTI3fDA&ixlib=rb-4.1.0&q=80&w=1080',
+        dataAiHint: 'Indian yoga',
+        quote: "My new wellness website is serene and beautiful, just like I envisioned. Thank you, CodeAndCount!",
+    },
+    {
+        name: 'Marcus Holloway',
+        title: 'Game Developer, London',
+        avatar: 'https://images.unsplash.com/photo-1560250056-07ba64664864?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxibGFjayUyMG1hbiUyMGdhbWVyfGVufDB8fHx8fDE3NTQxNTg5Mjd8MA&ixlib=rb-4.1.0&q=80&w=1080',
+        dataAiHint: 'Black man gamer',
+        quote: "The AI-powered analytics dashboard they built gives us incredible insights into player behavior.",
+    },
+    {
+        name: 'Deepika Iyer',
+        title: 'Law Firm Partner, Chennai',
+        avatar: 'https://images.unsplash.com/photo-1594393165415-9ee9841f354f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzb3V0aCUyMGluZGlhbiUyMHdvbWFufGVufDB8fHx8fDE3NTQxNTg5Mjd8MA&ixlib=rb-4.1.0&q=80&w=1080',
+        dataAiHint: 'South Indian woman',
+        quote: "Professionalism and integrity are core to their services, especially in financial management.",
+    },
+    {
+        name: 'Olga Petrova',
+        title: 'Cybersecurity Analyst, Moscow',
+        avatar: 'https://images.unsplash.com/photo-1521142597365-a1b4f4c45b80?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxydXNzaWFuJTIwd29tYW58ZW58MHx8fHwxNzU0MTU4OTI4fDA&ixlib=rb-4.1.0&q=80&w=1080',
+        dataAiHint: 'Russian woman',
+        quote: "They identified and fixed critical vulnerabilities in our system. Their expertise is invaluable.",
+    },
+    {
+        name: 'Suresh Kumar',
+        title: 'Retail Manager, Kolkata',
+        avatar: 'https://images.unsplash.com/photo-1594498664188-460b3765e9d6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxiZW5nYWxpJTIwbWFufGVufDB8fHx8fDE3NTQxNTg5Mjh8MA&ixlib=rb-4.1.0&q=80&w=1080',
+        dataAiHint: 'Bengali man',
+        quote: "Our inventory management is now seamless thanks to the custom software they developed for us.",
+    }
 ];
 
 const homepageBlogPosts = [
@@ -235,9 +340,7 @@ export default function HomePage() {
     createAnimation('.testimonials-section .bg-card', { y:0, opacity:1, duration: 0.1, delay:0}); // Animate the container card first
     createAnimation('.testimonials-title', {delay: 0.1});
     createAnimation('.testimonials-description', { delay: 0.2});
-    gsap.utils.toArray<HTMLElement>('.testimonial-card').forEach((card, index) => {
-      createAnimation(card, { delay: 0.1 * index + 0.2 });
-    });
+    // Testimonial cards are now animated by CSS
     
     // SEO Optimizer Tool Section
     createAnimation('.seo-tool-section .text-primary', { y:0, opacity: 1, scale: 0.8, duration: 0.6, ease: 'elastic.out(1, 0.5)'});
@@ -462,37 +565,39 @@ export default function HomePage() {
       </section>
 
       {/* Testimonials Section */}
-      <section id="testimonials" className="py-16 bg-background testimonials-section">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-card rounded-xl shadow-xl p-8 md:p-12 border border-border">
-            <h2 className="text-4xl font-bold text-center mb-4 text-foreground testimonials-title">What Our Clients Say</h2>
-            <p className="text-xl md:text-2xl text-muted-foreground text-center mb-12 max-w-2xl mx-auto testimonials-description">
-              Real stories from satisfied partners.
-            </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              {testimonials.map((testimonial) => (
-                <Card key={testimonial.name} className="shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out hover:-translate-y-1 testimonial-card" data-interactive-cursor="true">
-                  <CardContent className="pt-6">
-                    <div className="flex items-start space-x-4 mb-4">
-                      <Avatar className="h-16 w-16">
-                        <AvatarImage src={testimonial.avatar} alt={testimonial.name} data-ai-hint={testimonial.dataAiHint} />
-                        <AvatarFallback>{testimonial.name.substring(0,2)}</AvatarFallback>
-                      </Avatar>
-                      <div>
-                        <h4 className="text-lg font-semibold text-foreground">{testimonial.name}</h4>
-                        <p className="text-sm text-muted-foreground">{testimonial.title}</p>
-                      </div>
+        <section id="testimonials" className="py-16 bg-background testimonials-section">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="bg-card rounded-xl shadow-xl p-8 md:p-12 border border-border">
+                    <h2 className="text-4xl font-bold text-center mb-4 text-foreground testimonials-title">What Our Clients Say</h2>
+                    <p className="text-xl md:text-2xl text-muted-foreground text-center mb-12 max-w-2xl mx-auto testimonials-description">
+                        Real stories from satisfied partners across the globe.
+                    </p>
+                    <div className="scroller" data-speed="slow" data-direction="left">
+                        <div className="scroller__inner">
+                            {[...testimonials, ...testimonials].map((testimonial, index) => (
+                                <Card key={`${testimonial.name}-${index}`} className="w-[350px] flex-shrink-0 mx-4 shadow-lg" data-interactive-cursor="true">
+                                    <CardContent className="pt-6">
+                                        <div className="flex items-start space-x-4 mb-4">
+                                            <Avatar className="h-12 w-12">
+                                                <AvatarImage src={testimonial.avatar} alt={testimonial.name} data-ai-hint={testimonial.dataAiHint} />
+                                                <AvatarFallback>{testimonial.name.substring(0,2)}</AvatarFallback>
+                                            </Avatar>
+                                            <div>
+                                                <h4 className="text-base font-semibold text-foreground">{testimonial.name}</h4>
+                                                <p className="text-xs text-muted-foreground">{testimonial.title}</p>
+                                            </div>
+                                        </div>
+                                        <blockquote className="text-sm text-foreground italic border-l-2 border-primary pl-3 py-1">
+                                            "{testimonial.quote}"
+                                        </blockquote>
+                                    </CardContent>
+                                </Card>
+                            ))}
+                        </div>
                     </div>
-                    <blockquote className="text-foreground italic border-l-4 border-primary pl-4 py-2">
-                      "{testimonial.quote}"
-                    </blockquote>
-                  </CardContent>
-                </Card>
-              ))}
+                </div>
             </div>
-          </div>
-        </div>
-      </section>
+        </section>
 
       {/* SEO Optimizer Tool Section */}
       <section id="seo-tool" className="py-16 md:py-20 bg-background text-foreground seo-tool-section">
@@ -648,3 +753,4 @@ export default function HomePage() {
     
 
     
+
