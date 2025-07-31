@@ -7,6 +7,8 @@ import { ArrowLeft, CalendarDays, Tag, Clock3, Dot } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 
+export const dynamic = 'force-dynamic';
+
 // Mock data - in a real app, this would come from a CMS or database
 const blogPosts = [
   {
