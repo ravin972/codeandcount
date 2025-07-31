@@ -115,7 +115,7 @@ export default function ContactPage() {
                     <div className="ml-4">
                       <h3 className="text-lg font-semibold text-foreground">Call Us</h3>
                       <a href="tel:+918685941423" className="text-muted-foreground hover:text-primary transition-colors">
-                        +91-8685941423
+                        +91-9729041423
                       </a>
                        <br/>
                       <a href="tel:+917737770374" className="text-muted-foreground hover:text-primary transition-colors">
