@@ -205,7 +205,7 @@ export default function HexTestPage() {
               </CardTitle>
               {gameStarted && isGameOver && (
                 <CardDescription className="text-xl mt-2">
-                  Score: {score} &nbsp;&nbsp;|&nbsp;&nbsp; Level: {level -1 > 0 ? level -1 : 1}
+                  Score: {score} &nbsp;&nbsp;|&nbsp;&nbsp; Level: {level -1 > 0 ? level -1 : 0}
                 </CardDescription>
               )}
                {!gameStarted && (
