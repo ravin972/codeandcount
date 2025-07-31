@@ -4,11 +4,12 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, Briefcase, Users, Rss, Mail, Sparkles, ArrowUpRight, Home } from 'lucide-react'; 
-import { usePathname, useRouter } from 'next/navigation';
+import { Menu, Briefcase, Users, Rss, Mail, Sparkles, ArrowUpRight } from 'lucide-react'; 
+import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { gsap } from 'gsap';
 
 const navLinks = [
   { href: '/services', label: 'Services', icon: <Briefcase className="h-5 w-5" /> },
@@ -20,28 +21,54 @@ const navLinks = [
 
 export function Header() {
   const pathname = usePathname();
-  const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [hasScrolled, setHasScrolled] = useState(false);
+  const headerRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
-    const handleScroll = () => {
-      setHasScrolled(window.scrollY > 10);
-    };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // Check on mount
-    return () => window.removeEventListener('scroll', handleScroll);
+    const headerElement = headerRef.current;
+    if (!headerElement) return;
+
+    // Selectors for animation targets
+    const logoEl = headerElement.querySelector('.header-logo');
+    const navItems = gsap.utils.toArray(headerElement.querySelectorAll('.nav-link-item'));
+    const ctaSection = headerElement.querySelector('.header-cta-section');
+
+    // Set initial states
+    gsap.set(logoEl, { opacity: 0, scale: 0.9 });
+    gsap.set(navItems, { opacity: 0, y: -20 });
+    gsap.set(ctaSection, { opacity: 0, x: 50 });
+
+    // Create a timeline for a synchronized animation sequence
+    const tl = gsap.timeline({
+      defaults: { ease: 'power3.out' },
+      delay: 0.2 // Small delay before starting the whole animation
+    });
+
+    tl.to(logoEl, {
+      opacity: 1,
+      scale: 1,
+      duration: 0.8,
+    })
+    .to(navItems, {
+      opacity: 1,
+      y: 0,
+      duration: 0.6,
+      stagger: 0.1, // Stagger the animation for each nav item
+    }, "-=0.5") // Overlap with the logo animation slightly
+    .to(ctaSection, {
+      opacity: 1,
+      x: 0,
+      duration: 0.8,
+    }, "-=0.6"); // Overlap this animation as well
+
   }, []);
 
   return (
-    <header className="relative h-24">
-      <div className={cn(
-        "fixed top-0 left-0 right-0 z-50 p-4 md:p-6 transition-all duration-300 ease-in-out",
-        "flex items-center justify-between"
-      )}>
+    <header ref={headerRef} className="relative h-24">
+      <div className="fixed top-0 left-0 right-0 z-50 p-4 md:p-6 flex items-center justify-between pointer-events-none">
         
         {/* Logo Section (Top Left) */}
-        <div className="flex-shrink-0">
+        <div className="flex-shrink-0 header-logo" style={{ pointerEvents: 'auto' }}>
            <Link 
             href="/" 
             className="font-bold text-2xl hover:opacity-80 transition-opacity duration-300"
@@ -52,11 +79,7 @@ export function Header() {
         </div>
 
         {/* Centered Desktop Navigation */}
-        <nav className={cn(
-          "hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2",
-          "transition-all duration-300 ease-in-out",
-          hasScrolled ? "opacity-100 translate-y-[-50%]" : "opacity-0 translate-y-[-75%]",
-        )}>
+        <div className="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2" style={{ pointerEvents: 'auto' }}>
            <div className="flex items-center justify-center gap-1 bg-card/80 backdrop-blur-md border border-border shadow-lg rounded-full px-3 py-2">
               {navLinks.map((link) => (
                 <Link
@@ -64,7 +87,7 @@ export function Header() {
                   href={link.href}
                   className={cn(
                     "font-medium transition-colors duration-200 rounded-full text-sm", 
-                    "px-3 py-1.5", 
+                    "px-3 py-1.5 nav-link-item", // Added class for animation targeting
                     pathname === link.href || pathname.startsWith(link.href + '/') 
                       ? "text-primary bg-primary/10" 
                       : "text-card-foreground/80 hover:bg-accent/50 hover:text-accent-foreground"
@@ -74,10 +97,10 @@ export function Header() {
                 </Link>
               ))}
            </div>
-        </nav>
+        </div>
 
         {/* CTA & Theme Toggle Section (Top Right) */}
-        <div className="hidden md:flex items-center gap-3">
+        <div className="hidden md:flex items-center gap-3 header-cta-section" style={{ pointerEvents: 'auto' }}>
           <Button
             asChild
             variant="default"
@@ -93,7 +116,7 @@ export function Header() {
         </div>
 
         {/* Mobile Menu Trigger */}
-        <div className="md:hidden flex items-center space-x-3">
+        <div className="md:hidden flex items-center space-x-3" style={{ pointerEvents: 'auto' }}>
           <ThemeToggle />
           <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
             <SheetTrigger asChild>
