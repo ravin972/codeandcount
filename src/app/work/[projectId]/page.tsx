@@ -6,6 +6,8 @@ import { Badge } from '@/components/ui/badge';
 import { ArrowLeft, ExternalLink, CheckCircle } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 
+export const dynamic = 'force-dynamic';
+
 const portfolioItems = [
   {
     id: 'divyasangrah-spiritual-marketplace',
@@ -537,3 +539,4 @@ export default function ProjectDetailPage({ params }: ProjectDetailPageProps) {
   );
 }
 
+    
