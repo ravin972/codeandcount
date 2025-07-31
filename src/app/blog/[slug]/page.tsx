@@ -226,14 +226,6 @@ const blogPosts = [
 ];
 
 
-export async function generateStaticParams() {
-  return blogPosts
-    .filter(post => typeof post.slug === 'string' && post.slug.length > 0)
-    .map((post) => ({
-      slug: post.slug,
-    }));
-}
-
 interface BlogPostPageProps {
   params: { slug: string };
 }

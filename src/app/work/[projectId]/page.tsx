@@ -409,14 +409,6 @@ const portfolioItems = [
   }
 ];
 
-export async function generateStaticParams() {
-  return portfolioItems
-    .filter(item => typeof item.id === 'string' && item.id.length > 0)
-    .map((item) => ({
-      projectId: item.id,
-    }));
-}
-
 interface ProjectDetailPageProps {
   params: { projectId: string };
 }
