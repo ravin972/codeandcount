@@ -47,7 +47,7 @@ export default function AboutPage() {
               {/* Our Story Image */}
               <div className="bg-card rounded-xl shadow-xl border border-border overflow-hidden group">
                  <Image 
-                  src="https://images.unsplash.com/photo-1522071820081-009f0129c7da?w=800&h=1000&fit=crop&q=80"
+                  src="https://images.unsplash.com/photo-1680783954745-3249be59e527?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxBaXxlbnwwfHx8fDE3NTM5NTk5NDJ8MA&ixlib=rb-4.1.0&q=80&w=1080"
                   alt="A diverse team collaborating in a modern, creative workspace" 
                   width={800} 
                   height={1000} 
