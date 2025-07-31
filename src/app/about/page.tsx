@@ -82,28 +82,6 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
-
-      {/* Meet The Team Section */}
-      <section className="py-16 md:py-24">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="bg-card rounded-xl shadow-xl p-8 md:p-12 border border-border">
-            <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">Meet Our Experts</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {teamMembers.map((member) => (
-                <Card key={member.name} className="text-center shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out p-6 hover:-translate-y-1" data-interactive-cursor="true">
-                  <Avatar className="w-24 h-24 mx-auto mb-4 border-4 border-primary transform transition-transform duration-300 ease-in-out hover:scale-110">
-                    <AvatarImage src={member.avatarSrc} alt={member.name} data-ai-hint={member.dataAiHint} />
-                    <AvatarFallback>{member.name.split(' ').map(n => n[0]).join('')}</AvatarFallback>
-                  </Avatar>
-                  <h3 className="text-xl font-semibold text-foreground">{member.name}</h3>
-                  <p className="text-primary font-medium">{member.role}</p>
-                  <p className="text-sm text-muted-foreground mt-2">{member.bio}</p>
-                </Card>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
   );
 }
