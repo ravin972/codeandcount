@@ -43,7 +43,7 @@ const CustomCursor: React.FC = () => {
     }
 
     const cursorEl = cursorRef.current;
-    if (!cursorEl) return;
+    if (!cursorEl) return; // FIX: Ensure element exists before using it.
 
     let firstMove = true;
 
