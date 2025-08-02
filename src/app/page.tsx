@@ -536,7 +536,9 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {caseStudies.map((study) => (
               <Card key={study.id} className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out flex flex-col group hover:-translate-y-1 case-study-card" data-interactive-cursor="true">
-                <Image src={study.imageUrl} alt={study.title} width={600} height={400} className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out" data-ai-hint={study.dataAiHint} />
+                <div className="ripple-container">
+                  <Image src={study.imageUrl} alt={study.title} width={600} height={400} className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out" data-ai-hint={study.dataAiHint} />
+                </div>
                 <CardHeader>
                   <CardTitle className="text-2xl font-semibold">{study.title}</CardTitle>
                   <CardDescription>{study.category}</CardDescription>
@@ -713,14 +715,16 @@ export default function HomePage() {
                   >
                      <div ref={index === 0 ? cardRef : null} className="h-full">
                       <Card className="h-full flex flex-col shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out hover:-translate-y-1" data-interactive-cursor="true">
-                        <Image
-                          src={post.imageUrl}
-                          alt={post.title}
-                          width={600}
-                          height={400}
-                          className="w-full h-48 object-cover rounded-t-lg transition-transform duration-300 ease-in-out group-hover:scale-105"
-                          data-ai-hint={post.dataAiHint}
-                        />
+                        <div className="ripple-container">
+                          <Image
+                            src={post.imageUrl}
+                            alt={post.title}
+                            width={600}
+                            height={400}
+                            className="w-full h-48 object-cover rounded-t-lg transition-transform duration-300 ease-in-out group-hover:scale-105"
+                            data-ai-hint={post.dataAiHint}
+                          />
+                        </div>
                         <CardContent className="p-4 flex-grow flex flex-col">
                           <p className="text-xs text-muted-foreground mb-1 flex items-center">
                             <Dot className="h-4 w-4 mr-0.5 -ml-1 text-primary" /> {post.readTime}
@@ -753,5 +757,6 @@ export default function HomePage() {
     
 
     
+
 
 

@@ -237,7 +237,7 @@ type FilterType = 'all' | 'accounting' | 'web_ai';
 
 const ProjectCard = ({ item }: { item: typeof portfolioItems[0] }) => (
   <Card key={item.id} className="overflow-hidden flex flex-col group shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out hover:-translate-y-1" data-interactive-cursor="true">
-    <div className="relative overflow-hidden">
+    <div className="relative overflow-hidden ripple-container">
       <Image 
         src={item.imageUrl} 
         alt={item.title} 

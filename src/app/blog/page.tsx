@@ -334,7 +334,7 @@ export default function BlogPage() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {posts.map((post) => (
                 <Card key={post.slug} className="overflow-hidden flex flex-col group shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out hover:-translate-y-1" data-interactive-cursor="true">
-                  <Link href={`/blog/${post.slug}`} className="block">
+                  <Link href={`/blog/${post.slug}`} className="block ripple-container">
                     <Image 
                       src={post.imageUrl} 
                       alt={post.title} 
