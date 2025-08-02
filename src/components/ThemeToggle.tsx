@@ -20,12 +20,10 @@ export function ThemeToggle() {
     setTheme(resolvedTheme === 'dark' ? 'light' : 'dark');
   };
 
-  // To prevent hydration mismatch, render a placeholder or null until mounted.
-  // A disabled button matching the final size with a default icon is a good approach.
   if (!mounted) {
     return (
       <Button variant="outline" size="icon" disabled aria-label="Loading theme toggle" className="rounded-full">
-        <Sun className="h-[1.2rem] w-[1.2rem]" /> {/* Placeholder icon */}
+        <Sun className="h-[1.2rem] w-[1.2rem]" />
       </Button>
     );
   }

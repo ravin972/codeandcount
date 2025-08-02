@@ -8,7 +8,7 @@ import { Menu, Briefcase, Users, Rss, Mail, Sparkles, ArrowUpRight } from 'lucid
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import React, { useState, useEffect, useRef } from 'react';
-import { ThemeToggle } from '@/components/ThemeToggle';
+import { ThemeToggleButton } from '@/components/ui/theme-toggle-button';
 import { gsap } from 'gsap';
 
 const navLinks = [
@@ -112,12 +112,12 @@ export function Header() {
               <ArrowUpRight className="ml-1 h-4 w-4 transition-transform duration-300 ease-in-out group-hover:rotate-45" />
             </Link>
           </Button>
-          <ThemeToggle />
+          <ThemeToggleButton variant="circle-blur" />
         </div>
 
         {/* Mobile Menu Trigger */}
         <div className="md:hidden flex items-center space-x-3" style={{ pointerEvents: 'auto' }}>
-          <ThemeToggle />
+          <ThemeToggleButton variant="circle-blur" />
           <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
             <SheetTrigger asChild>
               <Button variant="outline" size="icon" className="rounded-full">
