@@ -54,8 +54,6 @@ const CustomCursor: React.FC = () => {
       opacity: 0,
       scale: 1,
       backgroundColor: primaryColorForFill,
-      borderWidth: '0px',
-      borderColor: 'transparent',
     });
 
     const onMouseMove = (e: MouseEvent) => {
@@ -74,10 +72,7 @@ const CustomCursor: React.FC = () => {
     const onMouseOver = (e: MouseEvent) => {
       if (e.target && (e.target as HTMLElement).closest('a, button, [role="button"], [data-interactive-cursor="true"]')) {
         gsap.to(cursorEl, {
-          scale: 2.5,
-          backgroundColor: 'transparent',
-          borderWidth: '2px',
-          borderColor: primaryColorForFill,
+          scale: 2.5, // Zoom effect by scaling up
           duration: 0.3,
           ease: 'power2.out',
         });
@@ -93,10 +88,7 @@ const CustomCursor: React.FC = () => {
 
       if (isLeavingInteractive && !isEnteringInteractive) {
         gsap.to(cursorEl, {
-          scale: 1,
-          backgroundColor: primaryColorForFill,
-          borderWidth: '0px',
-          borderColor: 'transparent',
+          scale: 1, // Revert to normal scale
           duration: 0.3,
           ease: 'power2.out',
         });
