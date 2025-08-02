@@ -2,37 +2,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent } from '@/components/ui/card';
 import { MessageSquareQuote } from 'lucide-react';
-
-const testimonialsData = [
-  {
-    name: 'Jane Doe',
-    title: 'CEO, Alpha Corp',
-    avatar: 'https://placehold.co/100x100.png',
-    dataAiHint: 'person portrait',
-    quote: "CodeAndCount.com transformed our online presence. Their team is professional, creative, and delivered outstanding results. We couldn't be happier!",
-  },
-  {
-    name: 'John Smith',
-    title: 'Founder, Beta Solutions',
-    avatar: 'https://placehold.co/100x100.png',
-    dataAiHint: 'man smiling',
-    quote: 'Working with CodeAndCount.com was a game-changer. Their insights into branding and web development are unparalleled. Highly recommended!',
-  },
-  {
-    name: 'Alice Johnson',
-    title: 'Marketing Director, Gamma LLC',
-    avatar: 'https://placehold.co/100x100.png',
-    dataAiHint: 'professional woman',
-    quote: 'The attention to detail and commitment to our project goals were exceptional. The final product exceeded all our expectations.',
-  },
-  {
-    name: 'Robert Brown',
-    title: 'CTO, Delta Innovations',
-    avatar: 'https://placehold.co/100x100.png',
-    dataAiHint: 'tech executive',
-    quote: 'From initial concept to final deployment, the CodeAndCount team was a pleasure to work with. Their technical expertise is top-notch.',
-  },
-];
+import { testimonials as testimonialsData } from '@/app/page';
 
 export default function TestimonialsPage() {
   return (

@@ -92,7 +92,7 @@ const caseStudies = [
   },
 ];
 
-const testimonials = [
+export const testimonials = [
     {
         name: 'Priya Sharma',
         title: 'MD, Jaipur Handlooms',
@@ -753,4 +753,5 @@ export default function HomePage() {
     
 
     
+
 
