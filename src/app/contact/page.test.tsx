@@ -1,6 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import ContactPage from './page';
 
+export const dynamic = 'force-dynamic';
+
 describe('ContactPage', () => {
   it('renders the main heading', () => {
     render(<ContactPage />);
@@ -83,4 +85,3 @@ describe('ContactPage', () => {
     expect(mapIframe).toHaveAttribute('src', expect.stringContaining('https://maps.google.com/maps'));
   });
 });
-
