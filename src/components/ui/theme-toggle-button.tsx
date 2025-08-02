@@ -5,17 +5,20 @@ import { useTheme } from "next-themes"
 import { Moon, Sun } from "lucide-react"
 import { cn } from "@/lib/utils"
 import React, { useEffect, useState } from "react"
+import Image from "next/image"
 
 const ThemeToggleButton = ({
   className,
   variant = "circle",
   start = "center",
   showLabel,
+  url,
 }: {
   className?: string
-  variant?: "circle" | "circle-blur"
+  variant?: "circle" | "circle-blur" | "gif"
   start?: "top-left" | "top-right" | "bottom-left" | "bottom-right" | "center"
   showLabel?: boolean
+  url?: string
 }) => {
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
@@ -57,6 +60,16 @@ const ThemeToggleButton = ({
       )}
       aria-label="Toggle theme"
     >
+      {variant === "gif" && url && (
+        <div
+          className={cn(
+            "absolute inset-0 h-full w-full transition-all duration-1000",
+            theme === "dark" ? "opacity-0" : "opacity-100"
+          )}
+        >
+          <Image src={url} alt="theme gif" fill className="object-cover" />
+        </div>
+      )}
       {variant === "circle-blur" && (
         <div
           className={cn(
@@ -99,4 +112,4 @@ const ThemeToggleButton = ({
   )
 }
 
-export { ThemeToggleButton }
+export default ThemeToggleButton

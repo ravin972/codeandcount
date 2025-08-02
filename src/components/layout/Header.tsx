@@ -8,7 +8,7 @@ import { Menu, Briefcase, Users, Rss, Mail, Sparkles, ArrowUpRight } from 'lucid
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import React, { useState, useEffect, useRef } from 'react';
-import { ThemeToggleButton } from '@/components/ui/theme-toggle-button';
+import ThemeToggleButton from '@/components/ui/theme-toggle-button';
 import { gsap } from 'gsap';
 
 const navLinks = [

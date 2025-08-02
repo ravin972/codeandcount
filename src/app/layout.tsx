@@ -6,7 +6,7 @@ import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { Toaster } from "@/components/ui/toaster";
 import { cn } from '@/lib/utils';
-import { ThemeProvider } from "@/components/ThemeProvider";
+import { ThemeProvider } from "@/components/ui/theme-provider";
 import CustomCursor from '@/components/effects/CustomCursor';
 import FloatingWhatsAppButton from '@/components/common/FloatingWhatsAppButton';
 
@@ -58,6 +58,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={cn(inter.variable)} suppressHydrationWarning>
+      <head />
       <body className="antialiased flex flex-col min-h-screen">
         <ThemeProvider
           attribute="class"
