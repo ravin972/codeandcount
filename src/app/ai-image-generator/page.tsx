@@ -185,12 +185,12 @@ export default function AIImageGeneratorPage() {
                 </CardDescription>
               </CardHeader>
               <CardContent>
-                <div className="aspect-video relative border rounded-md overflow-hidden shadow-lg">
+                <div className="w-full aspect-video relative border rounded-md overflow-hidden shadow-lg">
                   <NextImage 
                     src={generatedImageDataUri} 
                     alt="AI generated image" 
-                    fill // Changed from layout="fill"
-                    style={{ objectFit: "contain" }} // Changed from objectFit="contain"
+                    layout="fill"
+                    objectFit="contain"
                     unoptimized={generatedImageDataUri.startsWith('data:')} 
                   />
                 </div>

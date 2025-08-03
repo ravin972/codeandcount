@@ -8,7 +8,26 @@ import { Card } from '@/components/ui/card';
 
 export const dynamic = 'force-dynamic';
 
-const portfolioItems = [
+const portfolioItems: {
+    id: string;
+    title: string;
+    category: string;
+    imageUrl: string;
+    dataAiHint: string;
+    description: string;
+    longDescription: string;
+    tags: string[];
+    client: string;
+    date: string;
+    liveUrl: string;
+    servicesProvided: string[];
+    results: string;
+    gallery: {
+        src: string;
+        alt: string;
+        dataAiHint: string;
+    }[];
+}[] = [
   {
     id: 'divyasangrah-spiritual-marketplace',
     title: 'DivyaSangrah Spiritual Marketplace',

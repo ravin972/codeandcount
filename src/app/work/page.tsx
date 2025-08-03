@@ -10,7 +10,17 @@ import { Badge } from '@/components/ui/badge';
 import { Eye, GalleryThumbnails, Calculator, Laptop } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
-const portfolioItems = [
+const portfolioItems: {
+  id: string;
+  title: string;
+  category: string;
+  type: 'webdev' | 'accounting' | 'ai';
+  imageUrl: string;
+  dataAiHint: string;
+  description: string;
+  tags: string[];
+  liveUrl: string;
+}[] = [
   {
     id: 'divyasangrah-spiritual-marketplace',
     title: 'DivyaSangrah Spiritual Marketplace',
