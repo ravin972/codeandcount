@@ -8,6 +8,8 @@ import { Progress } from '@/components/ui/progress';
 import { Eye, Play, RefreshCw, Gamepad2, AlertTriangle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
+export const dynamic = 'force-dynamic';
+
 const INITIAL_TIME_PER_LEVEL = 10; // seconds
 const MAX_GRID_DIMENSION = 6; // Max 6x6 grid
 

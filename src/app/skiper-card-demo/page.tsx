@@ -8,6 +8,8 @@ import { cn } from "@/lib/utils";
 import { Badge } from "@/components/ui/badge";
 import { SkiperCard } from "@/components/ui/skiper-card";
 
+export const dynamic = 'force-dynamic';
+
 // NOTE: Placeholder images are used here.
 // In a real scenario, you would place your images in the `public` directory
 // and reference them like `/feature-1.png`.
