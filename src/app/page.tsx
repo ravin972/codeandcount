@@ -16,6 +16,8 @@ import { cn } from '@/lib/utils';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import Preloader from '@/components/layout/Preloader';
+import { testimonials } from '@/lib/testimonial-data';
+import { blogPosts as homepageBlogPosts } from '@/lib/blog-data';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -92,198 +94,6 @@ const caseStudies = [
     description: 'Developed for B2B travel operations. Offers hotel & flight APIs, lead tracking dashboards, and bulk booking systems.',
   },
 ];
-
-export const testimonials = [
-    {
-        name: 'Priya Sharma',
-        title: 'MD, Jaipur Handlooms',
-        avatar: 'https://images.unsplash.com/flagged/photo-1559289142-e88aab8191d7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxpbmRpYW4lMjB3b21hbiUyMHByb2Zlc3Npb25hbHxlbnwwfHx8fDE3NTAzMTAyODF8MA&ixlib=rb-4.1.0&q=80&w=1080',
-        dataAiHint: 'indian woman professional',
-        quote: "CodeAndCount has been pivotal for our digital growth. Their web and AI solutions are truly commendable.",
-    },
-    {
-        name: 'Rohan Mehra',
-        title: 'Founder, Bangalore Tech Startups',
-        avatar: 'https://images.unsplash.com/photo-1654262609484-76d1a8f3b016?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxpbmRpYW4lMjBtYW4lMjBzdGFydHVwfGVufDB8fHx8MTc1MDMxMDI4MXww&ixlib=rb-4.1.0&q=80&w=1080',
-        dataAiHint: 'indian man startup',
-        quote: 'The team understood our vision perfectly. Their innovative approach to web solutions is top-notch.',
-    },
-    {
-        name: 'Chloe Dubois',
-        title: 'Art Director, Paris Design House',
-        avatar: 'https://images.unsplash.com/photo-1509967419530-da38b4704bc6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxwYXJpcyUyMHdvbWFufGVufDB8fHx8fDE3NTQxNTg2MDZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
-        dataAiHint: 'Parisian woman',
-        quote: "An exceptional partner for our branding needs. The creativity and precision they bring are unparalleled.",
-    },
-    {
-        name: 'Aditya Rao',
-        title: 'CEO, Mumbai FinTech',
-        avatar: 'https://images.unsplash.com/photo-1593325639333-287c2b535805?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxNXx8aW5kaWFuJTIwbWFuJTIwc3VpdHxlbnwwfHx8fDE3NTQxNTg2MDd8MA&ixlib=rb-4.1.0&q=80&w=1080',
-        dataAiHint: 'Indian man suit',
-        quote: "Their accounting services streamlined our finances, allowing us to focus on scaling our business.",
-    },
-    {
-        name: 'Kenji Tanaka',
-        title: 'CTO, Tokyo Innovations',
-        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxqYXBhbmVzZSUyMG1hbnxlbnwwfHx8fDE3NTQxNTg2MDd8MA&ixlib=rb-4.1.0&q=80&w=1080',
-        dataAiHint: 'Japanese man',
-        quote: 'The AI integration they developed for our platform has revolutionized our user experience.',
-    },
-    {
-        name: 'Fatima Al-Jamil',
-        title: 'E-commerce Head, Dubai Retail',
-        avatar: 'https://images.unsplash.com/photo-1548358217-35aa143f434b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxhcmFiJTIwd29tYW58ZW58MHx8fHwxNzU0MTU4NjA3fDA&ixlib=rb-4.1.0&q=80&w=1080',
-        dataAiHint: 'Arab woman',
-        quote: "Our online sales have doubled since CodeAndCount redesigned our e-commerce site. A fantastic result!",
-    },
-    {
-        name: 'Vikram Singh',
-        title: 'Restaurateur, Delhi Chains',
-        avatar: 'https://images.unsplash.com/photo-1615995203923-3b1a80c93563?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxpbmRpYW4lMjBtYW4lMjBwb3J0cmFpdHxlbnwwfHx8fDE3NTQxNTg2MDd8MA&ixlib=rb-4.1.0&q=80&w=1080',
-        dataAiHint: 'Indian man portrait',
-        quote: "The digital marketing campaign they ran was brilliant. Our footfall increased by over 40%.",
-    },
-    {
-        name: 'Sofia Rossi',
-        title: 'Founder, Milan Fashion Tech',
-        avatar: 'https://images.unsplash.com/photo-1594744806549-83a3a6344068?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxpdGFsaWFuJTIwd29tYW58ZW58MHx8fHwxNzU0MTU4NjA3fDA&ixlib=rb-4.1.0&q=80&w=1080',
-        dataAiHint: 'Italian woman',
-        quote: 'A perfect blend of technical skill and creative flair. They are my go-to for all digital projects.',
-    },
-    {
-        name: 'Arjun Desai',
-        title: 'Filmmaker, Bollywood',
-        avatar: 'https://images.unsplash.com/photo-1618085222619-64a9a059c1b3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxib2xseXdvb2QlMjBkaXJlY3RvcnxlbnwwfHx8fDE3NTQxNTg5Mjd8MA&ixlib=rb-4.1.0&q=80&w=1080',
-        dataAiHint: 'Bollywood director',
-        quote: "They designed a stunning portfolio website for my production house. It truly captures our cinematic style.",
-    },
-    {
-        name: 'Liam Murphy',
-        title: 'Pub Owner, Dublin',
-        avatar: 'https://images.unsplash.com/photo-1542065435-d72e3a73b578?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxpcmlzaCUyMG1hbnxlbnwwfHx8fDE3NTQxNTg5Mjd8MA&ixlib=rb-4.1.0&q=80&w=1080',
-        dataAiHint: 'Irish man',
-        quote: "Our new booking system is a breeze to use. The CodeAndCount team was professional and efficient.",
-    },
-    {
-        name: 'Ananya Reddy',
-        title: 'Startup Founder, Hyderabad',
-        avatar: 'https://images.unsplash.com/photo-1618765278183-b26a6f19972b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxpbmRpYW4lMjB3b21hbiUyMGxhcHRvcHxlbnwwfHx8fDE3NTQxNTg5Mjd8MA&ixlib=rb-4.1.0&q=80&w=1080',
-        dataAiHint: 'Indian woman laptop',
-        quote: "Their full-service package, from accounting to web dev, has been a lifesaver for my startup.",
-    },
-    {
-        name: 'Carlos Gomez',
-        title: 'Architect, Madrid Studio',
-        avatar: 'https://images.unsplash.com/photo-1612250109403-91c6858a721d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzcGFuaXNoJTIwbWFufGVufDB8fHx8fDE3NTQxNTg5Mjd8MA&ixlib=rb-4.1.0&q=80&w=1080',
-        dataAiHint: 'Spanish man',
-        quote: "A talented team that delivers sophisticated design and flawless functionality. Highly recommended.",
-    },
-    {
-        name: 'Isha Patel',
-        title: 'Yoga Instructor, Goa',
-        avatar: 'https://images.unsplash.com/photo-1603988239243-982875c74222?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxpbmlhbiUyMHlvZ2F8ZW58MHx8fHwxNzU0MTU4OTI3fDA&ixlib=rb-4.1.0&q=80&w=1080',
-        dataAiHint: 'Indian yoga',
-        quote: "My new wellness website is serene and beautiful, just like I envisioned. Thank you, CodeAndCount!",
-    },
-    {
-        name: 'Marcus Holloway',
-        title: 'Game Developer, London',
-        avatar: 'https://images.unsplash.com/photo-1560250056-07ba64664864?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxibGFjayUyMG1hbiUyMGdhbWVyfGVufDB8fHx8fDE3NTQxNTg5Mjd8MA&ixlib=rb-4.1.0&q=80&w=1080',
-        dataAiHint: 'Black man gamer',
-        quote: "The AI-powered analytics dashboard they built gives us incredible insights into player behavior.",
-    },
-    {
-        name: 'Deepika Iyer',
-        title: 'Law Firm Partner, Chennai',
-        avatar: 'https://images.unsplash.com/photo-1594393165415-9ee9841f354f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxzb3V0aCUyMGluZGlhbiUyMHdvbWFufGVufDB8fHx8fDE3NTQxNTg5Mjd8MA&ixlib=rb-4.1.0&q=80&w=1080',
-        dataAiHint: 'South Indian woman',
-        quote: "Professionalism and integrity are core to their services, especially in financial management.",
-    },
-    {
-        name: 'Olga Petrova',
-        title: 'Cybersecurity Analyst, Moscow',
-        avatar: 'https://images.unsplash.com/photo-1521142597365-a1b4f4c45b80?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxydXNzaWFuJTIwd29tYW58ZW58MHx8fHwxNzU0MTU4OTI4fDA&ixlib=rb-4.1.0&q=80&w=1080',
-        dataAiHint: 'Russian woman',
-        quote: "They identified and fixed critical vulnerabilities in our system. Their expertise is invaluable.",
-    },
-    {
-        name: 'Suresh Kumar',
-        title: 'Retail Manager, Kolkata',
-        avatar: 'https://images.unsplash.com/photo-1594498664188-460b3765e9d6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxiZW5nYWxpJTIwbWFufGVufDB8fHx8fDE3NTQxNTg5Mjh8MA&ixlib=rb-4.1.0&q=80&w=1080',
-        dataAiHint: 'Bengali man',
-        quote: "Our inventory management is now seamless thanks to the custom software they developed for us.",
-    }
-];
-
-const homepageBlogPosts = [
-  {
-    slug: 'the-future-of-web-design-trends-for-2024',
-    title: 'The Future of Web Design: Trends for 2024',
-    imageUrl: 'https://images.unsplash.com/photo-1675044794037-9262cedb6d5d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxmdXR1cmlzdGljJTIwZGVzaWdufGVufDB8fHx8MTc1MDMxMDI4MXww&ixlib=rb-4.1.0&q=80&w=1080',
-    excerpt: 'Discover the cutting-edge web design trends shaping the digital landscape in 2024, from AI integration to immersive experiences.',
-    readTime: '6 min read',
-    category: 'Web Design',
-    date: '2024-07-15',
-    author: 'Alex Chen',
-    dataAiHint: 'futuristic design',
-  },
-  {
-    slug: 'unlocking-seo-success-a-comprehensive-guide',
-    title: 'Unlocking SEO Success: A Comprehensive Guide',
-    imageUrl: 'https://images.unsplash.com/photo-1666537072157-440346cea066?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxzZW8lMjBjaGFydCUyMGdyYXBofGVufDB8fHx8MTc1MDMxMDI4MXww&ixlib=rb-4.1.0&q=80&w=1080',
-    excerpt: 'Navigate the complexities of SEO with our in-depth guide, covering everything from keyword research to technical optimization.',
-    readTime: '10 min read',
-    category: 'SEO',
-    date: '2024-07-01',
-    author: 'Sam Lee',
-    dataAiHint: 'seo chart graph',
-  },
-  {
-    slug: 'why-craft-cms-is-our-go-to-for-flexible-websites',
-    title: 'Why Craft CMS is Our Go-To for Flexible Websites',
-    imageUrl: 'https://images.unsplash.com/photo-1641567535859-c58187ac4954?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxjbXMlMjBpbnRlcmZhY2V8ZW58MHx8fHwxNzUwMzEwMjgxfDA&ixlib=rb-4.1.0&q=80&w=1080',
-    excerpt: 'Explore the benefits of Craft CMS and why it stands out as a powerful, flexible, and user-friendly content management system.',
-    readTime: '4 min read',
-    category: 'Craft CMS',
-    date: '2024-06-20',
-    author: 'Maria Rodriguez',
-    dataAiHint: 'cms interface',
-  },
-  {
-    slug: 'ai-in-digital-marketing-the-new-frontier',
-    title: 'AI in Digital Marketing: The New Frontier',
-    imageUrl: 'https://images.unsplash.com/photo-1571934732896-f47880a8bdfc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8YXJ0aWZpY2lhbCUyMGludGVsbGlnZW5jZSUyMG1hcmtldGluZ3xlbnwwfHx8fDE3NTAzMTAyODJ8MA&ixlib=rb-4.1.0&q=80&w=1080', 
-    dataAiHint: 'artificial intelligence marketing',
-    excerpt: 'How AI is revolutionizing digital marketing strategies, from content creation to customer analytics.',
-    readTime: '8 min read',
-    category: 'Digital Marketing',
-    date: '2024-05-22',
-    author: 'Sam Lee',
-  },
-  {
-    slug: 'the-importance-of-user-experience-ux-in-web-design',
-    title: 'The Importance of User Experience (UX) in Web Design',
-    imageUrl: 'https://images.unsplash.com/photo-1618761714954-0b8cd0026356?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHx1c2VyJTIwZXhwZXJpZW5jZSUyMGludGVyZmFjZXxlbnwwfHx8fDE3NTAzMTAyODF8MA&ixlib=rb-4.1.0&q=80&w=1080', 
-    dataAiHint: 'user experience interface',
-    excerpt: 'A deep dive into why UX is paramount for website success and how to optimize it for your users.',
-    readTime: '7 min read',
-    category: 'Web Design',
-    date: '2024-05-10',
-    author: 'Alex Chen',
-  },
-  {
-    slug: 'wordpress-vs-headless-cms-which-is-right-for-you',
-    title: 'WordPress vs. Headless CMS: Which is Right for You?',
-    imageUrl: 'https://images.unsplash.com/photo-1560306990-18fa759c8713?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxjbXMlMjBjb21wYXJpc29uJTIwY2hhcnR8ZW58MHx8fHwxNzUwMzEwMjgxfDA&ixlib=rb-4.1.0&q=80&w=1080', 
-    dataAiHint: 'cms comparison chart',
-    excerpt: 'Comparing traditional WordPress with modern headless CMS solutions to help you choose the best fit.',
-    readTime: '9 min read',
-    category: 'CMS',
-    date: '2024-04-28',
-    author: 'Maria Rodriguez',
-  },
-];
-
 
 export default function HomePage() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -761,7 +571,7 @@ export default function HomePage() {
               </div>
               <div className="lg:w-2/3 lg:flex-1 min-w-0">
                 <div ref={scrollContainerRef} className="flex space-x-6 overflow-x-auto pb-4 -mb-4 scrollbar-hide">
-                  {homepageBlogPosts.map((post, index) => (
+                  {homepageBlogPosts.slice(0, 6).map((post, index) => (
                     <Link
                       key={post.slug}
                       href={`/blog/${post.slug}`}
@@ -776,7 +586,7 @@ export default function HomePage() {
                               width={600}
                               height={400}
                               className="w-full h-48 object-cover rounded-t-lg transition-transform duration-300 ease-in-out group-hover:scale-105"
-                              data-ai-hint={post.dataAiHint}
+                              data-ai-hint={post.dataAiHintImage}
                             />
                           </div>
                           <CardContent className="p-4 flex-grow flex flex-col">

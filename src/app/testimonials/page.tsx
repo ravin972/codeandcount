@@ -2,7 +2,7 @@
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Card, CardContent } from '@/components/ui/card';
 import { MessageSquareQuote } from 'lucide-react';
-import { testimonials as testimonialsData } from '@/app/page';
+import { testimonials as testimonialsData } from '@/lib/testimonial-data';
 
 export default function TestimonialsPage() {
   return (

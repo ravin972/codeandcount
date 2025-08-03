@@ -49,6 +49,7 @@ const nextConfig: NextConfig = {
       }
     ],
   },
+  serverComponentsExternalPackages: ['@opentelemetry/exporter-jaeger'],
 };
 
 export default nextConfig;
