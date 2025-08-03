@@ -21,7 +21,7 @@ export default function ContactPage() {
       if (Cal.ns && Cal.ns["${calComNamespace}"]) {
         Cal.ns["${calComNamespace}"]("ui", {"theme":"auto","styles":{"branding":{"brandColor":"hsl(var(--primary))"}},"hideEventTypeDetails":false,"layout":"month_view"});
       } else {
-        console.warn("Cal.com namespace '${calComNamespace}' not available for UI config immediately after init. This might indicate an issue or a race condition.");
+        console.warn("Cal.com namespace '${calComNamespace}' not available for UI config immediately after init. This might indicate a race condition.");
       }
     } else {
       console.error("Cal function was not defined after IIFE execution.");
@@ -61,7 +61,7 @@ export default function ContactPage() {
               data-cal-config='{"layout":"month_view"}'
               size="lg"
               className={cn(
-                "group w-full max-w-xs mx-auto text-base md:text-lg py-3 px-8 md:py-4 md:px-10",
+                "group w-full max-w-xs mx-auto text-base py-3 px-8",
                 "transition-all duration-300 ease-in-out shadow-lg hover:shadow-2xl active:shadow-md transform hover:-translate-y-0.5 active:translate-y-px",
                 "bg-gradient-to-br from-primary to-green-400 dark:from-primary dark:to-accent text-primary-foreground"
               )}

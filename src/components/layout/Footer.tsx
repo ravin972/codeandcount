@@ -66,7 +66,7 @@ export function Footer() {
           size="lg"
           asChild
           className={cn(
-            "group w-full max-w-sm mx-auto text-base md:text-lg py-3 px-8 md:py-4 md:px-10",
+            "group w-full max-w-sm mx-auto text-base py-3 px-8",
             "transition-all duration-300 ease-in-out shadow-lg hover:shadow-2xl active:shadow-md transform hover:-translate-y-0.5 active:translate-y-px",
             "bg-gradient-to-br from-primary-foreground to-neutral-200 text-primary hover:bg-primary-foreground/90 dark:bg-gradient-to-br dark:from-primary dark:to-accent dark:text-primary-foreground"
           )}

@@ -191,7 +191,7 @@ export function ContactForm() {
           <Button 
             type="submit" 
             className={cn(
-              "group w-full sm:w-auto text-base md:text-lg py-3 px-6",
+              "group w-full sm:w-auto text-base py-3 px-6",
               "transition-all duration-300 ease-in-out shadow-lg hover:shadow-2xl active:shadow-md transform hover:-translate-y-0.5 active:translate-y-px",
               "bg-gradient-to-br from-primary to-green-400 dark:from-primary dark:to-accent text-primary-foreground"
             )} 

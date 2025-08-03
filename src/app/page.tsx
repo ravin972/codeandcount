@@ -493,7 +493,7 @@ export default function HomePage() {
                 asChild
                 size="lg"
                 className={cn(
-                    "group w-full max-w-xs mx-auto text-base md:text-lg py-3 px-8 md:py-4 md:px-10 hero-button",
+                    "group w-full max-w-xs mx-auto text-base py-3 px-8 hero-button",
                     "transition-all duration-300 ease-in-out shadow-lg hover:shadow-2xl active:shadow-md transform hover:-translate-y-0.5 active:translate-y-px",
                     "bg-gradient-to-br from-primary to-green-400 dark:from-primary dark:to-accent text-primary-foreground"
                 )}
@@ -651,7 +651,7 @@ export default function HomePage() {
                 asChild
                 size="lg"
                 className={cn(
-                    "group w-full max-w-xs mx-auto text-base md:text-lg py-3 px-8 md:py-4 md:px-10",
+                    "group w-full max-w-xs mx-auto text-base py-3 px-8",
                     "transition-all duration-300 ease-in-out shadow-lg hover:shadow-2xl active:shadow-md transform hover:-translate-y-0.5 active:translate-y-px",
                     "bg-gradient-to-br from-primary to-green-400 dark:from-primary dark:to-accent text-primary-foreground"
                 )}
@@ -679,7 +679,7 @@ export default function HomePage() {
                 asChild
                 size="lg"
                 className={cn(
-                    "group w-full max-w-xs mx-auto text-base md:text-lg py-3 px-8 md:py-4 md:px-10",
+                    "group w-full max-w-xs mx-auto text-base py-3 px-8",
                     "transition-all duration-300 ease-in-out shadow-lg hover:shadow-2xl active:shadow-md transform hover:-translate-y-0.5 active:translate-y-px",
                     "bg-gradient-to-br from-primary to-green-400 dark:from-primary dark:to-accent text-primary-foreground"
                 )}
@@ -707,7 +707,7 @@ export default function HomePage() {
               size="lg" 
               asChild 
               className={cn(
-                  "group w-full max-w-xs mx-auto text-base md:text-lg py-3 px-8 md:py-4 md:px-10",
+                  "group w-full max-w-xs mx-auto text-base py-3 px-8",
                   "transition-all duration-300 ease-in-out shadow-lg hover:shadow-2xl active:shadow-md transform hover:-translate-y-0.5 active:translate-y-px",
                   "bg-gradient-to-br from-primary-foreground to-neutral-200 text-primary hover:bg-primary-foreground/90 dark:bg-gradient-to-br dark:from-primary dark:to-accent dark:text-primary-foreground"
               )}
@@ -811,6 +811,7 @@ export default function HomePage() {
     
 
     
+
 
 
 
