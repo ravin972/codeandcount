@@ -699,8 +699,8 @@ export default function HomePage() {
       {/* Blog Section */}
       <section className="py-16 md:py-24 bg-background text-foreground">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-3 gap-12 items-center">
-            <div className="md:col-span-1 space-y-6 blog-section-intro">
+          <div className="flex flex-col lg:flex-row lg:items-center lg:gap-12">
+            <div className="lg:w-1/3 flex-shrink-0 space-y-6 blog-section-intro mb-8 lg:mb-0">
               <p className="text-sm font-semibold text-primary flex items-center">
                 <Dot className="h-5 w-5 mr-1 -ml-1" /> Blog
               </p>
@@ -733,13 +733,13 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-            <div className="md:col-span-2 overflow-x-hidden md:overflow-x-visible md:overflow-y-hidden">
-              <div ref={scrollContainerRef} className="flex space-x-6 overflow-x-auto overflow-y-visible pb-4 -mb-4 scrollbar-hide">
+            <div className="lg:w-2/3 lg:flex-1 min-w-0">
+              <div ref={scrollContainerRef} className="flex space-x-6 overflow-x-auto pb-4 -mb-4 scrollbar-hide">
                 {homepageBlogPosts.map((post, index) => (
                   <Link
                     key={post.slug}
                     href={`/blog/${post.slug}`}
-                    className="block flex-shrink-0 w-[80vw] sm:w-[calc(50%-0.75rem)] md:w-[calc(33.333%-1rem)] group" 
+                    className="block flex-shrink-0 w-[80vw] sm:w-[50vw] md:w-[40vw] lg:w-[calc(50%-0.75rem)] group" 
                   >
                      <div ref={index === 0 ? cardRef : null} className="h-full">
                       <Card className="h-full flex flex-col shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out hover:-translate-y-1" data-interactive-cursor="true">
@@ -785,6 +785,7 @@ export default function HomePage() {
     
 
     
+
 
 
 
