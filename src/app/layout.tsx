@@ -10,8 +10,6 @@ import { cn } from '@/lib/utils';
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import CustomCursor from '@/components/effects/CustomCursor';
 import FloatingWhatsAppButton from '@/components/common/FloatingWhatsAppButton';
-import Preloader from '@/components/layout/Preloader';
-import { useEffect, useState } from 'react';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -59,17 +57,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    // Simulate loading time and then hide the preloader
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000); // 2 seconds delay
-
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <html lang="en" className={cn(inter.variable)} suppressHydrationWarning>
       <head>
@@ -84,7 +71,6 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {isLoading && <Preloader />}
           <CustomCursor />
           <Header />
           <main className="flex-grow">{children}</main>

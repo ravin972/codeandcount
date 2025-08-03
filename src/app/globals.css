@@ -163,31 +163,41 @@
   }
 
   /* Preloader Animations */
-  @keyframes preloader-fade-in-up {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  .animate-preloader-fade-in-up {
-    animation: preloader-fade-in-up 0.8s ease-out forwards;
-  }
-
   @keyframes preloader-fade-out {
     from {
       opacity: 1;
     }
     to {
       opacity: 0;
+      visibility: hidden;
     }
   }
 
   .animate-preloader-fade-out {
-    animation: preloader-fade-out 1s ease-in-out forwards;
+    animation: preloader-fade-out 0.5s ease-in-out forwards;
   }
+  
+  /* 3D Text Flip Animation */
+  .perspective-container {
+    perspective: 1000px;
+  }
+
+  @keyframes flip-in {
+    0% {
+      transform: rotateX(90deg);
+      opacity: 0;
+    }
+    100% {
+      transform: rotateX(0deg);
+      opacity: 1;
+    }
+  }
+  
+  .animate-flip-in {
+    display: inline-block;
+    animation: flip-in 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    opacity: 0;
+    transform-origin: 50% 50%;
+  }
+
 }
