@@ -26,6 +26,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useToast } from "@/hooks/use-toast";
+import { cn } from '@/lib/utils';
 
 const initialBlogPosts = [
   {
@@ -281,7 +282,15 @@ export default function BlogPage() {
           <div className="mt-8 flex justify-center">
             <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
               <DialogTrigger asChild>
-                <Button variant="default" size="lg" className="rounded-full">
+                 <Button
+                    size="lg"
+                    className={cn(
+                        "group w-full max-w-xs mx-auto text-base md:text-lg py-3 px-8 md:py-4 md:px-10",
+                        "transition-all duration-300 ease-in-out shadow-lg hover:shadow-2xl active:shadow-md transform hover:-translate-y-0.5 active:translate-y-px",
+                        "bg-gradient-to-br from-primary to-green-400 dark:from-primary dark:to-accent text-primary-foreground"
+                    )}
+                    data-interactive-cursor="true"
+                  >
                   <PlusCircle className="mr-2 h-5 w-5" /> Create New Post
                 </Button>
               </DialogTrigger>

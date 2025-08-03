@@ -463,9 +463,18 @@ export default function HomePage() {
             <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-10 hero-paragraph">
             CodeAndCount.com helps turn your ideas into reality — from web development to smart accounting. We simplify success with digital innovation, custom software, and expert financial solutions.
             </p>
-            <Button size="lg" asChild className="rounded-full hero-button">
+            <Button
+              asChild
+              size="lg"
+              className={cn(
+                  "group w-full max-w-xs mx-auto text-base md:text-lg py-3 px-8 md:py-4 md:px-10 hero-button",
+                  "transition-all duration-300 ease-in-out shadow-lg hover:shadow-2xl active:shadow-md transform hover:-translate-y-0.5 active:translate-y-px",
+                  "bg-gradient-to-br from-primary to-green-400 dark:from-primary dark:to-accent text-primary-foreground"
+              )}
+              data-interactive-cursor="true"
+            >
               <Link href="/contact#start-project">
-                Start Your Project <ArrowRight className="ml-2 h-5 w-5" />
+                Start Your Project <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Link>
             </Button>
           </div>
@@ -612,9 +621,18 @@ export default function HomePage() {
             Unlock the power of AI to rewrite your content, incorporate strategic keywords, and climb search engine rankings. Try our free SEO Optimizer tool today!
           </p>
           
-          <Button size="lg" asChild className="rounded-full">
+          <Button
+              asChild
+              size="lg"
+              className={cn(
+                  "group w-full max-w-xs mx-auto text-base md:text-lg py-3 px-8 md:py-4 md:px-10",
+                  "transition-all duration-300 ease-in-out shadow-lg hover:shadow-2xl active:shadow-md transform hover:-translate-y-0.5 active:translate-y-px",
+                  "bg-gradient-to-br from-primary to-green-400 dark:from-primary dark:to-accent text-primary-foreground"
+              )}
+              data-interactive-cursor="true"
+            >
             <Link href="/seo-optimizer">
-              Try SEO Optimizer <ArrowRight className="ml-2 h-5 w-5" />
+              Try SEO Optimizer <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Link>
           </Button>
         </div>
@@ -631,9 +649,18 @@ export default function HomePage() {
               Transform your ideas into stunning visuals. Describe any image, and our AI will bring it to life. Explore the future of digital art!
             </p>
             
-            <Button size="lg" asChild className="rounded-full">
+             <Button
+              asChild
+              size="lg"
+              className={cn(
+                  "group w-full max-w-xs mx-auto text-base md:text-lg py-3 px-8 md:py-4 md:px-10",
+                  "transition-all duration-300 ease-in-out shadow-lg hover:shadow-2xl active:shadow-md transform hover:-translate-y-0.5 active:translate-y-px",
+                  "bg-gradient-to-br from-primary to-green-400 dark:from-primary dark:to-accent text-primary-foreground"
+              )}
+              data-interactive-cursor="true"
+            >
               <Link href="/ai-image-generator">
-                Try AI Image Generator <ArrowRight className="ml-2 h-5 w-5" />
+                Try AI Image Generator <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Link>
             </Button>
           </div>
@@ -653,14 +680,15 @@ export default function HomePage() {
           <Button 
             size="lg" 
             asChild 
-            variant="default"
             className={cn(
-                "rounded-full shadow-lg hover:shadow-2xl active:shadow-md transform hover:-translate-y-0.5 active:translate-y-px",
-                "bg-primary-foreground text-primary hover:bg-primary-foreground/90 dark:bg-primary dark:text-primary-foreground dark:hover:bg-primary/90"
+                "group w-full max-w-xs mx-auto text-base md:text-lg py-3 px-8 md:py-4 md:px-10",
+                "transition-all duration-300 ease-in-out shadow-lg hover:shadow-2xl active:shadow-md transform hover:-translate-y-0.5 active:translate-y-px",
+                "bg-gradient-to-br from-primary-foreground to-neutral-200 text-primary hover:bg-primary-foreground/90 dark:bg-gradient-to-br dark:from-primary dark:to-accent dark:text-primary-foreground"
              )}
+            data-interactive-cursor="true"
            >
             <Link href="/contact#start-project">
-              Get in Touch <ArrowRight className="ml-2 h-5 w-5" />
+              Get in Touch <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Link>
           </Button>
         </div>
@@ -705,7 +733,7 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
-            <div className="md:col-span-2 overflow-x-hidden md:overflow-x-visible md:overflow-y-visible overflow-y-hidden">
+            <div className="md:col-span-2 overflow-x-hidden md:overflow-x-visible md:overflow-y-hidden">
               <div ref={scrollContainerRef} className="flex space-x-6 overflow-x-auto overflow-y-visible pb-4 -mb-4 scrollbar-hide">
                 {homepageBlogPosts.map((post, index) => (
                   <Link
@@ -757,6 +785,7 @@ export default function HomePage() {
     
 
     
+
 
 
 

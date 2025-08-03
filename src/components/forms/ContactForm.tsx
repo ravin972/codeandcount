@@ -26,6 +26,7 @@ import {
 import { useToast } from "@/hooks/use-toast";
 import { ArrowRight, Loader2, MessageSquare } from "lucide-react";
 import React from "react";
+import { cn } from "@/lib/utils";
 
 const contactFormSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -187,7 +188,16 @@ export function ContactForm() {
           )}
         />
         <div className="flex flex-col sm:flex-row gap-4 items-center">
-          <Button type="submit" className="w-full sm:w-auto" disabled={isSubmitting}>
+          <Button 
+            type="submit" 
+            className={cn(
+              "group w-full sm:w-auto text-base md:text-lg py-3 px-6",
+              "transition-all duration-300 ease-in-out shadow-lg hover:shadow-2xl active:shadow-md transform hover:-translate-y-0.5 active:translate-y-px",
+              "bg-gradient-to-br from-primary to-green-400 dark:from-primary dark:to-accent text-primary-foreground"
+            )} 
+            disabled={isSubmitting}
+            data-interactive-cursor="true"
+          >
             {isSubmitting ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -195,7 +205,7 @@ export function ContactForm() {
               </>
             ) : (
               <>
-                Send Message <ArrowRight className="ml-2 h-4 w-4" />
+                Send Message <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </>
             )}
           </Button>
