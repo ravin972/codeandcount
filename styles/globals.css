@@ -136,4 +136,68 @@
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
   }
+  
+  /* Image Ripple Effect */
+  .ripple-container {
+    @apply relative overflow-hidden;
+  }
+  .ripple-container::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background-color: hsla(0, 0%, 100%, 0.2);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease-out, height 0.6s ease-out, opacity 0.6s ease-out;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .ripple-container:hover::after,
+  .ripple-container:focus::after {
+    width: 200%;
+    height: 200%;
+    opacity: 0;
+  }
+
+  /* Preloader Animations */
+  @keyframes preloader-fade-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+      visibility: hidden;
+    }
+  }
+
+  .animate-preloader-fade-out {
+    animation: preloader-fade-out 0.5s ease-in-out forwards;
+  }
+  
+  /* 3D Text Flip Animation */
+  .perspective-container {
+    perspective: 1000px;
+  }
+
+  @keyframes flip-in {
+    0% {
+      transform: rotateX(80deg);
+      opacity: 0;
+    }
+    100% {
+      transform: rotateX(0deg);
+      opacity: 1;
+    }
+  }
+  
+  .animate-flip-in {
+    display: inline-block;
+    animation: flip-in 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    opacity: 0;
+    transform-origin: 50% 50%;
+  }
+
 }
