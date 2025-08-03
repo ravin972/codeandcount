@@ -3,9 +3,10 @@
 
 import React from 'react';
 import Script from 'next/script';
-import { Mail, Phone, MapPin, CalendarDays, MessageSquare, ExternalLink } from 'lucide-react'; 
+import { Mail, Phone, MapPin, CalendarDays, MessageSquare, ExternalLink, ArrowRight } from 'lucide-react'; 
 import { ContactForm } from '@/components/forms/ContactForm';
 import { Button } from '@/components/ui/button';
+import { cn } from '@/lib/utils';
 
 export default function ContactPage() {
   const mapAddress = "spaze i tech park, Sec-49, Gurugram, Haryana, India";
@@ -58,13 +59,16 @@ export default function ContactPage() {
               data-cal-namespace={calComNamespace}
               data-cal-link={calComCalLink}
               data-cal-config='{"layout":"month_view"}'
-              variant="default"
               size="lg"
-              className="min-h-[50px] w-full max-w-xs mx-auto rounded-lg text-lg shadow-lg hover:shadow-xl transition-shadow"
+              className={cn(
+                "group w-full max-w-xs mx-auto text-base md:text-lg py-3 px-8 md:py-4 md:px-10",
+                "transition-all duration-300 ease-in-out shadow-lg hover:shadow-2xl active:shadow-md transform hover:-translate-y-0.5 active:translate-y-px",
+                "bg-gradient-to-br from-primary to-green-400 dark:from-primary dark:to-accent text-primary-foreground"
+              )}
               data-interactive-cursor="true"
             >
               Schedule Your Meeting
-              <ExternalLink className="ml-2 h-5 w-5" />
+              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Button>
           </div>
         </section>
