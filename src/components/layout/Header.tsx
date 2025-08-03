@@ -103,13 +103,17 @@ export function Header() {
         <div className="hidden md:flex items-center gap-3 header-cta-section" style={{ pointerEvents: 'auto' }}>
           <Button
             asChild
-            variant="default"
-            size="default" 
-            className="rounded-full group"
+            size="default"
+            className={cn(
+              "group rounded-full",
+              "transition-all duration-300 ease-in-out shadow-lg hover:shadow-2xl active:shadow-md transform hover:-translate-y-0.5 active:translate-y-px",
+              "bg-gradient-to-br from-primary to-green-400 dark:from-primary dark:to-accent text-primary-foreground"
+            )}
+            data-interactive-cursor="true"
           >
             <Link href="/contact#start-project">
               <span>Start a project</span>
-              <ArrowUpRight className="ml-1 h-4 w-4 transition-transform duration-300 ease-in-out group-hover:rotate-45" />
+              <ArrowUpRight className="ml-1 h-4 w-4 transition-transform duration-300 ease-in-out group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
             </Link>
           </Button>
           <ThemeToggleButton variant="circle-blur" start="top-right" />
