@@ -57,9 +57,9 @@ export const portfolioItems: {
     servicesProvided: ['E-commerce Platform', 'Brand Website Design', 'Product Showcase', 'Mobile Commerce', 'SEO'],
     results: 'Established a strong online presence for the Philotes brand, resulting in increased brand awareness and online sales.',
     gallery: [
-        { src: 'https://placehold.co/800x600.png', alt: 'Philotes Shoe Collection', dataAiHint: 'shoe collection' },
-        { src: 'https://placehold.co/800x600.png', alt: 'Shoe Product Page', dataAiHint: 'single shoe' },
-        { src: 'https://placehold.co/800x600.png', alt: 'Mobile Shopping Experience', dataAiHint: 'mobile shopping' },
+        { src: 'https://images.unsplash.com/photo-1618677831741-6260a73ff4f9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxzaG9lJTIwY29sbGVjdGlvbnxlbnwwfHx8fDE3NTQzODAxNzd8MA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Philotes Shoe Collection', dataAiHint: 'shoe collection' },
+        { src: 'https://images.unsplash.com/photo-1515955656352-a1fa3ffcd111?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxzaW5nbGUlMjBzaG9lfGVufDB8fHx8MTc1NDM4MDE3N3ww&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Shoe Product Page', dataAiHint: 'single shoe' },
+        { src: 'https://images.unsplash.com/photo-1586880244543-0528a802be97?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxtb2JpbGUlMjBzaG9wcGluZ3xlbnwwfHx8fDE3NTQzODAxNzd8MA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Mobile Shopping Experience', dataAiHint: 'mobile shopping' },
     ]
   },
   {
