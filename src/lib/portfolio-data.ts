@@ -141,9 +141,9 @@ export const portfolioItems: {
     servicesProvided: ['Travel Website Design', 'UX/UI for Tourism', 'Lead Generation Forms', 'WhatsApp Integration', 'CMS'],
     results: 'Increased lead generation by 30% through optimized user funnels and direct WhatsApp engagement.',
     gallery: [
-        { src: 'https://placehold.co/800x600.png', alt: 'Travel Package Display', dataAiHint: 'tour packages' },
-        { src: 'https://placehold.co/800x600.png', alt: 'Destination Guide Page', dataAiHint: 'destination info' },
-        { src: 'https://placehold.co/800x600.png', alt: 'Lead Form with WhatsApp', dataAiHint: 'booking form' },
+        { src: 'https://images.unsplash.com/photo-1561538165-411322e90881?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8dG91ciUyMHBhY2thZ2VzfGVufDB8fHx8MTc1NDM4OTExM3ww&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Travel Package Display', dataAiHint: 'tour packages' },
+        { src: 'https://images.unsplash.com/photo-1526904701202-d6ccd5c4b9ac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxkZXN0aW5hdGlvbiUyMGluZm98ZW58MHx8fHwxNzU0Mzg5MTEzfDA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Destination Guide Page', dataAiHint: 'destination info' },
+        { src: 'https://images.unsplash.com/photo-1578016981482-d4dd3db297b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHxib29raW5nJTIwZm9ybXxlbnwwfHx8fDE3NTQzODkxMTJ8MA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Lead Form with WhatsApp', dataAiHint: 'booking form' },
     ]
   },
   {
