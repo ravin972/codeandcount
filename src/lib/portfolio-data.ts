@@ -298,7 +298,7 @@ export const portfolioItems: {
     title: 'IndiaLends',
     category: 'Fintech · Loan Marketplace',
     type: 'webdev',
-    imageUrl: 'https://placehold.co/1200x800.png',
+    imageUrl: 'https://images.unsplash.com/photo-1430276084627-789fe55a6da0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxMRU5EU3xlbnwwfHx8fDE3NTQzOTI1NjB8MA&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHint: 'fintech loan',
     description: 'Smart credit platform offering personal loans, credit cards, and financial education. Built with API-backed services and real-time checks.',
     longDescription: 'IndiaLends is a leading fintech platform in India, offering a smart credit marketplace for personal loans, credit cards, and financial literacy resources. The platform is built with robust API-backed services and real-time credit checking capabilities to provide users with quick and reliable financial solutions.',
