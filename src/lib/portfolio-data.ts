@@ -78,9 +78,9 @@ export const portfolioItems: {
     servicesProvided: ['WordPress Development', 'E-commerce Strategy', 'Booking System Integration', 'UI/UX Design', 'Payment Gateway Setup'],
     results: 'Successfully launched a comprehensive spiritual marketplace, leading to increased service bookings and product sales. Enhanced user engagement through intuitive design.',
     gallery: [
-        { src: 'https://placehold.co/800x600.png', alt: 'Marketplace Homepage', dataAiHint: 'storefront home' },
-        { src: 'https://placehold.co/800x600.png', alt: 'Astrology Consultation Booking', dataAiHint: 'service booking' },
-        { src: 'https://placehold.co/800x600.png', alt: 'Puja Items Store', dataAiHint: 'puja items' },
+        { src: 'https://images.unsplash.com/photo-1565474087406-2d7e5b99b350?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxzdG9yZWZyb250JTIwaG9tZXxlbnwwfHx8fDE3NTQzODA1NjF8MA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Marketplace Homepage', dataAiHint: 'storefront home' },
+        { src: 'https://images.unsplash.com/photo-1626207887298-da2fc1f50e82?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxzZXJ2aWNlJTIwYm9va2luZ3xlbnwwfHx8fDE3NTQzODA1NjF8MA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Astrology Consultation Booking', dataAiHint: 'service booking' },
+        { src: 'https://images.unsplash.com/photo-1727963179460-5d1c8f5f96c8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxwdWphJTIwaXRlbXN8ZW58MHx8fHwxNzU0MzgwNTYxfDA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Puja Items Store', dataAiHint: 'puja items' },
     ]
   },
   {
