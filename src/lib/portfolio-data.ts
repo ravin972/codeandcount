@@ -99,9 +99,9 @@ export const portfolioItems: {
     servicesProvided: ['Corporate Website Design', 'AI Solutions Showcase', 'Cloud Services Info', 'Portfolio Development', 'Contact Integration'],
     results: 'Enhanced online presence and lead generation for IT services. Streamlined recruitment process through the integrated career hub.',
     gallery: [
-        { src: 'https://placehold.co/800x600.png', alt: 'AI Solutions Page', dataAiHint: 'ai solutions' },
-        { src: 'https://placehold.co/800x600.png', alt: 'Career Hub Interface', dataAiHint: 'career portal' },
-        { src: 'https://placehold.co/800x600.png', alt: 'Client Portfolio Display', dataAiHint: 'client work' },
+        { src: 'https://images.unsplash.com/photo-1588610991095-734b1574b960?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxhaSUyMHNvbHV0aW9uc3xlbnwwfHx8fDE3NTQzODEyMjB8MA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'AI Solutions Page', dataAiHint: 'ai solutions' },
+        { src: 'https://images.unsplash.com/photo-1580484026799-aa3e7a76b3fc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxjYXJlZXIlMjBwb3J0YWx8ZW58MHx8fHwxNzU0MzgxMjIwfDA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Career Hub Interface', dataAiHint: 'career portal' },
+        { src: 'https://images.unsplash.com/photo-1727285100419-348edd55d403?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8Y2xpZW50JTIwd29ya3xlbnwwfHx8fDE3NTQzODEyMjF8MA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Client Portfolio Display', dataAiHint: 'client work' },
     ]
   },
   {
@@ -193,7 +193,7 @@ export const portfolioItems: {
     title: 'Anandam by DivyaSangrah',
     category: 'Food & Restaurant · Online Ordering',
     type: 'webdev',
-    imageUrl: 'https://images.unsplash.com/photo-1625398407796-82650a8c135f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxpbmRpYW4lMjBmb29kfGVufDB8fHx8MTc1MDQxMjQ4M3ww&ixlib=rb-4.1.0&q=80&w=1080', 
+    imageUrl: 'https://images.unsplash.com/photo-1625398407796-82650a8c135f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxpbmRpYW4lMjBmb29kfGVufDB8fHx8fDE3NTUwNDEyNDgzfDA&ixlib=rb-4.1.0&q=80&w=1080', 
     dataAiHint: 'food restaurant', 
     description: 'Online store for delicious meals and restaurant services. Features menu display, online ordering, and table reservations.', 
     longDescription: 'Anandam by DivyaSangrah offers a delightful online experience for food lovers. Browse our extensive menu, place orders for delivery or pickup, and even book a table. The platform is designed for ease of use, showcasing delicious food photography and providing a seamless ordering process.', 
