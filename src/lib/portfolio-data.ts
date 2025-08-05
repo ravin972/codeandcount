@@ -36,9 +36,9 @@ export const portfolioItems: {
     servicesProvided: ['E-commerce Development', 'UI/UX Design', 'Razorpay Integration', 'Mobile Optimization', 'SEO Strategy'],
     results: 'Successfully launched a premium e-commerce store, enhancing brand image and enabling direct-to-consumer sales with a secure payment system.',
     gallery: [
-        { src: 'https://placehold.co/800x600.png', alt: 'Tradyne Perfumes Homepage', dataAiHint: 'perfume store homepage' },
-        { src: 'https://placehold.co/800x600.png', alt: 'Product Detail Page', dataAiHint: 'fragrance product' },
-        { src: 'https://placehold.co/800x600.png', alt: 'Secure Checkout with Razorpay', dataAiHint: 'payment checkout' },
+        { src: 'https://images.unsplash.com/photo-1680984258298-8fc21dacce9f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxwZXJmdW1lJTIwc3RvcmUlMjBob21lcGFnZXxlbnwwfHx8fDE3NTQzNzk5NTJ8MA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Tradyne Perfumes Homepage', dataAiHint: 'perfume store homepage' },
+        { src: 'https://images.unsplash.com/photo-1563170352-ba54fb431add?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxmcmFncmFuY2UlMjBwcm9kdWN0fGVufDB8fHx8fDE3NTQzNzk5NTMnww&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Product Detail Page', dataAiHint: 'fragrance product' },
+        { src: 'https://images.unsplash.com/photo-1726137570712-58609cab9eba?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxwYXltZW50JTIwY2hlY2tvdXR8ZW58MHx8fHwxNzU0Mzc5OTUyfDA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Secure Checkout with Razorpay', dataAiHint: 'payment checkout' },
     ]
   },
   {
