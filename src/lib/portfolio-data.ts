@@ -25,7 +25,7 @@ export const portfolioItems: {
     title: 'Tradyne Perfumes',
     category: 'E-commerce · Luxury Fragrance',
     type: 'webdev',
-    imageUrl: 'https://placehold.co/600x450.png',
+    imageUrl: 'https://images.unsplash.com/photo-1615634260167-c8cdede054de?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxwZXJmdW1lc3xlbnwwfHx8fDE3NTQzNzkwNTR8MA&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHint: 'regal perfume bottle TRADYNE Royale deep purple sapphire blue glass gold accents embossed logo rich velvet royal fabric purple midnight blue background spotlight subtle sparkles classy royal powerful',
     description: 'A sophisticated e-store for Tradyne Perfumes, featuring seamless product browsing, a mobile-first design, and secure payments via Razorpay.',
     longDescription: 'Tradyne Perfumes required a high-end online presence to match their luxury products. We developed a custom, SEO-friendly e-commerce platform that is both visually elegant and highly functional. The site is fully mobile-responsive and incorporates Razorpay for secure and reliable payment processing, providing a seamless shopping experience for customers.',
