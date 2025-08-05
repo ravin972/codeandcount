@@ -162,9 +162,9 @@ export const portfolioItems: {
     servicesProvided: ['SaaS App Development', 'User Authentication', 'Calendar Integration', 'File Management', 'Real-time Collaboration'],
     results: 'Empowered small businesses and freelancers with an effective tool for task management and team collaboration.',
     gallery: [
-        { src: 'https://placehold.co/800x600.png', alt: 'Task Management Dashboard', dataAiHint: 'project tasks' },
-        { src: 'https://placehold.co/800x600.png', alt: 'Calendar View', dataAiHint: 'team calendar' },
-        { src: 'https://placehold.co/800x600.png', alt: 'File Sharing Interface', dataAiHint: 'document cloud' },
+        { src: 'https://images.unsplash.com/photo-1683199320521-38e3370de70d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHxwcm9qZWN0JTIwdGFza3N8ZW58MHx8fHwxNzU0MzkwMzc1fDA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Task Management Dashboard', dataAiHint: 'project tasks' },
+        { src: 'https://images.unsplash.com/photo-1676276376052-dc9c9c0b6917?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHx0ZWFtJTIwY2FsZW5kYXJ8ZW58MHx8fHwxNzU0MzkwMzc1fDA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Calendar View', dataAiHint: 'team calendar' },
+        { src: 'https://images.unsplash.com/photo-1528157377481-b010149f0e4c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxkb2N1bWVudCUyMGNsb3VkfGVufDB8fHx8MTc1NDM5MDM3NXww&ixlib=rb-4.1.0&q=80&w=1080', alt: 'File Sharing Interface', dataAiHint: 'document cloud' },
     ]
   },
   {
