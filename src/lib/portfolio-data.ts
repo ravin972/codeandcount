@@ -319,7 +319,7 @@ export const portfolioItems: {
     title: 'AadiDeva Venture',
     category: 'Travel & Adventure · Tour Booking',
     type: 'webdev',
-    imageUrl: 'https://placehold.co/1200x800.png',
+    imageUrl: 'https://images.unsplash.com/photo-1540359319315-f69be3a17e9d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxyZWFsZXN0YXRlfGVufDB8fHx8MTc1NDM5MzU1NHww&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHint: 'adventure booking',
     description: 'An adventure tourism platform offering curated trekking, cultural trips, and personalized travel experiences across India. Built to inspire explorers and manage bookings with ease.',
     longDescription: 'AadiDeva Venture is an online platform dedicated to adventure tourism in India. It offers a curated selection of trekking expeditions, cultural tours, and personalized travel itineraries, designed to inspire exploration and simplify the booking process for adventurers.',
