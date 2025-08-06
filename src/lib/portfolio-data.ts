@@ -466,7 +466,7 @@ export const portfolioItems: {
     title: 'Import/Export Documentation Support',
     category: 'Global Trade · Logistics',
     type: 'accounting',
-    imageUrl: 'https://placehold.co/1200x800.png',
+    imageUrl: 'https://images.unsplash.com/photo-1494412574643-ff11b0a5c1c3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw5fHx0cmFkZXxlbnwwfHx8fDE3NTQ0NjY5Mjh8MA&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHint: 'export documents',
     description: 'Support for commercial invoice preparation, packing lists, shipping bills, and client KYC/agreement documentation tracking.',
     longDescription: 'Comprehensive support for import/export documentation, including commercial invoice preparation, packing lists, shipping bills, and tracking of client KYC and agreement documentation to ensure smooth international trade operations.',
