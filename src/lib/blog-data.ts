@@ -47,7 +47,7 @@ export const blogPosts = [
       <p>As environmental concerns grow, <strong>sustainable web design</strong> (or "green web design") is gaining traction. This approach focuses on reducing the carbon footprint of websites.</p>
       <ul>
         <li><strong>Performance Optimization:</strong> The core of sustainability is performance. Faster, more efficient websites consume less energy on both the server and the client-side.</li>
-        <li><strong>Eco-Friendly Practices:</strong> This involves optimizing images, streamlining code, choosing eco-friendly hosting providers, and designing with efficiency in mind from the start.</li>
+        <li><strong>Eco-Friendly Practices:</strong> This involves optimizing images, streamlining code, and choosing eco-friendly hosting providers, and designing with efficiency in mind from the start.</li>
       </ul>
 
       <p>By embracing these <strong>web design trends for 2024</strong>, businesses and designers can create digital presences that are not only technologically advanced but also more human, inclusive, and responsible.</p>
@@ -92,7 +92,7 @@ export const blogPosts = [
     authorAvatar: 'https://placehold.co/40x40.png',
     dataAiHintAuthor: 'professional person',
     excerpt: 'Learn the fundamental principles of creating a memorable and effective brand identity that resonates with your target audience.',
-    imageUrl: 'https://placehold.co/1200x600.png',
+    imageUrl: 'https://images.unsplash.com/photo-1508599589920-14cfa1c1fe4d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxNnx8YnJhbmRpbmd8ZW58MHx8fHwxNzU0NDY1MDYzfDA&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHintImage: 'brand moodboard',
     category: 'Branding',
     readTime: '7 min read',
