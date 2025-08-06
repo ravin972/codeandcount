@@ -99,7 +99,7 @@ export const portfolioItems: {
     servicesProvided: ['Corporate Website Design', 'AI Solutions Showcase', 'Cloud Services Info', 'Portfolio Development', 'Contact Integration'],
     results: 'Enhanced online presence and lead generation for IT services. Streamlined recruitment process through the integrated career hub.',
     gallery: [
-        { src: 'https://images.unsplash.com/photo-1588610991095-734b1574b960?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxhaSUyMHNvbHV0aW9uc3xlbnwwfHx8fDE3NTQzODEyMjB8MA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'AI Solutions Page', dataAiHint: 'ai solutions' },
+        { src: 'https://images.unsplash.com/photo-1588610991095-734b1574b960?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw3fHxhdXRvbWF0aW9uJTIwcnVsZXN8ZW58MHx8fHwxNzU0NDcyNzgyfDA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'AI Solutions Page', dataAiHint: 'automation rules' },
         { src: 'https://images.unsplash.com/photo-1580484026799-aa3e7a76b3fc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHxjYXJlZXIlMjBwb3J0YWx8ZW58MHx8fHwxNzU0MzgxMjIwfDA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Career Hub Interface', dataAiHint: 'career portal' },
         { src: 'https://images.unsplash.com/photo-1727285100419-348edd55d403?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxMHx8Y2xpZW50JTIwd29ya3xlbnwwfHx8fDE3NTQzODEyMjF8MA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Client Portfolio Display', dataAiHint: 'client work' },
     ]
@@ -172,7 +172,7 @@ export const portfolioItems: {
     title: 'Parivartan by DivyaSangrah',
     category: 'E-commerce · Apparel Store',
     type: 'webdev',
-    imageUrl: 'https://images.unsplash.com/photo-1555529771-835f59fc5efe?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxhcHBhcmVsfGVufDB8fHx8MTc1MDQxMTgzOHww&ixlib=rb-4.1.0&q=80&w=1080',
+    imageUrl: 'https://images.unsplash.com/photo-1555529771-835f59fc5efe?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxhcHBhcmVsfGVufDB8fHx8fDE3NTUwNDExgzOHww&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHint: 'apparel store',
     description: 'An online apparel store by DivyaSangrah, offering a unique collection of clothing and accessories. Designed for a seamless shopping experience.',
     longDescription: "Parivartan by DivyaSangrah is an e-commerce platform dedicated to apparel, offering a unique collection of clothing and accessories. The store is designed to provide a seamless and enjoyable online shopping experience, showcasing fashion items with style and elegance.",
@@ -183,9 +183,9 @@ export const portfolioItems: {
     servicesProvided: ['E-commerce Platform Development', 'Online Store Design', 'Product Catalog Management', 'Payment Gateway Integration', 'Fashion E-commerce'],
     results: "Successfully launched a stylish online apparel store, attracting fashion-conscious customers and increasing online sales.",
     gallery: [
-        { src: 'https://placehold.co/800x600.png', alt: 'Apparel Collection Showcase', dataAiHint: 'clothing collection' },
-        { src: 'https://placehold.co/800x600.png', alt: 'Product Detail Page', dataAiHint: 'fashion product' },
-        { src: 'https://placehold.co/800x600.png', alt: 'Online Store Checkout', dataAiHint: 'ecommerce checkout' },
+        { src: 'https://images.unsplash.com/photo-1542295669-1273616f7fd6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw1fHxjbG90aGluZyUyMGNvbGxlY3Rpb258ZW58MHx8fHwxNzU0NDcyNzgyfDA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Apparel Collection Showcase', dataAiHint: 'clothing collection' },
+        { src: 'https://images.unsplash.com/photo-1581044777550-4cfa6ce998c3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxmYXNoaW9uJTIwcHJvZHVjdHxlbnwwfHx8fDE3NTQ0NzI3ODJ8MA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Product Detail Page', dataAiHint: 'fashion product' },
+        { src: 'https://images.unsplash.com/photo-1583255113824-d258a47480a4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxlY29tbWVyY2UlMjBjaGVja291dHxlbnwwfHx8fDE3NTQ0NzI3ODJ8MA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Online Store Checkout', dataAiHint: 'ecommerce checkout' },
     ]
   },
   {
@@ -204,9 +204,9 @@ export const portfolioItems: {
     servicesProvided: ['Online Ordering System', 'Menu Management Integration', 'Restaurant Website Design', 'Payment Gateway Setup', 'Table Reservation Feature'], 
     results: 'Successfully launched an intuitive online food ordering platform, increasing takeaway orders and streamlining the reservation process. Positive customer feedback on ease of use and menu presentation.', 
     gallery: [ 
-        { src: 'https://placehold.co/800x600.png', alt: 'Restaurant Menu Page', dataAiHint: 'food menu' },
-        { src: 'https://placehold.co/800x600.png', alt: 'Online Ordering System', dataAiHint: 'order food' },
-        { src: 'https://placehold.co/800x600.png', alt: 'Table Reservation Interface', dataAiHint: 'restaurant booking' },
+        { src: 'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxmb29kJTIwbWVudXxlbnwwfHx8fDE3NTQ0NzI3ODJ8MA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Restaurant Menu Page', dataAiHint: 'food menu' },
+        { src: 'https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxvcmRlciUyMGZvb2R8ZW58MHx8fHwxNzU0NDcyNzgyfDA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Online Ordering System', dataAiHint: 'order food' },
+        { src: 'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxyZXN0YXVyYW50JTIwYm9va2luZ3xlbnwwfHx8fDE3NTQ0NzI3ODJ8MA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Table Reservation Interface', dataAiHint: 'restaurant booking' },
     ]
   },
   {
@@ -225,9 +225,9 @@ export const portfolioItems: {
     servicesProvided: ['Professional Web Design', 'Dynamic Form Creation', 'CRM Integration', 'Service Page Layouts', 'Mobile Responsive Dev'],
     results: 'Improved professional image and streamlined lead management process, resulting in better client acquisition.',
     gallery: [
-        { src: 'https://placehold.co/800x600.png', alt: 'Consulting Services Page', dataAiHint: 'consulting services' },
-        { src: 'https://placehold.co/800x600.png', alt: 'Dynamic Contact Form', dataAiHint: 'inquiry form' },
-        { src: 'https://placehold.co/800x600.png', alt: 'CRM Integration Diagram', dataAiHint: 'crm flow' },
+        { src: 'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxjb25zdWx0aW5nJTIwc2VydmljZXN8ZW58MHx8fHwxNzU0NDcyNzgyfDA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Consulting Services Page', dataAiHint: 'consulting services' },
+        { src: 'https://images.unsplash.com/photo-1556742502-ec7c0e9f34b1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxpbnF1aXJ5JTIwZm9ybXxlbnwwfHx8fDE3NTQ0NzI3ODJ8MA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Dynamic Contact Form', dataAiHint: 'inquiry form' },
+        { src: 'https://images.unsplash.com/photo-1616401784845-180844d1baed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjcm0lMjBmbG93fGVufDB8fHx8MTc1NDQ3Mjc4Mnww&ixlib=rb-4.1.0&q=80&w=1080', alt: 'CRM Integration Diagram', dataAiHint: 'crm flow' },
     ]
   },
   {
@@ -246,9 +246,9 @@ export const portfolioItems: {
     servicesProvided: ['Tech Website Development', 'Client Portfolio Design', 'Contact Automation', 'DevOps Solutions', 'Infrastructure Projects'],
     results: 'Successfully showcased complex IT projects, enhancing credibility and attracting enterprise-level clients.',
     gallery: [
-        { src: 'https://placehold.co/800x600.png', alt: 'Development Projects Showcase', dataAiHint: 'dev projects' },
-        { src: 'https://placehold.co/800x600.png', alt: 'Infrastructure Solutions', dataAiHint: 'cloud infra' },
-        { src: 'https://placehold.co/800x600.png', alt: 'Automated Contact System', dataAiHint: 'contact automation' },
+        { src: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxkZXYlMjBwcm9qZWN0c3xlbnwwfHx8fDE3NTQ0NzI3ODN8MA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Development Projects Showcase', dataAiHint: 'dev projects' },
+        { src: 'https://images.unsplash.com/photo-1573495782789-70762a1b5c8a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjbG91ZCUyMGluZnJhfGVufDB8fHx8MTc1NDQ3Mjc4M3ww&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Infrastructure Solutions', dataAiHint: 'cloud infra' },
+        { src: 'https://images.unsplash.com/photo-1611926653458-092a4234cfb2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjb250YWN0JTIwYXV0b21hdGlvbnxlbnwwfHx8fDE3NTQ0NzI3ODN8MA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Automated Contact System', dataAiHint: 'contact automation' },
     ]
   },
   {
@@ -267,9 +267,9 @@ export const portfolioItems: {
     servicesProvided: ['Platform Development', 'Matching Algorithm', 'Growth Tracking', 'Candidate Profiling', 'Job Board'],
     results: 'Launched a unique talent development platform in the Indonesian market, connecting skilled individuals with employers.',
     gallery: [
-        { src: 'https://placehold.co/800x600.png', alt: 'Job Matching Interface', dataAiHint: 'talent search' },
-        { src: 'https://placehold.co/800x600.png', alt: 'Candidate Profile', dataAiHint: 'candidate profile' },
-        { src: 'https://placehold.co/800x600.png', alt: 'Growth Tracking Dashboard', dataAiHint: 'growth dashboard' },
+        { src: 'https://images.unsplash.com/photo-1556740758-90de374c12ad?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx0YWxlbnQlMjBzZWFyY2h8ZW58MHx8fHwxNzU0NDcyNzgyfDA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Job Matching Interface', dataAiHint: 'talent search' },
+        { src: 'https://images.unsplash.com/photo-1549923746-c502d488b3ea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjYW5kaWRhdGUlMjBwcm9maWxlfGVufDB8fHx8MTc1NDQ3Mjc4Mnww&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Candidate Profile', dataAiHint: 'candidate profile' },
+        { src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxncm93dGglMjBkYXNoYm9hcmR8ZW58MHx8fHwxNzU0NDcyNzgyfDA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Growth Tracking Dashboard', dataAiHint: 'growth dashboard' },
     ]
   },
   {
@@ -288,9 +288,9 @@ export const portfolioItems: {
     servicesProvided: ['Healthcare Portal Dev', 'Doctor Booking System', 'Ayurvedic E-commerce', 'Multilingual Support', 'UI/UX Design'],
     results: 'Successfully launched an online Ayurvedic consultation and product platform, making traditional healthcare more accessible.',
     gallery: [
-        { src: 'https://placehold.co/800x600.png', alt: 'Doctor Consultation Booking', dataAiHint: 'online consultation' },
-        { src: 'https://placehold.co/800x600.png', alt: 'Ayurvedic Product Store', dataAiHint: 'ayurveda products' },
-        { src: 'https://placehold.co/800x600.png', alt: 'Multilingual Interface', dataAiHint: 'multilingual ui' },
+        { src: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxvbmxpbmUlMjBjb25zdWx0YXRpb258ZW58MHx8fHwxNzU0NDcyNzgyfDA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Doctor Consultation Booking', dataAiHint: 'online consultation' },
+        { src: 'https://images.unsplash.com/photo-1587854692152-cbe660dbde88?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHwheXVydmVkYSUyMHByb2R1Y3RzfGVufDB8fHx8MTc1NDQ3Mjc4Mnww&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Ayurvedic Product Store', dataAiHint: 'ayurveda products' },
+        { src: 'https://images.unsplash.com/photo-1543286386-713bdd548da4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxtdWx0aWxpbmd1YWwlMjB1aXxlbnwwfHx8fDE3NTQ0NzI3ODJ8MA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Multilingual Interface', dataAiHint: 'multilingual ui' },
     ]
   },
   {
@@ -309,9 +309,9 @@ export const portfolioItems: {
     servicesProvided: ['Fintech Platform Dev', 'Financial API Integration', 'Loan Workflow Design', 'Credit Marketplace', 'Secure Data Handling'],
     results: 'Contributed to a high-traffic fintech platform, enhancing its loan and credit card application processes.',
     gallery: [
-        { src: 'https://placehold.co/800x600.png', alt: 'Loan Application Form', dataAiHint: 'loan form' },
-        { src: 'https://placehold.co/800x600.png', alt: 'Credit Card Comparison', dataAiHint: 'card comparison' },
-        { src: 'https://placehold.co/800x600.png', alt: 'Financial Education Section', dataAiHint: 'finance education' },
+        { src: 'https://images.unsplash.com/photo-1639755491373-0490b42907e5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxvYW4lMjBmb3JtfGVufDB8fHx8MTc1NDQ3Mjc4M3ww&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Loan Application Form', dataAiHint: 'loan form' },
+        { src: 'https://images.unsplash.com/photo-1556740738-b6a63e2775d2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjYXJkJTIwY29tcGFyaXNvbnxlbnwwfHx8fDE3NTQ0NzI3ODN8MA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Credit Card Comparison', dataAiHint: 'card comparison' },
+        { src: 'https://images.unsplash.com/photo-1620712943543-95fc636a843a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxpbmFuY2UlMjBlZHVjYXRpb258ZW58MHx8fHwxNzU0NDcyNzgyfDA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Financial Education Section', dataAiHint: 'finance education' },
     ]
   },
   {
@@ -330,9 +330,9 @@ export const portfolioItems: {
     servicesProvided: ['Adventure Tourism Platform', 'Tour Curation', 'Online Booking System', 'Itinerary Builder', 'Travel CMS'],
     results: 'Launched an engaging platform for adventure travel, attracting explorers and streamlining tour bookings.',
     gallery: [
-        { src: 'https://placehold.co/800x600.png', alt: 'Trekking Package Showcase', dataAiHint: 'trekking tour' },
-        { src: 'https://placehold.co/800x600.png', alt: 'Cultural Trip Booking', dataAiHint: 'culture trip' },
-        { src: 'https://placehold.co/800x600.png', alt: 'Personalized Travel Planner', dataAiHint: 'travel planner' },
+        { src: 'https://images.unsplash.com/photo-1551632811-561732d1e306?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx0cmVra2luZyUyMHRvdXJ8ZW58MHx8fHwxNzU0NDcyNzgyfDA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Trekking Package Showcase', dataAiHint: 'trekking tour' },
+        { src: 'https://images.unsplash.com/photo-1534469534237-4a7d6d36e2f8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjdWx0dXJlJTIwdHJpcHxlbnwwfHx8fDE3NTQ0NzI3ODJ8MA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Cultural Trip Booking', dataAiHint: 'culture trip' },
+        { src: 'https://images.unsplash.com/photo-1503220317375-aaad61436b1b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx0cmF2ZWwlMjBwbGFubmVyfGVufDB8fHx8fDE3NTQ0NzI3ODJ8MA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Personalized Travel Planner', dataAiHint: 'travel planner' },
     ]
   },
   {
@@ -340,7 +340,7 @@ export const portfolioItems: {
     title: 'Multi-Currency Invoice Generation',
     category: 'Financial Tools · International Invoicing',
     type: 'accounting',
-    imageUrl: 'https://placehold.co/1200x800.png',
+    imageUrl: 'https://images.unsplash.com/photo-1565513757849-11234a386125?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxpbnZvaWNlJTIwY3VycmVuY3l8ZW58MHx8fHwxNzU0NDcyNzgzfDA&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHint: 'invoice currency',
     description: 'Create invoices in USD, EUR, GBP, AED, and more with auto currency conversion and dual-currency display.',
     longDescription: 'Efficiently generate invoices in multiple currencies like USD, EUR, GBP, AED, etc. Features automatic currency conversion using real-time exchange rates and options for dual-currency display (e.g., INR + Foreign Currency) to cater to international clients.',
@@ -351,9 +351,9 @@ export const portfolioItems: {
     servicesProvided: ["Multi-Currency Invoicing", "Real-time Exchange Rates", "Dual-Currency Display", "International Billing Solutions"],
     results: "Streamlined international invoicing processes, improving clarity and payment efficiency for businesses with global clientele.",
     gallery: [
-        { src: 'https://placehold.co/800x600.png', alt: 'Currency Settings Interface', dataAiHint: 'currency settings' },
-        { src: 'https://placehold.co/800x600.png', alt: 'Sample Multi-Currency Invoice', dataAiHint: 'invoice preview' },
-        { src: 'https://placehold.co/800x600.png', alt: 'Exchange Rate Integration Display', dataAiHint: 'exchange rates' },
+        { src: 'https://images.unsplash.com/photo-1643465494208-1f37e4544a95?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjdXJyZW5jeSUyMHNldHRpbmdzfGVufDB8fHx8MTc1NDQ3Mjc4M3ww&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Currency Settings Interface', dataAiHint: 'currency settings' },
+        { src: 'https://images.unsplash.com/photo-1542844274-1b79529d3a09?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxpbnZvaWNlJTIwcHJldmlld3xlbnwwfHx8fDE3NTQ0NzI3ODN8MA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Sample Multi-Currency Invoice', dataAiHint: 'invoice preview' },
+        { src: 'https://images.unsplash.com/photo-1559526324-c1f275fbfa32?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxlc2NoYW5nZS1yYXRlc3xlbnwwfHx8fDE3NTQ0NzM4MDZ8MA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Exchange Rate Integration Display', dataAiHint: 'exchange rates' },
     ]
   },
   {
@@ -361,7 +361,7 @@ export const portfolioItems: {
     title: 'International Tax Compliance Solution',
     category: 'Taxation · Global Trade',
     type: 'accounting',
-    imageUrl: 'https://placehold.co/1200x800.png',
+    imageUrl: 'https://images.unsplash.com/photo-1554224155-1696413565d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx0YXglMjBjb21wbGlhbmNlfGVufDB8fHx8fDE3NTQ0NzM4MDZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHint: 'tax compliance',
     description: 'Navigate GST with Export Invoice Format, LUT assistance, and country-specific tax breakdowns for seamless global trade.',
     longDescription: 'Ensures international tax compliance with features like GST-compliant Export Invoice Format, assistance with Letter of Undertaking (LUT), and detailed country-specific tax breakdowns (VAT, GST, etc.) for businesses involved in global trade.',
@@ -372,9 +372,9 @@ export const portfolioItems: {
     servicesProvided: ["Export Tax Compliance", "GST Export Invoicing", "LUT Assistance", "International VAT/GST Handling"],
     results: "Simplified tax compliance for international transactions, reducing errors and ensuring adherence to global tax regulations.",
     gallery: [
-        { src: 'https://placehold.co/800x600.png', alt: 'Tax Compliance Dashboard', dataAiHint: 'tax form' },
-        { src: 'https://placehold.co/800x600.png', alt: 'Export Document Sample', dataAiHint: 'export document' },
-        { src: 'https://placehold.co/800x600.png', alt: 'Compliance Checklist Feature', dataAiHint: 'compliance checklist' },
+        { src: 'https://images.unsplash.com/photo-1560518883-ce09059eeffa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx0YXglMjBmb3JtfGVufDB8fHx8fDE3NTQ0NzM4MDZ8MA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Tax Compliance Dashboard', dataAiHint: 'tax form' },
+        { src: 'https://images.unsplash.com/photo-1605799902640-19d2d8293998?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxlc3BvcnQlMjBkb2N1bWVudHxlbnwwfHx8fDE3NTQ0NzM4MDZ8MA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Export Document Sample', dataAiHint: 'export document' },
+        { src: 'https://images.unsplash.com/photo-1599891041539-71d533503f77?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhc3NldCUyMG1hbmFnZW1lbnR8ZW58MHx8fHwxNzU0NDczODA2fDA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Compliance Checklist Feature', dataAiHint: 'asset management' },
     ]
   },
   {
@@ -382,7 +382,7 @@ export const portfolioItems: {
     title: 'Professional Invoice Customization',
     category: 'Branding · Billing Solutions',
     type: 'accounting',
-    imageUrl: 'https://placehold.co/1200x800.png',
+    imageUrl: 'https://images.unsplash.com/photo-1583521214693-7de59641264a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxpbnZvaWNlJTIwZGVzaWdufGVufDB8fHx8fDE3NTQ0NzM4MDZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHint: 'invoice design',
     description: 'Offer branded invoice templates, multi-language options, and direct PDF download/email delivery to clients for a professional touch.',
     longDescription: 'Enhance your brand\'s professionalism with customizable invoice templates. Supports multi-language options for invoices, and allows for easy PDF download and direct email delivery to clients.',
@@ -393,9 +393,9 @@ export const portfolioItems: {
     servicesProvided: ["Custom Invoice Templates", "Branded Invoicing", "Multi-Language Support", "PDF Generation & Delivery"],
     results: "Improved brand perception and client communication through professional and customizable invoicing.",
     gallery: [
-        { src: 'https://placehold.co/800x600.png', alt: 'Invoice Template Editor', dataAiHint: 'template editor' },
-        { src: 'https://placehold.co/800x600.png', alt: 'Branded Invoice Example', dataAiHint: 'branded invoice' },
-        { src: 'https://placehold.co/800x600.png', alt: 'Multi-Language Invoice Options', dataAiHint: 'language options' },
+        { src: 'https://images.unsplash.com/photo-1586953208448-315013527112?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx0ZW1wbGF0ZSUyMGVkaXRvcnxlbnwwfHx8fDE3NTQ0NzM4MDZ8MA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Invoice Template Editor', dataAiHint: 'template editor' },
+        { src: 'https://images.unsplash.com/photo-1600880292210-859b923841e7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjYXJkcyUyMGJyYW5kZWR8ZW58MHx8fHwxNzU0NDczODA2fDA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Branded Invoice Example', dataAiHint: 'cards branded' },
+        { src: 'https://images.unsplash.com/photo-1628155930542-e4f1a1835616?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxsYW5ndWFnZSUyMG9wdGlvbnN8ZW58MHx8fHwxNzU0NDczODA2fDA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Multi-Language Invoice Options', dataAiHint: 'language options' },
     ]
   },
   {
@@ -403,7 +403,7 @@ export const portfolioItems: {
     title: 'International Payment Gateway Integration',
     category: 'Fintech · Global Payments',
     type: 'accounting',
-    imageUrl: 'https://placehold.co/1200x800.png',
+    imageUrl: 'https://images.unsplash.com/photo-1583521214693-7de59641264a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwYXltZW50JTIwZ2F0ZXdheXxlbnwwfHx8fDE3NTQ0NzM4MDZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHint: 'payment gateway',
     description: 'Integrate payment gateways like PayPal, Stripe, Wise, Razorpay International, with payment reminders and a secure tracking dashboard.',
     longDescription: 'Facilitate seamless international payments by integrating popular gateways such as PayPal, Stripe, Wise, and Razorpay International. Includes features like payment due reminders, follow-ups, and a secure payment tracking dashboard.',
@@ -414,9 +414,9 @@ export const portfolioItems: {
     servicesProvided: ["Payment Gateway Integration", "International Payment Processing", "Automated Reminders", "Payment Tracking"],
     results: "Increased international sales and faster payment collection by offering diverse and secure payment options.",
     gallery: [
-        { src: 'https://placehold.co/800x600.png', alt: 'Payment Gateway Selection', dataAiHint: 'gateway logos' },
-        { src: 'https://placehold.co/800x600.png', alt: 'Secure Payment Form', dataAiHint: 'payment form' },
-        { src: 'https://placehold.co/800x600.png', alt: 'Payment Tracking Dashboard', dataAiHint: 'tracking dashboard' },
+        { src: 'https://images.unsplash.com/photo-1616401784845-180844d1baed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxnYXRld2F5JTIwbG9nb3N8ZW58MHx8fHwxNzU0NDczODA2fDA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Payment Gateway Selection', dataAiHint: 'gateway logos' },
+        { src: 'https://images.unsplash.com/photo-1604145610813-a402319d6537?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwYXltZW50JTIwZm9ybXxlbnwwfHx8fDE3NTQ0NzM4MDZ8MA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Secure Payment Form', dataAiHint: 'payment form' },
+        { src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwYXltZW50JTIwdHJhY2tpbmclMjBkYXNoYm9hcmR8ZW58MHx8fHwxNzU0NDczODA2fDA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Payment Tracking Dashboard', dataAiHint: 'tracking dashboard' },
     ]
   },
   {
@@ -435,9 +435,9 @@ export const portfolioItems: {
     servicesProvided: ["Recurring Invoice Automation", "Scheduled Dispatch (Email/WhatsApp)", "Automated Payment Confirmations", "Billing Workflow Optimization"],
     results: "Reduced manual effort and improved cash flow through efficient invoice automation and scheduling.",
     gallery: [
-        { src: 'https://placehold.co/800x600.png', alt: 'Invoice Scheduling Interface', dataAiHint: 'scheduling interface' },
-        { src: 'https://placehold.co/800x600.png', alt: 'Automation Rules Setup', dataAiHint: 'automation rules' },
-        { src: 'https://placehold.co/800x600.png', alt: 'Notification Settings Panel', dataAiHint: 'notification settings' },
+        { src: 'https://images.unsplash.com/photo-1678107373363-2287913ab9a8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxpbnZvaWNlJTIwc2NoZWR1bGluZyUyMGludGVyZmFjZXxlbnwwfHx8fDE3NTQ0NzM4MDZ8MA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Invoice Scheduling Interface', dataAiHint: 'scheduling interface' },
+        { src: 'https://images.unsplash.com/photo-1611926653458-092a4234cfb2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhdXRvbWF0aW9uJTIwcnVsZXMlMjBzZXR1cHxlbnwwfHx8fDE3NTQ0NzM4MDZ8MA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Automation Rules Setup', dataAiHint: 'automation rules' },
+        { src: 'https://images.unsplash.com/photo-1586953208448-315013527112?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxub3RpZmljYXRpb24lMjBzZXR0aW5ncyUyMHBhbmVsfGVufDB8fHx8MTc1NDQ3MzgwNnww&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Notification Settings Panel', dataAiHint: 'notification settings' },
     ]
   },
   {
@@ -456,9 +456,9 @@ export const portfolioItems: {
     servicesProvided: ["Invoice Data Management", "Billing Summary Reports", "Accounting Software Integration", "Financial Record Keeping"],
     results: "Enhanced financial visibility and simplified accounting processes through robust record keeping and reporting.",
     gallery: [
-        { src: 'https://placehold.co/800x600.png', alt: 'Financial Report Dashboard', dataAiHint: 'report dashboard' },
-        { src: 'https://placehold.co/800x600.png', alt: 'Data Export Options', dataAiHint: 'data export' },
-        { src: 'https://placehold.co/800x600.png', alt: 'Accounting Tool Integration Logos', dataAiHint: 'integration logos' },
+        { src: 'https://images.unsplash.com/photo-1642070442304-453510c4109b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxyZXBvcnQlMjBkYXNoYm9hcmR8ZW58MHx8fHwxNzU0NDczODA3fDA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Financial Report Dashboard', dataAiHint: 'report dashboard' },
+        { src: 'https://images.unsplash.com/photo-1633409361618-6874e053a47b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxkYXRhJTIwZXhwb3J0fGVufDB8fHx8MTc1NDQ3MzgwN3ww&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Data Export Options', dataAiHint: 'data export' },
+        { src: 'https://images.unsplash.com/photo-1651044458421-7c9e1b5a4a55?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxpbnRlZ3JhdGlvbiUyMGxvZ29zfGVufDB8fHx8MTc1NDQ3MzgwN3ww&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Accounting Tool Integration Logos', dataAiHint: 'integration logos' },
     ]
   },
   {
@@ -477,9 +477,9 @@ export const portfolioItems: {
     servicesProvided: ["Commercial Invoice Prep", "Packing List Generation", "Shipping Bill Assistance", "KYC & Agreement Tracking"],
     results: "Facilitated smoother import/export operations by ensuring accurate and compliant documentation.",
     gallery: [
-        { src: 'https://placehold.co/800x600.png', alt: 'Sample Export Document', dataAiHint: 'document template' },
-        { src: 'https://placehold.co/800x600.png', alt: 'Logistics Workflow Diagram', dataAiHint: 'logistics checklist' },
-        { src: 'https://placehold.co/800x600.png', alt: 'Compliance Verification Badge', dataAiHint: 'compliance seal' },
+        { src: 'https://images.unsplash.com/photo-1521791136064-7986c2920216?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxkb2N1bWVudCUyMHRlbXBsYXRlfGVufDB8fHx8MTc1NDQ3MzgwN3ww&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Sample Export Document', dataAiHint: 'document template' },
+        { src: 'https://images.unsplash.com/photo-1549419688-353d08f09312?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxvZ2lzdGljcyUyMGNoZWNrbGlzdHxlbnwwfHx8fDE3NTQ0NzM4MDd8MA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Logistics Workflow Diagram', dataAiHint: 'logistics checklist' },
+        { src: 'https://images.unsplash.com/photo-1600880292210-859b923841e7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjb21wbGlhbmNlJTIwc2VhbHxlbnwwfHx8fDE3NTQ0NzM4MDd8MA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Compliance Verification Badge', dataAiHint: 'compliance seal' },
     ]
   }
 ];
