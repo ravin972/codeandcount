@@ -332,7 +332,7 @@ export const portfolioItems: {
     gallery: [
         { src: 'https://images.unsplash.com/photo-1551632811-561732d1e306?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx0cmVra2luZyUyMHRvdXJ8ZW58MHx8fHwxNzU0NDcyNzgyfDA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Trekking Package Showcase', dataAiHint: 'trekking tour' },
         { src: 'https://images.unsplash.com/photo-1534469534237-4a7d6d36e2f8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjdWx0dXJlJTIwdHJpcHxlbnwwfHx8fDE3NTQ0NzI3ODJ8MA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Cultural Trip Booking', dataAiHint: 'culture trip' },
-        { src: 'https://images.unsplash.com/photo-1503220317375-aaad61436b1b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx0cmF2ZWwlMjBwbGFubmVyfGVufDB8fHx8fDE3NTQ0NzI3ODJ8MA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Personalized Travel Planner', dataAiHint: 'travel planner' },
+        { src: 'https://images.unsplash.com/photo-1503220317375-aaad61436b1b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx0cmF2ZWwlMjBwbGFubmVyfGVufDB8fHx8MTc1NDQ3Mjc4Mnww&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Personalized Travel Planner', dataAiHint: 'travel planner' },
     ]
   },
   {
@@ -403,7 +403,7 @@ export const portfolioItems: {
     title: 'International Payment Gateway Integration',
     category: 'Fintech · Global Payments',
     type: 'accounting',
-    imageUrl: 'https://images.unsplash.com/photo-1583521214693-7de59641264a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxwYXltZW50JTIwZ2F0ZXdheXxlbnwwfHx8fDE3NTQ0NzM4MDZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
+    imageUrl: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxwYXltZW50fGVufDB8fHx8MTc1NDQ3MjU4OHww&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHint: 'payment gateway',
     description: 'Integrate payment gateways like PayPal, Stripe, Wise, Razorpay International, with payment reminders and a secure tracking dashboard.',
     longDescription: 'Facilitate seamless international payments by integrating popular gateways such as PayPal, Stripe, Wise, and Razorpay International. Includes features like payment due reminders, follow-ups, and a secure payment tracking dashboard.',
