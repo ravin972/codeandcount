@@ -424,7 +424,7 @@ export const portfolioItems: {
     title: 'Invoice Automation & Scheduling System',
     category: 'Automation · Billing Efficiency',
     type: 'accounting',
-    imageUrl: 'https://placehold.co/1200x800.png',
+    imageUrl: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxhdXRvbWF0aW9ufGVufDB8fHx8MTc1NDQ3MTkwMXww&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHint: 'invoice automation',
     description: 'Automate monthly/recurring invoices, schedule dispatch via Email or WhatsApp, and send auto payment confirmations.',
     longDescription: 'Streamline your billing process with invoice automation. Auto-generate monthly or recurring invoices, schedule their dispatch through Email or WhatsApp, and send automatic payment confirmation messages to clients.',
