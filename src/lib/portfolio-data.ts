@@ -248,7 +248,7 @@ export const portfolioItems: {
     gallery: [
         { src: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxkZXYlMjBwcm9qZWN0c3xlbnwwfHx8fDE3NTQ0NzI3ODN8MA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Development Projects Showcase', dataAiHint: 'dev projects' },
         { src: 'https://images.unsplash.com/photo-1573495782789-70762a1b5c8a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjbG91ZCUyMGluZnJhfGVufDB8fHx8MTc1NDQ3Mjc4M3ww&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Infrastructure Solutions', dataAiHint: 'cloud infra' },
-        { src: 'https://images.unsplash.com/photo-1611926653458-092a4234cfb2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjb250YWN0JTIwYXV0b21hdGlvbnxlbnwwfHx8fDE3NTQ0NzI3ODN8MA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Automated Contact System', dataAiHint: 'contact automation' },
+        { src: 'https://images.unsplash.com/photo-1611926653458-092a4234cfb2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxhdXRvbWF0aW9uJTIwcnVsZXMlMjBzZXR1cHxlbnwwfHx8fDE3NTQ0NzM4MDZ8MA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Automated Contact System', dataAiHint: 'automation rules' },
     ]
   },
   {
@@ -267,7 +267,7 @@ export const portfolioItems: {
     servicesProvided: ['Platform Development', 'Matching Algorithm', 'Growth Tracking', 'Candidate Profiling', 'Job Board'],
     results: 'Launched a unique talent development platform in the Indonesian market, connecting skilled individuals with employers.',
     gallery: [
-        { src: 'https://images.unsplash.com/photo-1556740758-90de374c12ad?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx0YWxlbnQlMjBzZWFyY2h8ZW58MHx8fHwxNzU0NDcyNzgyfDA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Job Matching Interface', dataAiHint: 'talent search' },
+        { src: 'https://images.unsplash.com/photo-1556740758-90de374c12ad?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxncm93dGglMjBkYXNoYm9hcmR8ZW58MHx8fHwxNzU0NDcyNzgyfDA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Job Matching Interface', dataAiHint: 'growth dashboard' },
         { src: 'https://images.unsplash.com/photo-1549923746-c502d488b3ea?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxjYW5kaWRhdGUlMjBwcm9maWxlfGVufDB8fHx8MTc1NDQ3Mjc4Mnww&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Candidate Profile', dataAiHint: 'candidate profile' },
         { src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxncm93dGglMjBkYXNoYm9hcmR8ZW58MHx8fHwxNzU0NDcyNzgyfDA&ixlib=rb-4.1.0&q=80&w=1080', alt: 'Growth Tracking Dashboard', dataAiHint: 'growth dashboard' },
     ]
@@ -340,7 +340,7 @@ export const portfolioItems: {
     title: 'Multi-Currency Invoice Generation',
     category: 'Financial Tools · International Invoicing',
     type: 'accounting',
-    imageUrl: 'https://images.unsplash.com/photo-1565513757849-11234a386125?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHxpbnZvaWNlJTIwY3VycmVuY3l8ZW58MHx8fHwxNzU0NDcyNzgzfDA&ixlib=rb-4.1.0&q=80&w=1080',
+    imageUrl: 'https://images.unsplash.com/photo-1579500669315-99e9cdd932f0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxOHx8bXVsdGklMjBjdXJyZW5jeXxlbnwwfHx8fDE3NTQ0NzMyOTJ8MA&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHint: 'invoice currency',
     description: 'Create invoices in USD, EUR, GBP, AED, and more with auto currency conversion and dual-currency display.',
     longDescription: 'Efficiently generate invoices in multiple currencies like USD, EUR, GBP, AED, etc. Features automatic currency conversion using real-time exchange rates and options for dual-currency display (e.g., INR + Foreign Currency) to cater to international clients.',
