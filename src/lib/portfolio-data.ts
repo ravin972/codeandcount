@@ -445,7 +445,7 @@ export const portfolioItems: {
     title: 'Advanced Record Keeping & Reporting Suite',
     category: 'Accounting · Financial Reporting',
     type: 'accounting',
-    imageUrl: 'https://placehold.co/1200x800.png',
+    imageUrl: 'https://images.unsplash.com/photo-1693045181224-9fc2f954f054?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw4fHxpbnZvaWNlfGVufDB8fHx8MTc1NDQ3MTUxN3ww&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHint: 'financial reports',
     description: 'Export/import invoice records, generate monthly/quarterly billing summaries, and integrate with Zoho, QuickBooks, Tally.',
     longDescription: 'Maintain accurate financial records with features to export/import invoice data. Generate monthly/quarterly billing summary reports and integrate seamlessly with popular accounting tools like Zoho, QuickBooks, and Tally.',
