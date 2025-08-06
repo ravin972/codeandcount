@@ -182,7 +182,7 @@ export const blogPosts = [
     authorAvatar: 'https://placehold.co/40x40.png',
     dataAiHintAuthor: 'professional person',
     excerpt: 'Key elements of a successful content strategy tailored for SaaS companies looking to grow.',
-    imageUrl: 'https://placehold.co/1200x600.png',
+    imageUrl: 'https://images.unsplash.com/photo-1642132652859-3ef5a1048fd1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwzfHxzYWFzfGVufDB8fHx8MTc1NDQ2NTM0MHww&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHintImage: 'saas content strategy',
     category: 'Content Strategy',
     readTime: '7 min read',
