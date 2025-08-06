@@ -197,7 +197,7 @@ export const blogPosts = [
     authorAvatar: 'https://placehold.co/40x40.png',
     dataAiHintAuthor: 'marketing expert',
     excerpt: 'Best practices for image optimization to improve website speed and user experience.',
-    imageUrl: 'https://placehold.co/1200x600.png',
+    imageUrl: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxfHx3ZWIlMjBwZXJmb3JtYW5jZXxlbnwwfHx8fDE3NTQ0NjU0NTZ8MA&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHintImage: 'image optimization tools',
     category: 'Web Performance',
     readTime: '5 min read',
