@@ -41,6 +41,16 @@ const services = [
 ];
 
 const clientLogos: { name: string; icon?: JSX.Element; imageUrl?: string; dataAiHint?: string }[] = [
+    {
+        name: 'Tradyne Perfumes',
+        imageUrl: 'https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=375,fit=crop,q=95/AR03Dr4n5jfnXDLk/tradyne-logo-perfume-photoroom-AMq89KLo9Gfk4xM2.png',
+        dataAiHint: 'perfume logo',
+    },
+    {
+        name: 'Philotes',
+        imageUrl: 'https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=768,fit=crop,q=95/Yg2yJ37ryafQolWr/whatsapp_image_2025-08-02_at_12.41.54_pm-removebg-preview-photoroom-Y4Lv0DByVLhEqR7N.png',
+        dataAiHint: 'footwear logo',
+    },
   {
     name: 'PVT LTD',
     imageUrl: 'https://assets.zyrosite.com/cdn-cgi/image/format=auto,w=372,h=96,fit=crop,trim=142.47311827956992;0;228.49462365591398;0/AR0LWLPr10FjjMp5/2-removebg-preview-A3Q2jb6yZziVroXJ.png',
@@ -347,23 +357,25 @@ export default function HomePage() {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="bg-card rounded-xl shadow-xl p-8 md:p-12 border border-border">
               <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-10 client-logos-title">Trusted by Industry Leaders</h2>
-              <div className="flex flex-wrap justify-center items-center gap-8 md:gap-12">
-                {clientLogos.map((logo) => (
-                  <div key={logo.name} title={logo.name} className="transition-transform duration-300 ease-in-out transform hover:scale-110 group client-logo-item" data-interactive-cursor="true">
-                    {logo.imageUrl ? (
-                      <Image
-                        src={logo.imageUrl}
-                        alt={logo.name}
-                        width={120}
-                        height={48}
-                        className="object-contain h-12 w-auto max-w-[150px] group-hover:opacity-80 transition-opacity"
-                        data-ai-hint={logo.dataAiHint}
-                      />
-                    ) : (
-                      logo.icon
-                    )}
-                  </div>
-                ))}
+               <div className="scroller" data-speed="slow" data-direction="left">
+                <div className="scroller__inner">
+                    {[...clientLogos, ...clientLogos].map((logo, index) => (
+                      <div key={`${logo.name}-${index}`} title={logo.name} className="flex-shrink-0 mx-8 transition-transform duration-300 ease-in-out transform hover:scale-110 group client-logo-item" data-interactive-cursor="true">
+                        {logo.imageUrl ? (
+                          <Image
+                            src={logo.imageUrl}
+                            alt={`${logo.name} logo`}
+                            width={140}
+                            height={56}
+                            className="object-contain h-14 w-auto max-w-[160px] group-hover:opacity-80 transition-opacity"
+                            data-ai-hint={logo.dataAiHint}
+                          />
+                        ) : (
+                          logo.icon
+                        )}
+                      </div>
+                    ))}
+                </div>
               </div>
             </div>
           </div>
