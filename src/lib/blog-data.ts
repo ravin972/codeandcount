@@ -227,7 +227,7 @@ export const blogPosts = [
     authorAvatar: 'https://placehold.co/40x40.png',
     dataAiHintAuthor: 'professional person',
     excerpt: 'Step-by-step instructions on how to design and build web forms that are usable by everyone.',
-    imageUrl: 'https://placehold.co/1200x600.png',
+    imageUrl: 'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHwlMjBmb3JtfGVufDB8fHx8MTc1NDQ2NjAyM3ww&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHintImage: 'accessible form ui',
     category: 'Accessibility',
     readTime: '7 min read',
