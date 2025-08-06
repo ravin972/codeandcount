@@ -212,7 +212,7 @@ export const blogPosts = [
     authorAvatar: 'https://placehold.co/40x40.png',
     dataAiHintAuthor: 'software developer',
     excerpt: 'A beginner-friendly guide to integrating Genkit AI into your Next.js applications.',
-    imageUrl: 'https://placehold.co/1200x600.png',
+    imageUrl: 'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw2fHwlMjBhaXxlbnwwfHx8fDE3NTQ0NjU4MTR8MA&ixlib=rb-4.1.0&q=80&w=1080',
     dataAiHintImage: 'ai integration code',
     category: 'AI Development',
     readTime: '9 min read',
