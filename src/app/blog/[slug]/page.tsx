@@ -7,15 +7,10 @@ import { ArrowLeft, CalendarDays, Tag, Clock3, Dot } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
 import { blogPosts } from '@/lib/blog-data';
-import { PageProps } from 'next';
 
 export const dynamic = 'force-dynamic';
 
-interface BlogPostPageProps extends PageProps {
-  params: { slug: string };
-}
-
-export default function BlogPostPage({ params }: BlogPostPageProps) {
+export default function BlogPostPage({ params }: { params: { slug: string } }) {
   const { slug } = params;
   const post = blogPosts.find(p => p.slug === slug);
 
