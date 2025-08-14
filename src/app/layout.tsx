@@ -1,15 +1,9 @@
 
-"use client";
-
+import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import '../../styles/globals.css'; // Updated import path
-import { Header } from '@/components/layout/Header';
-import { Footer } from '@/components/layout/Footer';
-import { Toaster } from "@/components/ui/toaster";
+import '../../styles/globals.css';
 import { cn } from '@/lib/utils';
-import { ThemeProvider } from "@/components/ui/theme-provider";
-import CustomCursor from '@/components/effects/CustomCursor';
-import FloatingWhatsAppButton from '@/components/common/FloatingWhatsAppButton';
+import ClientLayout from './client-layout';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -17,40 +11,73 @@ const inter = Inter({
   display: 'swap',
 });
 
-// export const metadata: Metadata = {
-//   title: {
-//     default: 'CodeAndCount.com - Web & App Development',
-//     template: '%s | CodeAndCount.com',
-//   },
-//   description: 'CodeAndCount.com is a modern web and app development agency, creating powerful digital solutions.',
-//   openGraph: {
-//     title: 'CodeAndCount.com - Web & App Development',
-//     description: 'Modern web and app development solutions.',
-//     type: 'website',
-//     locale: 'en_US',
-//     url: 'https://codeandcount.com.example',
-//     siteName: 'CodeAndCount.com',
-//     images: [
-//       {
-//         url: 'https://placehold.co/1200x630.png', 
-//         width: 1200,
-//         height: 630,
-//         alt: 'CodeAndCount.com',
-//       },
-//     ],
-//   },
-//   twitter: {
-//     card: 'summary_large_image',
-//     title: 'CodeAndCount.com - Web & App Development',
-//     description: 'Modern web and app development solutions.',
-//     images: ['https://placehold.co/1200x630.png'], 
-//   },
-//   manifest: '/manifest.json',
-//   themeColor: '#b2ff03',
-//   icons: {
-//     icon: "data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3e%3crect width='100' height='100' rx='20' fill='%234AD685' /%3e%3ctext x='50' y='50' dy='.3em' font-size='70' font-weight='bold' text-anchor='middle' fill='white'%3eC%3c/text%3e%3c/svg%3e",
-//   },
-// };
+export const metadata: Metadata = {
+  title: {
+    default: 'CodeAndCount | Web, AI, & Accounting Solutions',
+    template: '%s | CodeAndCount.com',
+  },
+  description: 'CodeAndCount.com is a premier agency offering custom web and app development, AI integration, digital marketing, and expert accounting services to elevate your business.',
+  keywords: [
+    'Web Development',
+    'AI Solutions',
+    'Accounting Services',
+    'Digital Marketing',
+    'Mobile App Development',
+    'Next.js Development',
+    'Craft CMS',
+    'WordPress Development',
+    'SEO Services',
+    'UI/UX Design',
+    'Gurugram',
+    'India'
+  ],
+  authors: [{ name: 'CodeAndCount.com Team', url: 'https://codeandcount.com' }],
+  creator: 'CodeAndCount.com',
+  publisher: 'CodeAndCount.com',
+  openGraph: {
+    title: 'CodeAndCount | Custom Web, AI, & Accounting Solutions',
+    description: 'Partner with CodeAndCount for cutting-edge web development, AI-powered tools, and comprehensive financial management.',
+    url: 'https://codeandcount.com', 
+    siteName: 'CodeAndCount.com',
+    images: [
+      {
+        url: 'https://placehold.co/1200x630/2563eb/ffffff.png?text=CodeAndCount',
+        width: 1200,
+        height: 630,
+        alt: 'CodeAndCount.com - Web, AI, & Accounting Solutions',
+      },
+    ],
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'CodeAndCount | Top-Tier Web, AI, & Accounting Services',
+    description: 'From stunning websites and intelligent AI to precise accounting, CodeAndCount provides the digital and financial expertise your business needs to succeed.',
+    creator: '@codeandcount',
+    images: ['https://placehold.co/1200x600/2563eb/ffffff.png?text=CodeAndCount'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#111827' },
+  ],
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon-16x16.png',
+    apple: '/apple-touch-icon.png',
+  },
+};
 
 export default function RootLayout({
   children,
@@ -59,25 +86,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={cn(inter.variable)} suppressHydrationWarning>
-      <head>
-        <title>CodeAndCount.com - Web & App Development</title>
-        <meta name="description" content="CodeAndCount.com is a modern web and app development agency, creating powerful digital solutions." />
-        <link rel="icon" href="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3e%3crect width='100' height='100' rx='20' fill='%234AD685' /%3e%3ctext x='50' y='50' dy='.3em' font-size='70' font-weight='bold' text-anchor='middle' fill='white'%3eC%3c/text%3e%3c/svg%3e" />
-      </head>
-      <body className="antialiased flex flex-col min-h-screen">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <CustomCursor />
-          <Header />
-          <main className="flex-grow">{children}</main>
-          <Footer />
-          <Toaster />
-          <FloatingWhatsAppButton />
-        </ThemeProvider>
+      <body>
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );
