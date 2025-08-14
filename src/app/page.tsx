@@ -18,6 +18,7 @@ import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
 import Preloader from '@/components/layout/Preloader';
 import { testimonials } from '@/lib/testimonial-data';
 import { blogPosts as homepageBlogPosts } from '@/lib/blog-data';
+import { portfolioItems } from '@/lib/portfolio-data';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -78,33 +79,6 @@ const clientLogos: { name: string; icon?: JSX.Element; imageUrl?: string; dataAi
   },
 ];
 
-const caseStudies = [
-  {
-    id: 'divyasangrah-spiritual-marketplace',
-    title: 'DivyaSangrah Spiritual Marketplace',
-    category: 'E‑commerce · Spiritual Services',
-    imageUrl: 'https://images.unsplash.com/photo-1610979573089-78f2429d47d4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwxOXx8aGluZHUlMjBzcGlyaXR1YWx8ZW58MHx8fHwxNzUwNDEwNTExfDA&ixlib=rb-4.1.0&q=80&w=1080', 
-    dataAiHint: 'spiritual storefront',
-    description: 'An all-in-one online store offering puja items, astrology consultations, and religious service bookings. Crafted for spiritual ambience and performance.',
-  },
-  {
-    id: 'itverbs-technology-solutions',
-    title: 'ITVerbs Technology Solutions',
-    category: 'Corporate IT Solutions',
-    imageUrl: 'https://images.unsplash.com/photo-1531297484001-80022131f5a1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHwyfHx0ZWNofGVufDB8fHx8MTc1MDQwNTQyNnww&ixlib=rb-4.1.0&q=80&w=1080', 
-    dataAiHint: 'corporate it',
-    description: 'Corporate portal for AI solutions, cloud services, and development projects. Includes career hub, portfolio sections, and contact workflows.',
-  },
-  {
-    id: 'buztrix-traveltech',
-    title: 'BuzTrix TravelTech India Pvt. Ltd.',
-    category: 'Travel SaaS Platform',
-    imageUrl: 'https://images.unsplash.com/photo-1502791451862-7bd8c1df43a7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHx0cmF2ZWwlMjBpbWFnZXxlbnwwfHx8fDE3NTA0MDk5MjJ8MA&ixlib=rb-4.1.0&q=80&w=1080', 
-    dataAiHint: 'travel saas',
-    description: 'Developed for B2B travel operations. Offers hotel & flight APIs, lead tracking dashboards, and bulk booking systems.',
-  },
-];
-
 // Fisher-Yates shuffle algorithm
 const shuffleArray = <T,>(array: T[]): T[] => {
   let currentIndex = array.length,  randomIndex;
@@ -131,11 +105,11 @@ export default function HomePage() {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
-  const [shuffledCaseStudies, setShuffledCaseStudies] = useState(caseStudies);
+  const [shuffledProjects, setShuffledProjects] = useState(portfolioItems);
 
   useEffect(() => {
     // Only run on the client
-    setShuffledCaseStudies(shuffleArray([...caseStudies]));
+    setShuffledProjects(shuffleArray([...portfolioItems]));
   }, []);
 
 
@@ -407,7 +381,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Case Studies Section */}
+        {/* Featured Work Section */}
         <section id="work" className="py-16 bg-background">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="relative inline-grid place-items-center w-full text-center mb-4 case-studies-title">
@@ -417,21 +391,21 @@ export default function HomePage() {
               Explore how we've helped businesses like yours succeed.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {shuffledCaseStudies.map((study) => (
-                <Card key={study.id} className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out flex flex-col group hover:-translate-y-1 case-study-card" data-interactive-cursor="true">
+              {shuffledProjects.slice(0, 3).map((project) => (
+                <Card key={project.id} className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out flex flex-col group hover:-translate-y-1 case-study-card" data-interactive-cursor="true">
                   <div className="ripple-container">
-                    <Image src={study.imageUrl} alt={study.title} width={600} height={400} className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out" data-ai-hint={study.dataAiHint} />
+                    <Image src={project.imageUrl} alt={project.title} width={600} height={400} className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out" data-ai-hint={project.dataAiHint} />
                   </div>
                   <CardHeader>
-                    <CardTitle className="text-2xl font-semibold">{study.title}</CardTitle>
-                    <CardDescription>{study.category}</CardDescription>
+                    <CardTitle className="text-2xl font-semibold">{project.title}</CardTitle>
+                    <CardDescription>{project.category}</CardDescription>
                   </CardHeader>
                   <CardContent className="flex-grow">
-                    <p className="text-muted-foreground">{study.description}</p>
+                    <p className="text-muted-foreground">{project.description}</p>
                   </CardContent>
                   <CardFooter>
                     <Button variant="outline" asChild className="rounded-full">
-                      <Link href={`/work/${study.id}`}>
+                      <Link href={`/work/${project.id}`}>
                         View Case Study <Eye className="ml-2 h-4 w-4" />
                       </Link>
                     </Button>
@@ -653,3 +627,5 @@ export default function HomePage() {
     </div>
   );
 }
+
+    
