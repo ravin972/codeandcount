@@ -67,19 +67,26 @@ export function ContactForm() {
   async function onSubmit(values: ContactFormValues) {
     setIsSubmitting(true);
     
-    // Simulate a network request
-    await new Promise(resolve => setTimeout(resolve, 1500));
-
     try {
-      // Here you would typically send the form data to your backend API
-      // For this example, we'll just log it and show a success message.
-      console.log("Form Submitted:", values);
-
-      toast({
-        title: "Message Sent Successfully!",
-        description: "Thank you for reaching out. We'll get back to you shortly.",
+      const response = await fetch("https://formspree.io/f/mvojozpb", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify(values),
       });
-      form.reset();
+
+      if (response.ok) {
+        toast({
+          title: "Message Sent Successfully!",
+          description: "Thank you for reaching out. We'll get back to you shortly.",
+        });
+        form.reset();
+      } else {
+        throw new Error("Failed to send message.");
+      }
+
     } catch (error) {
       console.error("Form submission error:", error);
       toast({
