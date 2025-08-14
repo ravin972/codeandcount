@@ -24,7 +24,7 @@ export function BackToTopButton({ className }: { className?: string }) {
       )}
       aria-label="Scroll back to top"
     >
-      <span>Sh*t I've gone too far, send me back up</span>
+      <span>Beam me up!</span>
       <MoveUp className="h-5 w-5 text-yellow-400" />
     </button>
   );
