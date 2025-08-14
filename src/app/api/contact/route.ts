@@ -7,22 +7,25 @@ export async function POST(req: Request) {
     const body = await req.json();
     const { name, email, phone, company, queryType, message } = body;
 
-    // Input validation
+    // --- Input Validation ---
     if (!name || !email || !message || !queryType) {
       return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
     }
     
-    // WARNING: Storing credentials in environment variables is crucial for security.
-    // Do not hard-code them in the source code.
+    // --- Environment Variable Check ---
     const user = process.env.EMAIL_USER;
     const pass = process.env.EMAIL_PASS;
-    const receiver = process.env.RECEIVER_EMAIL;
+    const receiver1 = process.env.RECEIVER_EMAIL_1;
+    const receiver2 = process.env.RECEIVER_EMAIL_2;
 
-    if (!user || !pass || !receiver) {
-      console.error("Email credentials are not set in environment variables.");
+    if (!user || !pass || !receiver1 || !receiver2) {
+      console.error("Email credentials or receiver emails are not set in environment variables.");
       return NextResponse.json({ error: "Server configuration error. Could not send email." }, { status: 500 });
     }
+    
+    const receiverEmails = [receiver1, receiver2].join(', ');
 
+    // --- Nodemailer Transport ---
     const transporter = nodemailer.createTransport({
       host: "smtp.gmail.com",
       port: 465,
@@ -33,10 +36,10 @@ export async function POST(req: Request) {
       },
     });
 
-    // Email to you (the site owner)
+    // --- Email to Site Owners ---
     const mailToOwner = {
-      from: `"${name}" <${email}>`, // Use user's name and email as sender
-      to: receiver,
+      from: `"${name}" <${email}>`, // Display user's name and email as sender
+      to: receiverEmails, // Send to both primary and secondary emails
       subject: `New Contact Form Submission: ${queryType}`,
       html: `
         <div style="font-family: Arial, sans-serif; line-height: 1.6;">
@@ -56,10 +59,10 @@ export async function POST(req: Request) {
       `,
     };
 
-    // Auto-reply email to the user
+    // --- Auto-reply to User ---
     const mailToUser = {
-      from: `"CodeAndCount Team" <${receiver}>`,
-      to: email,
+      from: `"CodeAndCount Team" <${user}>`, // Send from your email
+      to: email, // Send to the person who filled out the form
       subject: "We've Received Your Message!",
       html: `
         <div style="font-family: Arial, sans-serif; line-height: 1.6;">
@@ -76,15 +79,17 @@ export async function POST(req: Request) {
       `,
     };
 
-    // Send both emails
-    await transporter.sendMail(mailToOwner);
-    await transporter.sendMail(mailToUser);
+    // --- Send Emails ---
+    // Use Promise.all to send both emails concurrently
+    await Promise.all([
+      transporter.sendMail(mailToOwner),
+      transporter.sendMail(mailToUser)
+    ]);
 
     return NextResponse.json({ success: true }, { status: 200 });
 
   } catch (error) {
     console.error("Contact API Error:", error);
-    // In case of a nodemailer error, it might have more specific info
     const errorMessage = error instanceof Error ? error.message : "An unexpected server error occurred.";
     return NextResponse.json({ error: "Failed to send email.", details: errorMessage }, { status: 500 });
   }
