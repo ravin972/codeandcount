@@ -105,6 +105,25 @@ const caseStudies = [
   },
 ];
 
+// Fisher-Yates shuffle algorithm
+const shuffleArray = <T,>(array: T[]): T[] => {
+  let currentIndex = array.length,  randomIndex;
+
+  // While there remain elements to shuffle.
+  while (currentIndex > 0) {
+
+    // Pick a remaining element.
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex--;
+
+    // And swap it with the current element.
+    [array[currentIndex], array[randomIndex]] = [
+      array[randomIndex], array[currentIndex]];
+  }
+
+  return array;
+};
+
 export default function HomePage() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
@@ -112,6 +131,13 @@ export default function HomePage() {
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
   const [isLoading, setIsLoading] = useState(true);
+  const [shuffledCaseStudies, setShuffledCaseStudies] = useState(caseStudies);
+
+  useEffect(() => {
+    // Only run on the client
+    setShuffledCaseStudies(shuffleArray([...caseStudies]));
+  }, []);
+
 
   // Preloader logic moved here
   useEffect(() => {
@@ -391,7 +417,7 @@ export default function HomePage() {
               Explore how we've helped businesses like yours succeed.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {caseStudies.map((study) => (
+              {shuffledCaseStudies.map((study) => (
                 <Card key={study.id} className="overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out flex flex-col group hover:-translate-y-1 case-study-card" data-interactive-cursor="true">
                   <div className="ripple-container">
                     <Image src={study.imageUrl} alt={study.title} width={600} height={400} className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out" data-ai-hint={study.dataAiHint} />
@@ -529,7 +555,7 @@ export default function HomePage() {
               size="lg" 
               asChild 
               className={cn(
-                  "group w-full max-w-xs mx-auto text-base py-3 px-8",
+                  "group w-full max-w-xs mx-auto text-base py-3 px-6",
                   "transition-all duration-300 ease-in-out shadow-lg hover:shadow-2xl active:shadow-md transform hover:-translate-y-0.5 active:translate-y-px",
                   "bg-background text-primary hover:bg-neutral-200 dark:bg-primary-foreground dark:text-primary dark:hover:bg-primary-foreground/90"
               )}
