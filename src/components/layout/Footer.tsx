@@ -17,7 +17,7 @@ const XIcon = () => (
 
 const footerSections = {
   cta: {
-    title: "Do you like what you see?",
+    title: "Let's Build Your Next Big Idea",
     buttonText: "Start a project",
     buttonLink: "/contact#start-project",
   },
@@ -180,3 +180,5 @@ export function Footer() {
     </footer>
   );
 }
+
+    

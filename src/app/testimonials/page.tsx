@@ -11,7 +11,7 @@ export default function TestimonialsPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-4 flex items-center justify-center">
             <MessageSquareQuote className="h-12 w-12 mr-4 text-primary" />
-            Client Voices
+            Client Testimonials
           </h1>
           <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
             Hear directly from our valued partners about their experiences working with CodeAndCount.com.
@@ -49,3 +49,5 @@ export default function TestimonialsPage() {
     </div>
   );
 }
+
+    

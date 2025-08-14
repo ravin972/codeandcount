@@ -13,30 +13,32 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: {
-    default: 'CodeAndCount | Web, AI, & Accounting Solutions',
+    default: 'CodeAndCount – Web Development, AI Solutions & Accounting Services',
     template: '%s | CodeAndCount.com',
   },
-  description: 'CodeAndCount.com is a premier agency offering custom web and app development, AI integration, digital marketing, and expert accounting services to elevate your business.',
+  description: 'CodeAndCount.com: Premier agency in Gurugram, India for custom web development, AI solutions, digital marketing, and expert accounting services to elevate your business.',
   keywords: [
-    'Web Development',
-    'AI Solutions',
-    'Accounting Services',
-    'Digital Marketing',
+    'Web Development Gurugram',
+    'AI Solutions India',
+    'Accounting Services Gurugram',
+    'Digital Marketing Agency',
     'Mobile App Development',
     'Next.js Development',
     'Craft CMS',
     'WordPress Development',
-    'SEO Services',
+    'SEO Services India',
     'UI/UX Design',
     'Gurugram',
-    'India'
+    'India',
+    'Fintech Solutions',
+    'SaaS Development'
   ],
   authors: [{ name: 'CodeAndCount.com Team', url: 'https://codeandcount.com' }],
   creator: 'CodeAndCount.com',
   publisher: 'CodeAndCount.com',
   openGraph: {
-    title: 'CodeAndCount | Custom Web, AI, & Accounting Solutions',
-    description: 'Partner with CodeAndCount for cutting-edge web development, AI-powered tools, and comprehensive financial management.',
+    title: 'CodeAndCount | Web Development, AI, & Accounting in Gurugram',
+    description: 'Partner with CodeAndCount for cutting-edge web development, AI-powered tools, and comprehensive financial management from Gurugram, India.',
     url: 'https://codeandcount.com', 
     siteName: 'CodeAndCount.com',
     images: [
@@ -47,12 +49,12 @@ export const metadata: Metadata = {
         alt: 'CodeAndCount.com - Web, AI, & Accounting Solutions',
       },
     ],
-    locale: 'en_US',
+    locale: 'en_IN',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'CodeAndCount | Top-Tier Web, AI, & Accounting Services',
+    title: 'CodeAndCount | Top-Tier Web, AI, & Accounting Services in India',
     description: 'From stunning websites and intelligent AI to precise accounting, CodeAndCount provides the digital and financial expertise your business needs to succeed.',
     creator: '@codeandcount',
     images: ['https://placehold.co/1200x600/2563eb/ffffff.png?text=CodeAndCount'],
@@ -92,3 +94,5 @@ export default function RootLayout({
     </html>
   );
 }
+
+    

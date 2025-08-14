@@ -26,18 +26,18 @@ gsap.registerPlugin(ScrollTrigger);
 
 const services = [
   {
-    name: 'Account Management',
-    description: 'Expert financial management, compliance, and strategic accounting services to ensure your business thrives.',
+    name: 'Accounting & Financial Management',
+    description: 'Strategic accounting, tax compliance, and payroll management. Custom dashboards for real-time business insights. Expertise in FinTech, retail, and hospitality sectors.',
     icon: <Calculator className="h-10 w-10 text-primary mb-4" />
   },
   {
-    name: 'Web & AI Solutions',
-    description: 'Cutting-edge web development, AI-powered tools, and creative design to build exceptional digital experiences.',
+    name: 'Web & AI Development',
+    description: 'Custom websites, SaaS platforms, and mobile apps. AI-powered tools like chatbots, automation, and analytics. UI/UX design with modern, mobile-first interfaces.',
     icon: <Laptop className="h-10 w-10 text-primary mb-4" />
   },
   {
-    name: 'Digital Marketing',
-    description: 'Strategic digital marketing services to boost your online presence, engage audiences, and drive growth.',
+    name: 'Digital Marketing & SEO',
+    description: 'Search engine optimization (SEO) for higher rankings. Paid advertising campaigns (Google, Meta, LinkedIn). Social media strategy & content creation.',
     icon: <Volume2 className="h-10 w-10 text-primary mb-4" />
   }
 ];
@@ -207,6 +207,8 @@ export default function HomePage() {
     // Note: Horizontal scroll items might need different/no scrolltrigger or careful trigger points.
     // For simplicity, the individual cards inside the scroller are not animated here with scrolltrigger
     // to avoid conflicts with the horizontal scrolling itself.
+    // For simplicity, the individual cards inside the scroller are not animated here with scrolltrigger
+    // to avoid conflicts with the horizontal scrolling itself.
     createAnimation('.blog-section-controls', { delay: 0.2 });
 
 
@@ -303,12 +305,12 @@ export default function HomePage() {
           <div className="relative rounded-3xl p-8 md:p-12 lg:p-16">
               <div className="mb-6 hero-title">
                 <h1 className="text-5xl md:text-7xl font-bold tracking-tight bg-gradient-text-dynamic bg-clip-text text-transparent">
-                  Crafting digital experience.
+                  Code&Count – Web Development, AI Solutions & Accounting Services
                 </h1>
               </div>
 
               <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-10 hero-paragraph">
-              CodeAndCount.com helps turn your ideas into reality — from web development to smart accounting. We simplify success with digital innovation, custom software, and expert financial solutions.
+                Crafting digital experiences that turn your ideas into reality. We blend web development, AI innovation, and expert accounting to simplify your path to success.
               </p>
               <Button
                 asChild
@@ -335,7 +337,7 @@ export default function HomePage() {
               <h2 className="col-start-1 row-start-1 relative z-[1] text-4xl md:text-5xl font-bold text-center text-foreground">Our Core Services</h2>
             </div>
             <p className="text-xl md:text-2xl text-muted-foreground text-center mt-4 mb-12 max-w-2xl mx-auto services-description">
-              We offer a comprehensive suite of services to bring your vision to life.
+              We offer a full suite of digital and financial solutions to help your business thrive.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {services.map((service) => (
@@ -357,7 +359,7 @@ export default function HomePage() {
         <section id="trusted-by-leaders" className="py-16 bg-background">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="bg-card rounded-xl shadow-xl p-8 md:p-12 border border-border">
-              <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-10 client-logos-title">Trusted by Industry Leaders</h2>
+              <h2 className="text-3xl md:text-4xl font-bold text-center text-foreground mb-10 client-logos-title">Trusted by Leading Brands</h2>
                <div className="scroller" data-speed="slow" data-direction="left">
                 <div className="scroller__inner">
                     {[...clientLogos, ...clientLogos].map((logo, index) => (
@@ -386,10 +388,10 @@ export default function HomePage() {
         <section id="work" className="py-16 bg-background">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="relative inline-grid place-items-center w-full text-center mb-4 case-studies-title">
-              <h2 className="col-start-1 row-start-1 relative z-[1] text-4xl md:text-5xl font-bold text-center text-foreground">Featured Work</h2>
+              <h2 className="col-start-1 row-start-1 relative z-[1] text-4xl md:text-5xl font-bold text-center text-foreground">Featured Projects</h2>
             </div>
             <p className="text-xl md:text-2xl text-muted-foreground text-center mb-12 max-w-2xl mx-auto case-studies-description">
-              Explore how we've helped businesses like yours succeed.
+              Explore our success stories across multiple industries.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {shuffledProjects.slice(0, 3).map((project) => (
@@ -428,14 +430,14 @@ export default function HomePage() {
           <section id="testimonials" className="py-16 bg-background testimonials-section">
               <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                   <div className="bg-card rounded-xl shadow-xl p-8 md:p-12 border border-border">
-                      <h2 className="text-4xl font-bold text-center mb-4 text-foreground testimonials-title">What Our Clients Say</h2>
+                      <h2 className="text-4xl font-bold text-center mb-4 text-foreground testimonials-title">Client Testimonials</h2>
                       <p className="text-xl md:text-2xl text-muted-foreground text-center mb-12 max-w-2xl mx-auto testimonials-description">
-                          Real stories from satisfied partners across the globe.
+                          Real feedback from partners who trust us.
                       </p>
                       <div className="scroller" data-speed="slow" data-direction="left">
                           <div className="scroller__inner">
-                              {[...testimonials, ...testimonials].map((testimonial, index) => (
-                                  <Card key={`${testimonial.name}-${index}`} className="w-[350px] flex-shrink-0 mx-4 shadow-lg" data-interactive-cursor="true">
+                              {[...testimonials.slice(0,2), ...testimonials.slice(0,2)].map((testimonial, index) => (
+                                  <Card key={`${testimonial.name}-${index}`} className="w-[450px] flex-shrink-0 mx-4 shadow-lg" data-interactive-cursor="true">
                                       <CardContent className="pt-6">
                                           <div className="flex items-start space-x-4 mb-4">
                                               <Avatar className="h-12 w-12">
@@ -455,6 +457,11 @@ export default function HomePage() {
                               ))}
                           </div>
                       </div>
+                      <div className="text-center mt-8">
+                        <Button variant="link" asChild>
+                            <Link href="/testimonials">Read More Reviews <ArrowRight className="ml-1 h-4 w-4" /></Link>
+                        </Button>
+                      </div>
                   </div>
               </div>
           </section>
@@ -464,10 +471,10 @@ export default function HomePage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <Sparkles className="h-12 w-12 text-primary mx-auto mb-6" />
             <div className="relative inline-grid place-items-center w-full text-center mb-6">
-              <h2 className="col-start-1 row-start-1 relative z-[1] text-4xl md:text-5xl font-bold">Boost Your SEO with Our AI Optimizer</h2>
+              <h2 className="col-start-1 row-start-1 relative z-[1] text-4xl md:text-5xl font-bold">Boost Your SEO with AI</h2>
             </div>
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
-              Unlock the power of AI to rewrite your content, incorporate strategic keywords, and climb search engine rankings. Try our free SEO Optimizer tool today!
+              Unlock higher rankings with our AI SEO Optimizer – rewrite content, target keywords, and track results.
             </p>
             
             <div className="relative inline-block">
@@ -526,9 +533,9 @@ export default function HomePage() {
             className="absolute inset-0 w-full h-full -z-10" 
           />
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground dark:text-primary-foreground">Ready to Elevate Your Brand?</h2>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground dark:text-primary-foreground">Let’s Build Your Next Big Idea</h2>
             <p className="text-lg md:text-xl max-w-2xl mx-auto mb-10 text-muted-foreground dark:text-primary-foreground/90">
-              Let's discuss how CodeAndCount.com can help you achieve your business goals. We partner with clients of all sizes, across diverse industries, to deliver exceptional results.
+              From startups to enterprises, we partner with you to develop, market, and scale your brand from Gurugram, Haryana, India.
             </p>
             <Button 
               size="lg" 
@@ -541,7 +548,7 @@ export default function HomePage() {
               data-interactive-cursor="true"
             >
               <Link href="/contact#start-project">
-                Get in Touch <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+                Start Your Project <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Link>
             </Button>
           </div>
@@ -554,11 +561,8 @@ export default function HomePage() {
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col lg:flex-row lg:items-center lg:gap-12">
               <div className="lg:w-1/3 flex-shrink-0 space-y-6 blog-section-intro mb-8 lg:mb-0">
-                <p className="text-sm font-semibold text-primary flex items-center">
-                  <Dot className="h-5 w-5 mr-1 -ml-1" /> Blog
-                </p>
-                <h2 className="text-4xl md:text-5xl font-bold leading-tight text-foreground">
-                  The latest from CodeAndCount.com
+                 <h2 className="text-4xl md:text-5xl font-bold leading-tight text-foreground">
+                  Latest Insights from Our Blog
                 </h2>
                 <div className="space-y-4">
                   <Button
@@ -568,7 +572,7 @@ export default function HomePage() {
                     className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full group pl-6 pr-4 py-3 text-base"
                   >
                     <Link href="/blog">
-                      View the blog
+                      Read More Articles
                       <span className="ml-2 bg-primary-foreground/20 p-1.5 rounded-full inline-flex items-center justify-center">
                         <ArrowUpRight className="h-4 w-4 text-primary-foreground" />
                       </span>
@@ -588,7 +592,7 @@ export default function HomePage() {
               </div>
               <div className="lg:w-2/3 lg:flex-1 min-w-0">
                 <div ref={scrollContainerRef} className="flex space-x-6 overflow-x-auto pb-4 -mb-4 scrollbar-hide">
-                  {homepageBlogPosts.slice(0, 6).map((post, index) => (
+                  {homepageBlogPosts.slice(0, 3).map((post, index) => (
                     <Link
                       key={post.slug}
                       href={`/blog/${post.slug}`}
@@ -613,9 +617,6 @@ export default function HomePage() {
                             <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-2 mb-2">
                               {post.title}
                             </h3>
-                            <p className="text-sm text-muted-foreground line-clamp-3 flex-grow">
-                              {post.excerpt}
-                            </p>
                           </CardContent>
                         </Card>
                       </div>
@@ -632,7 +633,5 @@ export default function HomePage() {
     </div>
   );
 }
-
-    
 
     
