@@ -31,9 +31,10 @@ import { cn } from "@/lib/utils";
 const contactFormSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
   email: z.string().email({ message: "Please enter a valid email address." }),
+  phone: z.string().optional(),
   company: z.string().optional(),
   queryType: z.string().min(1, { message: "Please select a query type." }),
-  message: z.string().min(10, { message: "Message must be at least 10 characters." }).max(1000, { message: "Message must not exceed 1000 characters." }),
+  message: z.string().min(10, { message: "Message must be at least 10 characters." }).max(5000, { message: "Message must not exceed 5000 characters." }),
 });
 
 type ContactFormValues = z.infer<typeof contactFormSchema>;
@@ -58,17 +59,17 @@ export function ContactForm() {
     defaultValues: {
       name: "",
       email: "",
+      phone: "",
       company: "",
       queryType: "",
       message: "",
     },
   });
 
-  async function onSubmit(values: ContactFormValues) {
+ async function onSubmit(values: ContactFormValues) {
     setIsSubmitting(true);
-    
     try {
-      const response = await fetch("https://formspree.io/f/xgegvdpl", {
+      const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -84,14 +85,15 @@ export function ContactForm() {
         });
         form.reset();
       } else {
-        throw new Error("Failed to send message.");
+        const errorData = await response.json();
+        throw new Error(errorData.error || "Failed to send message.");
       }
 
     } catch (error) {
       console.error("Form submission error:", error);
       toast({
         title: "Error",
-        description: "Something went wrong. Please try again or contact us directly.",
+        description: error instanceof Error ? error.message : "Something went wrong. Please try again or contact us directly.",
         variant: "destructive",
       });
     } finally {
@@ -126,6 +128,19 @@ export function ContactForm() {
               </FormControl>
               <FormMessage />
             </FormItem>
+          )}
+        />
+       <FormField
+          control={form.control}
+          name="phone"
+          render={({ field }) => (
+          <FormItem>
+          <FormLabel>Phone Number (Optional)</FormLabel>
+          <FormControl>
+          <Input type="tel" placeholder="+91 98765 43210" {...field} />
+          </FormControl>
+          <FormMessage />
+          </FormItem>
           )}
         />
         <FormField
