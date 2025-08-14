@@ -107,7 +107,7 @@ export function Header() {
             className={cn(
               "group rounded-full",
               "transition-all duration-300 ease-in-out shadow-lg hover:shadow-2xl active:shadow-md transform hover:-translate-y-0.5 active:translate-y-px",
-              "bg-gradient-to-br from-primary to-green-400 dark:from-primary dark:to-accent text-primary-foreground"
+              "bg-primary text-primary-foreground"
             )}
             data-interactive-cursor="true"
           >
