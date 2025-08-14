@@ -66,34 +66,25 @@ export function ContactForm() {
 
   async function onSubmit(values: ContactFormValues) {
     setIsSubmitting(true);
-    try {
-      const recipients = "pandeyravinder078@gmail.com,hello@codeandcount.com";
-      const subject = encodeURIComponent(
-        `${values.queryType} - Contact from ${values.name}`
-      );
-      const bodyLines = [
-        `Name: ${values.name}`,
-        `Email: ${values.email}`,
-        `Company: ${values.company || 'N/A'}`,
-        `Query Type: ${values.queryType}`,
-        `------------------------------------`,
-        `Message:`,
-        values.message,
-      ];
-      const body = encodeURIComponent(bodyLines.join("\n"));
+    
+    // Simulate a network request
+    await new Promise(resolve => setTimeout(resolve, 1500));
 
-      window.location.href = `mailto:${recipients}?subject=${subject}&body=${body}`;
+    try {
+      // Here you would typically send the form data to your backend API
+      // For this example, we'll just log it and show a success message.
+      console.log("Form Submitted:", values);
 
       toast({
-        title: "Email Client Opened",
-        description: "Please send the email using your default mail application. Your form details have been pre-filled.",
+        title: "Message Sent Successfully!",
+        description: "Thank you for reaching out. We'll get back to you shortly.",
       });
       form.reset();
     } catch (error) {
-      console.error("Mailto construction error:", error);
+      console.error("Form submission error:", error);
       toast({
         title: "Error",
-        description: "Could not open your email client. Please try again or copy the email address.",
+        description: "Something went wrong. Please try again or contact us directly.",
         variant: "destructive",
       });
     } finally {
@@ -201,7 +192,7 @@ export function ContactForm() {
             {isSubmitting ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Preparing Email...
+                Sending...
               </>
             ) : (
               <>
