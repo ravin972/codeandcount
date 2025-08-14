@@ -242,7 +242,7 @@ export const portfolioItems: {
     tags: ['Enterprise Web', 'Tech Branding', 'DevOps', 'IT Solutions', 'Client Portfolio'],
     client: 'Venkwara Infotech Pvt. Ltd.',
     date: '2023-06-05',
-    liveUrl: 'https://venkwarainfotechpvtltd.com',
+    liveUrl: 'https://www.venkwara.in/',
     servicesProvided: ['Tech Website Development', 'Client Portfolio Design', 'Contact Automation', 'DevOps Solutions', 'Infrastructure Projects'],
     results: 'Successfully showcased complex IT projects, enhancing credibility and attracting enterprise-level clients.',
     gallery: [
@@ -403,7 +403,7 @@ export const portfolioItems: {
     title: 'International Payment Gateway Integration',
     category: 'Fintech · Global Payments',
     type: 'accounting',
-    imageUrl: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxwYXltZW50fGVufDB8fHx8MTc1NDQ3MjU4OHww&ixlib=rb-4.1.0&q=80&w=1080',
+    imageUrl: 'https://images.unsplash.com/photo-1563013544-824ae1b704d3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3NDE5ODJ8MHwxfHNlYXJjaHw0fHxwYXltZW50fGVufDB8fHx8MTc1NDQ3MjU4OHww&lib=rb-4.1.0&q=80&w=1080',
     dataAiHint: 'payment gateway',
     description: 'Integrate payment gateways like PayPal, Stripe, Wise, Razorpay International, with payment reminders and a secure tracking dashboard.',
     longDescription: 'Facilitate seamless international payments by integrating popular gateways such as PayPal, Stripe, Wise, and Razorpay International. Includes features like payment due reminders, follow-ups, and a secure payment tracking dashboard.',
