@@ -19,6 +19,7 @@ import Preloader from '@/components/layout/Preloader';
 import { testimonials } from '@/lib/testimonial-data';
 import { blogPosts as homepageBlogPosts } from '@/lib/blog-data';
 import { portfolioItems } from '@/lib/portfolio-data';
+import { Badge } from '@/components/ui/badge';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -469,20 +470,22 @@ export default function HomePage() {
               Unlock the power of AI to rewrite your content, incorporate strategic keywords, and climb search engine rankings. Try our free SEO Optimizer tool today!
             </p>
             
-            <Button
-                asChild
-                size="lg"
-                className={cn(
-                    "group w-full max-w-xs mx-auto text-base py-3 px-8",
-                    "transition-all duration-300 ease-in-out shadow-lg hover:shadow-2xl active:shadow-md transform hover:-translate-y-0.5 active:translate-y-px",
-                    "bg-primary text-primary-foreground"
-                )}
-                data-interactive-cursor="true"
-              >
-              <Link href="/seo-optimizer">
-                Try SEO Optimizer <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-              </Link>
-            </Button>
+            <div className="relative inline-block">
+                <Button
+                    size="lg"
+                    className={cn(
+                        "group w-full max-w-xs mx-auto text-base py-3 px-8",
+                        "transition-all duration-300 ease-in-out shadow-lg hover:shadow-2xl active:shadow-md transform hover:-translate-y-0.5 active:translate-y-px",
+                        "bg-primary text-primary-foreground",
+                        "opacity-50 cursor-not-allowed" // Make it look disabled
+                    )}
+                    data-interactive-cursor="true"
+                    disabled // Disable the button functionality
+                >
+                  Try SEO Optimizer <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+                <Badge variant="secondary" className="absolute -top-2 -right-4 rotate-12">Coming Soon!</Badge>
+            </div>
           </div>
         </section>
 
@@ -497,20 +500,22 @@ export default function HomePage() {
                 Transform your ideas into stunning visuals. Describe any image, and our AI will bring it to life. Explore the future of digital art!
               </p>
               
-              <Button
-                asChild
-                size="lg"
-                className={cn(
-                    "group w-full max-w-xs mx-auto text-base py-3 px-8",
-                    "transition-all duration-300 ease-in-out shadow-lg hover:shadow-2xl active:shadow-md transform hover:-translate-y-0.5 active:translate-y-px",
-                    "bg-primary text-primary-foreground"
-                )}
-                data-interactive-cursor="true"
-              >
-                <Link href="/ai-image-generator">
-                  Try AI Image Generator <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-                </Link>
-              </Button>
+              <div className="relative inline-block">
+                <Button
+                    size="lg"
+                    className={cn(
+                        "group w-full max-w-xs mx-auto text-base py-3 px-8",
+                        "transition-all duration-300 ease-in-out shadow-lg hover:shadow-2xl active:shadow-md transform hover:-translate-y-0.5 active:translate-y-px",
+                        "bg-primary text-primary-foreground",
+                        "opacity-50 cursor-not-allowed"
+                    )}
+                    data-interactive-cursor="true"
+                    disabled
+                >
+                    Try AI Image Generator <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+                <Badge variant="secondary" className="absolute -top-2 -right-4 rotate-12">Coming Soon!</Badge>
+            </div>
             </div>
         </section>
 
@@ -627,5 +632,7 @@ export default function HomePage() {
     </div>
   );
 }
+
+    
 
     
