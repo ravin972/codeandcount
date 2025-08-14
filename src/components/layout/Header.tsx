@@ -13,7 +13,7 @@ import { gsap } from 'gsap';
 
 const navLinks = [
   { href: '/services', label: 'Services', icon: <Briefcase className="h-5 w-5" /> },
-  { href: '/work', label: 'Work', icon: <Sparkles className="h-5 w-5" /> },
+  { href: '/work', label: 'Our Work', icon: <Sparkles className="h-5 w-5" /> },
   { href: '/about', label: 'About', icon: <Users className="h-5 w-5" /> },
   { href: '/blog', label: 'Blog', icon: <Rss className="h-5 w-5" /> },
   { href: '/contact', label: 'Contact', icon: <Mail className="h-5 w-5" /> },
