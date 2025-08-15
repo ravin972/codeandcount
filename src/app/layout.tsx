@@ -13,9 +13,15 @@ const inter = Inter({
 
 // SVG Favicon with "C2" text
 const faviconSvg = `
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="32" height="32">
-  <circle cx="50" cy="50" r="50" fill="hsl(145 65% 45%)"></circle>
-  <text x="50%" y="50%" text-anchor="middle" dy=".3em" font-size="50" font-weight="bold" fill="white" font-family="sans-serif">C2</text>
+<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:hsl(220, 90%, 55%);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:hsl(260, 90%, 65%);stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="100" height="100" rx="20" fill="url(#grad1)"/>
+  <text x="50%" y="50%" font-family="Arial, sans-serif" font-size="50" dy=".3em" font-weight="bold" fill="white" text-anchor="middle">C2</text>
 </svg>
 `;
 const faviconDataUrl = `data:image/svg+xml;base64,${btoa(faviconSvg)}`;
