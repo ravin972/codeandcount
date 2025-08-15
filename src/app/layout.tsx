@@ -11,6 +11,16 @@ const inter = Inter({
   display: 'swap',
 });
 
+// SVG Favicon with "C2" text
+const faviconSvg = `
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="32" height="32">
+  <circle cx="50" cy="50" r="50" fill="hsl(145 65% 45%)"></circle>
+  <text x="50%" y="50%" text-anchor="middle" dy=".3em" font-size="50" font-weight="bold" fill="white" font-family="sans-serif">C2</text>
+</svg>
+`;
+const faviconDataUrl = `data:image/svg+xml;base64,${btoa(faviconSvg)}`;
+
+
 export const metadata: Metadata = {
   title: {
     default: 'CodeAndCount – Web Development, AI Solutions & Accounting Services',
@@ -75,9 +85,9 @@ export const metadata: Metadata = {
     { media: '(prefers-color-scheme: dark)', color: '#111827' },
   ],
   icons: {
-    icon: '/favicon.ico',
-    shortcut: '/favicon-16x16.png',
-    apple: '/apple-touch-icon.png',
+    icon: faviconDataUrl,
+    shortcut: faviconDataUrl,
+    apple: faviconDataUrl,
   },
 };
 
@@ -94,5 +104,4 @@ export default function RootLayout({
     </html>
   );
 }
-
     
