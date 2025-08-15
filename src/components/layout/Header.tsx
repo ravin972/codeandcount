@@ -4,7 +4,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, Briefcase, Users, Rss, Mail, Sparkles, ArrowUpRight, Code } from 'lucide-react'; 
+import { Menu, Briefcase, Users, Rss, Mail, Sparkles, ArrowUpRight } from 'lucide-react'; 
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import React, { useState, useEffect, useRef } from 'react';
@@ -96,7 +96,7 @@ export function Header() {
               "flex items-center transition-all duration-400 ease-in-out",
               isScrolled ? "opacity-0 scale-90" : "opacity-100 scale-100"
             )}>
-              <Code className="w-8 h-8 mr-2 text-primary" />
+              <span className="text-primary font-bold mr-2 text-3xl">&lt;/&gt;</span>
               <span className="whitespace-nowrap">Code<span className="text-primary">&amp;</span>Count</span>
             </span>
 
@@ -105,7 +105,7 @@ export function Header() {
               "absolute transition-all duration-400 ease-in-out flex items-center",
                isScrolled ? "opacity-100 scale-100" : "opacity-0 scale-90"
             )}>
-              <Code className="w-8 h-8 mr-1 text-primary" />
+              <span className="text-primary font-bold mr-1 text-3xl">&lt;/&gt;</span>
                <span className="whitespace-nowrap">C<sub className="text-primary text-base -ml-1">2</sub></span>
             </span>
           </Link>
@@ -168,7 +168,7 @@ export function Header() {
               </SheetHeader>
               <div className="flex flex-col space-y-6 mt-4"> 
                 <Link href="/" className="text-2xl font-bold text-foreground self-start hover:opacity-80 transition-opacity whitespace-nowrap flex items-center" onClick={() => setIsMobileMenuOpen(false)}>
-                  <Code className="w-8 h-8 mr-2 text-primary" />
+                  <span className="text-primary font-bold mr-2 text-3xl">&lt;/&gt;</span>
                   Code<span className="text-primary">&amp;</span>Count
                 </Link>
                 <nav className="flex flex-col space-y-4">
