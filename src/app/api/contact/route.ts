@@ -38,9 +38,10 @@ export async function POST(req: Request) {
 
     // --- Email to Site Owners ---
     const mailToOwner = {
-      from: `"${name}" <${email}>`, // Display user's name and email as sender
-      to: receiverEmails, // Send to both primary and secondary emails
-      subject: `New Contact Form Submission: ${queryType}`,
+      from: `"${name}" <${user}>`, // Must be your Gmail
+      replyTo: email, // User's email, so admin can reply directly
+      to: receiverEmails,
+      subject: `Code&Count New Contact Form Submission: ${queryType}`,
       html: `
         <div style="font-family: Arial, sans-serif; line-height: 1.6;">
           <h2 style="color: #333;">New Inquiry from CodeAndCount.com</h2>
