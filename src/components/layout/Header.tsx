@@ -22,7 +22,24 @@ const navLinks = [
 export function Header() {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 50);
+    };
+    
+    window.addEventListener('scroll', handleScroll);
+    
+    // Initial check in case the page loads scrolled
+    handleScroll();
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
 
   useEffect(() => {
     const headerElement = headerRef.current;
@@ -71,10 +88,24 @@ export function Header() {
         <div className="flex-shrink-0 header-logo" style={{ pointerEvents: 'auto' }}>
            <Link 
             href="/" 
-            className="font-bold text-2xl hover:opacity-80 transition-opacity duration-300"
+            className="font-bold text-2xl hover:opacity-80 transition-opacity duration-300 relative w-[160px] h-[32px] flex items-center"
             onClick={() => setIsMobileMenuOpen(false)}
           >
-            Code<span className="text-primary">&amp;</span>Count
+            {/* Full Logo Text */}
+            <span className={cn(
+              "absolute transition-all duration-400 ease-in-out",
+              isScrolled ? "opacity-0 scale-90" : "opacity-100 scale-100"
+            )}>
+              Code<span className="text-primary">&amp;</span>Count
+            </span>
+
+            {/* Compact Logo */}
+            <span className={cn(
+              "absolute transition-all duration-400 ease-in-out",
+               isScrolled ? "opacity-100 scale-100" : "opacity-0 scale-90"
+            )}>
+              C<sub className="text-primary text-base -ml-1">2</sub>
+            </span>
           </Link>
         </div>
 
