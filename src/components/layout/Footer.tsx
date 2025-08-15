@@ -3,7 +3,7 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowUpRight, Phone, Mail, MapPin, Copyright, Github, Linkedin, Instagram } from 'lucide-react';
+import { ArrowUpRight, Phone, Mail, MapPin, Github, Linkedin, Instagram } from 'lucide-react';
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { BackToTopButton } from '@/components/layout/BackToTopButton';
@@ -31,7 +31,7 @@ const footerSections = {
       { text: "Play Hex Test!", href: "/hex-test" },
   ],
   contactInfo: {
-    phone1: "+91-8685941423",
+    phone1: "+91-9729041423",
     phone2: "+91-7737770374",
     email: "hello@codeandcount.com",
     addressLine1: "spaze i tech park, Sec-49",
@@ -123,11 +123,11 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Social Links */}
+          {/* Social Links & Back to top */}
            <div className="md:text-left">
              <div className="flex items-center justify-between md:justify-start mb-4 gap-4">
                 <h3 className={cn("text-xl font-semibold", "text-foreground dark:text-primary-foreground")}>Connect With Us</h3>
-                <BackToTopButton size="icon" className="md:hidden fixed bottom-24 right-6" />
+                 <BackToTopButton size="icon" className="md:hidden fixed bottom-24 right-6" />
              </div>
             <div className="flex md:justify-start justify-center space-x-4">
               {footerSections.socialLinks.map((social) => (
@@ -147,7 +147,7 @@ export function Footer() {
               ))}
             </div>
              <div className="hidden md:block mt-8">
-               <BackToTopButton />
+               <BackToTopButton size="lg"/>
              </div>
           </div>
         </div>
@@ -166,8 +166,8 @@ export function Footer() {
           </div>
            <div className="mt-4 flex items-center justify-center">
             <Link href="/" className={cn("text-lg font-bold transition-opacity flex items-center", "text-foreground dark:text-primary-foreground hover:opacity-80")}>
-              <span className="text-primary font-bold text-lg">&lt;/&gt;</span>
-              <span>Code<span className="text-primary">&amp;</span>Count</span>
+               <span className="text-primary font-bold text-xl leading-none">&lt;/&gt;</span>
+               <span className='text-xl leading-none'>Code<span className="text-primary">&amp;</span>Count</span>
             </Link>
           </div>
         </div>
