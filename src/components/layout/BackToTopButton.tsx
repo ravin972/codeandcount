@@ -34,10 +34,10 @@ export function BackToTopButton({ className }: { className?: string }) {
   return (
     <Button
       variant="outline"
-      size="icon"
+      size="lg"
       onClick={scrollToTop}
       className={cn(
-        'fixed bottom-6 right-24 z-40 h-12 w-12 rounded-full shadow-lg transition-all duration-300 ease-in-out',
+        'fixed bottom-6 right-24 z-40 rounded-full shadow-lg transition-all duration-300 ease-in-out',
         'bg-card/80 backdrop-blur-md hover:bg-accent/80 hover:text-accent-foreground focus:ring-2 focus:ring-offset-2 focus:ring-primary/80',
         'transform hover:scale-105',
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none',
@@ -46,7 +46,8 @@ export function BackToTopButton({ className }: { className?: string }) {
       aria-label="Scroll back to top"
       data-interactive-cursor="true"
     >
-      <ArrowUp className="h-6 w-6" />
+      <ArrowUp className="h-5 w-5 mr-2" />
+      <span>Send me back up</span>
     </Button>
   );
 }
