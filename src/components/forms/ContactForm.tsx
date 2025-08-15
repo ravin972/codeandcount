@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -16,13 +15,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { useToast } from "@/hooks/use-toast";
 import { ArrowRight, Loader2, MessageSquare } from "lucide-react";
 import React from "react";
@@ -31,24 +23,11 @@ import { cn } from "@/lib/utils";
 const contactFormSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
   email: z.string().email({ message: "Please enter a valid email address." }),
-  phone: z.string().optional(),
-  company: z.string().optional(),
-  queryType: z.string().min(1, { message: "Please select a query type." }),
+  subject: z.string().min(5, { message: "Subject must be at least 5 characters." }),
   message: z.string().min(10, { message: "Message must be at least 10 characters." }).max(5000, { message: "Message must not exceed 5000 characters." }),
 });
 
 type ContactFormValues = z.infer<typeof contactFormSchema>;
-
-const queryTypes = [
-  "General Inquiry",
-  "Project Proposal",
-  "Service Question",
-  "Technical Support",
-  "Partnership Opportunity",
-  "Feedback",
-  "Careers",
-  "Other",
-];
 
 export function ContactForm() {
   const { toast } = useToast();
@@ -59,9 +38,7 @@ export function ContactForm() {
     defaultValues: {
       name: "",
       email: "",
-      phone: "",
-      company: "",
-      queryType: "",
+      subject: "",
       message: "",
     },
   });
@@ -78,15 +55,16 @@ export function ContactForm() {
         body: JSON.stringify(values),
       });
 
-      if (response.ok) {
+      const result = await response.json();
+
+      if (response.ok && result.success) {
         toast({
           title: "Message Sent Successfully!",
           description: "Thank you for reaching out. We'll get back to you shortly.",
         });
         form.reset();
       } else {
-        const errorData = await response.json();
-        throw new Error(errorData.error || "Failed to send message.");
+        throw new Error(result.error || "Failed to send message.");
       }
 
     } catch (error) {
@@ -132,50 +110,13 @@ export function ContactForm() {
         />
        <FormField
           control={form.control}
-          name="phone"
-          render={({ field }) => (
-          <FormItem>
-          <FormLabel>Phone Number (Optional)</FormLabel>
-          <FormControl>
-          <Input type="tel" placeholder="+91 98765 43210" {...field} />
-          </FormControl>
-          <FormMessage />
-          </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="company"
+          name="subject"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Company (Optional)</FormLabel>
+              <FormLabel>Subject</FormLabel>
               <FormControl>
-                <Input placeholder="Your Company Inc." {...field} />
+                <Input placeholder="Subject of your message" {...field} />
               </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="queryType"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Reason for Contact</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select a reason" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  {queryTypes.map((type) => (
-                    <SelectItem key={type} value={type}>
-                      {type}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
               <FormMessage />
             </FormItem>
           )}
@@ -193,9 +134,6 @@ export function ContactForm() {
                   {...field}
                 />
               </FormControl>
-              <FormDescription>
-                Please provide as much detail as possible.
-              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
