@@ -96,8 +96,7 @@ export function Header() {
               "flex items-center transition-all duration-500 ease-in-out",
               isScrolled ? "opacity-0 scale-90" : "opacity-100 scale-100"
             )}>
-              <span className="text-primary font-bold text-2xl">&lt;/&gt;</span>
-              <span className="whitespace-nowrap">Code<span className="text-primary">&amp;</span>Count</span>
+              <span className="text-primary font-bold text-2xl">&lt;/&gt;</span><span className="whitespace-nowrap">Code<span className="text-primary">&amp;</span>Count</span>
             </span>
 
             {/* Compact Logo */}
@@ -105,8 +104,7 @@ export function Header() {
               "absolute transition-all duration-500 ease-in-out flex items-center",
                isScrolled ? "opacity-100 scale-100" : "opacity-0 scale-90"
             )}>
-              <span className="text-primary font-bold text-2xl">&lt;/&gt;</span>
-               <span className="whitespace-nowrap">C<sub className="text-primary text-base -ml-1">2</sub></span>
+               <span className="whitespace-nowrap">C<span className="text-primary">2</span></span>
             </span>
           </Link>
         </div>
@@ -168,8 +166,7 @@ export function Header() {
               </SheetHeader>
               <div className="flex flex-col space-y-6 mt-4"> 
                 <Link href="/" className="text-2xl font-bold text-foreground self-start hover:opacity-80 transition-opacity whitespace-nowrap flex items-center" onClick={() => setIsMobileMenuOpen(false)}>
-                  <span className="text-primary font-bold text-2xl">&lt;/&gt;</span>
-                  Code<span className="text-primary">&amp;</span>Count
+                  <span className="text-primary font-bold text-2xl">&lt;/&gt;</span>Code<span className="text-primary">&amp;</span>Count
                 </Link>
                 <nav className="flex flex-col space-y-4">
                   {navLinks.map((link) => (
