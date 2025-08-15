@@ -32,7 +32,7 @@ export function BackToTopButton() {
       variant="outline"
       onClick={scrollToTop}
       className={cn(
-        'fixed bottom-24 right-6 z-40 rounded-full transition-all duration-300 ease-in-out md:bottom-6',
+        'fixed bottom-24 right-6 z-40 rounded-full transition-all duration-300 ease-in-out',
         'h-12 w-12 md:h-auto md:w-auto md:px-4 md:py-2',
         'border-white/20 bg-white/10 text-primary-foreground backdrop-blur-lg',
         'shadow-lg shadow-black/20 hover:shadow-primary/40 hover:border-primary/50',
