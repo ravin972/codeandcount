@@ -37,17 +37,18 @@ export function BackToTopButton({ className }: { className?: string }) {
       size="lg"
       onClick={scrollToTop}
       className={cn(
-        'relative rounded-full shadow-lg transition-all duration-300 ease-in-out',
-        'bg-card/80 backdrop-blur-md hover:bg-accent/80 hover:text-accent-foreground focus:ring-2 focus:ring-offset-2 focus:ring-primary/80',
-        'transform hover:scale-105',
+        'relative rounded-full transition-all duration-300 ease-in-out',
+        'border-white/20 bg-white/10 text-primary-foreground backdrop-blur-lg',
+        'shadow-lg shadow-black/20 hover:shadow-primary/40 hover:border-primary/50',
+        'transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background',
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none',
         className
       )}
       aria-label="Scroll back to top"
       data-interactive-cursor="true"
     >
-      <ArrowUp className="h-5 w-5 mr-2" />
-      <span>Send me back up</span>
+      <ArrowUp className="h-5 w-5 mr-2 text-primary" />
+      <span className="text-primary-foreground/90">Send me back up</span>
     </Button>
   );
 }
