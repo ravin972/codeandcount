@@ -125,9 +125,10 @@ export function Footer() {
 
           {/* Social Links */}
           <div className="md:text-left">
-            <div className="flex items-center justify-center md:justify-start mb-4">
-              <h3 className={cn("text-xl font-semibold", "text-foreground dark:text-primary-foreground")}>Connect With Us</h3>
-            </div>
+             <div className="flex items-center justify-between md:justify-start mb-4 gap-4">
+                <h3 className={cn("text-xl font-semibold", "text-foreground dark:text-primary-foreground")}>Connect With Us</h3>
+                <BackToTopButton className="md:hidden" />
+             </div>
             <div className="flex md:justify-start justify-center space-x-4">
               {footerSections.socialLinks.map((social) => (
                 <Link
@@ -145,6 +146,9 @@ export function Footer() {
                 </Link>
               ))}
             </div>
+             <div className="hidden md:block mt-8">
+               <BackToTopButton />
+             </div>
           </div>
         </div>
 
@@ -168,7 +172,6 @@ export function Footer() {
           </div>
         </div>
       </div>
-      <BackToTopButton />
     </footer>
   );
 }

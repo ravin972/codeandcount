@@ -6,7 +6,6 @@ import { Footer } from '@/components/layout/Footer';
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import CustomCursor from '@/components/effects/CustomCursor';
-import FloatingWhatsAppButton from '@/components/common/FloatingWhatsAppButton';
 import { BackToTopButton } from '@/components/layout/BackToTopButton';
 
 export default function ClientLayout({
@@ -27,8 +26,7 @@ export default function ClientLayout({
         <main className="flex-grow">{children}</main>
         <Footer />
         <Toaster />
-        <FloatingWhatsAppButton />
-        {/* BackToTopButton is now rendered here to be outside the footer and can be positioned fixed */}
+        {/* FloatingWhatsAppButton is now managed inside the footer to avoid overlap issues */}
       </div>
     </ThemeProvider>
   );
