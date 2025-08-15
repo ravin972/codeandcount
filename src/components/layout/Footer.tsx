@@ -172,7 +172,7 @@ export function Footer() {
           </div>
            <div className="mt-4 flex items-center justify-center">
             <Link href="/" className={cn("text-lg font-bold transition-opacity flex items-center", "text-foreground dark:text-primary-foreground hover:opacity-80")}>
-              <span className="text-primary font-bold mr-2 text-lg">&lt;/&gt;</span>
+              <span className="text-primary font-bold text-lg">&lt;/&gt;</span>
               <span>Code<span className="text-accent dark:text-accent">&amp;</span>Count</span>
             </Link>
           </div>
