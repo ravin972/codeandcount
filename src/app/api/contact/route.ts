@@ -36,12 +36,12 @@ export async function POST(req: Request) {
       },
     });
 
-    // --- Email to Admin ---
-    const mailToAdmin = {
-      from: `"${name}" <${user}>`, // Using authenticated user as sender for better deliverability
-      replyTo: email, // Set the user's email as the reply-to address
+    // --- Email to Site Owners ---
+    const mailToOwner = {
+      from: `"${name}" <${user}>`, // Must be your Gmail
+      replyTo: email, // User's email, so admin can reply directly
       to: receiverEmails,
-      subject: `New Contact Form Submission: ${subject}`,
+      subject: `Code&Count New Contact Form Submission: ${queryType}`,
       html: `
         <div style="font-family: Arial, sans-serif; line-height: 1.6;">
           <h2 style="color: #333;">New Inquiry from Website</h2>
