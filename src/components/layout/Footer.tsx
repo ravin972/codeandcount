@@ -127,7 +127,7 @@ export function Footer() {
            <div className="md:text-left">
              <div className="flex items-center justify-between md:justify-start mb-4 gap-4">
                 <h3 className={cn("text-xl font-semibold", "text-foreground dark:text-primary-foreground")}>Connect With Us</h3>
-                <BackToTopButton className="md:hidden fixed bottom-24 right-6" />
+                <BackToTopButton size="icon" className="md:hidden fixed bottom-24 right-6" />
              </div>
             <div className="flex md:justify-start justify-center space-x-4">
               {footerSections.socialLinks.map((social) => (
