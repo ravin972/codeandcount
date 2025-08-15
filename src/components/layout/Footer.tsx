@@ -3,7 +3,7 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowUpRight, Phone, Mail, MapPin, Copyright, Github, Linkedin, Instagram } from 'lucide-react';
+import { ArrowUpRight, Phone, Mail, MapPin, Copyright, Github, Linkedin, Instagram, Code } from 'lucide-react';
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { BackToTopButton } from '@/components/layout/BackToTopButton';
@@ -170,9 +170,10 @@ export function Footer() {
               </Link>
             </div>
           </div>
-           <div className="mt-4">
-            <Link href="/" className={cn("text-lg font-bold transition-opacity", "text-foreground dark:text-primary-foreground hover:opacity-80")}>
-              Code<span className="text-accent dark:text-accent">And</span>Count
+           <div className="mt-4 flex items-center justify-center">
+            <Link href="/" className={cn("text-lg font-bold transition-opacity flex items-center", "text-foreground dark:text-primary-foreground hover:opacity-80")}>
+              <Code className="w-6 h-6 mr-2 text-primary" />
+              <span>Code<span className="text-accent dark:text-accent">&amp;</span>Count</span>
             </Link>
           </div>
         </div>
@@ -180,5 +181,3 @@ export function Footer() {
     </footer>
   );
 }
-
-    

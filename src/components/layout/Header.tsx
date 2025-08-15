@@ -4,7 +4,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, Briefcase, Users, Rss, Mail, Sparkles, ArrowUpRight } from 'lucide-react'; 
+import { Menu, Briefcase, Users, Rss, Mail, Sparkles, ArrowUpRight, Code } from 'lucide-react'; 
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import React, { useState, useEffect, useRef } from 'react';
@@ -88,23 +88,25 @@ export function Header() {
         <div className="flex-shrink-0 header-logo" style={{ pointerEvents: 'auto' }}>
            <Link 
             href="/" 
-            className="font-bold text-2xl hover:opacity-80 transition-opacity duration-300 relative w-[160px] h-[32px] flex items-center"
+            className="font-bold text-2xl hover:opacity-80 transition-opacity duration-300 relative w-auto h-[32px] flex items-center"
             onClick={() => setIsMobileMenuOpen(false)}
           >
             {/* Full Logo Text */}
-            <span className={cn(
-              "absolute transition-all duration-400 ease-in-out",
+             <span className={cn(
+              "flex items-center transition-all duration-400 ease-in-out",
               isScrolled ? "opacity-0 scale-90" : "opacity-100 scale-100"
             )}>
-              Code<span className="text-primary">&amp;</span>Count
+              <Code className="w-8 h-8 mr-2 text-primary" />
+              <span className="whitespace-nowrap">Code<span className="text-primary">&amp;</span>Count</span>
             </span>
 
             {/* Compact Logo */}
             <span className={cn(
-              "absolute transition-all duration-400 ease-in-out",
+              "absolute transition-all duration-400 ease-in-out flex items-center",
                isScrolled ? "opacity-100 scale-100" : "opacity-0 scale-90"
             )}>
-              C<sub className="text-primary text-base -ml-1">2</sub>
+              <Code className="w-8 h-8 mr-1 text-primary" />
+               <span className="whitespace-nowrap">C<sub className="text-primary text-base -ml-1">2</sub></span>
             </span>
           </Link>
         </div>
@@ -165,7 +167,8 @@ export function Header() {
                 <SheetTitle className="sr-only">Main Menu</SheetTitle>
               </SheetHeader>
               <div className="flex flex-col space-y-6 mt-4"> 
-                <Link href="/" className="text-2xl font-bold text-foreground self-start hover:opacity-80 transition-opacity whitespace-nowrap" onClick={() => setIsMobileMenuOpen(false)}>
+                <Link href="/" className="text-2xl font-bold text-foreground self-start hover:opacity-80 transition-opacity whitespace-nowrap flex items-center" onClick={() => setIsMobileMenuOpen(false)}>
+                  <Code className="w-8 h-8 mr-2 text-primary" />
                   Code<span className="text-primary">&amp;</span>Count
                 </Link>
                 <nav className="flex flex-col space-y-4">
