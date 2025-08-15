@@ -28,6 +28,7 @@ export default function ClientLayout({
         <Footer />
         <Toaster />
         <FloatingWhatsAppButton />
+        <BackToTopButton />
       </div>
     </ThemeProvider>
   );
