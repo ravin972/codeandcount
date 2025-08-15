@@ -38,7 +38,7 @@ const footerSections = {
     addressLine2: "Gurugram, Haryana, India"
   },
   socialLinks: [
-    { name: "GitHub", href: "https://github.com/ravin972/codeandcount", icon: <Github /> },
+    { name: "GitHub", href: "https://github.com/ravin972/", icon: <Github /> },
     { name: "LinkedIn", href: "https://linkedin.com/company/codeandcount", icon: <Linkedin /> },
     { name: "X", href: "https://x.com/codeandcount", icon: <XIcon /> },
     { name: "Instagram", href: "https://instagram.com/codeandcount", icon: <Instagram /> },
