@@ -47,8 +47,8 @@ export function BackToTopButton({ className }: { className?: string }) {
       aria-label="Scroll back to top"
       data-interactive-cursor="true"
     >
-      <ArrowUp className="h-5 w-5 mr-2 text-primary" />
-      <span className="text-primary-foreground/90">Send me back up</span>
+      <ArrowUp className="h-5 w-5 md:mr-2 text-primary" />
+      <span className="text-primary-foreground/90 hidden md:inline">Send me back up</span>
     </Button>
   );
 }
