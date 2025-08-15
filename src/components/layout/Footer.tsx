@@ -148,18 +148,8 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Back to Top Button - Centered, after the grid, before copyright */}
-         <div className="mt-10 mb-6 flex justify-center">
-          <BackToTopButton
-            className={cn(
-              "bg-foreground/10 text-foreground hover:bg-foreground/20 focus:ring-foreground/50 dark:bg-primary-foreground/10 dark:text-primary-foreground dark:hover:bg-primary-foreground/20 dark:focus:ring-primary-foreground/50",
-              "focus:ring-offset-transparent" 
-            )}
-          />
-        </div>
-
         {/* Bottom Bar */}
-        <div className={cn("mt-8 pt-8 border-t text-xs", "dark:border-primary-foreground/20 border-foreground/20 text-muted-foreground dark:text-primary-foreground/70")}>
+        <div className={cn("mt-12 pt-8 border-t text-xs", "dark:border-primary-foreground/20 border-foreground/20 text-muted-foreground dark:text-primary-foreground/70")}>
           <div className="flex flex-col sm:flex-row justify-between items-center">
             <div className="mb-2 sm:mb-0">
               <span>&copy; CodeAndCount.com {foundingYear} - {currentYear}. All Rights Reserved.</span>
@@ -173,11 +163,12 @@ export function Footer() {
            <div className="mt-4 flex items-center justify-center">
             <Link href="/" className={cn("text-lg font-bold transition-opacity flex items-center", "text-foreground dark:text-primary-foreground hover:opacity-80")}>
               <span className="text-primary font-bold text-lg">&lt;/&gt;</span>
-              <span>Code<span className="text-accent dark:text-accent">&amp;</span>Count</span>
+              <span>Code<span className="text-primary">&amp;</span>Count</span>
             </Link>
           </div>
         </div>
       </div>
+      <BackToTopButton />
     </footer>
   );
 }

@@ -7,6 +7,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/components/ui/theme-provider";
 import CustomCursor from '@/components/effects/CustomCursor';
 import FloatingWhatsAppButton from '@/components/common/FloatingWhatsAppButton';
+import { BackToTopButton } from '@/components/layout/BackToTopButton';
 
 export default function ClientLayout({
   children,
@@ -27,6 +28,7 @@ export default function ClientLayout({
         <Footer />
         <Toaster />
         <FloatingWhatsAppButton />
+        {/* BackToTopButton is now rendered here to be outside the footer and can be positioned fixed */}
       </div>
     </ThemeProvider>
   );

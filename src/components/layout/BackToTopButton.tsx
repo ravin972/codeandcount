@@ -2,10 +2,21 @@
 "use client";
 
 import React from 'react';
-import { MoveUp } from 'lucide-react';
+import { ArrowUp } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
 
 export function BackToTopButton({ className }: { className?: string }) {
+  const [isVisible, setIsVisible] = React.useState(false);
+
+  const toggleVisibility = () => {
+    if (window.scrollY > 300) {
+      setIsVisible(true);
+    } else {
+      setIsVisible(false);
+    }
+  };
+
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -13,19 +24,29 @@ export function BackToTopButton({ className }: { className?: string }) {
     });
   };
 
+  React.useEffect(() => {
+    window.addEventListener('scroll', toggleVisibility);
+    return () => {
+      window.removeEventListener('scroll', toggleVisibility);
+    };
+  }, []);
+
   return (
-    <button
-      type="button"
+    <Button
+      variant="outline"
+      size="icon"
       onClick={scrollToTop}
       className={cn(
-        'p-3 rounded-full shadow-lg flex items-center space-x-2 transition-all duration-300 ease-in-out', // Changed rounded-lg to rounded-full
-        'bg-neutral-800 text-neutral-200 hover:bg-neutral-700 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-neutral-900',
-        className // Positioning classes will be passed from parent
+        'fixed bottom-6 right-24 z-40 h-12 w-12 rounded-full shadow-lg transition-all duration-300 ease-in-out',
+        'bg-card/80 backdrop-blur-md hover:bg-accent/80 hover:text-accent-foreground focus:ring-2 focus:ring-offset-2 focus:ring-primary/80',
+        'transform hover:scale-105',
+        isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none',
+        className
       )}
       aria-label="Scroll back to top"
+      data-interactive-cursor="true"
     >
-      <span>Beam me up!</span>
-      <MoveUp className="h-5 w-5 text-yellow-400" />
-    </button>
+      <ArrowUp className="h-6 w-6" />
+    </Button>
   );
 }
