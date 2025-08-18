@@ -488,9 +488,13 @@ export default function HomePage() {
                     )}
                     data-interactive-cursor="true"
                 >
+<<<<<<< HEAD
                   <Link href="/seo-optimizer">
                     Try SEO Optimizer <ArrowRight className="ml-2 h-5 w-5" />
                   </Link>
+=======
+                  <Link href="/seo-optimizer">Try SEO Optimizer <ArrowRight className="ml-2 h-5 w-5" /></Link>
+>>>>>>> 17bbe71 (1. in this form only subject option available after in select enquiry op)
                 </Button>
             </div>
           </div>
@@ -518,9 +522,13 @@ export default function HomePage() {
                     )}
                     data-interactive-cursor="true"
                 >
+<<<<<<< HEAD
                   <Link href="/ai-image-generator">
                     Try AI Image Generator <ArrowRight className="ml-2 h-5 w-5" />
                   </Link>
+=======
+                    <Link href="/ai-image-generator">Try AI Image Generator <ArrowRight className="ml-2 h-5 w-5" /></Link>
+>>>>>>> 17bbe71 (1. in this form only subject option available after in select enquiry op)
                 </Button>
             </div>
             </div>
@@ -633,5 +641,8 @@ export default function HomePage() {
     </div>
   );
 }
+<<<<<<< HEAD
 
     
+=======
+>>>>>>> 17bbe71 (1. in this form only subject option available after in select enquiry op)
