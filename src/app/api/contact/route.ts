@@ -19,7 +19,7 @@ export async function POST(req: Request) {
     const emailPass = process.env.SMTP_PASS;
 
     if (!receiver1 || !receiver2 || !emailUser || !emailPass) {
-      console.error("Receiver emails or email credentials are not set in environment variables.");
+      console.error("Server configuration error: One or more email-related environment variables are not set.");
       return NextResponse.json({ success: false, error: "Server configuration error. Could not send email." }, { status: 500 });
     }
     
@@ -80,12 +80,13 @@ export async function POST(req: Request) {
         errorDetails.name = error.name;
         errorDetails.message = error.message;
         if ('code' in error) {
+            // This is useful for Nodemailer-specific errors (e.g., 'EAUTH')
             errorDetails.code = (error as any).code;
         }
     } else {
         errorDetails.raw = error;
     }
 
-    return NextResponse.json({ success: false, error: "Failed to process the request.", details: errorDetails }, { status: 500 });
+    return NextResponse.json({ success: false, error: "Failed to send the email.", details: errorDetails }, { status: 500 });
   }
 }
