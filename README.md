@@ -1,4 +1,4 @@
-# CodeAndCount.com - Next.js App
+ear# CodeAndCount.com - Next.js App
 
 This is a Next.js project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app), enhanced with ShadCN UI components, Tailwind CSS, and Genkit for AI functionalities, developed within Firebase Studio.
 
