@@ -1,7 +1,7 @@
 
 "use client";
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { cn } from '@/lib/utils';
@@ -135,7 +135,7 @@ const CustomCursor: React.FC = () => {
     <>
       {/* The outer ring of the cursor */}
       <div
-        ref={followerRef}
+        ref={ringRef}
         className={cn(
           "fixed w-8 h-8 rounded-full pointer-events-none z-[9999]",
           "border border-primary/50",
