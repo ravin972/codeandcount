@@ -8,6 +8,7 @@ import { ThemeProvider } from "@/components/ui/theme-provider";
 import CustomCursor from '@/components/effects/CustomCursor';
 import FloatingWhatsAppButton from '@/components/common/FloatingWhatsAppButton';
 import { BackToTopButton } from '@/components/layout/BackToTopButton';
+import { Analytics } from "@vercel/analytics/react";
 
 export default function ClientLayout({
   children,
@@ -29,6 +30,7 @@ export default function ClientLayout({
         <Toaster />
         <FloatingWhatsAppButton />
         <BackToTopButton />
+        <Analytics />
       </div>
     </ThemeProvider>
   );
