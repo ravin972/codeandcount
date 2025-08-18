@@ -139,7 +139,7 @@ export function ContactForm() {
             name="queryType"
             render={({ field }) => (
                 <FormItem>
-                <FormLabel>Select Topic</FormLabel>
+                <FormLabel>Select Enquiry</FormLabel>
                 <Select onValueChange={field.onChange} defaultValue={field.value}>
                     <FormControl>
                     <SelectTrigger>
