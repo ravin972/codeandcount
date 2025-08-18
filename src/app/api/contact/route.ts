@@ -1,7 +1,6 @@
 
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
-const sendgridTransport = require('nodemailer-sendgrid-transport');
 
 export async function POST(req: Request) {
   try {
@@ -14,28 +13,30 @@ export async function POST(req: Request) {
     }
     
     // --- Environment Variable Check ---
-    const sendgridApiKey = process.env.SENDGRID_API_KEY;
     const receiver1 = process.env.RECEIVER_EMAIL_1;
     const receiver2 = process.env.RECEIVER_EMAIL_2;
+    const emailUser = process.env.EMAIL_USER;
+    const emailPass = process.env.EMAIL_PASS;
 
-    if (!sendgridApiKey || !receiver1 || !receiver2) {
-      console.error("SendGrid API Key or receiver emails are not set in environment variables.");
+    if (!receiver1 || !receiver2 || !emailUser || !emailPass) {
+      console.error("Receiver emails or email credentials are not set in environment variables.");
       return NextResponse.json({ success: false, error: "Server configuration error. Could not send email." }, { status: 500 });
     }
     
     const receiverEmails = [receiver1, receiver2].join(', ');
 
-    // --- Nodemailer Transport (using SendGrid) ---
-    const transporter = nodemailer.createTransport(sendgridTransport({
-        auth: {
-            api_key: sendgridApiKey
-        }
-    }));
-
+    // --- Nodemailer Transport ---
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: emailUser,
+        pass: emailPass,
+      },
+    });
 
     // --- Email to Site Owners ---
     const mailToOwner = {
-      from: `"${name}" <${receiver1}>`, // Using one of your verified sender emails
+      from: `"${name}" <${emailUser}>`, // Using one of your verified sender emails
       replyTo: email, // User's email, so admin can reply directly
       to: receiverEmails,
       subject: `Code&Count New Contact Form Submission: ${queryType}`,
