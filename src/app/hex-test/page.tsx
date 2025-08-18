@@ -130,34 +130,31 @@ export default function HexTestPage() {
   }, [level, isGameOver, gameStarted, setupNewLevel]);
 
    useEffect(() => {
-    if (timerRef.current) {
-      clearInterval(timerRef.current);
+    if (isGameOver || !gameStarted) {
+      if (timerRef.current) clearInterval(timerRef.current);
+      return;
     }
-    if (!isGameOver && gameStarted && timeLeft > 0) {
-      timerRef.current = setInterval(() => {
-        setTimeLeft((prevTime) => {
-          if (prevTime <= 0.1) { 
-            clearInterval(timerRef.current!);
-            setIsGameOver(true);
-            if (correctHexIndex !== null && gridColors.length > 0) {
-              setRevealCorrectHex(gridColors[correctHexIndex]);
-            }
-            setRevealChosenHex(null); 
-            showTemporaryMessage("TIME'S UP!", 'error', 3000);
-            return 0;
-          }
-          return prevTime - 0.1; 
-        });
-      }, 100); 
-    } else if (timeLeft <= 0 && !isGameOver && gameStarted) {
-        clearInterval(timerRef.current!);
+
+    const handleGameOver = () => {
         setIsGameOver(true);
         if (correctHexIndex !== null && gridColors.length > 0) {
-          setRevealCorrectHex(gridColors[correctHexIndex]);
+            setRevealCorrectHex(gridColors[correctHexIndex]);
         }
         setRevealChosenHex(null);
         showTemporaryMessage("TIME'S UP!", 'error', 3000);
-    }
+    };
+
+    timerRef.current = setInterval(() => {
+      setTimeLeft((prevTime) => {
+        if (prevTime <= 0.1) {
+          clearInterval(timerRef.current!);
+          handleGameOver();
+          return 0;
+        }
+        return prevTime - 0.1;
+      });
+    }, 100);
+
     return () => {
       if (timerRef.current) {
         clearInterval(timerRef.current);
@@ -166,7 +163,7 @@ export default function HexTestPage() {
         clearTimeout(messageTimerRef.current);
       }
     };
-  }, [isGameOver, gameStarted, timeLeft, correctHexIndex, gridColors]);
+  }, [isGameOver, gameStarted, correctHexIndex, gridColors.length]);
 
   const handleCardClick = (index: number) => {
     if (isGameOver) return;

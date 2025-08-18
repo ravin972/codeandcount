@@ -11,8 +11,7 @@ import { blogPosts } from '@/lib/blog-data';
 export const dynamic = 'force-dynamic';
 
 export default function BlogPostPage({ params }: { params: { slug: string } }) {
-  const { slug } = params;
-  const post = blogPosts.find(p => p.slug === slug);
+  const post = blogPosts.find(p => p.slug === params.slug);
 
   if (!post) {
     return (

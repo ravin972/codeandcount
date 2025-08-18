@@ -79,10 +79,10 @@ export default function SEOOptimizerPage() {
     if (rewrittenText) {
       navigator.clipboard.writeText(rewrittenText);
       // Toast for copy action can be kept if considered user action feedback
-      // toast({
-      //   title: "Copied!",
-      //   description: "Rewritten text copied to clipboard.",
-      // });
+      toast({
+        title: "Copied!",
+        description: "Rewritten text copied to clipboard.",
+      });
     }
   };
 

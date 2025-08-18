@@ -479,19 +479,19 @@ export default function HomePage() {
             
             <div className="relative inline-block">
                 <Button
+                    asChild
                     size="lg"
                     className={cn(
                         "group w-full max-w-xs mx-auto text-base py-3 px-8",
                         "transition-all duration-300 ease-in-out shadow-lg hover:shadow-2xl active:shadow-md transform hover:-translate-y-0.5 active:translate-y-px",
-                        "bg-primary text-primary-foreground",
-                        "opacity-50 cursor-not-allowed" // Make it look disabled
+                        "bg-primary text-primary-foreground"
                     )}
                     data-interactive-cursor="true"
-                    disabled // Disable the button functionality
                 >
-                  Try SEO Optimizer <ArrowRight className="ml-2 h-5 w-5" />
+                  <Link href="/seo-optimizer">
+                    Try SEO Optimizer <ArrowRight className="ml-2 h-5 w-5" />
+                  </Link>
                 </Button>
-                <Badge variant="secondary" className="absolute -top-2 -right-4 rotate-12">Coming Soon!</Badge>
             </div>
           </div>
         </section>
@@ -509,19 +509,17 @@ export default function HomePage() {
               
               <div className="relative inline-block">
                 <Button
+                    asChild
                     size="lg"
                     className={cn(
                         "group w-full max-w-xs mx-auto text-base py-3 px-8",
                         "transition-all duration-300 ease-in-out shadow-lg hover:shadow-2xl active:shadow-md transform hover:-translate-y-0.5 active:translate-y-px",
-                        "bg-primary text-primary-foreground",
-                        "opacity-50 cursor-not-allowed"
+                        "bg-primary text-primary-foreground"
                     )}
                     data-interactive-cursor="true"
-                    disabled
                 >
-                    Try AI Image Generator <ArrowRight className="ml-2 h-5 w-5" />
+                    <Link href="/ai-image-generator">Try AI Image Generator <ArrowRight className="ml-2 h-5 w-5" /></Link>
                 </Button>
-                <Badge variant="secondary" className="absolute -top-2 -right-4 rotate-12">Coming Soon!</Badge>
             </div>
             </div>
         </section>
@@ -633,5 +631,3 @@ export default function HomePage() {
     </div>
   );
 }
-
-    

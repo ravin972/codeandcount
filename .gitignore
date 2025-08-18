@@ -82,6 +82,9 @@ temp
 .env.test
 .env.production
 .env
+.env.local
+.env.*
+!.env.example
 
 # WebStorm
 .idea/
