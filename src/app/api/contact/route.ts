@@ -61,13 +61,28 @@ export async function POST(req: Request) {
     };
 
     // --- Send Email ---
-    await transporter.sendMail(mailToOwner);
-
-    return NextResponse.json({ success: true }, { status: 200 });
+    try {
+        await transporter.sendMail(mailToOwner);
+        return NextResponse.json({ success: true }, { status: 200 });
+    } catch (mailError) {
+        console.error("Nodemailer sendMail failed:", mailError);
+        let errorDetails: any = { message: "Failed to send email due to a mail server issue." };
+        if (mailError instanceof Error) {
+            errorDetails.name = mailError.name;
+            errorDetails.message = mailError.message;
+            // Nodemailer often includes a 'code' property for auth errors
+            if ('code' in mailError) {
+                errorDetails.code = (mailError as any).code;
+            }
+        } else {
+            errorDetails.raw = mailError;
+        }
+        return NextResponse.json({ success: false, error: "Mail-sending operation failed.", details: errorDetails }, { status: 500 });
+    }
 
   } catch (error) {
     console.error("Contact API Error:", error);
     const errorMessage = error instanceof Error ? error.message : "An unexpected server error occurred.";
-    return NextResponse.json({ success: false, error: "Failed to send email.", details: errorMessage }, { status: 500 });
+    return NextResponse.json({ success: false, error: "Failed to process the request.", details: errorMessage }, { status: 500 });
   }
 }
