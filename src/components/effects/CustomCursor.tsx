@@ -7,9 +7,9 @@ import { cn } from '@/lib/utils';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 const CustomCursor: React.FC = () => {
-  const cursorRef = useRef<HTMLDivElement>(null);
+  const dotRef = useRef<HTMLDivElement>(null);
+  const ringRef = useRef<HTMLDivElement>(null);
   const [isMounted, setIsMounted] = useState(false);
-  const [primaryColorForFill, setPrimaryColorForFill] = useState('hsl(var(--primary))');
   const isMobile = useIsMobile();
 
   useEffect(() => {
@@ -17,65 +17,37 @@ const CustomCursor: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (isMounted) {
-      try {
-        const computedColor = getComputedStyle(document.documentElement).getPropertyValue('--primary').trim();
-        if (computedColor && CSS.supports('color', `hsl(${computedColor})`)) {
-          setPrimaryColorForFill(`hsl(${computedColor})`);
-        } else if (computedColor && CSS.supports('color', computedColor)) {
-          setPrimaryColorForFill(computedColor);
-        } else {
-          setPrimaryColorForFill('rgba(178, 255, 3, 0.8)'); // Fallback
-        }
-      } catch (e) {
-          setPrimaryColorForFill('rgba(178, 255, 3, 0.8)'); // Fallback on error
-      }
-    }
-  }, [isMounted]);
-
-  useEffect(() => {
-    // Bail out if not ready, on mobile, or color not resolved
-    if (!isMounted || isMobile === true || !primaryColorForFill || primaryColorForFill.startsWith('hsl(var')) {
-      if (cursorRef.current) {
-        gsap.set(cursorRef.current, { opacity: 0, scale: 0 });
-      }
+    if (!isMounted || isMobile === true) {
+      if (dotRef.current) gsap.set(dotRef.current, { opacity: 0, scale: 0 });
+      if (ringRef.current) gsap.set(ringRef.current, { opacity: 0, scale: 0 });
       return;
     }
 
-    const cursorEl = cursorRef.current;
-    if (!cursorEl) return; // FIX: Ensure element exists before using it.
+    const dotEl = dotRef.current;
+    const ringEl = ringRef.current;
+
+    if (!dotEl || !ringEl) return;
 
     let firstMove = true;
 
     // Set initial state
-    gsap.set(cursorEl, {
-      xPercent: -50,
-      yPercent: -50,
-      opacity: 0,
-      scale: 1,
-      backgroundColor: primaryColorForFill,
-    });
+    gsap.set([dotEl, ringEl], { xPercent: -50, yPercent: -50, opacity: 0, scale: 1 });
+    gsap.set(dotEl, { scale: 1 });
+    gsap.set(ringEl, { scale: 1 });
 
     const onMouseMove = (e: MouseEvent) => {
       if (firstMove) {
-        gsap.to(cursorEl, { opacity: 1, duration: 0.3 });
+        gsap.to([dotEl, ringEl], { opacity: 1, duration: 0.3 });
         firstMove = false;
       }
-      gsap.to(cursorEl, {
-        x: e.clientX,
-        y: e.clientY,
-        duration: 0.2,
-        ease: 'power2.out',
-      });
+      gsap.to(dotEl, { x: e.clientX, y: e.clientY, duration: 0.2, ease: 'power2.out' });
+      gsap.to(ringEl, { x: e.clientX, y: e.clientY, duration: 0.4, ease: 'power2.out' });
     };
 
     const onMouseOver = (e: MouseEvent) => {
       if (e.target && (e.target as HTMLElement).closest('a, button, [role="button"], [data-interactive-cursor="true"]')) {
-        gsap.to(cursorEl, {
-          scale: 2.5, // Zoom effect by scaling up
-          duration: 0.3,
-          ease: 'power2.out',
-        });
+        gsap.to(dotEl, { scale: 3, duration: 0.3, ease: 'power2.out' });
+        gsap.to(ringEl, { scale: 1.5, duration: 0.3, ease: 'power2.out' });
       }
     };
 
@@ -87,11 +59,8 @@ const CustomCursor: React.FC = () => {
       const isEnteringInteractive = relatedTarget?.closest('a, button, [role="button"], [data-interactive-cursor="true"]');
 
       if (isLeavingInteractive && !isEnteringInteractive) {
-        gsap.to(cursorEl, {
-          scale: 1, // Revert to normal scale
-          duration: 0.3,
-          ease: 'power2.out',
-        });
+        gsap.to(dotEl, { scale: 1, duration: 0.3, ease: 'power2.out' });
+        gsap.to(ringEl, { scale: 1, duration: 0.3, ease: 'power2.out' });
       }
     };
 
@@ -103,23 +72,34 @@ const CustomCursor: React.FC = () => {
       document.body.removeEventListener('mousemove', onMouseMove);
       document.body.removeEventListener('mouseover', onMouseOver);
       document.body.removeEventListener('mouseout', onMouseOut);
-      gsap.killTweensOf(cursorEl);
-      gsap.to(cursorEl, { opacity: 0, scale: 0, duration: 0.2 });
+      gsap.killTweensOf([dotEl, ringEl]);
+      gsap.to([dotEl, ringEl], { opacity: 0, scale: 0, duration: 0.2 });
     };
-  }, [isMounted, isMobile, primaryColorForFill]);
+  }, [isMounted, isMobile]);
 
   if (!isMounted || isMobile === true) {
     return null;
   }
 
   return (
-    <div
-      ref={cursorRef}
-      className={cn(
-        "fixed w-4 h-4 rounded-full pointer-events-none z-[9999]"
-      )}
-      style={{ opacity: 0 }}
-    />
+    <>
+      <div
+        ref={ringRef}
+        className={cn(
+          "fixed w-10 h-10 rounded-full pointer-events-none z-[9999]",
+          "border-2 border-primary/50",
+          "opacity-0"
+        )}
+      />
+      <div
+        ref={dotRef}
+        className={cn(
+          "fixed w-2 h-2 rounded-full pointer-events-none z-[9999]",
+          "bg-primary",
+          "opacity-0"
+        )}
+      />
+    </>
   );
 };
 
