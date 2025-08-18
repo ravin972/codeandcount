@@ -1,6 +1,7 @@
 
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+const sendgridTransport = require('nodemailer-sendgrid-transport');
 
 export async function POST(req: Request) {
   try {
@@ -13,28 +14,24 @@ export async function POST(req: Request) {
     }
     
     // --- Environment Variable Check ---
-    const user = process.env.SMTP_USER;
-    const pass = process.env.SMTP_PASS;
+    const sendgridApiKey = process.env.SENDGRID_API_KEY;
     const receiver1 = process.env.RECEIVER_EMAIL_1;
     const receiver2 = process.env.RECEIVER_EMAIL_2;
 
-    if (!user || !pass || !receiver1 || !receiver2) {
-      console.error("Email credentials or receiver emails are not set in environment variables.");
+    if (!sendgridApiKey || !receiver1 || !receiver2) {
+      console.error("SendGrid API Key or receiver emails are not set in environment variables.");
       return NextResponse.json({ success: false, error: "Server configuration error. Could not send email." }, { status: 500 });
     }
     
     const receiverEmails = [receiver1, receiver2].join(', ');
 
-    // --- Nodemailer Transport ---
-    const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
-      port: 587,
-      secure: false, // true for 465, false for other ports like 587
-      auth: {
-        user: user,
-        pass: pass,
-      },
-    });
+    // --- Nodemailer Transport (using SendGrid) ---
+    const transporter = nodemailer.createTransport(sendgridTransport({
+        auth: {
+            api_key: sendgridApiKey
+        }
+    }));
+
 
     // --- Email to Site Owners ---
     const mailToOwner = {
