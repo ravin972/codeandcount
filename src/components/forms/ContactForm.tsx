@@ -32,7 +32,7 @@ const contactFormSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
   email: z.string().email({ message: "Please enter a valid email address." }),
   contactNumber: z.string().optional(),
-  queryType: z.enum(["Web Development", "AI Solutions", "Account Management", "General Inquiry"], {
+  queryType: z.enum(["Web Development", "AI Solutions", "Account Management", "Digital Marketing", "Career/HR Services", "General Inquiry"], {
     required_error: "You need to select a topic.",
   }),
   subject: z.string().min(5, { message: "Subject must be at least 5 characters." }),
@@ -150,6 +150,8 @@ export function ContactForm() {
                     <SelectItem value="Web Development">Web Development</SelectItem>
                     <SelectItem value="AI Solutions">AI Solutions</SelectItem>
                     <SelectItem value="Account Management">Account Management</SelectItem>
+                    <SelectItem value="Digital Marketing">Digital Marketing</SelectItem>
+                    <SelectItem value="Career/HR Services">Career/HR Services</SelectItem>
                     <SelectItem value="General Inquiry">General Inquiry</SelectItem>
                     </SelectContent>
                 </Select>
