@@ -131,7 +131,7 @@ export function ContactForm() {
             <FormItem>
               <FormLabel>Email Address</FormLabel>
               <FormControl>
-                <Input type="email" placeholder="you@example.com" {...field} />
+                <Input type="email" placeholder="Your Email" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -199,7 +199,7 @@ export function ContactForm() {
               <FormLabel>Your Message</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder="Tell us about your project, goals, or any questions you have..."
+                  placeholder="Your message box where you give details..."
                   className="min-h-[150px]"
                   {...field}
                 />
@@ -229,18 +229,6 @@ export function ContactForm() {
                 Send Message <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </>
             )}
-          </Button>
-          <span className="text-muted-foreground text-sm hidden sm:inline-block">or</span>
-           <Button variant="outline" asChild className="w-full sm:w-auto">
-            <a
-              href="https://wa.me/919729041423?text=Hello%2C%20I%27d%20like%20to%20inquire%20about..." 
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-green-500 text-white hover:bg-green-600 hover:text-white"
-            >
-              <MessageSquare className="mr-2 h-5 w-5" /> 
-              Chat on WhatsApp
-            </a>
           </Button>
         </div>
       </form>
