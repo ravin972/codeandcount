@@ -33,9 +33,18 @@ const contactFormSchema = z.object({
   email: z.string().email({ message: "Please enter a valid email address." }),
   contactNumber: z.string().optional(),
   queryType: z.string({ required_error: "Please select an enquiry type." }),
-  subject: z.string().min(5, { message: "Subject must be at least 5 characters." }),
+  subject: z.string().min(5, { message: "Subject must be at least 5 characters." }).optional(),
   message: z.string().min(10, { message: "Message must be at least 10 characters." }).max(5000, { message: "Message must not exceed 5000 characters." }),
+}).refine(data => {
+    if (data.queryType === 'Other') {
+        return data.subject && data.subject.length >= 5;
+    }
+    return true;
+}, {
+    message: "Subject must be at least 5 characters.",
+    path: ["subject"],
 });
+
 
 type ContactFormValues = z.infer<typeof contactFormSchema>;
 
@@ -54,8 +63,17 @@ export function ContactForm() {
     },
   });
 
+  const queryType = form.watch("queryType");
+
  async function onSubmit(values: ContactFormValues) {
     setIsSubmitting(true);
+    
+    // If queryType is not 'Other', use it as the subject.
+    const submissionValues = {
+        ...values,
+        subject: values.queryType === 'Other' ? values.subject : values.queryType,
+    };
+
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
@@ -63,7 +81,7 @@ export function ContactForm() {
           "Content-Type": "application/json",
           "Accept": "application/json"
         },
-        body: JSON.stringify(values),
+        body: JSON.stringify(submissionValues),
       });
 
       const result = await response.json();
@@ -158,19 +176,21 @@ export function ContactForm() {
             </FormItem>
           )}
         />
-       <FormField
-          control={form.control}
-          name="subject"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Subject</FormLabel>
-              <FormControl>
-                <Input placeholder="Subject of your message" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+       {queryType === 'Other' && (
+          <FormField
+            control={form.control}
+            name="subject"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Subject</FormLabel>
+                <FormControl>
+                  <Input placeholder="Subject of your message" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        )}
         <FormField
           control={form.control}
           name="message"
