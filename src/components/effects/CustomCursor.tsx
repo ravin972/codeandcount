@@ -135,7 +135,7 @@ const CustomCursor: React.FC = () => {
     <>
       {/* The outer ring of the cursor */}
       <div
-        ref={ringRef}
+        ref={followerRef}
         className={cn(
           "fixed w-8 h-8 rounded-full pointer-events-none z-[9999]",
           "border border-primary/50",
