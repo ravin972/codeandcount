@@ -8,11 +8,19 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
@@ -23,6 +31,10 @@ import { cn } from "@/lib/utils";
 const contactFormSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
   email: z.string().email({ message: "Please enter a valid email address." }),
+  contactNumber: z.string().optional(),
+  queryType: z.enum(["Web Development", "AI Solutions", "Account Management", "General Inquiry"], {
+    required_error: "You need to select a topic.",
+  }),
   subject: z.string().min(5, { message: "Subject must be at least 5 characters." }),
   message: z.string().min(10, { message: "Message must be at least 10 characters." }).max(5000, { message: "Message must not exceed 5000 characters." }),
 });
@@ -38,6 +50,7 @@ export function ContactForm() {
     defaultValues: {
       name: "",
       email: "",
+      contactNumber: "",
       subject: "",
       message: "",
     },
@@ -102,11 +115,47 @@ export function ContactForm() {
             <FormItem>
               <FormLabel>Email Address</FormLabel>
               <FormControl>
-                <Input type="email" placeholder="you@example.com" {...field} />
+                <Input type="email" placeholder="Your Email" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
           )}
+        />
+        <FormField
+          control={form.control}
+          name="contactNumber"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Contact Number</FormLabel>
+              <FormControl>
+                <Input placeholder="Your Contact Number (Optional)" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+            control={form.control}
+            name="queryType"
+            render={({ field }) => (
+                <FormItem>
+                <FormLabel>Select Topic</FormLabel>
+                <Select onValueChange={field.onChange} defaultValue={field.value}>
+                    <FormControl>
+                    <SelectTrigger>
+                        <SelectValue placeholder="What is your inquiry about?" />
+                    </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                    <SelectItem value="Web Development">Web Development</SelectItem>
+                    <SelectItem value="AI Solutions">AI Solutions</SelectItem>
+                    <SelectItem value="Account Management">Account Management</SelectItem>
+                    <SelectItem value="General Inquiry">General Inquiry</SelectItem>
+                    </SelectContent>
+                </Select>
+                <FormMessage />
+                </FormItem>
+            )}
         />
        <FormField
           control={form.control}
@@ -115,7 +164,7 @@ export function ContactForm() {
             <FormItem>
               <FormLabel>Subject</FormLabel>
               <FormControl>
-                <Input placeholder="Subject of your message" {...field} />
+                <Input placeholder="Subject Of Your Message" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -129,7 +178,7 @@ export function ContactForm() {
               <FormLabel>Your Message</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder="Tell us about your project, goals, or any questions you have..."
+                  placeholder="Your message box where you give details..."
                   className="min-h-[150px]"
                   {...field}
                 />
@@ -159,18 +208,6 @@ export function ContactForm() {
                 Send Message <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
               </>
             )}
-          </Button>
-          <span className="text-muted-foreground text-sm hidden sm:inline-block">or</span>
-           <Button variant="outline" asChild className="w-full sm:w-auto">
-            <a
-              href="https://wa.me/919729041423?text=Hello%2C%20I%27d%20like%20to%20inquire%20about..." 
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-green-500 text-white hover:bg-green-600 hover:text-white"
-            >
-              <MessageSquare className="mr-2 h-5 w-5" /> 
-              Chat on WhatsApp
-            </a>
           </Button>
         </div>
       </form>

@@ -5,10 +5,10 @@ import nodemailer from "nodemailer";
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { name, email, subject, message } = body;
+    const { name, email, contactNumber, queryType, subject, message } = body;
 
     // --- Input Validation ---
-    if (!name || !email || !subject || !message) {
+    if (!name || !email || !queryType || !subject || !message) {
       return NextResponse.json({ success: false, error: "Missing required fields" }, { status: 400 });
     }
     
@@ -49,6 +49,9 @@ export async function POST(req: Request) {
           <hr>
           <p><strong>Name:</strong> ${name}</p>
           <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
+          ${contactNumber ? `<p><strong>Contact Number:</strong> ${contactNumber}</p>` : ''}
+          <p><strong>Topic:</strong> ${queryType}</p>
+          <p><strong>Subject:</strong> ${subject}</p>
           <div style="background-color: #f9f9f9; border: 1px solid #ddd; padding: 15px; border-radius: 5px; margin-top: 10px;">
             <p><strong>Message:</strong></p>
             <p>${message.replace(/\n/g, "<br>")}</p>
@@ -58,7 +61,7 @@ export async function POST(req: Request) {
     };
 
     // --- Send Email ---
-    await transporter.sendMail(mailToAdmin);
+    await transporter.sendMail(mailToOwner);
 
     return NextResponse.json({ success: true }, { status: 200 });
 
