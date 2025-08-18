@@ -2,7 +2,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm, useWatch } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import {
@@ -24,8 +24,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { ArrowRight, Loader2 } from "lucide-react";
-import React, { useEffect } from "react";
+import { ArrowRight, Loader2, MessageSquare } from "lucide-react";
+import React from "react";
 import { cn } from "@/lib/utils";
 
 const contactFormSchema = z.object({
@@ -37,16 +37,7 @@ const contactFormSchema = z.object({
   }),
   subject: z.string().min(5, { message: "Subject must be at least 5 characters." }),
   message: z.string().min(10, { message: "Message must be at least 10 characters." }).max(5000, { message: "Message must not exceed 5000 characters." }),
-}).refine(data => {
-    if (data.queryType === 'Other') {
-        return data.subject && data.subject.length >= 5;
-    }
-    return true;
-}, {
-    message: "Subject must be at least 5 characters.",
-    path: ["subject"],
 });
-
 
 type ContactFormValues = z.infer<typeof contactFormSchema>;
 
@@ -65,17 +56,8 @@ export function ContactForm() {
     },
   });
 
-  const queryType = form.watch("queryType");
-
  async function onSubmit(values: ContactFormValues) {
     setIsSubmitting(true);
-    
-    // If queryType is not 'Other', use it as the subject.
-    const submissionValues = {
-        ...values,
-        subject: values.queryType === 'Other' ? values.subject : values.queryType,
-    };
-
     try {
       const response = await fetch("/api/contact", {
         method: "POST",
@@ -83,7 +65,7 @@ export function ContactForm() {
           "Content-Type": "application/json",
           "Accept": "application/json"
         },
-        body: JSON.stringify(submissionValues),
+        body: JSON.stringify(values),
       });
 
       const result = await response.json();
@@ -179,10 +161,10 @@ export function ContactForm() {
         />
        <FormField
           control={form.control}
-          name="contactNumber"
+          name="subject"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Contact Number</FormLabel>
+              <FormLabel>Subject</FormLabel>
               <FormControl>
                 <Input placeholder="Subject Of Your Message" {...field} />
               </FormControl>
@@ -190,47 +172,6 @@ export function ContactForm() {
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name="queryType"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Select Enquiry</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
-                <FormControl>
-                  <SelectTrigger>
-                    <SelectValue placeholder="What is your inquiry about?" />
-                  </SelectTrigger>
-                </FormControl>
-                <SelectContent>
-                  <SelectItem value="Web Development">Web Development</SelectItem>
-                  <SelectItem value="AI Solutions">AI Solutions</SelectItem>
-                  <SelectItem value="Account Management">Account Management</SelectItem>
-                  <SelectItem value="Digital Marketing">Digital Marketing</SelectItem>
-                  <SelectItem value="Career/HR Services">Career/HR Services</SelectItem>
-                  <SelectItem value="General Inquiry">General Inquiry</SelectItem>
-                  <SelectItem value="Other">Other</SelectItem>
-                </SelectContent>
-              </Select>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-       {queryType === 'Other' && (
-          <FormField
-            control={form.control}
-            name="subject"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Subject</FormLabel>
-                <FormControl>
-                  <Input placeholder="Subject of your message" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        )}
         <FormField
           control={form.control}
           name="message"
