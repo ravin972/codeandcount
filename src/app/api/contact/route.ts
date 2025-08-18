@@ -5,10 +5,10 @@ import nodemailer from "nodemailer";
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { name, email, subject, message } = body;
+    const { name, email, contactNumber, queryType, subject, message } = body;
 
     // --- Input Validation ---
-    if (!name || !email || !subject || !message) {
+    if (!name || !email || !queryType || !subject || !message) {
       return NextResponse.json({ success: false, error: "Missing required fields" }, { status: 400 });
     }
     
@@ -39,7 +39,7 @@ export async function POST(req: Request) {
     // --- Email to Site Owners ---
     const mailToOwner = {
       from: `"${name}" <${user}>`, // Must be your Gmail
-      replyTo: email, // User's email, so admin can reply directly
+      replyTo: email,
       to: receiverEmails,
       subject: `Code&Count New Contact Form Submission: ${queryType}`,
       html: `
@@ -49,6 +49,9 @@ export async function POST(req: Request) {
           <hr>
           <p><strong>Name:</strong> ${name}</p>
           <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
+          ${contactNumber ? `<p><strong>Contact Number:</strong> ${contactNumber}</p>` : ''}
+          <p><strong>Inquiry Type:</strong> ${queryType}</p>
+          <p><strong>Subject:</strong> ${subject}</p>
           <div style="background-color: #f9f9f9; border: 1px solid #ddd; padding: 15px; border-radius: 5px; margin-top: 10px;">
             <p><strong>Message:</strong></p>
             <p>${message.replace(/\n/g, "<br>")}</p>
@@ -58,7 +61,14 @@ export async function POST(req: Request) {
     };
 
     // --- Send Email ---
-    await transporter.sendMail(mailToAdmin);
+    try {
+        await transporter.sendMail(mailToOwner);
+    } catch (mailError) {
+        console.error("Nodemailer failed to send email:", mailError);
+        // This will give you the exact error from Gmail's server
+        const errorMessage = mailError instanceof Error ? mailError.message : "Unknown mail error";
+        return NextResponse.json({ success: false, error: `Mail server error: ${errorMessage}` }, { status: 500 });
+    }
 
     return NextResponse.json({ success: true }, { status: 200 });
 
