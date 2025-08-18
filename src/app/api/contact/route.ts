@@ -36,7 +36,7 @@ export async function POST(req: Request) {
 
     // --- Email to Site Owners ---
     const mailToOwner = {
-      from: `"${name}" <${user}>`, // Must be your Gmail
+      from: `"${name}" <${emailUser}>`, // Must be your Gmail
       replyTo: email,
       to: receiverEmails,
       subject: `Code&Count New Contact Form Submission: ${queryType}`,
