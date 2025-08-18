@@ -128,7 +128,7 @@ export function ContactForm() {
             <FormItem>
               <FormLabel>Contact Number</FormLabel>
               <FormControl>
-                <Input placeholder="Your Contact Number (Optional)" {...field} />
+                <Input placeholder="Your Contact Number" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
