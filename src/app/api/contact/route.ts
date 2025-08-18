@@ -1,3 +1,4 @@
+
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 
@@ -7,7 +8,7 @@ export async function POST(req: Request) {
     const { name, email, contactNumber, queryType, subject, message } = body;
 
     // --- Input Validation ---
-    if (!name || !email || !queryType || !subject || !message) {
+    if (!name || !email || !queryType || !message || (queryType === "General Inquiry" && !subject)) {
       return NextResponse.json({ success: false, error: "Missing required fields" }, { status: 400 });
     }
     
@@ -48,7 +49,7 @@ export async function POST(req: Request) {
           <p><strong>Email:</strong> <a href="mailto:${email}">${email}</a></p>
           ${contactNumber ? `<p><strong>Contact Number:</strong> ${contactNumber}</p>` : ''}
           <p><strong>Topic:</strong> ${queryType}</p>
-          <p><strong>Subject:</strong> ${subject}</p>
+          ${subject ? `<p><strong>Subject:</strong> ${subject}</p>`: ''}
           <div style="background-color: #f9f9f9; border: 1px solid #ddd; padding: 15px; border-radius: 5px; margin-top: 10px;">
             <p><strong>Message:</strong></p>
             <p>${message.replace(/\n/g, "<br>")}</p>
@@ -56,9 +57,38 @@ export async function POST(req: Request) {
         </div>
       `,
     };
+    
+    // --- Auto-reply Email to User ---
+    const mailToUser = {
+        from: `"CodeAndCount.com" <${emailUser}>`,
+        to: email,
+        subject: "We've Received Your Message!",
+        html: `
+        <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+            <h2 style="color: #1a73e8;">Thank You for Reaching Out!</h2>
+            <p>Hello ${name},</p>
+            <p>We've successfully received your message and appreciate you contacting us. One of our team members will review your inquiry and get back to you as soon as possible.</p>
+            <p>Here's a copy of your message for your records:</p>
+            <div style="background-color: #f9f9f9; border: 1px solid #ddd; padding: 15px; border-radius: 5px; margin-top: 10px;">
+                <p><strong>Topic:</strong> ${queryType}</p>
+                 ${subject ? `<p><strong>Subject:</strong> ${subject}</p>`: ''}
+                <p><strong>Message:</strong></p>
+                <p>${message.replace(/\n/g, "<br>")}</p>
+            </div>
+            <p>In the meantime, feel free to browse our <a href="https://codeandcount.com/work">work</a> or read our latest <a href="https://codeandcount.com/blog">blog posts</a>.</p>
+            <br>
+            <p>Best regards,</p>
+            <p><strong>The CodeAndCount.com Team</strong></p>
+        </div>
+        `,
+    };
 
-    // --- Send Email ---
-    await transporter.sendMail(mailToOwner);
+    // --- Send Emails ---
+    await Promise.all([
+      transporter.sendMail(mailToOwner),
+      transporter.sendMail(mailToUser)
+    ]);
+    
     return NextResponse.json({ success: true }, { status: 200 });
 
   } catch (error) {

@@ -35,9 +35,18 @@ const contactFormSchema = z.object({
   queryType: z.enum(["Web Development", "AI Solutions", "Account Management", "Digital Marketing", "Career/HR Services", "General Inquiry"], {
     required_error: "You need to select a topic.",
   }),
-  subject: z.string().min(5, { message: "Subject must be at least 5 characters." }),
+  subject: z.string().optional(),
   message: z.string().min(10, { message: "Message must be at least 10 characters." }).max(5000, { message: "Message must not exceed 5000 characters." }),
+}).refine(data => {
+    if (data.queryType === 'General Inquiry') {
+        return !!data.subject && data.subject.length >= 5;
+    }
+    return true;
+}, {
+    message: "Subject must be at least 5 characters for General Inquiry.",
+    path: ["subject"],
 });
+
 
 type ContactFormValues = z.infer<typeof contactFormSchema>;
 
@@ -55,6 +64,8 @@ export function ContactForm() {
       message: "",
     },
   });
+  
+  const queryType = form.watch("queryType");
 
  async function onSubmit(values: ContactFormValues) {
     setIsSubmitting(true);
@@ -159,19 +170,21 @@ export function ContactForm() {
                 </FormItem>
             )}
         />
-       <FormField
-          control={form.control}
-          name="subject"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Subject</FormLabel>
-              <FormControl>
-                <Input placeholder="Subject Of Your Message" {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        {queryType === "General Inquiry" && (
+            <FormField
+                control={form.control}
+                name="subject"
+                render={({ field }) => (
+                <FormItem>
+                    <FormLabel>Subject</FormLabel>
+                    <FormControl>
+                    <Input placeholder="Subject Of Your Message" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                </FormItem>
+                )}
+            />
+        )}
         <FormField
           control={form.control}
           name="message"
