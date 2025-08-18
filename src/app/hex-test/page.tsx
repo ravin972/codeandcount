@@ -130,8 +130,9 @@ export default function HexTestPage() {
   }, [level, isGameOver, gameStarted, setupNewLevel]);
 
    useEffect(() => {
-    if (timerRef.current) {
-      clearInterval(timerRef.current);
+    if (isGameOver || !gameStarted) {
+      if (timerRef.current) clearInterval(timerRef.current);
+      return;
     }
 
     const handleGameOver = () => {
@@ -143,18 +144,16 @@ export default function HexTestPage() {
         showTemporaryMessage("TIME'S UP!", 'error', 3000);
     };
 
-    if (!isGameOver && gameStarted) {
-      timerRef.current = setInterval(() => {
-        setTimeLeft((prevTime) => {
-          if (prevTime <= 0.1) {
-            clearInterval(timerRef.current!);
-            handleGameOver();
-            return 0;
-          }
-          return prevTime - 0.1;
-        });
-      }, 100);
-    }
+    timerRef.current = setInterval(() => {
+      setTimeLeft((prevTime) => {
+        if (prevTime <= 0.1) {
+          clearInterval(timerRef.current!);
+          handleGameOver();
+          return 0;
+        }
+        return prevTime - 0.1;
+      });
+    }, 100);
 
     return () => {
       if (timerRef.current) {
@@ -164,7 +163,7 @@ export default function HexTestPage() {
         clearTimeout(messageTimerRef.current);
       }
     };
-  }, [isGameOver, gameStarted, correctHexIndex, gridColors.length]); // Removed timeLeft from dependencies
+  }, [isGameOver, gameStarted, correctHexIndex, gridColors.length]);
 
   const handleCardClick = (index: number) => {
     if (isGameOver) return;
