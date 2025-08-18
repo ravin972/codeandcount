@@ -163,7 +163,7 @@ export default function HexTestPage() {
         clearTimeout(messageTimerRef.current);
       }
     };
-  }, [isGameOver, gameStarted, correctHexIndex, gridColors.length]);
+  }, [isGameOver, gameStarted, correctHexIndex, gridColors]);
 
   const handleCardClick = (index: number) => {
     if (isGameOver) return;
@@ -182,6 +182,8 @@ export default function HexTestPage() {
     }
   };
   
+  const finalLevel = level > 1 ? level - 1 : 0;
+
   return (
     <div className="bg-background text-foreground min-h-screen py-8 flex flex-col items-center">
       <header className="text-center mb-8 md:mb-12 w-full max-w-3xl px-4">
@@ -204,7 +206,7 @@ export default function HexTestPage() {
               </CardTitle>
               {gameStarted && isGameOver && (
                 <CardDescription className="text-xl mt-2">
-                  Score: {score} &nbsp;&nbsp;|&nbsp;&nbsp; Level: {level -1 > 0 ? level -1 : 0}
+                  Score: {score} &nbsp;&nbsp;|&nbsp;&nbsp; Level: {finalLevel}
                 </CardDescription>
               )}
                {!gameStarted && (
