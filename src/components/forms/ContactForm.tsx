@@ -2,13 +2,12 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -24,8 +23,8 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { ArrowRight, Loader2, MessageSquare } from "lucide-react";
-import React from "react";
+import { ArrowRight, Loader2 } from "lucide-react";
+import React, { useEffect } from "react";
 import { cn } from "@/lib/utils";
 
 const contactFormSchema = z.object({
