@@ -75,6 +75,6 @@ export async function POST(req: Request) {
   } catch (error) {
     console.error("Contact API Error:", error);
     const errorMessage = error instanceof Error ? error.message : "An unexpected server error occurred.";
-    return NextResponse.json({ success: false, error: "Failed to send email.", details: errorMessage }, { status: 500 });
+    return NextResponse.json({ success: false, error: "Failed to process the request.", details: errorMessage }, { status: 500 });
   }
 }
