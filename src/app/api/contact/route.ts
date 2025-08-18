@@ -1,6 +1,7 @@
 
 import { NextResponse } from "next/server";
 import nodemailer from "nodemailer";
+const sendgridTransport = require('nodemailer-sendgrid-transport');
 
 export async function POST(req: Request) {
   try {
