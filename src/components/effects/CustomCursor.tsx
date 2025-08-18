@@ -11,13 +11,16 @@ const CustomCursor: React.FC = () => {
   const ringRef = useRef<HTMLDivElement>(null);
   const [isMounted, setIsMounted] = useState(false);
   const isMobile = useIsMobile();
+  const mousePos = useRef({ x: 0, y: 0 });
 
+  // Mount check to avoid SSR issues
   useEffect(() => {
     setIsMounted(true);
   }, []);
 
   useEffect(() => {
-    if (!isMounted || isMobile === true) {
+    // Disable cursor on mobile or if not mounted
+    if (!isMounted || isMobile) {
       if (dotRef.current) gsap.set(dotRef.current, { opacity: 0, scale: 0 });
       if (ringRef.current) gsap.set(ringRef.current, { opacity: 0, scale: 0 });
       return;
@@ -28,76 +31,128 @@ const CustomCursor: React.FC = () => {
 
     if (!dotEl || !ringEl) return;
 
-    let firstMove = true;
+    let isFirstMove = true;
 
-    // Set initial state
-    gsap.set([dotEl, ringEl], { xPercent: -50, yPercent: -50, opacity: 0, scale: 1 });
-    gsap.set(dotEl, { scale: 1 });
-    gsap.set(ringEl, { scale: 1 });
+    // Set initial state (invisible and centered)
+    gsap.set([dotEl, ringEl], { xPercent: -50, yPercent: -50, opacity: 0 });
 
     const onMouseMove = (e: MouseEvent) => {
-      if (firstMove) {
+      mousePos.current = { x: e.clientX, y: e.clientY };
+
+      // Make cursor visible on first move
+      if (isFirstMove) {
         gsap.to([dotEl, ringEl], { opacity: 1, duration: 0.3 });
-        firstMove = false;
+        isFirstMove = false;
       }
-      gsap.to(dotEl, { x: e.clientX, y: e.clientY, duration: 0.2, ease: 'power2.out' });
-      gsap.to(ringEl, { x: e.clientX, y: e.clientY, duration: 0.4, ease: 'power2.out' });
+
+      // Dot follows mouse directly
+      gsap.to(dotEl, { 
+        x: mousePos.current.x, 
+        y: mousePos.current.y, 
+        duration: 0.2, 
+        ease: 'power2.out' 
+      });
+
+      // Ring follows mouse with a slight delay for a smooth, trailing effect
+      gsap.to(ringEl, { 
+        x: mousePos.current.x, 
+        y: mousePos.current.y, 
+        duration: 0.4, 
+        ease: 'power2.out' 
+      });
     };
 
+    // Handle hover effects on interactive elements
     const onMouseOver = (e: MouseEvent) => {
       if (e.target && (e.target as HTMLElement).closest('a, button, [role="button"], [data-interactive-cursor="true"]')) {
-        gsap.to(dotEl, { scale: 3, duration: 0.3, ease: 'power2.out' });
-        gsap.to(ringEl, { scale: 1.5, duration: 0.3, ease: 'power2.out' });
+        gsap.to(ringEl, { 
+          scale: 1.5,
+          duration: 0.3,
+          ease: 'power2.out'
+        });
+        gsap.to(dotEl, { 
+          scale: 0.7,
+          duration: 0.3,
+          ease: 'power2.out'
+        });
       }
     };
 
     const onMouseOut = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      const relatedTarget = e.relatedTarget as HTMLElement | null;
-
-      const isLeavingInteractive = target.closest('a, button, [role="button"], [data-interactive-cursor="true"]');
-      const isEnteringInteractive = relatedTarget?.closest('a, button, [role="button"], [data-interactive-cursor="true"]');
-
-      if (isLeavingInteractive && !isEnteringInteractive) {
-        gsap.to(dotEl, { scale: 1, duration: 0.3, ease: 'power2.out' });
-        gsap.to(ringEl, { scale: 1, duration: 0.3, ease: 'power2.out' });
+      // Check if we are not moving to another interactive element
+       if (e.target && (e.target as HTMLElement).closest('a, button, [role="button"], [data-interactive-cursor="true"]')) {
+         if (!(e.relatedTarget as HTMLElement)?.closest('a, button, [role="button"], [data-interactive-cursor="true"]')) {
+            gsap.to(ringEl, { scale: 1, duration: 0.3, ease: 'power2.out' });
+            gsap.to(dotEl, { scale: 1, duration: 0.3, ease: 'power2.out' });
+         }
       }
     };
 
-    document.body.addEventListener('mousemove', onMouseMove);
-    document.body.addEventListener('mouseover', onMouseOver);
-    document.body.addEventListener('mouseout', onMouseOut);
+    // Handle click animation
+    const onMouseDown = () => {
+      gsap.to(ringEl, { 
+        scale: 0.8, 
+        duration: 0.15, 
+        ease: 'power1.inOut' 
+      });
+    };
 
+    const onMouseUp = () => {
+      gsap.to(ringEl, { 
+        scale: 1.5, // Return to hover state if still over interactive element
+        duration: 0.2, 
+        ease: 'power1.inOut' 
+      });
+    };
+
+    // Add event listeners
+    window.addEventListener('mousemove', onMouseMove);
+    window.addEventListener('mouseover', onMouseOver);
+    window.addEventListener('mouseout', onMouseOut);
+    window.addEventListener('mousedown', onMouseDown);
+    window.addEventListener('mouseup', onMouseUp);
+
+    // Cleanup function
     return () => {
-      document.body.removeEventListener('mousemove', onMouseMove);
-      document.body.removeEventListener('mouseover', onMouseOver);
-      document.body.removeEventListener('mouseout', onMouseOut);
+      window.removeEventListener('mousemove', onMouseMove);
+      window.removeEventListener('mouseover', onMouseOver);
+      window.removeEventListener('mouseout', onMouseOut);
+      window.removeEventListener('mousedown', onMouseDown);
+      window.removeEventListener('mouseup', onMouseUp);
+      
+      // Kill GSAP tweens to prevent memory leaks
       gsap.killTweensOf([dotEl, ringEl]);
       gsap.to([dotEl, ringEl], { opacity: 0, scale: 0, duration: 0.2 });
     };
   }, [isMounted, isMobile]);
 
-  if (!isMounted || isMobile === true) {
+  // Don't render the cursor on server or for mobile users
+  if (!isMounted || isMobile) {
     return null;
   }
 
   return (
     <>
+      {/* The outer ring of the cursor */}
       <div
         ref={ringRef}
         className={cn(
-          "fixed w-10 h-10 rounded-full pointer-events-none z-[9999]",
-          "border-2 border-primary/50",
-          "opacity-0"
+          "fixed w-8 h-8 rounded-full pointer-events-none z-[9999]",
+          "border border-primary/50",
+          "opacity-0", // Initially hidden, made visible by GSAP
+          "shadow-md" // Subtle shadow for depth
         )}
+        style={{ willChange: 'transform' }} // Performance optimization
       />
+      {/* The inner dot of the cursor */}
       <div
         ref={dotRef}
         className={cn(
           "fixed w-2 h-2 rounded-full pointer-events-none z-[9999]",
           "bg-primary",
-          "opacity-0"
+          "opacity-0" // Initially hidden
         )}
+        style={{ willChange: 'transform' }} // Performance optimization
       />
     </>
   );
