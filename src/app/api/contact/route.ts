@@ -15,8 +15,8 @@ export async function POST(req: Request) {
     // --- Environment Variable Check ---
     const receiver1 = process.env.RECEIVER_EMAIL_1;
     const receiver2 = process.env.RECEIVER_EMAIL_2;
-    const emailUser = process.env.EMAIL_USER;
-    const emailPass = process.env.EMAIL_PASS;
+    const emailUser = process.env.SMTP_USER;
+    const emailPass = process.env.SMTP_PASS;
 
     if (!receiver1 || !receiver2 || !emailUser || !emailPass) {
       console.error("Receiver emails or email credentials are not set in environment variables.");
@@ -72,7 +72,20 @@ export async function POST(req: Request) {
 
   } catch (error) {
     console.error("Contact API Error:", error);
-    const errorMessage = error instanceof Error ? error.message : "An unexpected server error occurred.";
-    return NextResponse.json({ success: false, error: "Failed to process the request.", details: errorMessage }, { status: 500 });
+    let errorMessage = "An unexpected server error occurred.";
+    let errorDetails: any = {};
+
+    if (error instanceof Error) {
+        errorMessage = error.message;
+        errorDetails.name = error.name;
+        errorDetails.message = error.message;
+        if ('code' in error) {
+            errorDetails.code = (error as any).code;
+        }
+    } else {
+        errorDetails.raw = error;
+    }
+
+    return NextResponse.json({ success: false, error: "Failed to process the request.", details: errorDetails }, { status: 500 });
   }
 }
