@@ -2,12 +2,19 @@
 
 import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Gamepad2, Eye, Bird, Rows, Sparkles, Construction, ArrowRight } from 'lucide-react';
+import { Gamepad2, Eye, Bird, Rows, Sparkles, Construction, ArrowRight, ToyBrick } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
 const games = [
+  {
+    title: 'Super Retro Platformer',
+    description: 'Jump and run through a classic-style platformer world. Stomp on enemies, collect coins, and reach the flagpole!',
+    icon: <ToyBrick className="h-10 w-10 text-primary" />,
+    href: '/games/super-retro-platformer',
+    status: 'available',
+  },
   {
     title: 'Hex Test',
     description: 'How sharp is your color vision? Find the hexagon with the slightly different shade before time runs out. It gets harder each level!',
@@ -29,13 +36,6 @@ const games = [
     href: '/games/blocktris',
     status: 'available',
   },
-  {
-    title: 'Diwali Cracker',
-    description: 'Celebrate the festival of lights! A fun and safe way to enjoy the spectacle of bursting crackers in this festive clicking game.',
-    icon: <Sparkles className="h-10 w-10 text-muted-foreground" />,
-    href: '#',
-    status: 'coming-soon',
-  }
 ];
 
 export default function GamesPage() {
