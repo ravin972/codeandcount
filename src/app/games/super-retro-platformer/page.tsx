@@ -45,27 +45,36 @@ export default function SuperRetroPlatformerPage() {
     const [coins, setCoins] = useState(0);
     const [lives, setLives] = useState(3);
     const [isTouchDevice, setIsTouchDevice] = useState(false);
+    
+    const gameStateRef = useRef(gameState);
+    useEffect(() => {
+        gameStateRef.current = gameState;
+    }, [gameState]);
+
 
     useEffect(() => {
         setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0);
-        // Dynamically import Tone.js only on the client side
-        import('tone').then(Tone => {
-            toneRef.current = Tone;
+        
+        import('tone').then(module => {
+            toneRef.current = module.default;
             initGame();
         });
         
         window.addEventListener('resize', initGame);
         
         let animationFrameId: number;
-        const renderLoop = () => { gameLoop(gameDataRef.current.gameState); animationFrameId = requestAnimationFrame(renderLoop); };
+        const renderLoop = () => { gameLoop(); animationFrameId = requestAnimationFrame(renderLoop); };
         renderLoop();
         
         return () => { 
             window.removeEventListener('resize', initGame);
             cancelAnimationFrame(animationFrameId); 
             if (toneRef.current) {
-                toneRef.current.Transport.stop();
-                toneRef.current.Transport.cancel();
+                const Tone = toneRef.current;
+                if (Tone.Transport.state === 'started') {
+                    Tone.Transport.stop();
+                    Tone.Transport.cancel();
+                }
             }
         };
     }, []);
@@ -75,7 +84,7 @@ export default function SuperRetroPlatformerPage() {
         const Tone = toneRef.current;
         if (!Tone || gameDataRef.current.sounds) return;
 
-        gameDataRef.current.sounds = {
+        const sounds = {
             jump: new Tone.Synth({ oscillator: { type: 'triangle' }, envelope: { attack: 0.005, decay: 0.1, sustain: 0, release: 0.1 } }).toDestination(),
             coin: new Tone.Synth({ oscillator: { type: 'square' }, envelope: { attack: 0.005, decay: 0.1, sustain: 0.1, release: 0.1 } }).toDestination(),
             stomp: new Tone.MembraneSynth().toDestination(),
@@ -86,10 +95,13 @@ export default function SuperRetroPlatformerPage() {
             powerupAppear: new Tone.Synth({ oscillator: { type: 'sine' }, envelope: { attack: 0.01, decay: 0.1, sustain: 0, release: 0.1 } }).toDestination(),
         };
         const musicSynth = new Tone.Synth().toDestination();
-        gameDataRef.current.musicPattern = new Tone.Sequence((time, note) => {
+        const musicPattern = new Tone.Sequence((time, note) => {
             musicSynth.triggerAttackRelease(note, "8n", time);
         }, ["C4", ["E4", "G4"], "C5", ["E5", "G4"], "C4", ["G4", "E4"], "C5", ["G5", "E4"]], "4n");
-        gameDataRef.current.musicPattern.loop = true;
+        musicPattern.loop = true;
+        
+        gameDataRef.current.sounds = sounds;
+        gameDataRef.current.musicPattern = musicPattern;
     }, []);
 
     const playSound = useCallback((sound: string) => {
@@ -118,7 +130,7 @@ export default function SuperRetroPlatformerPage() {
             if (Tone.Transport.state !== 'started') {
                 Tone.Transport.start(); 
             }
-            if (!gameDataRef.current.musicPattern.state === 'started') {
+            if (gameDataRef.current.musicPattern.state !== 'started') {
                  gameDataRef.current.musicPattern.start(0);
             }
         } else { 
@@ -129,9 +141,9 @@ export default function SuperRetroPlatformerPage() {
     }, []);
 
     // --- Game Logic Classes and Functions ---
-    const initGame = useCallback(() => {
+    const initGame = useCallback((fullReset = true) => {
         const canvas = canvasRef.current;
-        if (!canvas) return;
+        if (!canvas || !toneRef.current) return;
 
         const ar = 16 / 9;
         let cH = window.innerHeight * 0.7;
@@ -140,10 +152,12 @@ export default function SuperRetroPlatformerPage() {
         canvas.width = cW; canvas.height = cH;
         TILE_SIZE = canvas.height / 15;
         
-        setGameState('start');
-        setScore(0);
-        setLives(3);
-        setCoins(0);
+        if (fullReset) {
+            setScore(0);
+            setLives(3);
+            setCoins(0);
+            setGameState('start');
+        }
 
         gameDataRef.current.keys = { left: false, right: false, up: false };
         gameDataRef.current.camera = { x: 0 };
@@ -152,7 +166,7 @@ export default function SuperRetroPlatformerPage() {
         gameDataRef.current.clouds = Array.from({length: 10}, () => new Cloud(Math.random() * cW * 3, Math.random() * cH * 0.5));
         
         if (toneRef.current && !gameDataRef.current.sounds) initSounds();
-        initLevel(true);
+        initLevel(fullReset);
         toggleMusic(false);
     }, [initSounds, toggleMusic]);
 
@@ -237,7 +251,18 @@ export default function SuperRetroPlatformerPage() {
         }
         powerUp() { if (this.size === 'small') { this.size = 'big'; this.y -= this.height; this.height *= 2; playSound('powerup'); } else { setScore(s => s + 500); } }
         takeDamage() { if (this.invincible) return; if (this.size === 'big') { this.size = 'small'; this.height /= 2; this.invincible = true; this.invincibleTimer = 90; playSound('powerdown'); } else { this.die(); } }
-        die() { playSound('death'); toggleMusic(false); setLives(l => l - 1); if (lives > 1) { setGameState('dead_start'); } else { setGameState('gameOver'); } }
+        die() { 
+            playSound('death'); toggleMusic(false);
+            setLives(l => {
+                const newLives = l - 1;
+                if (newLives > 0) {
+                    setGameState('dead_start');
+                } else {
+                    setGameState('gameOver');
+                }
+                return newLives;
+            });
+        }
     }
     class Enemy { x=0; y=0; dx=-1; width=0; height=0; stomped=false; animFrame=0; constructor(x:number, y:number) { this.x = x; this.y = y; this.width = TILE_SIZE; this.height = TILE_SIZE; }
         draw(ctx: CanvasRenderingContext2D) { ctx.save(); ctx.translate(this.x, this.y); ctx.fillStyle = '#854d0e'; const h = this.stomped ? this.height / 2 : this.height; ctx.fillRect(0, this.height - h, this.width, h); if(!this.stomped) { this.animFrame = (this.animFrame + 0.1) % 2; ctx.fillStyle = '#a16207'; if (Math.floor(this.animFrame) === 0) { ctx.fillRect(0, this.height, this.width * 0.4, this.height * 0.2); } else { ctx.fillRect(this.width * 0.6, this.height, this.width * 0.4, this.height * 0.2); } } ctx.restore(); }
@@ -260,10 +285,12 @@ export default function SuperRetroPlatformerPage() {
         update(camera: any) { this.x -= this.speed; if (this.x < -TILE_SIZE*3 - camera.x) this.x = canvasRef.current!.width + TILE_SIZE*2 + camera.x; }
     }
 
-    const gameLoop = useCallback((currentGameState: typeof gameState) => {
+    const gameLoop = useCallback(() => {
         const ctx = canvasRef.current?.getContext('2d');
         const canvas = canvasRef.current;
         if (!ctx || !canvas || !gameDataRef.current.player) return;
+        
+        const currentGameState = gameStateRef.current;
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = '#5d94f5'; ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -292,42 +319,58 @@ export default function SuperRetroPlatformerPage() {
         player.draw(ctx);
         ctx.restore();
     }, [playSound, toggleMusic]);
+
+    const handleStartGame = useCallback(() => {
+        const Tone = toneRef.current;
+        if (gameStateRef.current === 'start') {
+            if (Tone && Tone.context.state === 'suspended') {
+                Tone.start();
+            }
+            initGame(true); // Full reset for start
+            setGameState('playing');
+            toggleMusic(true);
+        } else if (gameStateRef.current === 'gameOver' || gameStateRef.current === 'win') {
+            initGame(true);
+            setGameState('playing');
+            toggleMusic(true);
+        }
+    }, [initGame, toggleMusic]);
     
     useEffect(() => {
-        gameDataRef.current.gameState = gameState;
-    }, [gameState])
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.repeat) return;
+            const keys = gameDataRef.current.keys;
+            if (e.code === 'ArrowLeft' || e.code === 'KeyA') keys.left = true;
+            if (e.code === 'ArrowRight' || e.code === 'KeyD') keys.right = true;
+            if (e.code === 'ArrowUp' || e.code === 'KeyW' || e.code === 'Space') keys.up = true;
+            if (e.code === 'Enter') handleStartGame();
+        };
+        const handleKeyUp = (e: KeyboardEvent) => {
+            const keys = gameDataRef.current.keys;
+            if (e.code === 'ArrowLeft' || e.code === 'KeyA') keys.left = false;
+            if (e.code === 'ArrowRight' || e.code === 'KeyD') keys.right = false;
+            if (e.code === 'ArrowUp' || e.code === 'KeyW' || e.code === 'Space') keys.up = false;
+        };
+        document.addEventListener('keydown', handleKeyDown);
+        document.addEventListener('keyup', handleKeyUp);
+        return () => {
+            document.removeEventListener('keydown', handleKeyDown);
+            document.removeEventListener('keyup', handleKeyUp);
+        };
+    }, [handleStartGame]);
 
-    const handleInput = useCallback((down:boolean, key: 'left'|'right'|'up'|'enter') => {
-        const currentGameState = gameDataRef.current.gameState;
-        const Tone = toneRef.current;
-
-        if (key === 'enter' || (key === 'up' && isTouchDevice)) { // 'up' for touch start
-             if ((currentGameState === 'start' || currentGameState === 'gameOver' || currentGameState === 'win') && down) {
-                if (Tone && Tone.context.state === 'suspended') {
-                    Tone.start();
-                }
-                if (currentGameState === 'start') {
-                    initGame(); // Full reset for start
-                    setGameState('playing'); 
-                    toggleMusic(true);
-                } else {
-                     initGame();
-                }
-            }
-        }
-        if(gameDataRef.current.keys) gameDataRef.current.keys[key] = down;
-    }, [isTouchDevice, initGame, toggleMusic]);
-
-    useEffect(() => {
-        const handleKeyDown = (e: KeyboardEvent) => { if (e.repeat) return; if (e.code === 'ArrowLeft' || e.code === 'KeyA') handleInput(true, 'left'); if (e.code === 'ArrowRight' || e.code === 'KeyD') handleInput(true, 'right'); if (e.code === 'ArrowUp' || e.code === 'KeyW' || e.code === 'Space') handleInput(true, 'up'); if (e.code === 'Enter') handleInput(true, 'enter'); };
-        const handleKeyUp = (e: KeyboardEvent) => { if (e.code === 'ArrowLeft' || e.code === 'KeyA') handleInput(false, 'left'); if (e.code === 'ArrowRight' || e.code === 'KeyD') handleInput(false, 'right'); if (e.code === 'ArrowUp' || e.code === 'KeyW' || e.code === 'Space') handleInput(false, 'up'); };
-        document.addEventListener('keydown', handleKeyDown); document.addEventListener('keyup', handleKeyUp);
-        return () => { document.removeEventListener('keydown', handleKeyDown); document.removeEventListener('keyup', handleKeyUp); };
-    }, [handleInput]);
+    const handleTouch = (key: 'left' | 'right' | 'up', isDown: boolean) => {
+      if (gameDataRef.current.keys) {
+        gameDataRef.current.keys[key] = isDown;
+      }
+      if (isDown && (gameStateRef.current === 'start' || gameStateRef.current === 'gameOver' || gameStateRef.current === 'win')) {
+        handleStartGame();
+      }
+    };
 
     return (
         <div className="bg-background text-foreground min-h-screen py-8 flex flex-col items-center justify-center">
-            <header className="text-center mb-6 w-full max-w-lg px-4">
+            <header className="text-center mb-6 w-full max-w-4xl px-4">
                 <div className="bg-secondary rounded-xl shadow-xl p-6 border border-border">
                     <h1 className="text-3xl md:text-4xl font-bold tracking-tight flex items-center justify-center">
                         <ToyBrick className="h-10 w-10 mr-3 text-primary" />
@@ -351,12 +394,12 @@ export default function SuperRetroPlatformerPage() {
                                 {gameState === 'start' && <>
                                     <CardTitle className="text-3xl mb-4 flex items-center"><Gamepad2 className="inline h-8 w-8 mr-2 text-primary" />Ready to Play?</CardTitle>
                                     <CardDescription className="text-md text-white/80 pt-2 max-w-sm mx-auto">Use Arrow Keys or A/D to move, Space/W to jump. Press Enter to start.</CardDescription>
-                                    <Button size="lg" className="mt-6" onClick={() => handleInput(true, 'enter')}><Play className="mr-2 h-5 w-5" /> Start Game</Button>
+                                    <Button size="lg" className="mt-6" onClick={handleStartGame}><Play className="mr-2 h-5 w-5" /> Start Game</Button>
                                 </>}
                                 {(gameState === 'gameOver' || gameState === 'win') && <>
                                     <CardTitle className={cn("text-3xl mb-4 flex items-center", gameState === 'gameOver' && "text-destructive")}>{gameState === 'gameOver' ? <AlertTriangle className="inline h-8 w-8 mr-2" /> : "🎉"} {gameState === 'gameOver' ? 'GAME OVER' : 'YOU WIN!'}</CardTitle>
                                     <CardDescription className="text-xl mt-2 text-white">Final Score: {score}</CardDescription>
-                                    <Button size="lg" className="mt-6" onClick={() => handleInput(true, 'enter')}><RefreshCw className="mr-2 h-5 w-5" /> Play Again</Button>
+                                    <Button size="lg" className="mt-6" onClick={handleStartGame}><RefreshCw className="mr-2 h-5 w-5" /> Play Again</Button>
                                 </>}
                             </div>
                         )}
@@ -365,10 +408,10 @@ export default function SuperRetroPlatformerPage() {
                     <CardFooter className={cn("p-4 border-t flex flex-col items-center justify-center gap-4")}>
                         <div className={cn("w-full max-w-sm justify-between items-center", isTouchDevice ? "flex" : "hidden")}>
                             <div className="flex gap-4">
-                                <Button onTouchStart={(e) => {e.preventDefault(); handleInput(true, 'left')}} onTouchEnd={(e) => {e.preventDefault(); handleInput(false, 'left')}} variant="outline" size="lg" className="h-16 w-16 rounded-full text-3xl select-none">←</Button>
-                                <Button onTouchStart={(e) => {e.preventDefault(); handleInput(true, 'right')}} onTouchEnd={(e) => {e.preventDefault(); handleInput(false, 'right')}} variant="outline" size="lg" className="h-16 w-16 rounded-full text-3xl select-none">→</Button>
+                                <Button onTouchStart={(e) => {e.preventDefault(); handleTouch('left', true)}} onTouchEnd={(e) => {e.preventDefault(); handleTouch('left', false)}} variant="outline" size="lg" className="h-16 w-16 rounded-full text-3xl select-none">←</Button>
+                                <Button onTouchStart={(e) => {e.preventDefault(); handleTouch('right', true)}} onTouchEnd={(e) => {e.preventDefault(); handleTouch('right', false)}} variant="outline" size="lg" className="h-16 w-16 rounded-full text-3xl select-none">→</Button>
                             </div>
-                            <Button onTouchStart={(e) => {e.preventDefault(); handleInput(true, 'up')}} onTouchEnd={(e) => {e.preventDefault(); handleInput(false, 'up')}} variant="destructive" size="lg" className="h-20 w-20 rounded-full text-3xl font-bold select-none">A</Button>
+                            <Button onTouchStart={(e) => {e.preventDefault(); handleTouch('up', true)}} onTouchEnd={(e) => {e.preventDefault(); handleTouch('up', false)}} variant="destructive" size="lg" className="h-20 w-20 rounded-full text-3xl font-bold select-none">A</Button>
                         </div>
                          <Button size="lg" variant="outline" asChild>
                             <Link href="/games"><ArrowLeft className="mr-2 h-4 w-4" /> Back to Games</Link>
@@ -378,5 +421,7 @@ export default function SuperRetroPlatformerPage() {
             </main>
         </div>
     );
+}
+
 
     
