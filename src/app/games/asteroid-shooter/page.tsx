@@ -302,7 +302,7 @@ export default function AsteroidShooterPage() {
                 ctx.beginPath(); ctx.arc(p.x, p.y, 2, 0, Math.PI * 2); ctx.fill();
             }
 
-            if (blinkOn) drawShip(ctx, ship.x, ship.y, ship.a);
+            if (blinkOn) drawShip(ctx, ship, ship.x, ship.y, ship.a);
             
             for (const laser of ship.lasers) {
                 ctx.fillStyle = 'salmon';
@@ -320,12 +320,12 @@ export default function AsteroidShooterPage() {
             }
 
             for(let i = 0; i < lives; i++) {
-                drawShip(ctx, SHIP_SIZE + i * SHIP_SIZE * 1.2, SHIP_SIZE, 90 / 180 * Math.PI, 'white', 0.8);
+                drawShip(ctx, ship, SHIP_SIZE + i * SHIP_SIZE * 1.2, SHIP_SIZE * 2, 90 / 180 * Math.PI, 'white', 0.8);
             }
         }
         
         requestAnimationFrame(gameLoop);
-    }, [gameState, highScore]);
+    }, [gameState, highScore, lives]);
 
     const handleScreenWrap = (obj: any, canvas: HTMLCanvasElement) => {
          if (obj.x < 0 - obj.r) obj.x = canvas.width + obj.r;
@@ -334,7 +334,7 @@ export default function AsteroidShooterPage() {
          else if (obj.y > canvas.height + obj.r) obj.y = 0 - obj.r;
     }
     
-    const drawShip = (ctx: CanvasRenderingContext2D, x:number, y:number, a:number, color = 'white', scale = 1.0) => {
+    const drawShip = (ctx: CanvasRenderingContext2D, ship: any, x:number, y:number, a:number, color = 'white', scale = 1.0) => {
          const shipR = (SHIP_SIZE / 2) * scale;
          ctx.strokeStyle = color; ctx.lineWidth = SHIP_SIZE / 20 * scale;
          
@@ -354,7 +354,7 @@ export default function AsteroidShooterPage() {
          ctx.closePath();
          ctx.fillStyle = "darkgrey"; ctx.fill(); ctx.stroke();
          
-        if (gameDataRef.current.ship.thrusting && scale === 1.0) {
+        if (ship.thrusting && scale === 1.0) {
             ctx.fillStyle = 'red'; ctx.strokeStyle = 'yellow'; ctx.lineWidth = SHIP_SIZE / 10;
             ctx.beginPath();
             ctx.moveTo( x - shipR * (1 / 3 * Math.cos(a) + 0.5 * Math.sin(a)), y + shipR * (1 / 3 * Math.sin(a) - 0.5 * Math.cos(a)) );
