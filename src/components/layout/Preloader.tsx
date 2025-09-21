@@ -24,24 +24,6 @@ export default function Preloader() {
         <span className="animate-flip-in inline-block" style={{ animationDelay: '1.2s' }}>n</span>
         <span className="animate-flip-in inline-block" style={{ animationDelay: '1.3s' }}>t</span>
       </div>
-      <div className="perspective-container text-lg sm:text-xl lg:text-2xl font-semibold mt-4 text-amber-500">
-        <span className="animate-flip-in inline-block" style={{ animationDelay: '1.5s' }}>H</span>
-        <span className="animate-flip-in inline-block" style={{ animationDelay: '1.55s' }}>a</span>
-        <span className="animate-flip-in inline-block" style={{ animationDelay: '1.6s' }}>p</span>
-        <span className="animate-flip-in inline-block" style={{ animationDelay: '1.65s' }}>p</span>
-        <span className="animate-flip-in inline-block" style={{ animationDelay: '1.7s' }}>y</span>
-        <span className="animate-flip-in inline-block ml-2" style={{ animationDelay: '1.8s' }}>D</span>
-        <span className="animate-flip-in inline-block" style={{ animationDelay: '1.85s' }}>i</span>
-        <span className="animate-flip-in inline-block" style={{ animationDelay: '1.9s' }}>w</span>
-        <span className="animate-flip-in inline-block" style={{ animationDelay: '1.95s' }}>a</span>
-        <span className="animate-flip-in inline-block" style={{ animationDelay: '2.0s' }}>l</span>
-        <span className="animate-flip-in inline-block" style={{ animationDelay: '2.05s' }}>i</span>
-        <span className="animate-flip-in inline-block ml-2" style={{ animationDelay: '2.1s' }}>2</span>
-        <span className="animate-flip-in inline-block" style={{ animationDelay: '2.15s' }}>0</span>
-        <span className="animate-flip-in inline-block" style={{ animationDelay: '2.2s' }}>2</span>
-        <span className="animate-flip-in inline-block" style={{ animationDelay: '2.25s' }}>5</span>
-         <Flame className="inline-block animate-flip-in text-orange-500 ml-1" style={{ animationDelay: '2.3s' }} />
-      </div>
     </div>
   );
 }

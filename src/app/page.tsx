@@ -20,6 +20,7 @@ import { testimonials } from '@/lib/testimonial-data';
 import { blogPosts as homepageBlogPosts } from '@/lib/blog-data';
 import { portfolioItems } from '@/lib/portfolio-data';
 import { Badge } from '@/components/ui/badge';
+import DiwaliCracker from '@/components/common/DiwaliCracker';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -99,13 +100,15 @@ const shuffleArray = <T,>(array: T[]): T[] => {
   return array;
 };
 
+type LoadingStep = 'preloading' | 'cracker' | 'done';
+
 export default function HomePage() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const cardRef = useRef<HTMLDivElement>(null);
   const [itemWidth, setItemWidth] = useState(0);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
-  const [isLoading, setIsLoading] = useState(true);
+  const [loadingStep, setLoadingStep] = useState<LoadingStep>('preloading');
   const [shuffledProjects, setShuffledProjects] = useState(portfolioItems);
 
   useEffect(() => {
@@ -114,27 +117,35 @@ export default function HomePage() {
   }, []);
 
 
-  // Preloader logic moved here
+  // Preloader and animation sequence logic
   useEffect(() => {
-    // Make sure we're on the client side
     if (typeof window !== 'undefined') {
-      // Check if the preloader has already run in this session
       const hasLoaded = sessionStorage.getItem('preloader_has_run');
       if (hasLoaded) {
-        setIsLoading(false);
+        setLoadingStep('done');
       } else {
-        const timer = setTimeout(() => {
-          setIsLoading(false);
-          sessionStorage.setItem('preloader_has_run', 'true');
-        }, 3000); // Increased duration for new animation
-        return () => clearTimeout(timer);
+        // Start preloader
+        const preloaderTimer = setTimeout(() => {
+          // Preloader finished, now show cracker
+          setLoadingStep('cracker');
+          
+          // Cracker animation will last for 3s (from its own CSS)
+          const crackerTimer = setTimeout(() => {
+            setLoadingStep('done');
+            sessionStorage.setItem('preloader_has_run', 'true');
+          }, 3000);
+
+          return () => clearTimeout(crackerTimer);
+        }, 2500); // Preloader duration
+
+        return () => clearTimeout(preloaderTimer);
       }
     }
   }, []);
 
-  // Animations
+  // GSAP Animations
   useEffect(() => {
-    if (isLoading) return; // Don't run animations while preloader is active
+    if (loadingStep !== 'done') return; // Don't run animations until loading is fully complete
 
     // Helper function for creating animations
     const createAnimation = (target: gsap.TweenTarget, vars: gsap.TweenVars) => {
@@ -216,7 +227,7 @@ export default function HomePage() {
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
-  }, [isLoading]);
+  }, [loadingStep]);
 
 
 
@@ -232,7 +243,7 @@ export default function HomePage() {
   }, []);
 
   useEffect(() => {
-    if (isLoading) return;
+    if (loadingStep !== 'done') return;
     const container = scrollContainerRef.current;
     
     const calculateItemWidth = () => {
@@ -269,7 +280,7 @@ export default function HomePage() {
       }
       window.removeEventListener('resize', calculateItemWidth);
     };
-  }, [checkScrollability, isLoading]);
+  }, [checkScrollability, loadingStep]);
 
 
   const handleScroll = (direction: 'left' | 'right') => {
@@ -288,9 +299,10 @@ export default function HomePage() {
 
   return (
     <div className="bg-background text-foreground">
-      {isLoading && <Preloader />}
+      {loadingStep === 'preloading' && <Preloader />}
+      {loadingStep === 'cracker' && <DiwaliCracker />}
 
-      <div className={cn(isLoading && "opacity-0")}>
+      <div className={cn(loadingStep !== 'done' && "opacity-0")}>
         {/* Hero Section */}
         <section className="py-20 md:py-32 relative overflow-hidden bg-gradient-main-hero-light dark:bg-gradient-main-hero">
           <div
