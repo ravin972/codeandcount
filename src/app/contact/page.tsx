@@ -3,16 +3,18 @@
 
 import React from 'react';
 import Script from 'next/script';
-import { Mail, Phone, MapPin, CalendarDays, MessageSquare, ExternalLink, ArrowRight } from 'lucide-react'; 
+import { Mail, Phone, MapPin, CalendarDays, MessageSquare, ExternalLink, ArrowRight, Gift } from 'lucide-react'; 
 import { ContactForm } from '@/components/forms/ContactForm';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 
 export default function ContactPage() {
   const mapAddress = "spaze i tech park, Sec-49, Gurugram, Haryana, India";
   const mapEmbedUrl = `https://maps.google.com/maps?q=${encodeURIComponent(mapAddress)}&t=&z=15&ie=UTF8&iwloc=&output=embed`;
   const calComCalLink = "ravin-pandey-f7vkoq/30min"; 
   const calComNamespace = "30min";
+  const REFERRAL_CODE = "DIWALI2025";
 
   const calComScriptContent = `
     (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if(typeof namespace === "string"){cal.ns[namespace] = cal.ns[namespace] || api;p(cal.ns[namespace], ar);p(cal, ["initNamespace", namespace]);} else p(cal, ar); return;} p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
@@ -72,6 +74,33 @@ export default function ContactPage() {
             </Button>
           </div>
         </section>
+
+        {/* Diwali Referral Offer Section */}
+        <section className="pb-16 md:pb-20">
+            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+                <Card className="max-w-2xl mx-auto bg-gradient-to-tr from-amber-400/20 via-orange-500/20 to-red-500/20" data-interactive-cursor="true">
+                    <CardHeader>
+                        <CardTitle className="flex items-center text-2xl font-bold text-foreground">
+                            <Gift className="h-6 w-6 mr-3 text-primary" />
+                            Special Diwali Referral Offer!
+                        </CardTitle>
+                        <CardDescription className="text-foreground/80">
+                            Refer a new client and get 25% OFF your next project.
+                        </CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-3 text-sm text-muted-foreground">
+                        <p><strong className="text-foreground">How it works:</strong> When a new client you refer schedules a meeting and confirms their project with us, you both get rewarded!</p>
+                        <p><strong className="text-foreground">To Claim:</strong> Ask your referred client to mention your name and the referral code below when they contact us.</p>
+                        <div className="mt-2 flex items-center justify-center rounded-lg border-2 border-dashed border-primary/50 bg-background/50 p-3">
+                            <p className="text-lg font-mono font-semibold tracking-widest text-primary">
+                            {REFERRAL_CODE}
+                            </p>
+                        </div>
+                    </CardContent>
+                </Card>
+            </div>
+        </section>
+
 
         {/* Separator */}
         <div className="my-8 md:my-12 text-center">
