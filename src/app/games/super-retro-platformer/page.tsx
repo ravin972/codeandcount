@@ -151,10 +151,6 @@ export default function SuperRetroPlatformerPage() {
         const ar = 16 / 9;
         let cW = parent.clientWidth;
         let cH = cW / ar;
-        if (cH > parent.clientHeight) {
-            cH = parent.clientHeight;
-            cW = cH * ar;
-        }
         
         canvas.width = cW;
         canvas.height = cH;
@@ -390,7 +386,7 @@ export default function SuperRetroPlatformerPage() {
             </header>
 
             <main className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl w-full flex justify-center">
-                <Card className="text-center relative aspect-video" data-interactive-cursor="true">
+                <Card className="w-full text-center relative overflow-hidden" data-interactive-cursor="true">
                     <CardHeader className="absolute top-2 left-2 z-20 text-left">
                         <p className="text-white font-bold" style={{ textShadow: '2px 2px 4px #000' }}>Score: {score}</p>
                         <p className="text-white font-bold" style={{ textShadow: '2px 2px 4px #000' }}>Coins: {coins}</p>
@@ -398,7 +394,7 @@ export default function SuperRetroPlatformerPage() {
                     <CardHeader className="absolute top-2 right-2 z-20 text-right">
                          <p className="text-white font-bold" style={{ textShadow: '2px 2px 4px #000' }}>Lives: {lives}</p>
                     </CardHeader>
-                    <CardContent className="p-0 relative h-full w-full flex items-center justify-center">
+                    <CardContent className="p-0 relative aspect-video">
                         {gameState !== 'playing' && (
                             <div className="absolute inset-0 bg-black/70 z-10 flex flex-col items-center justify-center p-4 text-center">
                                 {gameState === 'start' && <>
@@ -432,5 +428,7 @@ export default function SuperRetroPlatformerPage() {
         </div>
     );
 }
+
+    
 
     
