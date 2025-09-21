@@ -40,43 +40,33 @@ export default function SuperRetroPlatformerPage() {
     const gameDataRef = useRef<any>({});
     const toneRef = useRef<typeof ToneType | null>(null);
 
-    const [gameState, setGameState] = useState<'start' | 'playing' | 'dead_start' | 'win' | 'gameOver'>('start');
+    // Visual state for UI update
     const [score, setScore] = useState(0);
     const [coins, setCoins] = useState(0);
     const [lives, setLives] = useState(3);
     const [isTouchDevice, setIsTouchDevice] = useState(false);
-    
-    const gameStateRef = useRef(gameState);
-    useEffect(() => {
-        gameStateRef.current = gameState;
-    }, [gameState]);
-
+    const [currentGameState, setCurrentGameState] = useState<'start' | 'playing' | 'dead_start' | 'win' | 'gameOver'>('start');
 
     useEffect(() => {
         setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0);
         
         import('tone').then(module => {
             toneRef.current = module.default;
-            initGame();
         });
         
-        window.addEventListener('resize', initGame);
-        
-        let animationFrameId: number;
-        const renderLoop = () => { gameLoop(); animationFrameId = requestAnimationFrame(renderLoop); };
-        renderLoop();
+        const animationFrameId = requestAnimationFrame(gameLoop);
         
         return () => { 
-            window.removeEventListener('resize', initGame);
             cancelAnimationFrame(animationFrameId); 
-            if (toneRef.current) {
-                const Tone = toneRef.current;
-                if (Tone.Transport.state === 'started') {
-                    Tone.Transport.stop();
-                    Tone.Transport.cancel();
-                }
-            }
+            toggleMusic(false);
+            window.removeEventListener('resize', handleResize);
         };
+    }, []);
+
+    useEffect(() => {
+      initGame(true);
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
     }, []);
 
     // --- Sound Engine ---
@@ -84,7 +74,7 @@ export default function SuperRetroPlatformerPage() {
         const Tone = toneRef.current;
         if (!Tone || gameDataRef.current.sounds) return;
 
-        const sounds = {
+        gameDataRef.current.sounds = {
             jump: new Tone.Synth({ oscillator: { type: 'triangle' }, envelope: { attack: 0.005, decay: 0.1, sustain: 0, release: 0.1 } }).toDestination(),
             coin: new Tone.Synth({ oscillator: { type: 'square' }, envelope: { attack: 0.005, decay: 0.1, sustain: 0.1, release: 0.1 } }).toDestination(),
             stomp: new Tone.MembraneSynth().toDestination(),
@@ -95,13 +85,11 @@ export default function SuperRetroPlatformerPage() {
             powerupAppear: new Tone.Synth({ oscillator: { type: 'sine' }, envelope: { attack: 0.01, decay: 0.1, sustain: 0, release: 0.1 } }).toDestination(),
         };
         const musicSynth = new Tone.Synth().toDestination();
-        const musicPattern = new Tone.Sequence((time, note) => {
+        gameDataRef.current.musicPattern = new Tone.Sequence((time, note) => {
             musicSynth.triggerAttackRelease(note, "8n", time);
-        }, ["C4", ["E4", "G4"], "C5", ["E5", "G4"], "C4", ["G4", "E4"], "C5", ["G5", "E4"]], "4n");
-        musicPattern.loop = true;
-        
-        gameDataRef.current.sounds = sounds;
-        gameDataRef.current.musicPattern = musicPattern;
+        }, ["C4", ["E4", "G4"], "C5", ["E5", "G4"], "C4", ["G4", "E4"], "C5", ["G5", "E4"]], "4n").start(0);
+        gameDataRef.current.musicPattern.loop = true;
+
     }, []);
 
     const playSound = useCallback((sound: string) => {
@@ -130,9 +118,6 @@ export default function SuperRetroPlatformerPage() {
             if (Tone.Transport.state !== 'started') {
                 Tone.Transport.start(); 
             }
-            if (gameDataRef.current.musicPattern.state !== 'started') {
-                 gameDataRef.current.musicPattern.start(0);
-            }
         } else { 
             if (Tone.Transport.state === 'started') {
                 Tone.Transport.stop(); 
@@ -140,42 +125,52 @@ export default function SuperRetroPlatformerPage() {
         }
     }, []);
 
-    // --- Game Logic Classes and Functions ---
-    const initGame = useCallback((fullReset = true) => {
+    const handleResize = () => {
         const canvas = canvasRef.current;
-        if (!canvas || !toneRef.current) return;
-
-        const parent = canvas.parentElement;
-        if(!parent) return;
+        if(!canvas || !canvas.parentElement) return;
 
         const ar = 16 / 9;
-        let cW = parent.clientWidth;
+        let cW = canvas.parentElement.clientWidth;
         let cH = cW / ar;
-        
+        if (cH > window.innerHeight * 0.8) {
+            cH = window.innerHeight * 0.8;
+            cW = cH * ar;
+        }
+
         canvas.width = cW;
         canvas.height = cH;
         TILE_SIZE = canvas.height / 15;
+    };
+    
+    // --- Game Logic Classes and Functions ---
+    const initGame = useCallback((fullReset = true) => {
+        handleResize();
         
         if (fullReset) {
             setScore(0);
             setLives(3);
             setCoins(0);
-            setGameState('start');
         }
 
-        gameDataRef.current.keys = { left: false, right: false, up: false };
-        gameDataRef.current.camera = { x: 0 };
-        gameDataRef.current.player = new Player(0,0);
-        
-        gameDataRef.current.clouds = Array.from({length: 10}, () => new Cloud(Math.random() * cW * 3, Math.random() * cH * 0.5));
-        
-        if (toneRef.current && !gameDataRef.current.sounds) initSounds();
+        gameDataRef.current = {
+            ...gameDataRef.current,
+            keys: { left: false, right: false, up: false },
+            camera: { x: 0 },
+            player: new Player(0,0),
+            clouds: Array.from({length: 10}, () => new Cloud(Math.random() * (canvasRef.current?.width || 800) * 3, Math.random() * (canvasRef.current?.height || 450) * 0.5)),
+            gameState: 'start',
+            deadTimer: 0,
+        };
+        setCurrentGameState('start');
+
         initLevel(fullReset);
         toggleMusic(false);
-    }, [initSounds, toggleMusic]);
+    }, [toggleMusic]);
 
     const initLevel = (isFullReset: boolean) => {
         const gameData = gameDataRef.current;
+        if(!gameData) return;
+
         gameData.platforms = [];
         gameData.enemies = [];
         gameData.items = [];
@@ -238,34 +233,35 @@ export default function SuperRetroPlatformerPage() {
             this.dy += GRAVITY; this.dx *= FRICTION; if(Math.abs(this.dx) > MAX_SPEED) this.dx = MAX_SPEED * Math.sign(this.dx);
             this.x += this.dx; this.handleHorizontalCollisions(); this.y += this.dy; this.handleVerticalCollisions();
             if (this.invincible) { this.invincibleTimer--; if (this.invincibleTimer <= 0) this.invincible = false; }
-            if (this.y > canvasRef.current!.height + TILE_SIZE * 2) this.die();
+            if (canvasRef.current && this.y > canvasRef.current.height + TILE_SIZE * 2) this.die();
         }
         handleHorizontalCollisions() {
             gameDataRef.current.platforms.forEach((p:Platform) => { if (this.x < p.x + p.width && this.x + this.width > p.x && this.y < p.y + p.height && this.y + this.height > p.y) { if (this.dx > 0) this.x = p.x - this.width; else if (this.dx < 0) this.x = p.x + p.width; this.dx = 0; } });
         }
         handleVerticalCollisions() {
             this.onGround = false;
-            for (let i = gameDataRef.current.platforms.length - 1; i >= 0; i--) {
-                const p = gameDataRef.current.platforms[i];
+            gameDataRef.current.platforms.forEach((p: Platform, i: number) => {
                 if (this.x < p.x + p.width && this.x + this.width > p.x && this.y < p.y + p.height && this.y + this.height > p.y) {
                     if (this.dy > 0 && this.y + this.height - this.dy <= p.y) { this.y = p.y - this.height; this.dy = 0; this.onGround = true; }
                     else if (this.dy < 0 && this.y - this.dy >= p.y + p.height) { this.y = p.y + p.height; this.dy = 0.1; if (p.type === '?' || p.type === 'M') { p.hit(this.facing); } else if (p.type === 'b' && this.size === 'big') { gameDataRef.current.platforms.splice(i, 1); } }
                 }
-            }
+            });
         }
         powerUp() { if (this.size === 'small') { this.size = 'big'; this.y -= this.height; this.height *= 2; playSound('powerup'); } else { setScore(s => s + 500); } }
         takeDamage() { if (this.invincible) return; if (this.size === 'big') { this.size = 'small'; this.height /= 2; this.invincible = true; this.invincibleTimer = 90; playSound('powerdown'); } else { this.die(); } }
         die() { 
             playSound('death'); toggleMusic(false);
-            setLives(l => {
-                const newLives = l - 1;
-                if (newLives > 0) {
-                    setGameState('dead_start');
-                } else {
-                    setGameState('gameOver');
-                }
-                return newLives;
-            });
+            const newLives = gameDataRef.current.lives - 1;
+            setLives(newLives);
+            gameDataRef.current.lives = newLives;
+
+            if (newLives > 0) {
+                gameDataRef.current.gameState = 'dead_start';
+                setCurrentGameState('dead_start');
+            } else {
+                gameDataRef.current.gameState = 'gameOver';
+                setCurrentGameState('gameOver');
+            }
         }
     }
     class Enemy { x=0; y=0; dx=-1; width=0; height=0; stomped=false; animFrame=0; constructor(x:number, y:number) { this.x = x; this.y = y; this.width = TILE_SIZE; this.height = TILE_SIZE; }
@@ -281,39 +277,39 @@ export default function SuperRetroPlatformerPage() {
     }
     class Platform { x=0; y=0; width=0; height=0; type:string; originalType:string; constructor(x:number, y:number, type:string) { this.x = x; this.y = y; this.width = TILE_SIZE; this.height = TILE_SIZE; this.type = type; this.originalType = type;}
         draw(ctx: CanvasRenderingContext2D) { let color = '#d97706'; if (this.type === 'b') color = '#f97316'; if (this.type === '?' || this.type === 'M') color = '#f59e0b'; if (this.type === 'used') color = '#a16207'; if (this.type === 'p') color = '#16a34a'; ctx.fillStyle = color; ctx.fillRect(this.x, this.y, this.width, this.height); if (this.type === 'b') { ctx.fillStyle = 'rgba(0,0,0,0.2)'; ctx.fillRect(this.x, this.y, this.width, this.height/4); ctx.fillRect(this.x, this.y, this.width/4, this.height); } }
-        hit(dir: number) { if(this.type === '?') { setCoins(c => c + 1); setScore(s => s + 100); playSound('coin'); this.type = 'used'; } else if(this.type === 'M') { playSound('powerupAppear'); gameDataRef.current.items.push(new Item(this.x, this.y - TILE_SIZE, 'mushroom', dir)); this.type = 'used'; } }
+        hit(dir: number) { if(this.type === '?') { setCoins(c => {const newC = c + 1; gameDataRef.current.coins = newC; return newC;}); setScore(s => { const newS = s + 100; gameDataRef.current.score = newS; return newS; }); playSound('coin'); this.type = 'used'; } else if(this.type === 'M') { playSound('powerupAppear'); gameDataRef.current.items.push(new Item(this.x, this.y - TILE_SIZE, 'mushroom', dir)); this.type = 'used'; } }
     }
     class Flagpole { x=0; y=0; width=0; height=0; constructor(x:number,y:number) { this.x = x; this.y = y; this.width = TILE_SIZE/4; this.height = TILE_SIZE*5; } draw(ctx: CanvasRenderingContext2D) { ctx.fillStyle = '#d1d5db'; ctx.fillRect(this.x, this.y, this.width, this.height); } }
     class Cloud { x=0; y=0; speed=0; constructor(x:number,y:number) { this.x = x; this.y = y; this.speed = 0.2 + Math.random() * 0.3; }
         draw(ctx: CanvasRenderingContext2D) { ctx.fillStyle = 'rgba(255,255,255,0.9)'; ctx.fillRect(this.x, this.y, TILE_SIZE * 2, TILE_SIZE); ctx.fillRect(this.x + TILE_SIZE*0.5, this.y-TILE_SIZE*0.5, TILE_SIZE, TILE_SIZE); }
-        update(camera: any) { this.x -= this.speed; if (this.x < -TILE_SIZE*3 - camera.x) this.x = canvasRef.current!.width + TILE_SIZE*2 + camera.x; }
+        update() { this.x -= this.speed; if (canvasRef.current && this.x < -TILE_SIZE*3 - gameDataRef.current.camera.x) this.x = canvasRef.current.width + TILE_SIZE*2 + gameDataRef.current.camera.x; }
     }
 
     const gameLoop = useCallback(() => {
+        requestAnimationFrame(gameLoop);
+
         const ctx = canvasRef.current?.getContext('2d');
         const canvas = canvasRef.current;
-        if (!ctx || !canvas || !gameDataRef.current.player) return;
+        const gameData = gameDataRef.current;
+        if (!ctx || !canvas || !gameData.player) return;
         
-        const currentGameState = gameStateRef.current;
-
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = '#5d94f5'; ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-        const gameData = gameDataRef.current;
-        const { player, camera, clouds, platforms, flagpole, items, enemies } = gameData;
+        const { player, camera, clouds, platforms, flagpole, items, enemies, gameState } = gameData;
 
         ctx.save(); ctx.translate(-camera.x * 0.5, 0); clouds.forEach((c:Cloud) => c.draw(ctx)); ctx.restore();
 
-        if (currentGameState === 'playing') {
+        if (gameState === 'playing') {
             player.update();
-            enemies.forEach((e:Enemy, i:number) => { e.update(); if (player.x < e.x + e.width && player.x + player.width > e.x && player.y < e.y + e.height && player.y + player.height > e.y) { if (player.dy > 0.1 && player.y + player.height - player.dy <= e.y && !e.stomped) { e.stomped = true; player.dy = -6; setScore(s => s + 200); playSound('stomp'); setTimeout(() => enemies.splice(i, 1), 200); } else if (!e.stomped) { player.takeDamage(); } } });
+            enemies.forEach((e:Enemy, i:number) => { e.update(); if (player.x < e.x + e.width && player.x + player.width > e.x && player.y < e.y + e.height && player.y + player.height > e.y) { if (player.dy > 0.1 && player.y + player.height - player.dy <= e.y && !e.stomped) { e.stomped = true; player.dy = -6; setScore(s => s + 200); gameDataRef.current.score = score + 200; playSound('stomp'); setTimeout(() => enemies.splice(i, 1), 200); } else if (!e.stomped) { player.takeDamage(); } } });
             items.forEach((item:Item, i:number) => { item.update(); if(player.x < item.x + item.width && player.x + player.width > item.x && player.y < item.y + item.height && player.y + player.height > item.y) { player.powerUp(); items.splice(i, 1); } });
-            if (flagpole && player.x + player.width > flagpole.x && currentGameState !== 'win') { setGameState('win'); playSound('win'); toggleMusic(false); }
+            if (flagpole && player.x + player.width > flagpole.x && gameState !== 'win') { gameDataRef.current.gameState = 'win'; setCurrentGameState('win'); playSound('win'); toggleMusic(false); }
             camera.x = player.x - canvas.width / 2.5; if(camera.x < 0) camera.x = 0;
-            clouds.forEach((c:Cloud) => c.update(camera));
+            clouds.forEach((c:Cloud) => c.update());
         }
-        if(currentGameState === 'win') { player.dx = 0; player.x = flagpole.x; if(player.onGround === false) { player.y += 5; player.handleVerticalCollisions();} }
-        if(currentGameState === 'dead_start') { gameData.deadTimer = (gameData.deadTimer || 0) + 1; if(gameData.deadTimer > 120) { initLevel(false); setGameState('playing'); gameData.deadTimer = 0; toggleMusic(true); } }
+        if(gameState === 'win') { player.dx = 0; player.x = flagpole.x; if(player.onGround === false) { player.y += 5; player.handleVerticalCollisions();} }
+        if(gameState === 'dead_start') { gameData.deadTimer++; if(gameData.deadTimer > 120) { initLevel(false); gameData.gameState = 'playing'; setCurrentGameState('playing'); gameData.deadTimer = 0; toggleMusic(true); } }
         
         ctx.save(); ctx.translate(-camera.x, 0);
         platforms.forEach((p:Platform) => p.draw(ctx));
@@ -322,37 +318,38 @@ export default function SuperRetroPlatformerPage() {
         enemies.forEach((e:Enemy) => e.draw(ctx));
         player.draw(ctx);
         ctx.restore();
-    }, [playSound, toggleMusic]);
+    }, [playSound, toggleMusic, score]);
 
     const handleStartGame = useCallback(() => {
-        const Tone = toneRef.current;
-        if (gameStateRef.current === 'start') {
+        if(gameDataRef.current.gameState === 'start' || gameDataRef.current.gameState === 'gameOver' || gameDataRef.current.gameState === 'win') {
+            const Tone = toneRef.current;
             if (Tone && Tone.context.state === 'suspended') {
                 Tone.start();
             }
-            initGame(true); // Full reset for start
-            setGameState('playing');
-            toggleMusic(true);
-        } else if (gameStateRef.current === 'gameOver' || gameStateRef.current === 'win') {
-            initGame(true);
-            setGameState('playing');
+            if(!gameDataRef.current.sounds) initSounds();
+            
+            if(gameDataRef.current.gameState === 'gameOver' || gameDataRef.current.gameState === 'win') {
+                initGame(true);
+            }
+            
+            gameDataRef.current.gameState = 'playing';
+            setCurrentGameState('playing');
             toggleMusic(true);
         }
-    }, [initGame, toggleMusic]);
+    }, [initGame, toggleMusic, initSounds]);
     
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
-            if (e.repeat) return;
+            if (e.repeat || !gameDataRef.current.keys) return;
             const keys = gameDataRef.current.keys;
-            if (!keys) return;
             if (e.code === 'ArrowLeft' || e.code === 'KeyA') keys.left = true;
             if (e.code === 'ArrowRight' || e.code === 'KeyD') keys.right = true;
             if (e.code === 'ArrowUp' || e.code === 'KeyW' || e.code === 'Space') keys.up = true;
             if (e.code === 'Enter') handleStartGame();
         };
         const handleKeyUp = (e: KeyboardEvent) => {
+            if (!gameDataRef.current.keys) return;
             const keys = gameDataRef.current.keys;
-            if (!keys) return;
             if (e.code === 'ArrowLeft' || e.code === 'KeyA') keys.left = false;
             if (e.code === 'ArrowRight' || e.code === 'KeyD') keys.right = false;
             if (e.code === 'ArrowUp' || e.code === 'KeyW' || e.code === 'Space') keys.up = false;
@@ -369,7 +366,7 @@ export default function SuperRetroPlatformerPage() {
       if (gameDataRef.current.keys) {
         gameDataRef.current.keys[key] = isDown;
       }
-      if (isDown && (gameStateRef.current === 'start' || gameStateRef.current === 'gameOver' || gameStateRef.current === 'win')) {
+      if (isDown && (gameDataRef.current.gameState === 'start' || gameDataRef.current.gameState === 'gameOver' || gameDataRef.current.gameState === 'win')) {
         handleStartGame();
       }
     };
@@ -394,22 +391,22 @@ export default function SuperRetroPlatformerPage() {
                     <CardHeader className="absolute top-2 right-2 z-20 text-right">
                          <p className="text-white font-bold" style={{ textShadow: '2px 2px 4px #000' }}>Lives: {lives}</p>
                     </CardHeader>
-                    <CardContent className="p-0 relative aspect-video">
-                        {gameState !== 'playing' && (
+                    <CardContent className="p-0 relative">
+                        {currentGameState !== 'playing' && (
                             <div className="absolute inset-0 bg-black/70 z-10 flex flex-col items-center justify-center p-4 text-center">
-                                {gameState === 'start' && <>
+                                {currentGameState === 'start' && <>
                                     <CardTitle className="text-3xl mb-4 flex items-center"><Gamepad2 className="inline h-8 w-8 mr-2 text-primary" />Ready to Play?</CardTitle>
                                     <CardDescription className="text-md text-white/80 pt-2 max-w-sm mx-auto">Use Arrow Keys or A/D to move, Space/W to jump. Press Enter to start.</CardDescription>
                                     <Button size="lg" className="mt-6" onClick={handleStartGame}><Play className="mr-2 h-5 w-5" /> Start Game</Button>
                                 </>}
-                                {(gameState === 'gameOver' || gameState === 'win') && <>
-                                    <CardTitle className={cn("text-3xl mb-4 flex items-center", gameState === 'gameOver' && "text-destructive")}>{gameState === 'gameOver' ? <AlertTriangle className="inline h-8 w-8 mr-2" /> : "🎉"} {gameState === 'gameOver' ? 'GAME OVER' : 'YOU WIN!'}</CardTitle>
+                                {(currentGameState === 'gameOver' || currentGameState === 'win') && <>
+                                    <CardTitle className={cn("text-3xl mb-4 flex items-center", currentGameState === 'gameOver' && "text-destructive")}>{currentGameState === 'gameOver' ? <AlertTriangle className="inline h-8 w-8 mr-2" /> : "🎉"} {currentGameState === 'gameOver' ? 'GAME OVER' : 'YOU WIN!'}</CardTitle>
                                     <CardDescription className="text-xl mt-2 text-white">Final Score: {score}</CardDescription>
                                     <Button size="lg" className="mt-6" onClick={handleStartGame}><RefreshCw className="mr-2 h-5 w-5" /> Play Again</Button>
                                 </>}
                             </div>
                         )}
-                        <canvas ref={canvasRef} id="gameCanvas" />
+                        <canvas ref={canvasRef} id="gameCanvas" className='w-full aspect-video' />
                     </CardContent>
                     <CardFooter className={cn("p-4 border-t flex flex-col items-center justify-center gap-4")}>
                         <div className={cn("w-full max-w-sm justify-between items-center", isTouchDevice ? "flex" : "hidden")}>
@@ -428,5 +425,3 @@ export default function SuperRetroPlatformerPage() {
         </div>
     );
 }
-
-    
