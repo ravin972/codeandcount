@@ -138,11 +138,12 @@ export default function AsteroidShooterPage() {
 
     const createStarfield = () => {
         const stars = [];
-        const canvas = canvasRef.current!;
+        const canvas = canvasRef.current;
+        if (!canvas) return [];
         for(let i=0; i < STARFIELD_STARS; i++) {
             stars.push({
-                x: Math.random() * (canvas?.width || 800),
-                y: Math.random() * (canvas?.height || 600),
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
                 r: Math.random() * 1.5,
                 a: Math.random() * 0.5 + 0.5
             });
