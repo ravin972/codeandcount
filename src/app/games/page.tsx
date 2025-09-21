@@ -25,9 +25,9 @@ const games = [
   {
     title: 'Blocktris',
     description: 'The timeless puzzle game of falling blocks. Arrange the geometric shapes to clear lines and score points. How long can you last?',
-    icon: <Rows className="h-10 w-10 text-muted-foreground" />,
-    href: '#',
-    status: 'coming-soon',
+    icon: <Rows className="h-10 w-10 text-primary" />,
+    href: '/games/blocktris',
+    status: 'available',
   },
   {
     title: 'Diwali Cracker',
