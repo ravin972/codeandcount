@@ -185,20 +185,39 @@
 
   @keyframes flip-in {
     0% {
-      transform: rotateX(80deg) translateY(20px);
+      transform: rotateX(90deg) translateY(20px) scale(0.8);
       opacity: 0;
+      text-shadow: 0 0 1px hsla(0, 0%, 100%, 0.1);
+    }
+    50% {
+        opacity: 0.7;
     }
     100% {
-      transform: rotateX(0deg) translateY(0);
+      transform: rotateX(0deg) translateY(0) scale(1);
       opacity: 1;
+      text-shadow: 0 0 10px hsla(var(--primary), 0.5);
     }
   }
   
   .animate-flip-in {
     display: inline-block;
-    animation: flip-in 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    animation: flip-in 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
     opacity: 0;
     transform-origin: 50% 50%;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+  }
+
+  .animate-float {
+    animation: float 4s ease-in-out infinite;
+  }
+
+  .animation-delay-[-2s] {
+    animation-delay: -2s;
   }
 
 }

@@ -126,7 +126,7 @@ export default function HomePage() {
         const timer = setTimeout(() => {
           setIsLoading(false);
           sessionStorage.setItem('preloader_has_run', 'true');
-        }, 2500); // 2.5 seconds for 3D animation
+        }, 3000); // Increased duration for new animation
         return () => clearTimeout(timer);
       }
     }
@@ -171,7 +171,7 @@ export default function HomePage() {
       createAnimation(logo, { delay: 0.1 * index, y: 20 });
     });
 
-    // Case Studies Section
+    // Featured Work Section
     createAnimation('.case-studies-title', {});
     createAnimation('.case-studies-description', { delay: 0.2 });
     gsap.utils.toArray<HTMLElement>('.case-study-card').forEach((card, index) => {
