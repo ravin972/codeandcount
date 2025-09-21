@@ -46,8 +46,8 @@ export default function AsteroidShooterPage() {
         if (newGame) {
             setScore(0);
             setLives(GAME_LIVES);
-            setGameState('playing');
             newLevel();
+            setGameState('playing');
         } else {
              setGameState('start');
         }
@@ -204,7 +204,6 @@ export default function AsteroidShooterPage() {
     }
 
     const gameOver = () => {
-        setGameState('gameOver');
         setScore(s => {
             if (s > highScore) {
                 setHighScore(s);
@@ -212,6 +211,7 @@ export default function AsteroidShooterPage() {
             }
             return s;
         });
+        setGameState('gameOver');
     }
 
     const gameLoop = useCallback(() => {
@@ -341,7 +341,7 @@ export default function AsteroidShooterPage() {
         }
         
         requestAnimationFrame(gameLoop);
-    }, [gameState, lives]);
+    }, [gameState, lives, highScore, initGame]);
 
     const handleScreenWrap = (obj: any, canvas: HTMLCanvasElement) => {
          if (obj.x < 0 - obj.r) obj.x = canvas.width + obj.r;
@@ -470,3 +470,5 @@ export default function AsteroidShooterPage() {
         </div>
     );
 }
+
+    
