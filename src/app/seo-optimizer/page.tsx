@@ -77,14 +77,39 @@ export default function SEOOptimizerPage() {
 
   const handleCopyToClipboard = () => {
     if (rewrittenText) {
-      navigator.clipboard.writeText(rewrittenText);
-      // Toast for copy action can be kept if considered user action feedback
-      toast({
-        title: "Copied!",
-        description: "Rewritten text copied to clipboard.",
-      });
+      try {
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(rewrittenText).then(() => {
+            toast({
+              title: "Copied!",
+              description: "Rewritten text copied to clipboard.",
+            });
+          });
+        } else {
+          // Fallback for non-secure contexts
+          const textArea = document.createElement("textarea");
+          textArea.value = rewrittenText;
+          document.body.appendChild(textArea);
+          textArea.focus();
+          textArea.select();
+          document.execCommand('copy');
+          document.body.removeChild(textArea);
+          toast({
+            title: "Copied!",
+            description: "Rewritten text copied to clipboard.",
+          });
+        }
+      } catch (err) {
+        console.error('Failed to copy text: ', err);
+        toast({
+          title: "Copy Failed",
+          description: "Could not copy text to clipboard.",
+          variant: "destructive",
+        });
+      }
     }
   };
+
 
   return (
     <div className="bg-background text-foreground">
@@ -165,7 +190,7 @@ export default function SEOOptimizerPage() {
                 <Button variant="outline" size="sm" onClick={handleCopyToClipboard}>
                   <Copy className="mr-2 h-4 w-4" /> Copy
                 </Button>
-              </CardHeader>
+              </Header>
               <CardContent>
                 <div className="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none p-4 border rounded-md bg-muted min-h-[150px] whitespace-pre-wrap">
                   {rewrittenText}
