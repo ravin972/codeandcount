@@ -145,11 +145,15 @@ export default function SuperRetroPlatformerPage() {
         const canvas = canvasRef.current;
         if (!canvas || !toneRef.current) return;
 
+        const parent = canvas.parentElement;
+        if(!parent) return;
+
         const ar = 16 / 9;
-        let cH = window.innerHeight * 0.7;
-        let cW = cH * ar;
-        if (cW > window.innerWidth * 0.95) { cW = window.innerWidth * 0.95; cH = cW / ar; }
-        canvas.width = cW; canvas.height = cH;
+        let cW = parent.clientWidth;
+        let cH = cW / ar;
+        
+        canvas.width = cW;
+        canvas.height = cH;
         TILE_SIZE = canvas.height / 15;
         
         if (fullReset) {
@@ -424,8 +428,5 @@ export default function SuperRetroPlatformerPage() {
         </div>
     );
 }
-
-
-    
 
     
