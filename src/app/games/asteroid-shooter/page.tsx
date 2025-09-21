@@ -73,12 +73,12 @@ export default function AsteroidShooterPage() {
              }
              canvas.width = newWidth;
              canvas.height = newHeight;
+             gameDataRef.current.stars = createStarfield(); // Recreate stars on resize
         }
 
         window.addEventListener('resize', handleResize);
         handleResize();
 
-        gameDataRef.current.stars = createStarfield();
         initGame(false);
         
         const animationFrameId = requestAnimationFrame(gameLoop);
@@ -118,7 +118,7 @@ export default function AsteroidShooterPage() {
             do {
                 x = Math.floor(Math.random() * canvas.width);
                 y = Math.floor(Math.random() * canvas.height);
-            } while (distBetweenPoints(gameData.ship.x, gameData.ship.y, x, y) < ASTEROID_SIZE * 2 + gameData.ship.r);
+            } while (gameData.ship && distBetweenPoints(gameData.ship.x, gameData.ship.y, x, y) < ASTEROID_SIZE * 2 + gameData.ship.r);
             gameData.asteroids.push(newAsteroid(x, y, Math.ceil(ASTEROID_SIZE / 2)));
         }
     }
@@ -155,6 +155,7 @@ export default function AsteroidShooterPage() {
 
     const createExplosion = (x:number, y:number) => {
         const gameData = gameDataRef.current;
+        if (!gameData.particles) gameData.particles = [];
         for(let i = 0; i < PARTICLE_COUNT; i++) {
             const angle = Math.random() * 2 * Math.PI;
             const speed = Math.random() * 3;
@@ -189,6 +190,7 @@ export default function AsteroidShooterPage() {
     
     const shipHit = () => {
         const gameData = gameDataRef.current;
+        if (!gameData.ship) return;
         createExplosion(gameData.ship.x, gameData.ship.y);
         setLives(l => {
             const newLives = l - 1;
@@ -216,37 +218,50 @@ export default function AsteroidShooterPage() {
         const gameData = gameDataRef.current;
         const canvas = canvasRef.current;
         const ctx = canvas?.getContext('2d');
-        if (!ctx || !canvas || !gameData.ship) {
+        if (!ctx || !canvas) {
              requestAnimationFrame(gameLoop);
              return;
         };
+        
+        const currentGameState = gameState; // Capture state for this frame
 
-        if (gameState === 'playing') {
+        // ---- UPDATE LOGIC ----
+        if (currentGameState === 'playing') {
             const { ship, asteroids, particles } = gameData;
 
-            // Update Ship
-            if (ship.thrusting) {
-                ship.thrust.x += SHIP_THRUST * Math.cos(ship.a) / 60;
-                ship.thrust.y -= SHIP_THRUST * Math.sin(ship.a) / 60;
-            } else {
-                ship.thrust.x -= FRICTION * ship.thrust.x / 60;
-                ship.thrust.y -= FRICTION * ship.thrust.y / 60;
-            }
-            ship.a += ship.rot; ship.x += ship.thrust.x; ship.y += ship.thrust.y;
-            handleScreenWrap(ship, canvas);
+            if (ship) {
+                // Update Ship
+                if (ship.thrusting) {
+                    ship.thrust.x += SHIP_THRUST * Math.cos(ship.a) / 60;
+                    ship.thrust.y -= SHIP_THRUST * Math.sin(ship.a) / 60;
+                } else {
+                    ship.thrust.x -= FRICTION * ship.thrust.x / 60;
+                    ship.thrust.y -= FRICTION * ship.thrust.y / 60;
+                }
+                ship.a += ship.rot; ship.x += ship.thrust.x; ship.y += ship.thrust.y;
+                handleScreenWrap(ship, canvas);
 
-            // Update Lasers
-            for (let i = ship.lasers.length - 1; i >= 0; i--) {
-                const laser = ship.lasers[i];
-                laser.dist += Math.sqrt(Math.pow(laser.xv, 2) + Math.pow(laser.yv, 2));
-                laser.x += laser.xv; laser.y += laser.yv;
-                if (laser.dist > canvas.width * LASER_MAX_DIST) { ship.lasers.splice(i, 1); continue; }
-                
-                for (let j = asteroids.length - 1; j >= 0; j--) {
-                    if (distBetweenPoints(laser.x, laser.y, asteroids[j].x, asteroids[j].y) < asteroids[j].r) {
-                        destroyAsteroid(j);
-                        ship.lasers.splice(i, 1);
-                        break;
+                // Update Lasers
+                for (let i = ship.lasers.length - 1; i >= 0; i--) {
+                    const laser = ship.lasers[i];
+                    laser.dist += Math.sqrt(Math.pow(laser.xv, 2) + Math.pow(laser.yv, 2));
+                    laser.x += laser.xv; laser.y += laser.yv;
+                    if (laser.dist > canvas.width * LASER_MAX_DIST) { ship.lasers.splice(i, 1); continue; }
+                    
+                    for (let j = asteroids.length - 1; j >= 0; j--) {
+                        if (distBetweenPoints(laser.x, laser.y, asteroids[j].x, asteroids[j].y) < asteroids[j].r) {
+                            destroyAsteroid(j);
+                            ship.lasers.splice(i, 1);
+                            break;
+                        }
+                    }
+                }
+
+                if(ship.blinkNum > 0) {
+                    ship.blinkTime--;
+                    if(ship.blinkTime == 0) {
+                        ship.blinkTime = Math.ceil(SHIP_BLINK_DUR * 60);
+                        ship.blinkNum--;
                     }
                 }
             }
@@ -256,32 +271,25 @@ export default function AsteroidShooterPage() {
                 const roid = asteroids[i];
                 roid.x += roid.xv; roid.y += roid.yv;
                 handleScreenWrap(roid, canvas);
-                if (ship.blinkNum == 0 && distBetweenPoints(ship.x, ship.y, roid.x, roid.y) < ship.r + roid.r) {
+                if (ship && ship.blinkNum == 0 && distBetweenPoints(ship.x, ship.y, roid.x, roid.y) < ship.r + roid.r) {
                     shipHit();
                 }
             }
 
             // Update particles
-            for (let i = particles.length - 1; i >= 0; i--) {
-                const p = particles[i];
-                p.x += p.xv; p.y += p.yv;
-                p.alpha -= 1.0 / (PARTICLE_LIFESPAN * 60);
-                if (p.alpha <= 0) particles.splice(i, 1);
+            if (particles) {
+                for (let i = particles.length - 1; i >= 0; i--) {
+                    const p = particles[i];
+                    p.x += p.xv; p.y += p.yv;
+                    p.alpha -= 1.0 / (PARTICLE_LIFESPAN * 60);
+                    if (p.alpha <= 0) particles.splice(i, 1);
+                }
             }
             
             if (asteroids.length == 0) newLevel();
-
-            if(ship.blinkNum > 0) {
-                ship.blinkTime--;
-                if(ship.blinkTime == 0) {
-                    ship.blinkTime = Math.ceil(SHIP_BLINK_DUR * 60);
-                    ship.blinkNum--;
-                }
-            }
         }
 
-        // Render
-        const blinkOn = gameData.ship && gameData.ship.blinkNum % 2 == 0;
+        // ---- RENDER LOGIC ----
         ctx.fillStyle = '#000';
         ctx.fillRect(0, 0, canvas.width, canvas.height);
         
@@ -295,38 +303,45 @@ export default function AsteroidShooterPage() {
         }
         ctx.globalAlpha = 1.0;
 
-        if (gameState === 'playing') {
+        if (currentGameState === 'playing') {
             const { ship, asteroids, particles } = gameData;
             
-            for(const p of particles) {
-                ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha})`;
-                ctx.beginPath(); ctx.arc(p.x, p.y, 2, 0, Math.PI * 2); ctx.fill();
+            if(particles) {
+                for(const p of particles) {
+                    ctx.fillStyle = `rgba(255, 255, 255, ${p.alpha})`;
+                    ctx.beginPath(); ctx.arc(p.x, p.y, 2, 0, Math.PI * 2); ctx.fill();
+                }
             }
 
-            if (blinkOn) drawShip(ctx, ship, ship.x, ship.y, ship.a);
-            
-            for (const laser of ship.lasers) {
-                ctx.fillStyle = 'salmon';
-                ctx.beginPath(); ctx.arc(laser.x, laser.y, SHIP_SIZE / 15, 0, Math.PI * 2); ctx.fill();
+            if (ship) {
+                const blinkOn = ship.blinkNum % 2 == 0;
+                if (blinkOn) drawShip(ctx, ship, ship.x, ship.y, ship.a);
+                
+                for (const laser of ship.lasers) {
+                    ctx.fillStyle = 'salmon';
+                    ctx.beginPath(); ctx.arc(laser.x, laser.y, SHIP_SIZE / 15, 0, Math.PI * 2); ctx.fill();
+                }
             }
             
-            for (const roid of asteroids) {
-                ctx.strokeStyle = 'slategrey'; ctx.lineWidth = SHIP_SIZE / 20;
-                ctx.beginPath();
-                ctx.moveTo( roid.x + roid.r * roid.offs[0] * Math.cos(roid.a), roid.y + roid.r * roid.offs[0] * Math.sin(roid.a) );
-                for (let j = 1; j < roid.vert; j++) {
-                    ctx.lineTo( roid.x + roid.r * roid.offs[j] * Math.cos(roid.a + j * Math.PI * 2 / roid.vert), roid.y + roid.r * roid.offs[j] * Math.sin(roid.a + j * Math.PI * 2 / roid.vert) );
+            if (asteroids) {
+                for (const roid of asteroids) {
+                    ctx.strokeStyle = 'slategrey'; ctx.lineWidth = SHIP_SIZE / 20;
+                    ctx.beginPath();
+                    ctx.moveTo( roid.x + roid.r * roid.offs[0] * Math.cos(roid.a), roid.y + roid.r * roid.offs[0] * Math.sin(roid.a) );
+                    for (let j = 1; j < roid.vert; j++) {
+                        ctx.lineTo( roid.x + roid.r * roid.offs[j] * Math.cos(roid.a + j * Math.PI * 2 / roid.vert), roid.y + roid.r * roid.offs[j] * Math.sin(roid.a + j * Math.PI * 2 / roid.vert) );
+                    }
+                    ctx.closePath(); ctx.stroke();
                 }
-                ctx.closePath(); ctx.stroke();
             }
 
             for(let i = 0; i < lives; i++) {
-                drawShip(ctx, ship, SHIP_SIZE + i * SHIP_SIZE * 1.2, SHIP_SIZE * 2, 90 / 180 * Math.PI, 'white', 0.8);
+                drawShip(ctx, { thrusting: false }, SHIP_SIZE + i * SHIP_SIZE * 1.2, SHIP_SIZE * 2, 90 / 180 * Math.PI, 'white', 0.8);
             }
         }
         
         requestAnimationFrame(gameLoop);
-    }, [gameState, highScore, lives]);
+    }, [gameState, lives]);
 
     const handleScreenWrap = (obj: any, canvas: HTMLCanvasElement) => {
          if (obj.x < 0 - obj.r) obj.x = canvas.width + obj.r;
@@ -455,4 +470,3 @@ export default function AsteroidShooterPage() {
         </div>
     );
 }
-
