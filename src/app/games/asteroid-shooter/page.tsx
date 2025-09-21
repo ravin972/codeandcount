@@ -35,23 +35,32 @@ export default function AsteroidShooterPage() {
     const [score, setScore] = useState(0);
     const [highScore, setHighScore] = useState(0);
     const [lives, setLives] = useState(GAME_LIVES);
+    const gameStateRef = useRef(gameState);
+
+    useEffect(() => {
+        gameStateRef.current = gameState;
+    }, [gameState]);
 
     // --- Utility Functions ---
     const distBetweenPoints = (x1:number, y1:number, x2:number, y2:number) => Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
 
-    const newShip = useCallback(() => ({
-        x: canvasRef.current!.width / 2,
-        y: canvasRef.current!.height / 2,
-        r: SHIP_SIZE / 2,
-        a: 90 / 180 * Math.PI, // angle
-        rot: 0,
-        thrusting: false,
-        thrust: { x: 0, y: 0 },
-        blinkTime: Math.ceil(SHIP_BLINK_DUR * 60),
-        blinkNum: Math.ceil(SHIP_INVINCIBILITY_DUR / SHIP_BLINK_DUR),
-        canShoot: true,
-        lasers: []
-    }), []);
+    const newShip = useCallback(() => {
+        const canvas = canvasRef.current;
+        if (!canvas) return null;
+        return {
+            x: canvas.width / 2,
+            y: canvas.height / 2,
+            r: SHIP_SIZE / 2,
+            a: 90 / 180 * Math.PI, // angle
+            rot: 0,
+            thrusting: false,
+            thrust: { x: 0, y: 0 },
+            blinkTime: Math.ceil(SHIP_BLINK_DUR * 60),
+            blinkNum: Math.ceil(SHIP_INVINCIBILITY_DUR / SHIP_BLINK_DUR),
+            canShoot: true,
+            lasers: []
+        };
+    }, []);
 
     const newAsteroid = useCallback((x:number, y:number, r:number) => {
         const lvlMult = 1 + 0.1 * gameDataRef.current.level;
@@ -99,9 +108,10 @@ export default function AsteroidShooterPage() {
         gameDataRef.current.level++;
         createAsteroidBelt();
     }, [createAsteroidBelt]);
-    
+
     const initGame = useCallback((newGame: boolean) => {
         const gameData = gameDataRef.current;
+        const canvas = canvasRef.current!;
         gameData.ship = newShip();
         gameData.asteroids = [];
         gameData.particles = [];
@@ -116,6 +126,32 @@ export default function AsteroidShooterPage() {
             setGameState('start');
         }
     }, [newShip, newLevel]);
+
+
+    const gameLoop = useCallback(() => {
+        const ctx = canvasRef.current?.getContext('2d');
+        const canvas = canvasRef.current;
+        if (!ctx || !canvas) return;
+        
+        // RENDER BACKGROUND
+        ctx.fillStyle = '#000';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        
+        ctx.fillStyle = '#fff';
+        if(gameDataRef.current.stars) {
+             for (const star of gameDataRef.current.stars) {
+                ctx.globalAlpha = star.a;
+                ctx.beginPath(); ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2); ctx.fill();
+            }
+        }
+        ctx.globalAlpha = 1.0;
+
+        if (gameStateRef.current === 'playing') {
+            update();
+            renderGame();
+        }
+        requestAnimationFrame(gameLoop);
+    }, []);
 
     useEffect(() => {
         const storedHighScore = parseInt(localStorage.getItem('asteroidHighScore') || '0');
@@ -142,51 +178,19 @@ export default function AsteroidShooterPage() {
         gameDataRef.current.stars = createStarfield();
         initGame(false);
 
-        let animationFrameId: number;
-
-        const renderLoop = () => {
-            gameLoop();
-            animationFrameId = requestAnimationFrame(renderLoop);
-        };
-        renderLoop();
+        const animationFrameId = requestAnimationFrame(gameLoop);
 
         return () => {
             cancelAnimationFrame(animationFrameId);
             window.removeEventListener('resize', handleResize);
         }
-    }, [initGame, createStarfield]);
+    }, [initGame, createStarfield, gameLoop]);
 
-    const gameLoop = () => {
-        const gameData = gameDataRef.current;
-        const canvas = canvasRef.current;
-        const ctx = canvas?.getContext('2d');
-        if (!ctx || !canvas) return;
-        
-        const currentGameState = gameState; 
-
-        // RENDER BACKGROUND
-        ctx.fillStyle = '#000';
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-        
-        ctx.fillStyle = '#fff';
-        if(gameData.stars) {
-             for (const star of gameData.stars) {
-                ctx.globalAlpha = star.a;
-                ctx.beginPath(); ctx.arc(star.x, star.y, star.r, 0, Math.PI * 2); ctx.fill();
-            }
-        }
-        ctx.globalAlpha = 1.0;
-
-        // GAME LOGIC & RENDER
-        if (currentGameState === 'playing') {
-            update();
-            renderGame();
-        }
-    };
 
     const update = () => {
         const gameData = gameDataRef.current;
         const canvas = canvasRef.current!;
+        if (!gameData.ship) return;
         const { ship, asteroids, particles } = gameData;
         
         const handleScreenWrap = (obj: any) => {
@@ -299,6 +303,7 @@ export default function AsteroidShooterPage() {
         const gameData = gameDataRef.current;
         const canvas = canvasRef.current!;
         const ctx = canvas.getContext('2d')!;
+        if (!gameData.ship) return;
         const { ship, asteroids, particles } = gameData;
         
         const drawShip = (x:number, y:number, a:number, color = 'white', scale = 1.0) => {
@@ -364,7 +369,7 @@ export default function AsteroidShooterPage() {
     useEffect(() => {
         const handleKeyDown = (ev: KeyboardEvent) => {
             const gameData = gameDataRef.current;
-            if (gameState === 'start' || gameState === 'gameOver') {
+            if (gameStateRef.current === 'start' || gameStateRef.current === 'gameOver') {
                 if (ev.key === 'Enter') initGame(true);
                 return;
             }
@@ -405,7 +410,7 @@ export default function AsteroidShooterPage() {
             document.removeEventListener('keydown', handleKeyDown);
             document.removeEventListener('keyup', handleKeyUp);
         };
-    }, [gameState, initGame]);
+    }, [initGame]);
 
 
     return (
