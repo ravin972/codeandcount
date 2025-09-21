@@ -151,6 +151,10 @@ export default function SuperRetroPlatformerPage() {
         const ar = 16 / 9;
         let cW = parent.clientWidth;
         let cH = cW / ar;
+        if (cH > parent.clientHeight) {
+            cH = parent.clientHeight;
+            cW = cH * ar;
+        }
         
         canvas.width = cW;
         canvas.height = cH;
@@ -380,7 +384,7 @@ export default function SuperRetroPlatformerPage() {
                 <div className="bg-secondary rounded-xl shadow-xl p-6 border border-border">
                     <h1 className="text-3xl md:text-4xl font-bold tracking-tight flex items-center justify-center">
                         <ToyBrick className="h-10 w-10 mr-3 text-primary" />
-                        Super Retro Platformer
+                        SUPER MARIO
                     </h1>
                 </div>
             </header>

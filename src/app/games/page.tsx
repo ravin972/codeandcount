@@ -9,7 +9,7 @@ import { cn } from '@/lib/utils';
 
 const games = [
   {
-    title: 'Super Retro Platformer',
+    title: 'SUPER MARIO',
     description: 'Jump and run through a classic-style platformer world. Stomp on enemies, collect coins, and reach the flagpole!',
     icon: <ToyBrick className="h-10 w-10 text-primary" />,
     href: '/games/super-retro-platformer',
