@@ -2,7 +2,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from 'react';
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogClose, DialogFooter } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogClose } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
 import { Flame, Sparkles, Copy, Gift, UserPlus, Send } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
@@ -90,7 +90,7 @@ export default function DiwaliOffer() {
             </div>
         </div>
 
-        <DialogFooter className="flex-col sm:flex-row gap-2 sm:justify-center">
+        <div className="flex flex-col sm:flex-row gap-2 sm:justify-center">
           <Button asChild type="button" variant="default">
             <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
               <Send className="h-4 w-4 mr-2" /> Claim on WhatsApp
@@ -101,7 +101,7 @@ export default function DiwaliOffer() {
               Close
             </Button>
           </DialogClose>
-        </DialogFooter>
+        </div>
       </DialogContent>
     </Dialog>
   );
