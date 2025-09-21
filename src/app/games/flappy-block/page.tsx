@@ -311,7 +311,7 @@ export default function FlappyBlockPage() {
                                     <CardDescription className="text-md text-white/80 pt-2 max-w-sm mx-auto">
                                         Click, touch, or press Spacebar to flap the bird and navigate through the pipes.
                                     </CardDescription>
-                                    <Button size="lg" className="mt-6" onClick={handleInput}>
+                                    <Button size="lg" className="mt-6" onClick={(e) => { e.stopPropagation(); handleInput(); }}>
                                        <Play className="mr-2 h-5 w-5" /> Start Game
                                     </Button>
                                     </>
@@ -325,7 +325,7 @@ export default function FlappyBlockPage() {
                                          <CardDescription className="text-xl mt-2 text-white">
                                             Your Score: {Math.floor(score)}
                                         </CardDescription>
-                                        <Button size="lg" className="mt-6" onClick={handleInput}>
+                                        <Button size="lg" className="mt-6" onClick={(e) => { e.stopPropagation(); handleInput(); }}>
                                            <RefreshCw className="mr-2 h-5 w-5" /> Play Again
                                         </Button>
                                     </>
