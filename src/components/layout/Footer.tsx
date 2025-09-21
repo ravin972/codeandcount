@@ -3,7 +3,7 @@
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
-import { ArrowUpRight, Phone, Mail, MapPin, Github, Linkedin, Instagram } from 'lucide-react';
+import { ArrowUpRight, Phone, Mail, MapPin, Github, Linkedin, Instagram, Gamepad2 } from 'lucide-react';
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { BackToTopButton } from '@/components/layout/BackToTopButton';

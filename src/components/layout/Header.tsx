@@ -4,7 +4,7 @@
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
-import { Menu, Briefcase, Users, Rss, Mail, Sparkles, ArrowUpRight } from 'lucide-react'; 
+import { Menu, Briefcase, Users, Rss, Mail, Sparkles, ArrowUpRight, Gamepad2 } from 'lucide-react'; 
 import { usePathname } from 'next/navigation';
 import { cn } from '@/lib/utils';
 import React, { useState, useEffect, useRef } from 'react';
@@ -16,6 +16,7 @@ const navLinks = [
   { href: '/work', label: 'Our Work', icon: <Sparkles className="h-5 w-5" /> },
   { href: '/about', label: 'About', icon: <Users className="h-5 w-5" /> },
   { href: '/blog', label: 'Blog', icon: <Rss className="h-5 w-5" /> },
+  { href: '/games', label: 'Game Zone', icon: <Gamepad2 className="h-5 w-5" /> },
   { href: '/contact', label: 'Contact', icon: <Mail className="h-5 w-5" /> },
 ];
 
