@@ -327,7 +327,7 @@ export default function AsteroidShooterPage() {
             ctx.closePath();
             ctx.fillStyle = "darkgrey"; ctx.fill(); ctx.stroke();
             
-            if (ship.thrusting && scale === 1.0) {
+            if (ship && ship.thrusting && scale === 1.0) {
                 ctx.fillStyle = 'red'; ctx.strokeStyle = 'yellow'; ctx.lineWidth = SHIP_SIZE / 10;
                 ctx.beginPath();
                 ctx.moveTo( x - shipR * (1 / 3 * Math.cos(a) + 0.5 * Math.sin(a)), y + shipR * (1 / 3 * Math.sin(a) - 0.5 * Math.cos(a)) );
