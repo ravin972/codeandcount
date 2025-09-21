@@ -340,6 +340,7 @@ export default function SuperRetroPlatformerPage() {
         const handleKeyDown = (e: KeyboardEvent) => {
             if (e.repeat) return;
             const keys = gameDataRef.current.keys;
+            if (!keys) return;
             if (e.code === 'ArrowLeft' || e.code === 'KeyA') keys.left = true;
             if (e.code === 'ArrowRight' || e.code === 'KeyD') keys.right = true;
             if (e.code === 'ArrowUp' || e.code === 'KeyW' || e.code === 'Space') keys.up = true;
@@ -347,6 +348,7 @@ export default function SuperRetroPlatformerPage() {
         };
         const handleKeyUp = (e: KeyboardEvent) => {
             const keys = gameDataRef.current.keys;
+            if (!keys) return;
             if (e.code === 'ArrowLeft' || e.code === 'KeyA') keys.left = false;
             if (e.code === 'ArrowRight' || e.code === 'KeyD') keys.right = false;
             if (e.code === 'ArrowUp' || e.code === 'KeyW' || e.code === 'Space') keys.up = false;
@@ -423,5 +425,7 @@ export default function SuperRetroPlatformerPage() {
     );
 }
 
+
+    
 
     
