@@ -9,6 +9,7 @@ import CustomCursor from '@/components/effects/CustomCursor';
 import FloatingWhatsAppButton from '@/components/common/FloatingWhatsAppButton';
 import { BackToTopButton } from '@/components/layout/BackToTopButton';
 import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export default function ClientLayout({
   children,
@@ -31,6 +32,7 @@ export default function ClientLayout({
         <FloatingWhatsAppButton />
         <BackToTopButton />
         <Analytics />
+        <SpeedInsights />
       </div>
     </ThemeProvider>
   );
