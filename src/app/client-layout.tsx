@@ -10,6 +10,7 @@ import FloatingWhatsAppButton from '@/components/common/FloatingWhatsAppButton';
 import { BackToTopButton } from '@/components/layout/BackToTopButton';
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import DiwaliOffer from '@/components/common/DiwaliOffer';
 
 export default function ClientLayout({
   children,
@@ -33,6 +34,7 @@ export default function ClientLayout({
         <BackToTopButton />
         <Analytics />
         <SpeedInsights />
+        <DiwaliOffer />
       </div>
     </ThemeProvider>
   );
