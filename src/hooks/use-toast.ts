@@ -1,3 +1,4 @@
+
 "use client"
 
 // Inspired by react-hot-toast library
@@ -116,6 +117,12 @@ export const reducer = (state: State, action: Action): State => {
       }
     }
     case "REMOVE_TOAST":
+      if (action.toastId) {
+        const timeout = toastTimeouts.get(action.toastId);
+        if (timeout) clearTimeout(timeout);
+        toastTimeouts.delete(action.toastId);
+      }
+      
       if (action.toastId === undefined) {
         return {
           ...state,

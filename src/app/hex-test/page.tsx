@@ -182,7 +182,7 @@ export default function HexTestPage() {
     }
   };
   
-  const finalLevel = level > 1 ? level - 1 : 0;
+  const finalLevel = level > 1 ? level - 1 : (gameStarted ? 1 : 0);
 
   return (
     <div className="bg-background text-foreground min-h-screen py-8 flex flex-col items-center">
