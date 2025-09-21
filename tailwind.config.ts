@@ -95,26 +95,66 @@ export default {
   			sm: 'calc(var(--radius) - 4px)'
   		},
   		keyframes: {
+        // ShadCN UI Accordion
   			'accordion-down': {
-  				from: {
-  					height: '0'
-  				},
-  				to: {
-  					height: 'var(--radix-accordion-content-height)'
-  				}
+  				from: { height: '0' },
+  				to: { height: 'var(--radix-accordion-content-height)' }
   			},
   			'accordion-up': {
-  				from: {
-  					height: 'var(--radix-accordion-content-height)'
-  				},
-  				to: {
-  					height: '0'
-  				}
-  			}
+  				from: { height: 'var(--radix-accordion-content-height)' },
+  				to: { height: '0' }
+  			},
+        // Preloader
+        'preloader-fade-out': {
+          from: { opacity: '1' },
+          to: { opacity: '0', visibility: 'hidden' },
+        },
+        'flip-in': {
+          '0%': { transform: 'rotateX(90deg)', opacity: '0' },
+          '100%': { transform: 'rotateX(0deg)', opacity: '1' },
+        },
+        // Floating Diya
+        'float': {
+          '0%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-15px)' },
+          '100%': { transform: 'translateY(0px)' },
+        },
+        // Diwali Cracker
+        'cracker-burst': {
+          '0%': { transform: 'scale(0.5)', opacity: '1' },
+          '100%': { transform: 'scale(1.5)', opacity: '0' },
+        },
+        'text-glow-and-fade': {
+          '0%': {
+            opacity: '0',
+            transform: 'scale(0.8)',
+            textShadow: '0 0 5px hsla(var(--primary), 0.5)',
+          },
+          '20%': {
+            opacity: '1',
+            transform: 'scale(1.05)',
+            textShadow: '0 0 20px hsla(var(--primary), 1), 0 0 30px hsla(var(--accent), 0.7)',
+          },
+          '80%': {
+            opacity: '1',
+            transform: 'scale(1)',
+            textShadow: '0 0 20px hsla(var(--primary), 1), 0 0 30px hsla(var(--accent), 0.7)',
+          },
+          '100%': {
+            opacity: '0',
+            transform: 'scale(0.9)',
+            textShadow: '0 0 5px hsla(var(--primary), 0.5)',
+          },
+        },
   		},
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
-  			'accordion-up': 'accordion-up 0.2s ease-out'
+  			'accordion-up': 'accordion-up 0.2s ease-out',
+        'preloader-fade-out': 'preloader-fade-out 0.5s ease-in-out forwards',
+        'flip-in': 'flip-in 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards',
+        'float': 'float 4s ease-in-out infinite',
+        'cracker-burst': 'cracker-burst 1s ease-out forwards',
+        'text-glow-and-fade': 'text-glow-and-fade 3s ease-in-out forwards',
   		}
   	}
   },
