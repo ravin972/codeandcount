@@ -4,7 +4,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogClose } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { Flame, Sparkles, Copy, Gift, UserPlus, Send, MessageSquare } from 'lucide-react';
+import { Sparkles, Copy, Gift, UserPlus, Send, MessageSquare } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
 import { gsap } from 'gsap';
@@ -17,6 +17,18 @@ export default function DiwaliOffer() {
   const whatsappNumber = "919729041423";
   const whatsappMessage = `Hello! I'm claiming my Diwali referral reward. My referral code is ${REFERRAL_CODE}.`;
   const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+
+  useEffect(() => {
+    // Show popup automatically for first-time visitors in a session
+    const hasSeenPopup = sessionStorage.getItem('diwaliOfferSeen');
+    if (!hasSeenPopup) {
+      const timer = setTimeout(() => {
+        setIsOpen(true);
+        sessionStorage.setItem('diwaliOfferSeen', 'true');
+      }, 2000); // Delay opening by 2 seconds
+      return () => clearTimeout(timer);
+    }
+  }, []);
 
   useEffect(() => {
     // Floating animation for the Diya button
@@ -32,10 +44,18 @@ export default function DiwaliOffer() {
   }, []);
 
   const handleCopyCode = () => {
-    navigator.clipboard.writeText(REFERRAL_CODE);
-    toast({
-      title: "Copied!",
-      description: `Referral code "${REFERRAL_CODE}" copied to clipboard.`,
+    navigator.clipboard.writeText(REFERRAL_CODE).then(() => {
+        toast({
+            title: "Copied!",
+            description: `Referral code "${REFERRAL_CODE}" copied to clipboard.`,
+        });
+    }).catch(err => {
+        console.error("Copy failed:", err);
+        toast({
+            title: "Copy Failed",
+            description: "Could not copy the code. Please try again.",
+            variant: "destructive",
+        });
     });
   };
 
@@ -74,7 +94,7 @@ export default function DiwaliOffer() {
               
               <div className='text-left space-y-4 text-sm text-muted-foreground p-4 bg-background/50 rounded-lg border border-border'>
                 <p className='font-semibold text-foreground'>How It Works:</p>
-                <p className='flex items-start'><UserPlus className='h-5 w-5 mr-2 mt-0.5 text-primary flex-shrink-0' /> <span className='font-medium text-foreground'>Refer a new client.</span> When they fill out our contact form and schedule a meeting, you get rewarded.</p>
+                <p className='flex items-start'><UserPlus className='h-5 w-5 mr-2 mt-0.5 text-primary flex-shrink-0' /> <span className='font-medium text-foreground'>Refer a new client.</span> When they schedule a meeting, you both get rewarded.</p>
                 <p className='flex items-start'><MessageSquare className='h-5 w-5 mr-2 mt-0.5 text-primary flex-shrink-0' /> <span className='font-medium text-foreground'>Claim your reward.</span> Send us a screenshot of their meeting confirmation on WhatsApp with your referral code below.</p>
               </div>
 
