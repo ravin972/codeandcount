@@ -28,7 +28,7 @@ const footerSections = {
       { text: "About", href: "/about" },
       { text: "Blog", href: "/blog" },
       { text: "Contact", href: "/contact" },
-      { text: "Play Hex Test!", href: "/hex-test" },
+      { text: "Game Zone", href: "/games" },
   ],
   contactInfo: {
     phone1: "+91-9729041423",
