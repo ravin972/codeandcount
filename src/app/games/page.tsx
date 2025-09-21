@@ -1,8 +1,9 @@
+
 "use client";
 
 import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Gamepad2, Eye, Bird, Rows, Sparkles, Construction, ArrowRight, ToyBrick } from 'lucide-react';
+import { Gamepad2, Eye, Bird, Rows, Sparkles, Construction, ArrowRight, ToyBrick, Rocket } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
@@ -13,6 +14,13 @@ const games = [
     description: 'Jump and run through a classic-style platformer world. Stomp on enemies, collect coins, and reach the flagpole!',
     icon: <ToyBrick className="h-10 w-10 text-primary" />,
     href: '/games/super-retro-platformer',
+    status: 'available',
+  },
+  {
+    title: 'Asteroid Shooter',
+    description: 'Pilot your ship through a dangerous asteroid field. Blast space rocks and survive as long as you can in this vector-style classic.',
+    icon: <Rocket className="h-10 w-10 text-primary" />,
+    href: '/games/asteroid-shooter',
     status: 'available',
   },
   {
