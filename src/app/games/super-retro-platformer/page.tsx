@@ -7,7 +7,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription }
 import { ToyBrick, Play, RefreshCw, Gamepad2, AlertTriangle, ArrowLeft } from 'lucide-react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
-import * as Tone from 'tone';
+import type { default as ToneType } from 'tone';
 
 // --- Game Configuration ---
 const GRAVITY = 0.6;
@@ -38,6 +38,8 @@ const levelMap = [
 export default function SuperRetroPlatformerPage() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const gameDataRef = useRef<any>({});
+    const toneRef = useRef<typeof ToneType | null>(null);
+
     const [gameState, setGameState] = useState<'start' | 'playing' | 'dead_start' | 'win' | 'gameOver'>('start');
     const [score, setScore] = useState(0);
     const [coins, setCoins] = useState(0);
@@ -46,10 +48,33 @@ export default function SuperRetroPlatformerPage() {
 
     useEffect(() => {
         setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0);
+        // Dynamically import Tone.js only on the client side
+        import('tone').then(Tone => {
+            toneRef.current = Tone;
+            initGame();
+        });
+        
+        window.addEventListener('resize', initGame);
+        
+        let animationFrameId: number;
+        const renderLoop = () => { gameLoop(gameDataRef.current.gameState); animationFrameId = requestAnimationFrame(renderLoop); };
+        renderLoop();
+        
+        return () => { 
+            window.removeEventListener('resize', initGame);
+            cancelAnimationFrame(animationFrameId); 
+            if (toneRef.current) {
+                toneRef.current.Transport.stop();
+                toneRef.current.Transport.cancel();
+            }
+        };
     }, []);
 
     // --- Sound Engine ---
     const initSounds = useCallback(() => {
+        const Tone = toneRef.current;
+        if (!Tone || gameDataRef.current.sounds) return;
+
         gameDataRef.current.sounds = {
             jump: new Tone.Synth({ oscillator: { type: 'triangle' }, envelope: { attack: 0.005, decay: 0.1, sustain: 0, release: 0.1 } }).toDestination(),
             coin: new Tone.Synth({ oscillator: { type: 'square' }, envelope: { attack: 0.005, decay: 0.1, sustain: 0.1, release: 0.1 } }).toDestination(),
@@ -68,21 +93,39 @@ export default function SuperRetroPlatformerPage() {
     }, []);
 
     const playSound = useCallback((sound: string) => {
+        const Tone = toneRef.current;
         const sounds = gameDataRef.current.sounds;
-        if (!sounds || Tone.context.state !== 'running') return;
-        if (sound === 'jump') sounds.jump.triggerAttackRelease('C5', '8n');
-        else if (sound === 'coin') sounds.coin.triggerAttackRelease('E6', '16n');
-        else if (sound === 'stomp') sounds.stomp.triggerAttackRelease('C2', '8n');
-        else if (sound === 'powerup') sounds.powerup.triggerAttackRelease('G5', '4n');
-        else if (sound === 'powerdown') sounds.powerdown.triggerAttackRelease('G4', '4n');
-        else if (sound === 'death') sounds.death.triggerAttackRelease('C3', '2n');
-        else if (sound === 'win') sounds.win.triggerAttackRelease('G5', '1n');
-        else if (sound === 'powerupAppear') sounds.powerupAppear.triggerAttackRelease('A5', '16n');
+        if (!sounds || !Tone || Tone.context.state !== 'running') return;
+
+        try {
+            if (sound === 'jump') sounds.jump.triggerAttackRelease('C5', '8n');
+            else if (sound === 'coin') sounds.coin.triggerAttackRelease('E6', '16n');
+            else if (sound === 'stomp') sounds.stomp.triggerAttackRelease('C2', '8n');
+            else if (sound === 'powerup') sounds.powerup.triggerAttackRelease('G5', '4n');
+            else if (sound === 'powerdown') sounds.powerdown.triggerAttackRelease('G4', '4n');
+            else if (sound === 'death') sounds.death.triggerAttackRelease('C3', '2n');
+            else if (sound === 'win') sounds.win.triggerAttackRelease('G5', '1n');
+            else if (sound === 'powerupAppear') sounds.powerupAppear.triggerAttackRelease('A5', '16n');
+        } catch (error) {
+            console.error(`Error playing sound ${sound}:`, error);
+        }
     }, []);
     
     const toggleMusic = useCallback((play: boolean) => {
-        if (!gameDataRef.current.sounds) return;
-        if(play) { Tone.Transport.start(); } else { Tone.Transport.stop(); }
+        const Tone = toneRef.current;
+        if (!Tone || !gameDataRef.current.musicPattern) return;
+        if(play) { 
+            if (Tone.Transport.state !== 'started') {
+                Tone.Transport.start(); 
+            }
+            if (!gameDataRef.current.musicPattern.state === 'started') {
+                 gameDataRef.current.musicPattern.start(0);
+            }
+        } else { 
+            if (Tone.Transport.state === 'started') {
+                Tone.Transport.stop(); 
+            }
+        }
     }, []);
 
     // --- Game Logic Classes and Functions ---
@@ -108,7 +151,7 @@ export default function SuperRetroPlatformerPage() {
         
         gameDataRef.current.clouds = Array.from({length: 10}, () => new Cloud(Math.random() * cW * 3, Math.random() * cH * 0.5));
         
-        if (!gameDataRef.current.sounds) initSounds();
+        if (toneRef.current && !gameDataRef.current.sounds) initSounds();
         initLevel(true);
         toggleMusic(false);
     }, [initSounds, toggleMusic]);
@@ -131,7 +174,9 @@ export default function SuperRetroPlatformerPage() {
             }
         });
 
-        gameData.player.reset(TILE_SIZE * 3, TILE_SIZE * 10);
+        if (gameData.player) {
+            gameData.player.reset(TILE_SIZE * 3, TILE_SIZE * 10);
+        }
         gameData.enemies.push(new Enemy(TILE_SIZE * 20, TILE_SIZE * 10));
         gameData.enemies.push(new Enemy(TILE_SIZE * 30, TILE_SIZE * 10));
         gameData.enemies.push(new Enemy(TILE_SIZE * 55, TILE_SIZE * 10));
@@ -218,7 +263,7 @@ export default function SuperRetroPlatformerPage() {
     const gameLoop = useCallback((currentGameState: typeof gameState) => {
         const ctx = canvasRef.current?.getContext('2d');
         const canvas = canvasRef.current;
-        if (!ctx || !canvas) return;
+        if (!ctx || !canvas || !gameDataRef.current.player) return;
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         ctx.fillStyle = '#5d94f5'; ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -247,15 +292,6 @@ export default function SuperRetroPlatformerPage() {
         player.draw(ctx);
         ctx.restore();
     }, [playSound, toggleMusic]);
-
-    useEffect(() => {
-        initGame();
-        window.addEventListener('resize', initGame);
-        let animationFrameId: number;
-        const renderLoop = () => { gameLoop(gameDataRef.current.gameState); animationFrameId = requestAnimationFrame(renderLoop); };
-        renderLoop();
-        return () => { window.removeEventListener('resize', initGame); cancelAnimationFrame(animationFrameId); };
-    }, [initGame, gameLoop]);
     
     useEffect(() => {
         gameDataRef.current.gameState = gameState;
@@ -263,13 +299,24 @@ export default function SuperRetroPlatformerPage() {
 
     const handleInput = useCallback((down:boolean, key: 'left'|'right'|'up'|'enter') => {
         const currentGameState = gameDataRef.current.gameState;
-        if (key === 'enter') {
-            if (currentGameState === 'start' && down) { setGameState('playing'); toggleMusic(true); if (Tone.context.state === 'suspended') Tone.start(); }
-            else if ((currentGameState === 'gameOver' || currentGameState === 'win') && down) { initGame(); }
-            return;
+        const Tone = toneRef.current;
+
+        if (key === 'enter' || (key === 'up' && isTouchDevice)) { // 'up' for touch start
+             if ((currentGameState === 'start' || currentGameState === 'gameOver' || currentGameState === 'win') && down) {
+                if (Tone && Tone.context.state === 'suspended') {
+                    Tone.start();
+                }
+                if (currentGameState === 'start') {
+                    initGame(); // Full reset for start
+                    setGameState('playing'); 
+                    toggleMusic(true);
+                } else {
+                     initGame();
+                }
+            }
         }
         if(gameDataRef.current.keys) gameDataRef.current.keys[key] = down;
-    }, [initGame, toggleMusic]);
+    }, [isTouchDevice, initGame, toggleMusic]);
 
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => { if (e.repeat) return; if (e.code === 'ArrowLeft' || e.code === 'KeyA') handleInput(true, 'left'); if (e.code === 'ArrowRight' || e.code === 'KeyD') handleInput(true, 'right'); if (e.code === 'ArrowUp' || e.code === 'KeyW' || e.code === 'Space') handleInput(true, 'up'); if (e.code === 'Enter') handleInput(true, 'enter'); };
@@ -318,10 +365,10 @@ export default function SuperRetroPlatformerPage() {
                     <CardFooter className={cn("p-4 border-t flex flex-col items-center justify-center gap-4")}>
                         <div className={cn("w-full max-w-sm justify-between items-center", isTouchDevice ? "flex" : "hidden")}>
                             <div className="flex gap-4">
-                                <Button onTouchStart={() => handleInput(true, 'left')} onTouchEnd={() => handleInput(false, 'left')} variant="outline" size="lg" className="h-16 w-16 rounded-full text-3xl select-none">←</Button>
-                                <Button onTouchStart={() => handleInput(true, 'right')} onTouchEnd={() => handleInput(false, 'right')} variant="outline" size="lg" className="h-16 w-16 rounded-full text-3xl select-none">→</Button>
+                                <Button onTouchStart={(e) => {e.preventDefault(); handleInput(true, 'left')}} onTouchEnd={(e) => {e.preventDefault(); handleInput(false, 'left')}} variant="outline" size="lg" className="h-16 w-16 rounded-full text-3xl select-none">←</Button>
+                                <Button onTouchStart={(e) => {e.preventDefault(); handleInput(true, 'right')}} onTouchEnd={(e) => {e.preventDefault(); handleInput(false, 'right')}} variant="outline" size="lg" className="h-16 w-16 rounded-full text-3xl select-none">→</Button>
                             </div>
-                            <Button onTouchStart={() => handleInput(true, 'up')} onTouchEnd={() => handleInput(false, 'up')} variant="destructive" size="lg" className="h-20 w-20 rounded-full text-3xl font-bold select-none">A</Button>
+                            <Button onTouchStart={(e) => {e.preventDefault(); handleInput(true, 'up')}} onTouchEnd={(e) => {e.preventDefault(); handleInput(false, 'up')}} variant="destructive" size="lg" className="h-20 w-20 rounded-full text-3xl font-bold select-none">A</Button>
                         </div>
                          <Button size="lg" variant="outline" asChild>
                             <Link href="/games"><ArrowLeft className="mr-2 h-4 w-4" /> Back to Games</Link>
@@ -331,4 +378,5 @@ export default function SuperRetroPlatformerPage() {
             </main>
         </div>
     );
-}
+
+    
