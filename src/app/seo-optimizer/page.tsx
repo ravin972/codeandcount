@@ -190,7 +190,7 @@ export default function SEOOptimizerPage() {
                 <Button variant="outline" size="sm" onClick={handleCopyToClipboard}>
                   <Copy className="mr-2 h-4 w-4" /> Copy
                 </Button>
-              </Header>
+              </CardHeader>
               <CardContent>
                 <div className="prose prose-sm sm:prose lg:prose-lg xl:prose-xl max-w-none p-4 border rounded-md bg-muted min-h-[150px] whitespace-pre-wrap">
                   {rewrittenText}
