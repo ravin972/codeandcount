@@ -1,4 +1,3 @@
-
 "use client";
 
 import Link from 'next/link';
@@ -17,8 +16,8 @@ const games = [
     status: 'available',
   },
   {
-    title: 'Flappy Block',
-    description: 'Navigate the blocky bird through a series of pipes. A simple yet maddeningly addictive test of your timing and reflexes.',
+    title: 'Flappy Bird',
+    description: 'Navigate the bird through a series of pipes. A simple yet maddeningly addictive test of your timing and reflexes.',
     icon: <Bird className="h-10 w-10 text-primary" />,
     href: '/games/flappy-block',
     status: 'available',
