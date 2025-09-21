@@ -4,7 +4,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
-import { Rocket, Play, RefreshCw, Gamepad2, AlertTriangle, ArrowLeft } from 'lucide-react';
+import { Rocket, Play, RefreshCw, Gamepad2, AlertTriangle, ArrowLeft, Maximize } from 'lucide-react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 
@@ -30,6 +30,7 @@ const PARTICLE_COUNT = 30;
 export default function AsteroidShooterPage() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const gameDataRef = useRef<any>({});
+    const gameContainerRef = useRef<HTMLDivElement>(null);
     
     const [gameState, setGameState] = useState<'start' | 'playing' | 'gameOver'>('start');
     const [score, setScore] = useState(0);
@@ -412,6 +413,16 @@ export default function AsteroidShooterPage() {
         };
     }, [initGame]);
 
+    const handleFullScreen = () => {
+        if (gameContainerRef.current) {
+            if (document.fullscreenElement) {
+                document.exitFullscreen();
+            } else {
+                gameContainerRef.current.requestFullscreen();
+            }
+        }
+    };
+
 
     return (
         <div className="bg-background text-foreground min-h-screen py-8 flex flex-col items-center justify-center">
@@ -424,7 +435,7 @@ export default function AsteroidShooterPage() {
                 </div>
             </header>
             <main className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl w-full flex justify-center">
-                <Card className="w-full text-center relative overflow-hidden aspect-[4/3] shadow-2xl shadow-primary/20 border-primary/50" data-interactive-cursor="true">
+                <Card ref={gameContainerRef} className="w-full text-center relative overflow-hidden aspect-[4/3] shadow-2xl shadow-primary/20 border-primary/50 bg-black" data-interactive-cursor="true">
                     <CardHeader className="absolute top-2 left-4 right-4 z-20 flex flex-row justify-between items-center text-left">
                         <p className="text-white font-bold text-xl" style={{ textShadow: '2px 2px 4px #000' }}>SCORE: {score}</p>
                         <p className="text-white font-bold text-xl" style={{ textShadow: '2px 2px 4px #000' }}>HIGH: {highScore}</p>
@@ -447,9 +458,12 @@ export default function AsteroidShooterPage() {
                         )}
                         <canvas ref={canvasRef} id="gameCanvas" className='w-full h-full' />
                     </CardContent>
-                     <CardFooter className={cn("absolute bottom-4 left-1/2 -translate-x-1/2 z-20")}>
+                     <CardFooter className={cn("absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-4")}>
                         <Button size="lg" variant="outline" asChild>
                            <Link href="/games"><ArrowLeft className="mr-2 h-4 w-4" /> Back to Games</Link>
+                       </Button>
+                       <Button size="lg" variant="outline" onClick={handleFullScreen}>
+                           <Maximize className="mr-2 h-4 w-4" /> Full Screen
                        </Button>
                     </CardFooter>
                 </Card>

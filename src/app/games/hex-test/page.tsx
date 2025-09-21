@@ -3,9 +3,9 @@
 
 import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
-import { Eye, Play, RefreshCw, Gamepad2, AlertTriangle, ArrowLeft } from 'lucide-react';
+import { Eye, Play, RefreshCw, Gamepad2, AlertTriangle, ArrowLeft, Maximize } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
 
@@ -76,6 +76,8 @@ export default function HexTestPage() {
 
   const timerRef = useRef<NodeJS.Timeout | null>(null);
   const messageTimerRef = useRef<NodeJS.Timeout | null>(null);
+  const gameContainerRef = useRef<HTMLDivElement>(null);
+
 
   const getGridDimensions = useCallback(() => {
     const dimension = Math.min(MAX_GRID_DIMENSION, Math.floor(level / 2) + 2);
@@ -182,6 +184,16 @@ export default function HexTestPage() {
       showTemporaryMessage("INCORRECT!", 'error', 3000);
     }
   };
+
+  const handleFullScreen = () => {
+    if (gameContainerRef.current) {
+        if (document.fullscreenElement) {
+            document.exitFullscreen();
+        } else {
+            gameContainerRef.current.requestFullscreen();
+        }
+    }
+  };
   
   const finalLevel = level > 1 ? level - 1 : (gameStarted ? 1 : 0);
 
@@ -197,9 +209,9 @@ export default function HexTestPage() {
         </div>
       </header>
 
-      <main className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-md w-full">
+      <main ref={gameContainerRef} className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-md w-full">
         {!gameStarted || isGameOver ? (
-          <Card className="text-center" data-interactive-cursor="true"> 
+          <Card className="text-center bg-card" data-interactive-cursor="true"> 
             <CardHeader>
               <CardTitle className="text-3xl">
                 {gameStarted && isGameOver ? <AlertTriangle className="inline h-8 w-8 mr-2 text-destructive" /> : <Gamepad2 className="inline h-8 w-8 mr-2 text-primary" />} 
@@ -239,8 +251,8 @@ export default function HexTestPage() {
                 </div>
               )}
             </CardHeader>
-            <CardContent>
-              <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
+            <CardFooter className="flex-col gap-4">
+              <div className="flex flex-col sm:flex-row gap-3 justify-center w-full">
                 <Button size="lg" onClick={startGame} className="w-full sm:w-auto">
                   {gameStarted && isGameOver ? <RefreshCw className="mr-2 h-5 w-5" /> : <Play className="mr-2 h-5 w-5" />}
                   {gameStarted && isGameOver ? "PLAY AGAIN" : "PLAY"}
@@ -249,10 +261,13 @@ export default function HexTestPage() {
                   <Link href="/games"><ArrowLeft className="mr-2 h-4 w-4" /> Back to Games</Link>
                 </Button>
               </div>
-            </CardContent>
+               <Button size="lg" variant="outline" onClick={handleFullScreen} className="w-full">
+                  <Maximize className="mr-2 h-4 w-4" /> Full Screen
+              </Button>
+            </CardFooter>
           </Card>
         ) : (
-          <Card data-interactive-cursor="true"> 
+          <Card data-interactive-cursor="true" className="bg-card"> 
             <CardHeader className="p-4">
               <div className="flex justify-between items-center gap-4 mb-3">
                 <span className="text-sm font-semibold text-muted-foreground">LEVEL {level}</span>
@@ -292,9 +307,16 @@ export default function HexTestPage() {
                 ))}
               </div>
             </CardContent>
+             <CardFooter>
+                <Button size="lg" variant="outline" onClick={handleFullScreen} className="w-full">
+                    <Maximize className="mr-2 h-4 w-4" /> Full Screen
+                </Button>
+             </CardFooter>
           </Card>
         )}
       </main>
     </div>
   );
 }
+
+    

@@ -4,7 +4,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
-import { ToyBrick, Play, RefreshCw, Gamepad2, AlertTriangle, ArrowLeft } from 'lucide-react';
+import { ToyBrick, Play, RefreshCw, Gamepad2, AlertTriangle, ArrowLeft, Maximize } from 'lucide-react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 import type { default as ToneType } from 'tone';
@@ -39,6 +39,7 @@ export default function SuperRetroPlatformerPage() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const gameDataRef = useRef<any>({});
     const toneRef = useRef<typeof ToneType | null>(null);
+    const gameContainerRef = useRef<HTMLDivElement>(null);
 
     // Visual state for UI update
     const [score, setScore] = useState(0);
@@ -337,6 +338,16 @@ export default function SuperRetroPlatformerPage() {
             toggleMusic(true);
         }
     }, [initGame, toggleMusic, initSounds]);
+
+    const handleFullScreen = () => {
+        if (gameContainerRef.current) {
+            if (document.fullscreenElement) {
+                document.exitFullscreen();
+            } else {
+                gameContainerRef.current.requestFullscreen();
+            }
+        }
+    };
     
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
@@ -383,7 +394,7 @@ export default function SuperRetroPlatformerPage() {
             </header>
 
             <main className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl w-full flex justify-center">
-                <Card className="w-full text-center relative overflow-hidden" data-interactive-cursor="true">
+                <Card ref={gameContainerRef} className="w-full text-center relative overflow-hidden bg-black" data-interactive-cursor="true">
                     <CardHeader className="absolute top-2 left-2 z-20 text-left">
                         <p className="text-white font-bold" style={{ textShadow: '2px 2px 4px #000' }}>Score: {score}</p>
                         <p className="text-white font-bold" style={{ textShadow: '2px 2px 4px #000' }}>Coins: {coins}</p>
@@ -416,12 +427,19 @@ export default function SuperRetroPlatformerPage() {
                             </div>
                             <Button onTouchStart={(e) => {e.preventDefault(); handleTouch('up', true)}} onTouchEnd={(e) => {e.preventDefault(); handleTouch('up', false)}} variant="destructive" size="lg" className="h-20 w-20 rounded-full text-3xl font-bold select-none">A</Button>
                         </div>
-                         <Button size="lg" variant="outline" asChild>
-                            <Link href="/games"><ArrowLeft className="mr-2 h-4 w-4" /> Back to Games</Link>
-                        </Button>
+                         <div className="flex gap-4">
+                            <Button size="lg" variant="outline" asChild>
+                                <Link href="/games"><ArrowLeft className="mr-2 h-4 w-4" /> Back to Games</Link>
+                            </Button>
+                             <Button size="lg" variant="outline" onClick={handleFullScreen}>
+                                <Maximize className="mr-2 h-4 w-4" /> Full Screen
+                            </Button>
+                        </div>
                      </CardFooter>
                 </Card>
             </main>
         </div>
     );
 }
+
+    

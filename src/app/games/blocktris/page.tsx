@@ -4,7 +4,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
-import { Rows, Play, RefreshCw, Gamepad2, AlertTriangle, ArrowLeft, ArrowRight, ArrowDown, RotateCw } from 'lucide-react';
+import { Rows, Play, RefreshCw, Gamepad2, AlertTriangle, ArrowLeft, ArrowRight, ArrowDown, RotateCw, Maximize } from 'lucide-react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 
@@ -29,6 +29,7 @@ const SHAPES = [
 
 export default function BlocktrisPage() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
+    const gameContainerRef = useRef<HTMLDivElement>(null);
     const gameStateRef = useRef<'start' | 'playing' | 'gameOver'>('start');
     const boardRef = useRef<number[][]>([]);
     const currentPieceRef = useRef<any>(null);
@@ -277,7 +278,17 @@ export default function BlocktrisPage() {
 
         window.addEventListener('keydown', handleKeyDown);
         return () => window.removeEventListener('keydown', handleKeyDown);
-    }, [resetGame]);
+    }, []);
+
+    const handleFullScreen = () => {
+        if (gameContainerRef.current) {
+            if (document.fullscreenElement) {
+                document.exitFullscreen();
+            } else {
+                gameContainerRef.current.requestFullscreen();
+            }
+        }
+    };
 
     return (
         <div className="bg-background text-foreground min-h-screen py-8 flex flex-col items-center justify-center">
@@ -291,7 +302,7 @@ export default function BlocktrisPage() {
             </header>
 
             <main className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-lg w-full flex justify-center">
-                <Card className="text-center relative" data-interactive-cursor="true">
+                <Card ref={gameContainerRef} className="text-center relative bg-card" data-interactive-cursor="true">
                     <CardContent className="pt-6 relative flex items-center justify-center" style={{ width: COLS * BLOCK_SIZE, height: ROWS * BLOCK_SIZE }}>
                         {gameState !== 'playing' && (
                             <div className="absolute inset-0 bg-black/70 z-10 flex flex-col items-center justify-center p-4">
@@ -330,9 +341,14 @@ export default function BlocktrisPage() {
                             <p><strong>Lines:</strong> {lines}</p>
                             <p><strong>Level:</strong> {level}</p>
                          </div>
-                         <Button size="lg" variant="outline" asChild>
-                            <Link href="/games"><ArrowLeft className="mr-2 h-4 w-4" /> Back to Games</Link>
-                        </Button>
+                         <div className="flex gap-4">
+                            <Button size="lg" variant="outline" asChild>
+                                <Link href="/games"><ArrowLeft className="mr-2 h-4 w-4" /> Back to Games</Link>
+                            </Button>
+                             <Button size="lg" variant="outline" onClick={handleFullScreen}>
+                                <Maximize className="mr-2 h-4 w-4" /> Full Screen
+                            </Button>
+                        </div>
                      </CardFooter>
                 </Card>
             </main>
@@ -340,3 +356,4 @@ export default function BlocktrisPage() {
     );
 }
 
+    

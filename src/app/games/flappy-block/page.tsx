@@ -1,9 +1,10 @@
+
 "use client";
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Bird, Play, RefreshCw, Gamepad2, AlertTriangle, ArrowLeft } from 'lucide-react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
+import { Bird, Play, RefreshCw, Gamepad2, AlertTriangle, ArrowLeft, Maximize } from 'lucide-react';
 import Link from 'next/link';
 
 // --- Game Configuration ---
@@ -20,6 +21,7 @@ let pipeSpawnInterval = 100; // frames
 
 export default function FlappyBlockPage() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
+    const gameContainerRef = useRef<HTMLDivElement>(null);
     const birdRef = useRef<any>();
     const pipesRef = useRef<any[]>([]);
     const frameCountRef = useRef(0);
@@ -288,6 +290,16 @@ export default function FlappyBlockPage() {
         return () => window.removeEventListener('keydown', handleKeyDown);
     }, [handleInput]);
 
+    const handleFullScreen = () => {
+        if (gameContainerRef.current) {
+            if (document.fullscreenElement) {
+                document.exitFullscreen();
+            } else {
+                gameContainerRef.current.requestFullscreen();
+            }
+        }
+    };
+
     return (
         <div className="bg-background text-foreground min-h-screen py-8 flex flex-col items-center justify-center">
              <header className="text-center mb-6 w-full max-w-lg px-4">
@@ -300,7 +312,7 @@ export default function FlappyBlockPage() {
             </header>
 
             <main className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-lg w-full">
-                <Card className="text-center" data-interactive-cursor="true">
+                <Card ref={gameContainerRef} className="text-center bg-card" data-interactive-cursor="true">
                     <CardContent className="pt-6 relative aspect-[9/16] max-h-[90vh] flex items-center justify-center" onClick={handleInput}>
                         {gameState !== 'playing' && (
                             <div className="absolute inset-0 bg-black/50 z-10 flex flex-col items-center justify-center p-4">
@@ -339,13 +351,18 @@ export default function FlappyBlockPage() {
                         )}
                         <canvas ref={canvasRef} id="gameCanvas" className="rounded-md" />
                     </CardContent>
-                     <CardContent className="border-t pt-4">
+                     <CardFooter className="border-t pt-4 flex-wrap justify-center gap-4">
                          <Button size="lg" variant="outline" asChild>
                             <Link href="/games"><ArrowLeft className="mr-2 h-4 w-4" /> Back to Games</Link>
                         </Button>
-                     </CardContent>
+                         <Button size="lg" variant="outline" onClick={handleFullScreen}>
+                            <Maximize className="mr-2 h-4 w-4" /> Full Screen
+                        </Button>
+                     </CardFooter>
                 </Card>
             </main>
         </div>
     );
 }
+
+    
