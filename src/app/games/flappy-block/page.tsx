@@ -20,7 +20,6 @@ let pipeSpawnInterval = 100; // frames
 
 export default function FlappyBlockPage() {
     const canvasRef = useRef<HTMLCanvasElement>(null);
-    const gameLoopRef = useRef<number>();
     const birdRef = useRef<any>();
     const pipesRef = useRef<any[]>([]);
     const frameCountRef = useRef(0);
@@ -28,6 +27,11 @@ export default function FlappyBlockPage() {
 
     const [score, setScore] = useState(0);
     const [gameState, setGameState] = useState<'start' | 'playing' | 'gameOver'>('start');
+    const gameStateRef = useRef(gameState);
+
+    useEffect(() => {
+        gameStateRef.current = gameState;
+    }, [gameState]);
 
     // --- Bird Class ---
     class BirdClass {
@@ -160,7 +164,8 @@ export default function FlappyBlockPage() {
         setGameState('start');
     }, []);
 
-    const gameLoop = useCallback((currentGameState: 'start' | 'playing' | 'gameOver') => {
+    const gameLoop = useCallback(() => {
+        const currentGameState = gameStateRef.current;
         const canvas = canvasRef.current;
         const ctx = canvas?.getContext('2d');
         if (!ctx || !canvas) return;
@@ -202,7 +207,7 @@ export default function FlappyBlockPage() {
                 const minHeight = 60;
                 const maxHeight = canvasHeight - pipeGap - minHeight - groundHeight;
                 const topPipeHeight = Math.floor(Math.random() * (maxHeight - minHeight + 1)) + minHeight;
-                const bottomPipeHeight = canvasHeight - topPipeHeight - pipeGap;
+                const bottomPipeHeight = canvasHeight - topPipeHeight - pipeGap - groundHeight;
                 pipes.push(new PipeClass(true, topPipeHeight));
                 pipes.push(new PipeClass(false, bottomPipeHeight));
             }
@@ -222,7 +227,6 @@ export default function FlappyBlockPage() {
                  if (
                     bird.x + birdWidth / 2 > pipe.x &&
                     bird.x - birdWidth / 2 < pipe.x + pipe.width &&
-                    (bird.y - birdHeight / 2 < pipe.height || bird.y + birdHeight / 2 > pipe.y) &&
                     (pipe.isTop ? bird.y - birdHeight/2 < pipe.y + pipe.height : bird.y + birdHeight/2 > pipe.y)
                 ) {
                     setGameState('gameOver');
@@ -250,7 +254,7 @@ export default function FlappyBlockPage() {
         let animationFrameId: number;
         
         const renderLoop = () => {
-          gameLoop(gameState);
+          gameLoop();
           animationFrameId = requestAnimationFrame(renderLoop);
         };
 
@@ -260,18 +264,18 @@ export default function FlappyBlockPage() {
             window.removeEventListener('resize', initializeGame);
             cancelAnimationFrame(animationFrameId);
         };
-    }, [initializeGame, gameLoop, gameState]);
+    }, [initializeGame, gameLoop]);
     
     const handleInput = useCallback(() => {
-        if (gameState === 'start') {
+        if (gameStateRef.current === 'start') {
             setGameState('playing');
             birdRef.current?.flap();
-        } else if (gameState === 'playing') {
+        } else if (gameStateRef.current === 'playing') {
             birdRef.current?.flap();
-        } else if (gameState === 'gameOver') {
+        } else if (gameStateRef.current === 'gameOver') {
             initializeGame();
         }
-    }, [gameState, initializeGame]);
+    }, [initializeGame]);
 
     useEffect(() => {
         const handleKeyDown = (e: KeyboardEvent) => {
