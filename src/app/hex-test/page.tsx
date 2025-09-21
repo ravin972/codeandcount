@@ -5,8 +5,9 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
-import { Eye, Play, RefreshCw, Gamepad2, AlertTriangle } from 'lucide-react';
+import { Eye, Play, RefreshCw, Gamepad2, AlertTriangle, ArrowLeft } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import Link from 'next/link';
 
 export const dynamic = 'force-dynamic';
 
@@ -185,7 +186,7 @@ export default function HexTestPage() {
   const finalLevel = level > 1 ? level - 1 : (gameStarted ? 1 : 0);
 
   return (
-    <div className="bg-background text-foreground min-h-screen py-8 flex flex-col items-center">
+    <div className="bg-background text-foreground min-h-screen py-8 flex flex-col items-center justify-center">
       <header className="text-center mb-8 md:mb-12 w-full max-w-3xl px-4">
         <div className="bg-secondary rounded-xl shadow-xl p-6 md:p-8 border border-border">
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight flex items-center justify-center">
@@ -198,7 +199,7 @@ export default function HexTestPage() {
 
       <main className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-md w-full">
         {!gameStarted || isGameOver ? (
-          <Card className="text-center" data-interactive-cursor="true"> {/* Card uses solid bg */}
+          <Card className="text-center" data-interactive-cursor="true"> 
             <CardHeader>
               <CardTitle className="text-3xl">
                 {gameStarted && isGameOver ? <AlertTriangle className="inline h-8 w-8 mr-2 text-destructive" /> : <Gamepad2 className="inline h-8 w-8 mr-2 text-primary" />} 
@@ -239,14 +240,19 @@ export default function HexTestPage() {
               )}
             </CardHeader>
             <CardContent>
-              <Button size="lg" onClick={startGame} className="w-full md:w-auto">
-                {gameStarted && isGameOver ? <RefreshCw className="mr-2 h-5 w-5" /> : <Play className="mr-2 h-5 w-5" />}
-                {gameStarted && isGameOver ? "PLAY AGAIN" : "PLAY"}
-              </Button>
+              <div className="mt-6 flex flex-col sm:flex-row gap-3 justify-center">
+                <Button size="lg" onClick={startGame} className="w-full sm:w-auto">
+                  {gameStarted && isGameOver ? <RefreshCw className="mr-2 h-5 w-5" /> : <Play className="mr-2 h-5 w-5" />}
+                  {gameStarted && isGameOver ? "PLAY AGAIN" : "PLAY"}
+                </Button>
+                <Button size="lg" variant="outline" asChild className="w-full sm:w-auto">
+                  <Link href="/games"><ArrowLeft className="mr-2 h-4 w-4" /> Back to Games</Link>
+                </Button>
+              </div>
             </CardContent>
           </Card>
         ) : (
-          <Card data-interactive-cursor="true"> {/* Card uses solid bg */}
+          <Card data-interactive-cursor="true"> 
             <CardHeader className="p-4">
               <div className="flex justify-between items-center gap-4 mb-3">
                 <span className="text-sm font-semibold text-muted-foreground">LEVEL {level}</span>
