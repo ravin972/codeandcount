@@ -4,7 +4,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogClose, DialogFooter } from '@/components/ui/dialog';
 import { Button } from '@/components/ui/button';
-import { Flame, Sparkles, Copy, Gift } from 'lucide-react';
+import { Flame, Sparkles, Copy, Gift, UserPlus, Send } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { cn } from '@/lib/utils';
 import { gsap } from 'gsap';
@@ -13,7 +13,11 @@ export default function DiwaliOffer() {
   const [isOpen, setIsOpen] = useState(false);
   const diyaRef = useRef<HTMLButtonElement>(null);
   const { toast } = useToast();
-  const DISCOUNT_CODE = "DIWALI25";
+  const REFERRAL_CODE = "DIWALI2025";
+  const whatsappNumber = "919729041423"; // Your WhatsApp number
+  const whatsappMessage = `Hello! I'm claiming my Diwali referral reward. My referral code is ${REFERRAL_CODE}.`;
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(whatsappMessage)}`;
+
 
   useEffect(() => {
     if (diyaRef.current) {
@@ -28,10 +32,10 @@ export default function DiwaliOffer() {
   }, []);
 
   const handleCopyCode = () => {
-    navigator.clipboard.writeText(DISCOUNT_CODE);
+    navigator.clipboard.writeText(REFERRAL_CODE);
     toast({
       title: "Copied!",
-      description: `Discount code "${DISCOUNT_CODE}" copied to clipboard.`,
+      description: `Referral code "${REFERRAL_CODE}" copied to clipboard.`,
     });
   };
 
@@ -54,36 +58,47 @@ export default function DiwaliOffer() {
         <DialogHeader>
           <DialogTitle className="flex items-center text-2xl">
             <Sparkles className="h-6 w-6 mr-2 text-primary" />
-            Happy Diwali from CodeAndCount!
+            A Prosperous Diwali 2025!
           </DialogTitle>
           <DialogDescription>
-            To celebrate the festival of lights, here's a special offer just for you.
+            Celebrate with our special Referral Reward program.
           </DialogDescription>
         </DialogHeader>
         
-        <div className="py-6 text-center">
-            <p className="text-muted-foreground mb-2">Enjoy a festive discount on all our services!</p>
-            <div className="flex items-center justify-center space-x-2 my-4">
-                <Gift className="h-5 w-5 text-primary" />
-                <p className="text-lg font-bold">Get 25% OFF</p>
+        <div className="py-6 text-center space-y-6">
+            <div className="flex items-center justify-center space-x-2">
+                <Gift className="h-8 w-8 text-primary" />
+                <p className="text-2xl font-bold">Get 25% OFF Your Next Project!</p>
             </div>
+            
+            <div className='text-left space-y-4 text-sm'>
+              <p><strong className='text-foreground'>How it works:</strong></p>
+              <p className='flex items-start'><UserPlus className='h-4 w-4 mr-2 mt-1 text-primary flex-shrink-0' /> Refer a new client to us. When they book a project by filling our contact form and scheduling a meeting, you get rewarded!</p>
+              <p className='flex items-start'><Send className='h-4 w-4 mr-2 mt-1 text-primary flex-shrink-0' /> To claim your reward, just send us a screenshot of their confirmation on WhatsApp with your referral code.</p>
+            </div>
+
             <div 
               className="mt-4 flex items-center justify-between rounded-lg border-2 border-dashed border-primary/50 bg-background p-3"
             >
               <p className="text-lg font-mono font-semibold tracking-widest text-primary">
-                {DISCOUNT_CODE}
+                {REFERRAL_CODE}
               </p>
               <Button variant="ghost" size="sm" onClick={handleCopyCode}>
                 <Copy className="h-4 w-4 mr-2" />
-                Copy
+                Copy Code
               </Button>
             </div>
         </div>
 
-        <DialogFooter className="sm:justify-center">
+        <DialogFooter className="flex-col sm:flex-row gap-2 sm:justify-center">
+          <Button asChild type="button" variant="default">
+            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+              <Send className="h-4 w-4 mr-2" /> Claim on WhatsApp
+            </a>
+          </Button>
           <DialogClose asChild>
-            <Button type="button" variant="default">
-              Continue Shopping
+            <Button type="button" variant="outline">
+              Close
             </Button>
           </DialogClose>
         </DialogFooter>
