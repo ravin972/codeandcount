@@ -6,21 +6,21 @@ import { Button } from '@/components/ui/button';
 import { Gamepad2 } from 'lucide-react'; 
 import { cn } from '@/lib/utils';
 import { usePathname } from 'next/navigation';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 
 export default function FloatingGameZoneButton() {
   const pathname = usePathname();
   const buttonRef = useRef<HTMLButtonElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
-  // Hide button on game pages
-  if (pathname.startsWith('/games')) {
-    return null;
-  }
-  
   useEffect(() => {
-    // Floating animation for the button
-    if (buttonRef.current) {
+    // Determine visibility based on pathname
+    const shouldBeVisible = !pathname.startsWith('/games');
+    setIsVisible(shouldBeVisible);
+
+    if (shouldBeVisible && buttonRef.current) {
+      // Floating animation for the button
       gsap.to(buttonRef.current, {
         y: -8,
         duration: 1.2,
@@ -30,7 +30,12 @@ export default function FloatingGameZoneButton() {
         delay: 0.5, // Start with a slight delay
       });
     }
-  }, []);
+  }, [pathname]);
+
+  // Always render the component structure, but hide it based on state
+  if (!isVisible) {
+    return null;
+  }
 
   return (
     <Button
@@ -49,4 +54,3 @@ export default function FloatingGameZoneButton() {
     </Button>
   );
 }
-
