@@ -104,22 +104,21 @@ export default {
   				from: { height: 'var(--radix-accordion-content-height)' },
   				to: { height: '0' }
   			},
-        // Preloader
+        // Preloader & Cracker Animations
         'preloader-fade-out': {
           from: { opacity: '1' },
           to: { opacity: '0', visibility: 'hidden' },
         },
         'flip-in': {
-          '0%': { transform: 'rotateX(90deg)', opacity: '0' },
-          '100%': { transform: 'rotateX(0deg)', opacity: '1' },
+          '0%': { transform: 'rotateX(90deg) translateY(20px) scale(0.8)', opacity: '0' },
+          '50%': { opacity: '0.7' },
+          '100%': { transform: 'rotateX(0deg) translateY(0) scale(1)', opacity: '1' },
         },
-        // Floating Diya
         'float': {
           '0%': { transform: 'translateY(0px)' },
           '50%': { transform: 'translateY(-15px)' },
           '100%': { transform: 'translateY(0px)' },
         },
-        // Diwali Cracker
         'cracker-burst': {
           '0%': { transform: 'scale(0.5)', opacity: '1' },
           '100%': { transform: 'scale(1.5)', opacity: '0' },
