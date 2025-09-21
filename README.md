@@ -1,80 +1,139 @@
-ear# CodeAndCount.com - Next.js App
 
-This is a Next.js project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app), enhanced with ShadCN UI components, Tailwind CSS, and Genkit for AI functionalities, developed within Firebase Studio.
+<div align="center">
+  <h1 align="center">
+    <span style="font-size: 2.5rem; font-weight: bold;">Code&Count</span>
+    <br />
+    <span style="font-size: 1.25rem; color: hsl(var(--primary));">Web Development, AI Solutions & Accounting</span>
+  </h1>
+  <p align="center">
+    A modern web application showcasing services, portfolio, and AI-powered tools.
+    <br />
+    <a href="https://codeandcount.com" target="_blank"><strong>Explore the Live Site »</strong></a>
+  </p>
+</div>
 
-## Overview
+<div align="center">
 
-CodeAndCount.com is a modern web application designed to showcase services, portfolio, and insights related to web development, AI solutions, and account management.
+![Next.js](https://img.shields.io/badge/Next.js-15.x-black?style=for-the-badge&logo=next.js&logoColor=white)
+![React](https://img.shields.io/badge/React-18-blue?style=for-the-badge&logo=react&logoColor=61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript-5-blue?style=for-the-badge&logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Genkit](https://img.shields.io/badge/Genkit-AI-orange?style=for-the-badge&logo=google-cloud&logoColor=white)
 
-## Tech Stack
+</div>
 
-- **Framework**: [Next.js](https://nextjs.org/) (App Router)
-- **UI Library**: [React](https://reactjs.org/)
-- **Styling**: [Tailwind CSS](https://tailwindcss.com/)
-- **UI Components**: [ShadCN UI](https://ui.shadcn.com/)
-- **AI Integration**: [Genkit (by Google)](https://firebase.google.com/docs/genkit)
-- **Language**: [TypeScript](https://www.typescriptlang.org/)
+---
 
-## Getting Started
+## 🚀 Overview
 
-First, ensure you have Node.js and npm (or yarn/pnpm) installed.
+**CodeAndCount.com** is a digital agency's official website, built as a comprehensive showcase of services spanning web development, AI integration, and professional accounting. The platform is designed not just as a portfolio but as an interactive experience, featuring AI-powered tools and classic browser-based games.
 
-1.  **Install dependencies:**
+## ✨ Key Features
+
+-   **Modern Tech Stack**: Built with the Next.js 15 App Router for optimal performance and developer experience.
+-   **AI-Powered Tools**:
+    -   **SEO Optimizer**: Rewrites content with target keywords to boost search engine rankings.
+    -   **Image Generator**: Creates stunning visuals from text prompts using AI.
+-   **Retro Game Zone**: A collection of classic browser games for a fun, interactive break.
+-   **Dynamic Content**: Features a full-fledged blog, a filterable portfolio of work, and detailed service pages.
+-   **Responsive & Themed**: Fully responsive design with a sleek, modern UI and support for both light and dark modes.
+
+---
+
+## 🛠️ Tech Stack
+
+| Category          | Technology                                                                                                                                                             |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Framework**     | [Next.js](https://nextjs.org/) (App Router)                                                                                                                            |
+| **UI Library**    | [React](https://reactjs.org/)                                                                                                                                          |
+| **Language**      | [TypeScript](https://www.typescriptlang.org/)                                                                                                                          |
+| **Styling**       | [Tailwind CSS](https://tailwindcss.com/)                                                                                                                               |
+| **UI Components** | [ShadCN UI](https://ui.shadcn.com/)                                                                                                                                      |
+| **AI / GenAI**    | [Google AI & Genkit](https://firebase.google.com/docs/genkit)                                                                                                            |
+| **Animations**    | [GSAP](https://gsap.com/) & [Framer Motion](https://www.framer.com/motion/)                                                                                              |
+| **Deployment**    | [Vercel](https://vercel.com/)                                                                                                                                            |
+
+---
+
+## 🏁 Getting Started
+
+To get a local copy up and running, follow these simple steps.
+
+### Prerequisites
+
+-   [Node.js](https://nodejs.org/en/) (v18.x or later recommended)
+-   npm, yarn, or pnpm
+
+### Installation & Setup
+
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/your-username/your-repo-name.git
+    cd your-repo-name
+    ```
+
+2.  **Install dependencies:**
     ```bash
     npm install
-    # or
-    # yarn install
-    # or
-    # pnpm install
     ```
 
-2.  **Run the development server:**
+3.  **Set up environment variables:**
+    Create a `.env.local` file in the root of the project and add any necessary API keys (e.g., for Google AI).
+    ```
+    GEMINI_API_KEY=your_api_key_here
+    ```
+
+### Running the Application
+
+1.  **Run the development server:**
+    This command starts the Next.js application.
     ```bash
     npm run dev
-    # or
-    # yarn dev
-    # or
-    # pnpm dev
     ```
-    This will typically start the development server on `http://localhost:3000`. The current `package.json` specifies port `9002` for the `dev` script (`next dev --turbopack -p 9002`).
+    Open [http://localhost:9002](http://localhost:9002) in your browser.
 
-3.  **Run Genkit development server (for AI flows):**
-    In a separate terminal, run:
+2.  **Run the Genkit development server (for AI flows):**
+    In a separate terminal, run this command to start the Genkit server, which powers the AI tools.
     ```bash
-    npm run genkit:dev
-    # or
-    npm run genkit:watch # for auto-reloading on changes
+    npm run genkit:watch
     ```
 
-Open [http://localhost:9002](http://localhost:9002) (or your configured port) with your browser to see the result.
+---
 
-You can start editing the page by modifying `src/app/page.tsx`. The page auto-updates as you edit the file.
+## 📂 Project Structure
 
-## Available Scripts
+A brief overview of the key directories in this project:
 
-In the project directory, you can run:
+```
+/
+├── src/
+│   ├── app/                # Next.js App Router: pages and layouts
+│   ├── ai/                 # Genkit flows and AI-related logic
+│   ├── components/         # Shared React components (UI, layout, etc.)
+│   ├── lib/                # Shared libraries, data, and utility functions
+│   ├── hooks/              # Custom React hooks
+│   └── styles/             # Global styles
+├── public/                 # Static assets (images, fonts)
+├── next.config.ts          # Next.js configuration
+└── tailwind.config.ts      # Tailwind CSS configuration
+```
 
--   `npm run dev`: Runs the app in development mode with Turbopack.
--   `npm run genkit:dev`: Starts the Genkit development server.
--   `npm run genkit:watch`: Starts the Genkit development server with watch mode.
--   `npm run build`: Builds the app for production.
--   `npm run start`: Starts the production server.
--   `npm run lint`: Lints the project files using Next.js's built-in ESLint configuration.
--   `npm run typecheck`: Runs TypeScript to check for type errors.
+---
 
-## Learn More
+## 🤝 Contributing
 
-To learn more about the technologies used, take a look at the following resources:
+Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
--   [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
--   [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
--   [React Documentation](https://react.dev/) - learn about React.
--   [Tailwind CSS Documentation](https://tailwindcss.com/docs) - learn about Tailwind CSS.
--   [ShadCN UI Documentation](https://ui.shadcn.com/docs) - learn about ShadCN UI components.
--   [Genkit Documentation](https://firebase.google.com/docs/genkit) - learn about Genkit.
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
 
-## Deployment
+1.  Fork the Project
+2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4.  Push to the Branch (`git push origin feature/AmazingFeature`)
+5.  Open a Pull Request
 
-This project is ready to be deployed on any platform that supports Next.js, such as [Vercel](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) (from the creators of Next.js) or Firebase Hosting.
+---
 
-Check out the [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## 📄 License
+
+Distributed under the MIT License. See `LICENSE` file for more information.
