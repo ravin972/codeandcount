@@ -49,7 +49,7 @@ const games = [
     description: 'A modern take on the brick-breaking classic. Features AI-generated levels and an interactive game coach to give you tips.',
     icon: <Sparkles className="h-10 w-10 text-primary" />,
     href: '/games/breakout',
-    status: 'coming-soon',
+    status: 'available',
   },
 ];
 
