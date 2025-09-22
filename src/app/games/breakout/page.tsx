@@ -42,6 +42,11 @@ export default function BreakoutGamePage() {
     const [isCoachTipVisible, setIsCoachTipVisible] = useState(false);
     const [aiEndGameMessage, setAiEndGameMessage] = useState('');
     const [currentGameState, setCurrentGameState] = useState<'start' | 'playing' | 'gameOver'>('start');
+    const gameStateRef = useRef(currentGameState);
+
+    useEffect(() => {
+        gameStateRef.current = currentGameState;
+    }, [currentGameState]);
     
     // --- Game Constants ---
     const ballRadius = 10;
@@ -104,26 +109,29 @@ export default function BreakoutGamePage() {
         }
     }, []);
 
-    // --- Game Over / Win Logic ---
     const handleWin = useCallback(() => {
+        if (gameStateRef.current === 'gameOver') return;
         setCurrentGameState('gameOver');
         showEndGameMessage(true);
         stopGame();
-    }, [showEndGameMessage, stopGame]);
+    }, [stopGame]);
 
     const handleGameOver = useCallback(() => {
+        if (gameStateRef.current === 'gameOver') return;
         setCurrentGameState('gameOver');
         showEndGameMessage(false);
         stopGame();
-    }, [showEndGameMessage, stopGame]);
+    }, [stopGame]);
 
 
     // --- Game Loop and Drawing ---
     const draw = useCallback(() => {
-        const canvas = canvasRef.current;
-        if (!canvas) {
-          return;
+        if (gameStateRef.current !== 'playing') {
+             if (animationFrameId.current) stopGame();
         }
+        
+        const canvas = canvasRef.current;
+        if (!canvas) return;
         const ctx = canvas.getContext('2d')!;
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -131,7 +139,11 @@ export default function BreakoutGamePage() {
         const { bricks, ballX, ballY, paddleX, paddleY } = gameDataRef.current;
 
         if (!bricks || bricks.length === 0) {
-            if(currentGameState === 'playing') initBricks(gameDataRef.current.customBrickPattern);
+            if (gameStateRef.current === 'playing') initBricks(gameDataRef.current.customBrickPattern);
+            else {
+                 animationFrameId.current = requestAnimationFrame(draw);
+                 return;
+            }
         }
 
         // Draw Bricks
@@ -165,17 +177,14 @@ export default function BreakoutGamePage() {
         ctx.fill();
         ctx.closePath();
 
-        if (currentGameState !== 'playing') {
-            stopGame();
-            return;
-        }
+        if (gameStateRef.current !== 'playing') return;
 
         // Collision Detection
         for (let c = 0; c < brickColumnCount; c++) {
             for (let r = 0; r < brickRowCount; r++) {
                 const b = bricks[c]?.[r];
                 if (b?.status === 1) {
-                    if (ballX > b.x && ballX < b.x + brickWidth && ballY > b.y && ballY < b.y + brickHeight) {
+                    if (ballX + ballRadius > b.x && ballX - ballRadius < b.x + brickWidth && ballY + ballRadius > b.y && ballY - ballRadius < b.y + brickHeight) {
                         gameDataRef.current.dy = -gameDataRef.current.dy;
                         b.status = 0;
                         const newScore = gameDataRef.current.score + 10;
@@ -213,12 +222,12 @@ export default function BreakoutGamePage() {
         }
         if (gameDataRef.current.ballY + ballRadius > canvas.height) {
             const newLives = gameDataRef.current.lives - 1;
-            setLives(newLives); // Update React state
-            gameDataRef.current.lives = newLives; // Update ref state
+            setLives(newLives); 
+            gameDataRef.current.lives = newLives;
 
             if (newLives <= 0) {
                 handleGameOver();
-                return; // Stop the loop
+                return; 
             } else {
                 showCoachTip();
                 resetBallAndPaddle();
@@ -226,7 +235,7 @@ export default function BreakoutGamePage() {
         }
         
         animationFrameId.current = requestAnimationFrame(draw);
-    }, [currentGameState, handleGameOver, handleWin, resetBallAndPaddle, showCoachTip, stopGame]);
+    }, [handleGameOver, handleWin, resetBallAndPaddle, stopGame]);
     
     const startGame = useCallback(() => {
         gameDataRef.current.score = 0;
@@ -237,13 +246,9 @@ export default function BreakoutGamePage() {
         resetBallAndPaddle();
         initBricks(gameDataRef.current.customBrickPattern);
         
-        // This is the only place we should set 'playing' and start the loop.
         setCurrentGameState('playing');
         
-        // Start the game loop
-        if (animationFrameId.current) {
-            cancelAnimationFrame(animationFrameId.current);
-        }
+        if (animationFrameId.current) cancelAnimationFrame(animationFrameId.current);
         animationFrameId.current = requestAnimationFrame(draw);
     }, [resetBallAndPaddle, draw]);
 
@@ -302,7 +307,6 @@ export default function BreakoutGamePage() {
         } else if (currentGameState !== 'playing') {
             stopGame();
         }
-
         return () => stopGame();
     }, [currentGameState, draw, stopGame]);
 
@@ -359,8 +363,7 @@ export default function BreakoutGamePage() {
             canvas.style.height = `${newHeight}px`;
 
             resetBallAndPaddle();
-             // Call draw once to render the initial state on resize, but only if not playing.
-            if (currentGameState !== 'playing') {
+            if (gameStateRef.current !== 'playing') {
                 requestAnimationFrame(draw);
             }
         };
@@ -368,11 +371,10 @@ export default function BreakoutGamePage() {
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
         
-        // Initial drawing for start screen
         requestAnimationFrame(draw);
 
         return () => window.removeEventListener('resize', resizeCanvas);
-    }, [resetBallAndPaddle, draw, currentGameState]);
+    }, [resetBallAndPaddle, draw]);
 
     const handleFullScreen = () => {
         if (gameContainerRef.current) {
@@ -434,7 +436,7 @@ export default function BreakoutGamePage() {
                                     </div>
                                 </>}
                                 {currentGameState === 'gameOver' && <>
-                                    <CardTitle className="text-3xl mb-4 flex items-center"><AlertTriangle className="inline h-8 w-8 mr-2 text-destructive" />{score >= gameDataRef.current.brickCount * 10 ? "YOU WIN!" : "GAME OVER"}</CardTitle>
+                                    <CardTitle className="text-3xl mb-4 flex items-center"><AlertTriangle className="inline h-8 w-8 mr-2 text-destructive" />{gameDataRef.current.brickCount <= 0 ? "YOU WIN!" : "GAME OVER"}</CardTitle>
                                     <CardDescription className="text-lg text-white/90 mt-2">{aiEndGameMessage}</CardDescription>
                                     <p className='mt-4 text-muted-foreground'>Click to play again</p>
                                 </>}
