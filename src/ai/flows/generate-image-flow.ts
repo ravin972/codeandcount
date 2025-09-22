@@ -42,7 +42,7 @@ const generateImageFlow = ai.defineFlow(
     });
 
     if (!media || !media.url) {
-      throw new Error('Image generation failed or did not return a valid image URL.');
+      throw new Error('Image generation failed. The AI model did not return any image data. This could be due to safety settings or a temporary issue. Please try a different prompt.');
     }
     
     return { imageDataUri: media.url };
