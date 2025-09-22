@@ -11,7 +11,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { generateImage, GenerateImageInput } from '@/ai/flows/generate-image-flow';
-import { Loader2, Sparkles, Image as ImageIcon, Download, RefreshCw, Hourglass, Activity } from 'lucide-react';
+import { Loader2, Sparkles, Image as ImageIcon, Download, RefreshCw, Hourglass, Activity, History } from 'lucide-react';
 import NextImage from 'next/image';
 import { Progress } from '@/components/ui/progress';
 import { useApiUsageTracker } from '@/hooks/use-api-usage-tracker';
@@ -26,6 +26,14 @@ interface QueuedPrompt {
   id: number;
   prompt: string;
 }
+
+interface CachedImage {
+    imageDataUri: string;
+    timestamp: number;
+}
+
+const CACHE_TTL = 60 * 60 * 1000; // 1 hour in milliseconds
+const CACHE_KEY = 'imageGeneratorCache';
 
 export default function AIImageGeneratorPage() {
   const [generatedImageDataUri, setGeneratedImageDataUri] = useState<string | null>(null);
@@ -44,6 +52,28 @@ export default function AIImageGeneratorPage() {
     resolver: zodResolver(imageGeneratorSchema),
     defaultValues: { prompt: "" },
   });
+  
+  // --- Caching Logic ---
+  const getCache = (): Record<string, CachedImage> => {
+    try {
+        const cached = localStorage.getItem(CACHE_KEY);
+        return cached ? JSON.parse(cached) : {};
+    } catch (error) {
+        console.error("Failed to read from cache:", error);
+        return {};
+    }
+  };
+
+  const setCache = (prompt: string, imageDataUri: string) => {
+    try {
+        const cache = getCache();
+        cache[prompt] = { imageDataUri, timestamp: Date.now() };
+        localStorage.setItem(CACHE_KEY, JSON.stringify(cache));
+    } catch (error) {
+        console.error("Failed to write to cache:", error);
+    }
+  };
+
 
   // Effect to manage the retry delay countdown
   useEffect(() => {
@@ -83,6 +113,7 @@ export default function AIImageGeneratorPage() {
       const result = await generateImage(input);
       if (result && result.imageDataUri) {
         setGeneratedImageDataUri(result.imageDataUri);
+        setCache(queuedPrompt.prompt, result.imageDataUri); // Save successful result to cache
         setCurrentlyProcessing(null); // Success, clear current
       } else {
         throw new Error("The AI did not return a valid image. Please try a different prompt.");
@@ -125,6 +156,19 @@ export default function AIImageGeneratorPage() {
   };
   
   const onSubmit = async (data: ImageGeneratorFormValues) => {
+    // Check cache first
+    const cache = getCache();
+    const cachedItem = cache[data.prompt];
+    if (cachedItem && (Date.now() - cachedItem.timestamp < CACHE_TTL)) {
+      setGeneratedImageDataUri(cachedItem.imageDataUri);
+      toast({
+        title: "Cached Result",
+        description: "This image was retrieved from the cache and didn't use your API quota.",
+      });
+      form.reset();
+      return;
+    }
+
     const newQueuedPrompt: QueuedPrompt = {
       id: nextId.current++,
       prompt: data.prompt,
