@@ -1,8 +1,8 @@
 
 "use client";
 
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
+import { useState, useEffect, useRef } from 'react';
+import { useForm, useFormState } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Button } from '@/components/ui/button';
@@ -11,8 +11,8 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { generateImage, GenerateImageInput } from '@/ai/flows/generate-image-flow';
-import { Loader2, Sparkles, Image as ImageIcon, Download } from 'lucide-react';
-import NextImage from 'next/image'; // Renamed to avoid conflict with Lucide icon
+import { Loader2, Sparkles, Image as ImageIcon, Download, RefreshCw } from 'lucide-react';
+import NextImage from 'next/image';
 
 const imageGeneratorSchema = z.object({
   prompt: z.string().min(5, { message: "Prompt must be at least 5 characters." }).max(1000, { message: "Prompt must not exceed 1000 characters." }),
@@ -23,6 +23,9 @@ type ImageGeneratorFormValues = z.infer<typeof imageGeneratorSchema>;
 export default function AIImageGeneratorPage() {
   const [generatedImageDataUri, setGeneratedImageDataUri] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [retryDelay, setRetryDelay] = useState(0);
+  const [lastSubmittedPrompt, setLastSubmittedPrompt] = useState<string>("");
+  const retryIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const { toast } = useToast();
 
   const form = useForm<ImageGeneratorFormValues>({
@@ -32,9 +35,36 @@ export default function AIImageGeneratorPage() {
     },
   });
 
+  useEffect(() => {
+    if (retryDelay > 0) {
+      retryIntervalRef.current = setInterval(() => {
+        setRetryDelay(prev => prev - 1);
+      }, 1000);
+    } else {
+      if (retryIntervalRef.current) {
+        clearInterval(retryIntervalRef.current);
+      }
+    }
+    return () => {
+      if (retryIntervalRef.current) {
+        clearInterval(retryIntervalRef.current);
+      }
+    };
+  }, [retryDelay]);
+
+  const handleRetry = () => {
+    if (lastSubmittedPrompt) {
+      onSubmit({ prompt: lastSubmittedPrompt });
+    }
+  };
+  
   const onSubmit = async (data: ImageGeneratorFormValues) => {
     setIsLoading(true);
     setGeneratedImageDataUri(null);
+    setLastSubmittedPrompt(data.prompt);
+    setRetryDelay(0);
+    if (retryIntervalRef.current) clearInterval(retryIntervalRef.current);
+
     try {
       const input: GenerateImageInput = {
         prompt: data.prompt,
@@ -42,7 +72,6 @@ export default function AIImageGeneratorPage() {
       const result = await generateImage(input);
       if (result && result.imageDataUri) {
         setGeneratedImageDataUri(result.imageDataUri);
-        // Toast for success is removed as per guidelines (only for errors)
       } else {
         toast({
           title: "Error Generating Image",
@@ -51,25 +80,44 @@ export default function AIImageGeneratorPage() {
         });
       }
     } catch (error) {
-      let errorMessage = "An unexpected error occurred while generating the image. Please try again.";
-      if (error instanceof Error) {
-        errorMessage = error.message;
-        if (error.cause && typeof error.cause === 'string') {
-          errorMessage += ` (Cause: ${error.cause})`;
-        } else if (error.cause && typeof (error.cause as any).message === 'string') {
-          errorMessage += ` (Cause: ${(error.cause as any).message})`;
+      let errorMessage = "An unexpected error occurred. Please try again.";
+      let isRateLimitError = false;
+
+      if (error instanceof Error && error.message.includes("429 Too Many Requests")) {
+        isRateLimitError = true;
+        const retryMatch = error.message.match(/Please retry in ([\d.]+)s/);
+        let delay = 30; // Default delay
+        if (retryMatch && retryMatch[1]) {
+          delay = Math.ceil(parseFloat(retryMatch[1]));
         }
-      } else if (typeof error === 'object' && error !== null && 'message' in error) {
-        errorMessage = String((error as {message: string}).message);
+        setRetryDelay(delay);
+        errorMessage = `API limit reached. Please wait ${delay} seconds before trying again.`;
+      } else if (error instanceof Error) {
+        errorMessage = error.message;
       }
+      
       console.error("AI Image Generation Error Details:", error);
+
       toast({
-        title: "Image Generation Error",
+        title: isRateLimitError ? "Rate Limit Exceeded" : "Image Generation Error",
         description: errorMessage,
         variant: "destructive",
+        action: isRateLimitError ? (
+          <Button
+            variant="secondary"
+            size="sm"
+            onClick={handleRetry}
+            disabled={retryDelay > 0}
+          >
+            <RefreshCw className="mr-2 h-4 w-4" />
+            {retryDelay > 0 ? `Retry in ${retryDelay}s` : "Retry"}
+          </Button>
+        ) : undefined,
       });
+
+    } finally {
+      setIsLoading(false);
     }
-    setIsLoading(false);
   };
 
   const handleDownloadImage = () => {
@@ -90,11 +138,6 @@ export default function AIImageGeneratorPage() {
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      // Toast for download initiation can be kept if considered a user action feedback rather than generic notification
-      // toast({
-      //   title: "Downloading...",
-      //   description: "Your image has started downloading.",
-      // });
     } catch (error) {
       console.error("Download error:", error);
       toast({
@@ -142,11 +185,16 @@ export default function AIImageGeneratorPage() {
                     <p className="text-sm text-destructive mt-1">{form.formState.errors.prompt.message}</p>
                   )}
                 </div>
-                <Button type="submit" className="w-full md:w-auto text-base py-3 px-6" disabled={isLoading}>
+                <Button type="submit" className="w-full md:w-auto text-base py-3 px-6" disabled={isLoading || retryDelay > 0}>
                   {isLoading ? (
                     <>
                       <Loader2 className="mr-2 h-5 w-5 animate-spin" />
                       Generating...
+                    </>
+                  ) : retryDelay > 0 ? (
+                    <>
+                      <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                      Waiting ({retryDelay}s)...
                     </>
                   ) : (
                     <>
@@ -189,8 +237,8 @@ export default function AIImageGeneratorPage() {
                   <NextImage 
                     src={generatedImageDataUri} 
                     alt="AI generated image" 
-                    layout="fill"
-                    objectFit="contain"
+                    fill
+                    style={{objectFit: 'contain'}}
                     unoptimized={generatedImageDataUri.startsWith('data:')} 
                   />
                 </div>
@@ -211,3 +259,5 @@ export default function AIImageGeneratorPage() {
     </div>
   );
 }
+
+    
