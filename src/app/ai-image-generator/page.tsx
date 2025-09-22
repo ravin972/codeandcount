@@ -11,9 +11,10 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { generateImage, GenerateImageInput } from '@/ai/flows/generate-image-flow';
-import { Loader2, Sparkles, Image as ImageIcon, Download, RefreshCw, Hourglass } from 'lucide-react';
+import { Loader2, Sparkles, Image as ImageIcon, Download, RefreshCw, Hourglass, Activity } from 'lucide-react';
 import NextImage from 'next/image';
 import { Progress } from '@/components/ui/progress';
+import { useApiUsageTracker } from '@/hooks/use-api-usage-tracker';
 
 const imageGeneratorSchema = z.object({
   prompt: z.string().min(5, { message: "Prompt must be at least 5 characters." }).max(1000, { message: "Prompt must not exceed 1000 characters." }),
@@ -33,6 +34,7 @@ export default function AIImageGeneratorPage() {
   const [maxDelay, setMaxDelay] = useState(0);
   const [promptQueue, setPromptQueue] = useState<QueuedPrompt[]>([]);
   const [currentlyProcessing, setCurrentlyProcessing] = useState<QueuedPrompt | null>(null);
+  const { usage, incrementUsage, timeUntilReset, DAILY_LIMIT } = useApiUsageTracker('imageGenerator');
 
   const retryIntervalRef = useRef<NodeJS.Timeout | null>(null);
   const nextId = useRef(0);
@@ -74,6 +76,7 @@ export default function AIImageGeneratorPage() {
     setIsProcessing(true);
     setGeneratedImageDataUri(null);
     setCurrentlyProcessing(queuedPrompt);
+    incrementUsage();
 
     try {
       const input: GenerateImageInput = { prompt: queuedPrompt.prompt };
@@ -88,7 +91,7 @@ export default function AIImageGeneratorPage() {
       let errorMessage = "An unexpected error occurred. Please try again.";
       let isRateLimitError = false;
 
-      if (error instanceof Error && error.message.includes("429")) {
+      if (error instanceof Error && (error.message.includes("429") || error.message.includes("rate limit"))) {
         isRateLimitError = true;
         const retryMatch = error.message.match(/Please retry in ([\d.]+)s/);
         let delay = 30;
@@ -203,6 +206,30 @@ export default function AIImageGeneratorPage() {
             </CardContent>
           </Card>
           
+          <Card className="mt-10">
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <Activity className="mr-2 h-6 w-6 text-primary" />
+                Daily Usage Statistics
+              </CardTitle>
+              <CardDescription>
+                This is a client-side estimate of your daily API requests.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                <div className="flex justify-between items-center text-sm font-medium">
+                  <span>Requests Used Today:</span>
+                  <span className="text-foreground">{usage.count} / {DAILY_LIMIT}</span>
+                </div>
+                <Progress value={(usage.count / DAILY_LIMIT) * 100} className="w-full h-2" />
+                <div className="text-xs text-muted-foreground text-center">
+                  Quota resets in {timeUntilReset}
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
           {(isProcessing || promptQueue.length > 0 || retryDelay > 0) && (
             <Card className="mt-10">
                 <CardHeader>
