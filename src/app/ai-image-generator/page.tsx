@@ -2,7 +2,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from 'react';
-import { useForm, useFormState } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import { Button } from '@/components/ui/button';
@@ -11,8 +11,9 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
 import { generateImage, GenerateImageInput } from '@/ai/flows/generate-image-flow';
-import { Loader2, Sparkles, Image as ImageIcon, Download, RefreshCw } from 'lucide-react';
+import { Loader2, Sparkles, Image as ImageIcon, Download, RefreshCw, Hourglass } from 'lucide-react';
 import NextImage from 'next/image';
+import { Progress } from '@/components/ui/progress';
 
 const imageGeneratorSchema = z.object({
   prompt: z.string().min(5, { message: "Prompt must be at least 5 characters." }).max(1000, { message: "Prompt must not exceed 1000 characters." }),
@@ -20,25 +21,33 @@ const imageGeneratorSchema = z.object({
 
 type ImageGeneratorFormValues = z.infer<typeof imageGeneratorSchema>;
 
+interface QueuedPrompt {
+  id: number;
+  prompt: string;
+}
+
 export default function AIImageGeneratorPage() {
   const [generatedImageDataUri, setGeneratedImageDataUri] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
   const [retryDelay, setRetryDelay] = useState(0);
-  const [lastSubmittedPrompt, setLastSubmittedPrompt] = useState<string>("");
+  const [maxDelay, setMaxDelay] = useState(0);
+  const [promptQueue, setPromptQueue] = useState<QueuedPrompt[]>([]);
+  const [currentlyProcessing, setCurrentlyProcessing] = useState<QueuedPrompt | null>(null);
+
   const retryIntervalRef = useRef<NodeJS.Timeout | null>(null);
+  const nextId = useRef(0);
   const { toast } = useToast();
 
   const form = useForm<ImageGeneratorFormValues>({
     resolver: zodResolver(imageGeneratorSchema),
-    defaultValues: {
-      prompt: "",
-    },
+    defaultValues: { prompt: "" },
   });
 
+  // Effect to manage the retry delay countdown
   useEffect(() => {
     if (retryDelay > 0) {
       retryIntervalRef.current = setInterval(() => {
-        setRetryDelay(prev => prev - 1);
+        setRetryDelay(prev => Math.max(0, prev - 1));
       }, 1000);
     } else {
       if (retryIntervalRef.current) {
@@ -52,83 +61,77 @@ export default function AIImageGeneratorPage() {
     };
   }, [retryDelay]);
 
-  const handleRetry = () => {
-    if (lastSubmittedPrompt) {
-      onSubmit({ prompt: lastSubmittedPrompt });
+  // Effect to process the queue
+  useEffect(() => {
+    if (!isProcessing && promptQueue.length > 0 && retryDelay <= 0) {
+      const nextPrompt = promptQueue[0];
+      setPromptQueue(prev => prev.slice(1));
+      processPrompt(nextPrompt);
     }
-  };
-  
-  const onSubmit = async (data: ImageGeneratorFormValues) => {
-    setIsLoading(true);
+  }, [isProcessing, promptQueue, retryDelay]);
+
+  const processPrompt = async (queuedPrompt: QueuedPrompt) => {
+    setIsProcessing(true);
     setGeneratedImageDataUri(null);
-    setLastSubmittedPrompt(data.prompt);
-    setRetryDelay(0);
-    if (retryIntervalRef.current) clearInterval(retryIntervalRef.current);
+    setCurrentlyProcessing(queuedPrompt);
 
     try {
-      const input: GenerateImageInput = {
-        prompt: data.prompt,
-      };
+      const input: GenerateImageInput = { prompt: queuedPrompt.prompt };
       const result = await generateImage(input);
       if (result && result.imageDataUri) {
         setGeneratedImageDataUri(result.imageDataUri);
+        setCurrentlyProcessing(null); // Success, clear current
       } else {
-        toast({
-          title: "Error Generating Image",
-          description: "Failed to generate image. The AI might not have returned a result or the data URI was invalid.",
-          variant: "destructive",
-        });
+        throw new Error("The AI did not return a valid image. Please try a different prompt.");
       }
     } catch (error) {
       let errorMessage = "An unexpected error occurred. Please try again.";
       let isRateLimitError = false;
 
-      if (error instanceof Error && error.message.includes("429 Too Many Requests")) {
+      if (error instanceof Error && error.message.includes("429")) {
         isRateLimitError = true;
         const retryMatch = error.message.match(/Please retry in ([\d.]+)s/);
-        let delay = 30; // Default delay
+        let delay = 30;
         if (retryMatch && retryMatch[1]) {
           delay = Math.ceil(parseFloat(retryMatch[1]));
         }
         setRetryDelay(delay);
-        errorMessage = `API limit reached. Please wait ${delay} seconds before trying again.`;
-      } else if (error instanceof Error) {
-        errorMessage = error.message;
+        setMaxDelay(delay);
+        errorMessage = `API limit reached. Your request has been re-queued. Please wait.`;
+        // Re-add the failed prompt to the front of the queue
+        setPromptQueue(prev => [queuedPrompt, ...prev]);
+        setCurrentlyProcessing(null); // Clear current, as it's re-queued
+      } else {
+        // For non-rate-limit errors, we don't re-queue
+        if (error instanceof Error) {
+            errorMessage = error.message;
+        }
+        setCurrentlyProcessing(null);
       }
       
       console.error("AI Image Generation Error Details:", error);
 
       toast({
-        title: isRateLimitError ? "Rate Limit Exceeded" : "Image Generation Error",
+        title: isRateLimitError ? "Rate Limit Reached" : "Image Generation Error",
         description: errorMessage,
         variant: "destructive",
-        action: isRateLimitError ? (
-          <Button
-            variant="secondary"
-            size="sm"
-            onClick={handleRetry}
-            disabled={retryDelay > 0}
-          >
-            <RefreshCw className="mr-2 h-4 w-4" />
-            {retryDelay > 0 ? `Retry in ${retryDelay}s` : "Retry"}
-          </Button>
-        ) : undefined,
       });
-
     } finally {
-      setIsLoading(false);
+      setIsProcessing(false);
     }
+  };
+  
+  const onSubmit = async (data: ImageGeneratorFormValues) => {
+    const newQueuedPrompt: QueuedPrompt = {
+      id: nextId.current++,
+      prompt: data.prompt,
+    };
+    setPromptQueue(prev => [...prev, newQueuedPrompt]);
+    form.reset();
   };
 
   const handleDownloadImage = () => {
-    if (!generatedImageDataUri) {
-      toast({
-        title: "Error",
-        description: "No image to download.",
-        variant: "destructive",
-      });
-      return;
-    }
+    if (!generatedImageDataUri) return;
     try {
       const link = document.createElement('a');
       link.href = generatedImageDataUri;
@@ -147,6 +150,13 @@ export default function AIImageGeneratorPage() {
       });
     }
   };
+
+  const getQueuePosition = (id: number) => {
+    return promptQueue.findIndex(p => p.id === id) + 1;
+  };
+  
+  const totalQueueLength = (isProcessing ? 1 : 0) + promptQueue.length;
+  const estimatedWaitTime = (promptQueue.length * 15) + retryDelay; // Avg 15s per request + retry delay
 
   return (
     <div className="bg-background text-foreground">
@@ -168,7 +178,7 @@ export default function AIImageGeneratorPage() {
             <CardHeader>
               <CardTitle>Generate Your Image</CardTitle>
               <CardDescription>
-                Enter a detailed prompt for the image you want to create.
+                Enter a detailed prompt. Your request will be added to a queue and processed.
               </CardDescription>
             </CardHeader>
             <CardContent>
@@ -185,46 +195,51 @@ export default function AIImageGeneratorPage() {
                     <p className="text-sm text-destructive mt-1">{form.formState.errors.prompt.message}</p>
                   )}
                 </div>
-                <Button type="submit" className="w-full md:w-auto text-base py-3 px-6" disabled={isLoading || retryDelay > 0}>
-                  {isLoading ? (
-                    <>
-                      <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                      Generating...
-                    </>
-                  ) : retryDelay > 0 ? (
-                    <>
-                      <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                      Waiting ({retryDelay}s)...
-                    </>
-                  ) : (
-                    <>
-                      <Sparkles className="mr-2 h-5 w-5" />
-                      Generate Image
-                    </>
-                  )}
+                <Button type="submit" className="w-full md:w-auto text-base py-3 px-6" disabled={isProcessing && retryDelay > 0}>
+                   <Sparkles className="mr-2 h-5 w-5" />
+                   Add to Queue
                 </Button>
               </form>
             </CardContent>
           </Card>
-
-          {isLoading && (
-             <Card className="mt-10">
+          
+          {(isProcessing || promptQueue.length > 0 || retryDelay > 0) && (
+            <Card className="mt-10">
                 <CardHeader>
                     <CardTitle className="flex items-center">
-                        <Loader2 className="mr-2 h-6 w-6 animate-spin text-primary" />
-                        Generating Your Image...
+                      {isProcessing ? <Loader2 className="mr-2 h-6 w-6 animate-spin text-primary" /> : <Hourglass className="mr-2 h-6 w-6 text-primary" />}
+                      {retryDelay > 0 ? "Rate Limit Reached - Paused" : (isProcessing ? "Processing Request..." : "Request Queued")}
                     </CardTitle>
-                    <CardDescription>Please wait, this might take a few moments.</CardDescription>
+                    <CardDescription>
+                       {totalQueueLength} {totalQueueLength > 1 ? 'requests' : 'request'} in queue. Estimated wait: {estimatedWaitTime}s
+                    </CardDescription>
                 </CardHeader>
                 <CardContent>
-                    <div className="aspect-video bg-muted rounded-md flex items-center justify-center">
-                        <ImageIcon className="h-16 w-16 text-muted-foreground animate-pulse" />
-                    </div>
+                   {retryDelay > 0 && (
+                     <>
+                      <Label className="text-sm text-muted-foreground">Waiting for API... ({retryDelay}s)</Label>
+                      <Progress value={((maxDelay - retryDelay) / maxDelay) * 100} className="w-full mt-2 h-2" />
+                     </>
+                   )}
+                   <div className="mt-4 space-y-2">
+                    {currentlyProcessing && (
+                      <div className="p-3 bg-primary/10 rounded-md">
+                        <p className="font-semibold text-primary">Now Processing:</p>
+                        <p className="text-sm text-muted-foreground truncate">"{currentlyProcessing.prompt}"</p>
+                      </div>
+                    )}
+                    {promptQueue.map((item, index) => (
+                      <div key={item.id} className="p-3 bg-muted/50 rounded-md">
+                        <p className="font-semibold">#{index + 1} in Queue:</p>
+                        <p className="text-sm text-muted-foreground truncate">"{item.prompt}"</p>
+                      </div>
+                    ))}
+                   </div>
                 </CardContent>
              </Card>
           )}
 
-          {!isLoading && generatedImageDataUri && (
+          {!isProcessing && generatedImageDataUri && (
             <Card className="mt-10" data-interactive-cursor="true">
               <CardHeader>
                 <CardTitle>Generated Image</CardTitle>
@@ -249,7 +264,7 @@ export default function AIImageGeneratorPage() {
                   Download Image
                 </Button>
                 <p className="text-xs text-muted-foreground text-center sm:text-right">
-                  Image generated using Gemini. Refresh the page or submit a new prompt to create another.
+                  Image generated using Gemini. Submit a new prompt to create another.
                 </p>
               </CardFooter>
             </Card>
@@ -258,6 +273,5 @@ export default function AIImageGeneratorPage() {
       </section>
     </div>
   );
-}
 
     
