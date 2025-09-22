@@ -97,6 +97,137 @@ export default function BreakoutGamePage() {
         gameDataRef.current.paddleY = canvas.height - paddleHeight - 20;
     }, []);
 
+    const stopGame = useCallback(() => {
+        if (animationFrameId.current) {
+            cancelAnimationFrame(animationFrameId.current);
+            animationFrameId.current = undefined;
+        }
+    }, []);
+
+    // --- Game Over / Win Logic ---
+    const handleWin = useCallback(() => {
+        setCurrentGameState('gameOver');
+        showEndGameMessage(true);
+        stopGame();
+    }, [showEndGameMessage, stopGame]);
+
+    const handleGameOver = useCallback(() => {
+        setCurrentGameState('gameOver');
+        showEndGameMessage(false);
+        stopGame();
+    }, [showEndGameMessage, stopGame]);
+
+
+    // --- Game Loop and Drawing ---
+    const draw = useCallback(() => {
+        const canvas = canvasRef.current;
+        if (!canvas) {
+          return;
+        }
+        const ctx = canvas.getContext('2d')!;
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        const { bricks, ballX, ballY, paddleX, paddleY } = gameDataRef.current;
+
+        if (!bricks || bricks.length === 0) {
+            if(currentGameState === 'playing') initBricks(gameDataRef.current.customBrickPattern);
+        }
+
+        // Draw Bricks
+        for (let c = 0; c < brickColumnCount; c++) {
+            for (let r = 0; r < brickRowCount; r++) {
+                if (bricks[c]?.[r]?.status === 1) {
+                    const brickX = (c * (brickWidth + brickPadding)) + brickOffsetLeft;
+                    const brickY = (r * (brickHeight + brickPadding)) + brickOffsetTop;
+                    bricks[c][r].x = brickX;
+                    bricks[c][r].y = brickY;
+                    ctx.beginPath();
+                    ctx.rect(brickX, brickY, brickWidth, brickHeight);
+                    ctx.fillStyle = bricks[c][r].color;
+                    ctx.fill();
+                    ctx.closePath();
+                }
+            }
+        }
+
+        // Draw Ball
+        ctx.beginPath();
+        ctx.arc(ballX, ballY, ballRadius, 0, Math.PI * 2);
+        ctx.fillStyle = "#FFFFFF";
+        ctx.fill();
+        ctx.closePath();
+
+        // Draw Paddle
+        ctx.beginPath();
+        ctx.rect(paddleX, paddleY, paddleWidth, paddleHeight);
+        ctx.fillStyle = "#0095DD";
+        ctx.fill();
+        ctx.closePath();
+
+        if (currentGameState !== 'playing') {
+            stopGame();
+            return;
+        }
+
+        // Collision Detection
+        for (let c = 0; c < brickColumnCount; c++) {
+            for (let r = 0; r < brickRowCount; r++) {
+                const b = bricks[c]?.[r];
+                if (b?.status === 1) {
+                    if (ballX > b.x && ballX < b.x + brickWidth && ballY > b.y && ballY < b.y + brickHeight) {
+                        gameDataRef.current.dy = -gameDataRef.current.dy;
+                        b.status = 0;
+                        const newScore = gameDataRef.current.score + 10;
+                        gameDataRef.current.score = newScore;
+                        setScore(newScore);
+                        gameDataRef.current.brickCount--;
+                        if (gameDataRef.current.brickCount <= 0) {
+                            handleWin();
+                            return; 
+                        }
+                    }
+                }
+            }
+        }
+
+        if (ballX > paddleX && ballX < paddleX + paddleWidth && ballY + ballRadius > paddleY && ballY < paddleY + paddleHeight) {
+            gameDataRef.current.ballY = paddleY - ballRadius;
+            let collidePoint = ballX - (paddleX + paddleWidth / 2);
+            collidePoint = collidePoint / (paddleWidth / 2);
+            let angleRad = collidePoint * (Math.PI / 3);
+            gameDataRef.current.dx = ballSpeed * Math.sin(angleRad);
+            gameDataRef.current.dy = -ballSpeed * Math.cos(angleRad);
+        }
+
+        // Update Ball Position
+        gameDataRef.current.ballX += gameDataRef.current.dx;
+        gameDataRef.current.ballY += gameDataRef.current.dy;
+
+        // Wall Collisions
+        if (gameDataRef.current.ballX + ballRadius > canvas.width || gameDataRef.current.ballX - ballRadius < 0) {
+            gameDataRef.current.dx = -gameDataRef.current.dx;
+        }
+        if (gameDataRef.current.ballY - ballRadius < 0) {
+            gameDataRef.current.dy = -gameDataRef.current.dy;
+        }
+        if (gameDataRef.current.ballY + ballRadius > canvas.height) {
+            const newLives = gameDataRef.current.lives - 1;
+            setLives(newLives); // Update React state
+            gameDataRef.current.lives = newLives; // Update ref state
+
+            if (newLives <= 0) {
+                handleGameOver();
+                return; // Stop the loop
+            } else {
+                showCoachTip();
+                resetBallAndPaddle();
+            }
+        }
+        
+        animationFrameId.current = requestAnimationFrame(draw);
+    }, [currentGameState, handleGameOver, handleWin, resetBallAndPaddle, showCoachTip, stopGame]);
+    
     const startGame = useCallback(() => {
         gameDataRef.current.score = 0;
         setScore(0);
@@ -105,6 +236,8 @@ export default function BreakoutGamePage() {
         setAiEndGameMessage('');
         resetBallAndPaddle();
         initBricks(gameDataRef.current.customBrickPattern);
+        
+        // This is the only place we should set 'playing' and start the loop.
         setCurrentGameState('playing');
         
         // Start the game loop
@@ -112,7 +245,8 @@ export default function BreakoutGamePage() {
             cancelAnimationFrame(animationFrameId.current);
         }
         animationFrameId.current = requestAnimationFrame(draw);
-    }, [resetBallAndPaddle]);
+    }, [resetBallAndPaddle, draw]);
+
 
     // --- AI Integrations ---
     const handleGenerateLevel = async () => {
@@ -162,136 +296,10 @@ export default function BreakoutGamePage() {
         }
     }, [playAudio]);
 
-    const stopGame = useCallback(() => {
-        if (animationFrameId.current) {
-            cancelAnimationFrame(animationFrameId.current);
-            animationFrameId.current = undefined;
-        }
-    }, []);
-
-    // --- Game Over / Win Logic ---
-    const handleWin = useCallback(() => {
-        setCurrentGameState('gameOver');
-        showEndGameMessage(true);
-        stopGame();
-    }, [showEndGameMessage, stopGame]);
-
-    const handleGameOver = useCallback(() => {
-        setCurrentGameState('gameOver');
-        showEndGameMessage(false);
-        stopGame();
-    }, [showEndGameMessage, stopGame]);
-
-    // --- Game Loop and Drawing ---
-    const draw = useCallback(() => {
-        const canvas = canvasRef.current;
-        if (!canvas) {
-          return;
-        }
-        const ctx = canvas.getContext('2d')!;
-
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        if (!gameDataRef.current.bricks || gameDataRef.current.bricks.length === 0) {
-            if(currentGameState === 'playing') initBricks(gameDataRef.current.customBrickPattern);
-        }
-
-        // Draw Bricks
-        for (let c = 0; c < brickColumnCount; c++) {
-            for (let r = 0; r < brickRowCount; r++) {
-                if (gameDataRef.current.bricks[c]?.[r]?.status === 1) {
-                    const brickX = (c * (brickWidth + brickPadding)) + brickOffsetLeft;
-                    const brickY = (r * (brickHeight + brickPadding)) + brickOffsetTop;
-                    gameDataRef.current.bricks[c][r].x = brickX;
-                    gameDataRef.current.bricks[c][r].y = brickY;
-                    ctx.beginPath();
-                    ctx.rect(brickX, brickY, brickWidth, brickHeight);
-                    ctx.fillStyle = gameDataRef.current.bricks[c][r].color;
-                    ctx.fill();
-                    ctx.closePath();
-                }
-            }
-        }
-
-        // Draw Ball
-        ctx.beginPath();
-        ctx.arc(gameDataRef.current.ballX, gameDataRef.current.ballY, ballRadius, 0, Math.PI * 2);
-        ctx.fillStyle = "#FFFFFF";
-        ctx.fill();
-        ctx.closePath();
-
-        // Draw Paddle
-        ctx.beginPath();
-        ctx.rect(gameDataRef.current.paddleX, gameDataRef.current.paddleY, paddleWidth, paddleHeight);
-        ctx.fillStyle = "#0095DD";
-        ctx.fill();
-        ctx.closePath();
-
-        if (currentGameState === 'playing') {
-            // Collision Detection
-            const { ballX, ballY, bricks, paddleX, paddleY } = gameDataRef.current;
-            for (let c = 0; c < brickColumnCount; c++) {
-                for (let r = 0; r < brickRowCount; r++) {
-                    const b = bricks[c]?.[r];
-                    if (b?.status === 1) {
-                        if (ballX > b.x && ballX < b.x + brickWidth && ballY > b.y && ballY < b.y + brickHeight) {
-                            gameDataRef.current.dy = -gameDataRef.current.dy;
-                            b.status = 0;
-                            const newScore = gameDataRef.current.score + 10;
-                            gameDataRef.current.score = newScore;
-                            setScore(newScore);
-                            gameDataRef.current.brickCount--;
-                            if (gameDataRef.current.brickCount <= 0) {
-                                handleWin();
-                                return; 
-                            }
-                        }
-                    }
-                }
-            }
-
-            if (ballX > paddleX && ballX < paddleX + paddleWidth && ballY + ballRadius > paddleY && ballY < paddleY + paddleHeight) {
-                gameDataRef.current.ballY = paddleY - ballRadius;
-                let collidePoint = ballX - (paddleX + paddleWidth / 2);
-                collidePoint = collidePoint / (paddleWidth / 2);
-                let angleRad = collidePoint * (Math.PI / 3);
-                gameDataRef.current.dx = ballSpeed * Math.sin(angleRad);
-                gameDataRef.current.dy = -ballSpeed * Math.cos(angleRad);
-            }
-
-            // Update Ball Position
-            gameDataRef.current.ballX += gameDataRef.current.dx;
-            gameDataRef.current.ballY += gameDataRef.current.dy;
-
-            // Wall Collisions
-            if (gameDataRef.current.ballX + ballRadius > canvas.width || gameDataRef.current.ballX - ballRadius < 0) {
-                gameDataRef.current.dx = -gameDataRef.current.dx;
-            }
-            if (gameDataRef.current.ballY - ballRadius < 0) {
-                gameDataRef.current.dy = -gameDataRef.current.dy;
-            }
-            if (gameDataRef.current.ballY + ballRadius > canvas.height) {
-                const newLives = gameDataRef.current.lives - 1;
-                gameDataRef.current.lives = newLives;
-                setLives(newLives);
-                
-                if (newLives <= 0) {
-                    handleGameOver();
-                    return; 
-                } else {
-                    showCoachTip();
-                    resetBallAndPaddle();
-                }
-            }
-        }
-        
-        animationFrameId.current = requestAnimationFrame(draw);
-    }, [currentGameState, handleGameOver, handleWin, resetBallAndPaddle, showCoachTip]);
-
     useEffect(() => {
-        if (currentGameState === 'playing') {
+        if (currentGameState === 'playing' && !animationFrameId.current) {
             animationFrameId.current = requestAnimationFrame(draw);
-        } else {
+        } else if (currentGameState !== 'playing') {
             stopGame();
         }
 
@@ -351,19 +359,20 @@ export default function BreakoutGamePage() {
             canvas.style.height = `${newHeight}px`;
 
             resetBallAndPaddle();
+             // Call draw once to render the initial state on resize, but only if not playing.
+            if (currentGameState !== 'playing') {
+                requestAnimationFrame(draw);
+            }
         };
 
         resizeCanvas();
         window.addEventListener('resize', resizeCanvas);
+        
         // Initial drawing for start screen
-        const canvas = canvasRef.current;
-        if (canvas) {
-            const ctx = canvas.getContext('2d')!;
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-        }
+        requestAnimationFrame(draw);
 
         return () => window.removeEventListener('resize', resizeCanvas);
-    }, [resetBallAndPaddle]);
+    }, [resetBallAndPaddle, draw, currentGameState]);
 
     const handleFullScreen = () => {
         if (gameContainerRef.current) {
