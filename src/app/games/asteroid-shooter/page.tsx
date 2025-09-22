@@ -4,7 +4,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
-import { Rocket, Play, RefreshCw, Gamepad2, AlertTriangle, ArrowLeft, Maximize } from 'lucide-react';
+import { Rocket, Play, RefreshCw, Gamepad2, AlertTriangle, ArrowLeft, Maximize, RotateLeft, RotateRight, ArrowUp } from 'lucide-react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 
@@ -36,7 +36,12 @@ export default function AsteroidShooterPage() {
     const [score, setScore] = useState(0);
     const [highScore, setHighScore] = useState(0);
     const [lives, setLives] = useState(GAME_LIVES);
+    const [isTouchDevice, setIsTouchDevice] = useState(false);
     const gameStateRef = useRef(gameState);
+
+    useEffect(() => {
+        setIsTouchDevice('ontouchstart' in window || navigator.maxTouchPoints > 0);
+    }, []);
 
     useEffect(() => {
         gameStateRef.current = gameState;
@@ -367,6 +372,40 @@ export default function AsteroidShooterPage() {
         }
     }
 
+    const handleShoot = (isShooting: boolean) => {
+        const gameData = gameDataRef.current;
+        if (!gameData.ship) return;
+        if(isShooting) {
+            if (gameData.ship.canShoot && gameData.ship.lasers.length < 5) {
+                gameData.ship.lasers.push({
+                    x: gameData.ship.x + 4 / 3 * gameData.ship.r * Math.cos(gameData.ship.a),
+                    y: gameData.ship.y - 4 / 3 * gameData.ship.r * Math.sin(gameData.ship.a),
+                    xv: LASER_SPEED * Math.cos(gameData.ship.a) / 60,
+                    yv: -LASER_SPEED * Math.sin(gameData.ship.a) / 60,
+                    dist: 0
+                });
+                gameData.ship.canShoot = false;
+            }
+        } else {
+            gameData.ship.canShoot = true;
+        }
+    }
+
+    const handleRotate = (dir: 'left' | 'right' | 'stop') => {
+        const gameData = gameDataRef.current;
+        if (!gameData.ship) return;
+        if (dir === 'left') gameData.ship.rot = TURN_SPEED / 180 * Math.PI / 60;
+        else if (dir === 'right') gameData.ship.rot = -TURN_SPEED / 180 * Math.PI / 60;
+        else gameData.ship.rot = 0;
+    }
+
+    const handleThrust = (isThrusting: boolean) => {
+        const gameData = gameDataRef.current;
+        if (!gameData.ship) return;
+        gameData.ship.thrusting = isThrusting;
+    }
+
+
     useEffect(() => {
         const handleKeyDown = (ev: KeyboardEvent) => {
             const gameData = gameDataRef.current;
@@ -377,21 +416,10 @@ export default function AsteroidShooterPage() {
             if (!gameData.ship) return;
 
             switch (ev.key) {
-                case ' ':
-                    if (gameData.ship.canShoot && gameData.ship.lasers.length < 5) {
-                        gameData.ship.lasers.push({
-                            x: gameData.ship.x + 4 / 3 * gameData.ship.r * Math.cos(gameData.ship.a),
-                            y: gameData.ship.y - 4 / 3 * gameData.ship.r * Math.sin(gameData.ship.a),
-                            xv: LASER_SPEED * Math.cos(gameData.ship.a) / 60,
-                            yv: -LASER_SPEED * Math.sin(gameData.ship.a) / 60,
-                            dist: 0
-                        });
-                        gameData.ship.canShoot = false;
-                    }
-                    break;
-                case 'ArrowLeft': gameData.ship.rot = TURN_SPEED / 180 * Math.PI / 60; break;
-                case 'ArrowRight': gameData.ship.rot = -TURN_SPEED / 180 * Math.PI / 60; break;
-                case 'ArrowUp': gameData.ship.thrusting = true; break;
+                case ' ': handleShoot(true); break;
+                case 'ArrowLeft': handleRotate('left'); break;
+                case 'ArrowRight': handleRotate('right'); break;
+                case 'ArrowUp': handleThrust(true); break;
             }
         };
 
@@ -399,9 +427,9 @@ export default function AsteroidShooterPage() {
             const gameData = gameDataRef.current;
             if (!gameData.ship) return;
             switch (ev.key) {
-                case ' ': gameData.ship.canShoot = true; break;
-                case 'ArrowLeft': case 'ArrowRight': gameData.ship.rot = 0; break;
-                case 'ArrowUp': gameData.ship.thrusting = false; break;
+                case ' ': handleShoot(false); break;
+                case 'ArrowLeft': case 'ArrowRight': handleRotate('stop'); break;
+                case 'ArrowUp': handleThrust(false); break;
             }
         };
 
@@ -458,13 +486,25 @@ export default function AsteroidShooterPage() {
                         )}
                         <canvas ref={canvasRef} id="gameCanvas" className='w-full h-full' />
                     </CardContent>
-                     <CardFooter className={cn("absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex gap-4")}>
-                        <Button size="lg" variant="outline" asChild>
-                           <Link href="/games"><ArrowLeft className="mr-2 h-4 w-4" /> Back to Games</Link>
-                       </Button>
-                       <Button size="lg" variant="outline" onClick={handleFullScreen}>
-                           <Maximize className="mr-2 h-4 w-4" /> Full Screen
-                       </Button>
+                     <CardFooter className={cn("absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex flex-col gap-4")}>
+                       <div className={cn("w-full justify-between items-center", isTouchDevice ? "flex" : "hidden")}>
+                            <div className="flex gap-2">
+                                <Button onTouchStart={() => handleRotate('left')} onTouchEnd={() => handleRotate('stop')} variant="outline" size="lg" className="h-16 w-16 text-3xl select-none"><RotateLeft /></Button>
+                                <Button onTouchStart={() => handleRotate('right')} onTouchEnd={() => handleRotate('stop')} variant="outline" size="lg" className="h-16 w-16 text-3xl select-none"><RotateRight /></Button>
+                            </div>
+                             <div className="flex gap-2">
+                                <Button onTouchStart={() => handleThrust(true)} onTouchEnd={() => handleThrust(false)} variant="outline" size="lg" className="h-16 w-16 text-3xl select-none"><ArrowUp /></Button>
+                                <Button onTouchStart={() => handleShoot(true)} onTouchEnd={() => handleShoot(false)} variant="destructive" size="lg" className="h-16 w-16 text-3xl select-none">FIRE</Button>
+                            </div>
+                        </div>
+                        <div className="flex gap-4">
+                            <Button size="lg" variant="outline" asChild>
+                                <Link href="/games"><ArrowLeft className="mr-2 h-4 w-4" /> Back to Games</Link>
+                            </Button>
+                            <Button size="lg" variant="outline" onClick={handleFullScreen}>
+                                <Maximize className="mr-2 h-4 w-4" /> Full Screen
+                            </Button>
+                        </div>
                     </CardFooter>
                 </Card>
             </main>

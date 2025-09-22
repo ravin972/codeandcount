@@ -14,7 +14,6 @@ const GRAVITY = 0.6;
 const MOVE_SPEED = 0.3;
 const MAX_SPEED = 4.5;
 const FRICTION = 0.88;
-const JUMP_POWER = -12;
 let TILE_SIZE = 32;
 
 const levelMap = [
@@ -388,7 +387,7 @@ export default function SuperRetroPlatformerPage() {
                 <div className="bg-secondary rounded-xl shadow-xl p-6 border border-border">
                     <h1 className="text-3xl md:text-4xl font-bold tracking-tight flex items-center justify-center">
                         <ToyBrick className="h-10 w-10 mr-3 text-primary" />
-                        SUPER MARIO
+                        SUPER RETRO PLATFORMER
                     </h1>
                 </div>
             </header>
@@ -441,5 +440,3 @@ export default function SuperRetroPlatformerPage() {
         </div>
     );
 }
-
-    

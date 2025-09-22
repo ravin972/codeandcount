@@ -11,7 +11,7 @@ import { cn } from '@/lib/utils';
 // --- Game Configuration ---
 const COLS = 10;
 const ROWS = 20;
-const BLOCK_SIZE = 30; // Keep this for logical calculations
+let BLOCK_SIZE = 30; 
 
 const COLORS = [
     null, '#ef4444', '#f97316', '#eab308', '#22c55e', '#3b82f6', '#6366f1', '#a855f7'
@@ -199,14 +199,25 @@ export default function BlocktrisPage() {
     useEffect(() => {
         const canvas = canvasRef.current;
         if (!canvas) return;
-        canvas.width = COLS * BLOCK_SIZE;
-        canvas.height = ROWS * BLOCK_SIZE;
+
+        const resizeCanvas = () => {
+             const container = canvas.parentElement!;
+             BLOCK_SIZE = Math.floor(container.clientWidth / COLS);
+             canvas.width = COLS * BLOCK_SIZE;
+             canvas.height = ROWS * BLOCK_SIZE;
+             canvas.style.width = `${canvas.width}px`;
+             canvas.style.height = `${canvas.height}px`;
+        }
+        
+        resizeCanvas();
         resetGame();
         
         const animationFrameId = requestAnimationFrame(gameLoop);
+        window.addEventListener('resize', resizeCanvas);
         
         return () => {
             cancelAnimationFrame(animationFrameId);
+            window.removeEventListener('resize', resizeCanvas);
         };
     }, [resetGame, gameLoop]);
     
@@ -303,7 +314,7 @@ export default function BlocktrisPage() {
 
             <main className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-lg w-full flex justify-center">
                 <Card ref={gameContainerRef} className="text-center relative bg-card" data-interactive-cursor="true">
-                    <CardContent className="pt-6 relative flex items-center justify-center" style={{ width: COLS * BLOCK_SIZE, height: ROWS * BLOCK_SIZE }}>
+                    <CardContent className="pt-6 relative flex items-start justify-center">
                         {gameState !== 'playing' && (
                             <div className="absolute inset-0 bg-black/70 z-10 flex flex-col items-center justify-center p-4">
                                 {gameState === 'start' && (
@@ -329,10 +340,10 @@ export default function BlocktrisPage() {
                     </CardContent>
                     <CardFooter className={cn("p-4 border-t", isTouchDevice ? "block" : "hidden")}>
                         <div className="grid grid-cols-3 gap-2 w-full">
-                           <Button onMouseDown={() => move(-1)} variant="outline" size="lg" className="h-16 text-2xl"><ArrowLeft /></Button>
-                           <Button onMouseDown={rotate} variant="outline" size="lg" className="h-16 text-2xl"><RotateCw /></Button>
-                           <Button onMouseDown={() => move(1)} variant="outline" size="lg" className="h-16 text-2xl"><ArrowRight /></Button>
-                           <Button onMouseDown={() => drop()} variant="outline" size="lg" className="h-16 text-2xl col-span-3"><ArrowDown /></Button>
+                           <Button onTouchStart={() => move(-1)} variant="outline" size="lg" className="h-16 text-2xl select-none"><ArrowLeft /></Button>
+                           <Button onTouchStart={rotate} variant="outline" size="lg" className="h-16 text-2xl select-none"><RotateCw /></Button>
+                           <Button onTouchStart={() => move(1)} variant="outline" size="lg" className="h-16 text-2xl select-none"><ArrowRight /></Button>
+                           <Button onTouchStart={() => drop()} variant="outline" size="lg" className="h-16 text-2xl col-span-3 select-none"><ArrowDown /></Button>
                         </div>
                     </CardFooter>
                      <CardFooter className="p-4 border-t flex flex-col items-center justify-center gap-4">
@@ -355,5 +366,3 @@ export default function BlocktrisPage() {
         </div>
     );
 }
-
-    

@@ -173,38 +173,38 @@ export default function BreakoutGamePage() {
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        if (currentGameState === 'playing') {
-            // Draw Bricks
-            for (let c = 0; c < brickColumnCount; c++) {
-                for (let r = 0; r < brickRowCount; r++) {
-                    if (gameDataRef.current.bricks[c][r].status === 1) {
-                        const brickX = (c * (brickWidth + brickPadding)) + brickOffsetLeft;
-                        const brickY = (r * (brickHeight + brickPadding)) + brickOffsetTop;
-                        gameDataRef.current.bricks[c][r].x = brickX;
-                        gameDataRef.current.bricks[c][r].y = brickY;
-                        ctx.beginPath();
-                        ctx.rect(brickX, brickY, brickWidth, brickHeight);
-                        ctx.fillStyle = gameDataRef.current.bricks[c][r].color;
-                        ctx.fill();
-                        ctx.closePath();
-                    }
+        // Draw Bricks
+        for (let c = 0; c < brickColumnCount; c++) {
+            for (let r = 0; r < brickRowCount; r++) {
+                if (gameDataRef.current.bricks[c][r].status === 1) {
+                    const brickX = (c * (brickWidth + brickPadding)) + brickOffsetLeft;
+                    const brickY = (r * (brickHeight + brickPadding)) + brickOffsetTop;
+                    gameDataRef.current.bricks[c][r].x = brickX;
+                    gameDataRef.current.bricks[c][r].y = brickY;
+                    ctx.beginPath();
+                    ctx.rect(brickX, brickY, brickWidth, brickHeight);
+                    ctx.fillStyle = gameDataRef.current.bricks[c][r].color;
+                    ctx.fill();
+                    ctx.closePath();
                 }
             }
+        }
 
-            // Draw Ball
-            ctx.beginPath();
-            ctx.arc(gameDataRef.current.ballX, gameDataRef.current.ballY, ballRadius, 0, Math.PI * 2);
-            ctx.fillStyle = "#FFFFFF";
-            ctx.fill();
-            ctx.closePath();
+        // Draw Ball
+        ctx.beginPath();
+        ctx.arc(gameDataRef.current.ballX, gameDataRef.current.ballY, ballRadius, 0, Math.PI * 2);
+        ctx.fillStyle = "#FFFFFF";
+        ctx.fill();
+        ctx.closePath();
 
-            // Draw Paddle
-            ctx.beginPath();
-            ctx.rect(gameDataRef.current.paddleX, gameDataRef.current.paddleY, paddleWidth, paddleHeight);
-            ctx.fillStyle = "#0095DD";
-            ctx.fill();
-            ctx.closePath();
+        // Draw Paddle
+        ctx.beginPath();
+        ctx.rect(gameDataRef.current.paddleX, gameDataRef.current.paddleY, paddleWidth, paddleHeight);
+        ctx.fillStyle = "#0095DD";
+        ctx.fill();
+        ctx.closePath();
 
+        if (currentGameState === 'playing') {
             // Collision Detection
             const { ballX, ballY, bricks, paddleX, paddleY } = gameDataRef.current;
             for (let c = 0; c < brickColumnCount; c++) {
@@ -248,11 +248,12 @@ export default function BreakoutGamePage() {
             }
             if (gameDataRef.current.ballY + ballRadius > canvas.height) {
                 const newLives = gameDataRef.current.lives - 1;
-                gameDataRef.current.lives = newLives;
-                setLives(newLives);
                 if (newLives <= 0) {
+                    setLives(0);
                     handleGameOver();
                 } else {
+                    setLives(newLives);
+                    gameDataRef.current.lives = newLives;
                     showCoachTip();
                     resetBallAndPaddle();
                 }
@@ -267,8 +268,13 @@ export default function BreakoutGamePage() {
         return () => cancelAnimationFrame(animationFrameId);
     }, [draw]);
 
-    const handleStartClick = () => {
+    const handleStartClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+        const target = event.target as HTMLElement;
+        // Prevent starting game if clicking on AI controls
+        if (target.closest('#ai-controls')) return;
+
         if (currentGameState === 'start' || currentGameState === 'gameOver') {
+            gameDataRef.current.customBrickPattern = null;
             resetGame(null);
         }
     };
@@ -297,22 +303,20 @@ export default function BreakoutGamePage() {
     useEffect(() => {
         const resizeCanvas = () => {
             const canvas = canvasRef.current;
-            const container = gameContainerRef.current;
+            const container = gameContainerRef.current?.querySelector('.game-canvas-container');
             if (!canvas || !container) return;
             
             const aspectRatio = 4 / 5;
             let newWidth = container.clientWidth;
-            let newHeight = container.clientHeight;
+            let newHeight = newWidth / aspectRatio;
 
-            if (newWidth / newHeight > aspectRatio) {
+            if (newHeight > container.clientHeight) {
+                newHeight = container.clientHeight;
                 newWidth = newHeight * aspectRatio;
-            } else {
-                newHeight = newWidth / aspectRatio;
             }
+
             canvas.width = 640;
             canvas.height = 800;
-            canvas.style.width = `${newWidth}px`;
-            canvas.style.height = `${newHeight}px`;
             
             resetBallAndPaddle();
         };
@@ -345,13 +349,13 @@ export default function BreakoutGamePage() {
 
             <main ref={gameContainerRef} className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-lg w-full">
                 <Card className="text-center bg-black aspect-[4/5] relative" data-interactive-cursor="true">
-                    <CardHeader className="absolute top-2 left-4 right-4 z-20 flex justify-between items-center text-white font-bold text-lg" style={{ textShadow: '2px 2px 4px #000' }}>
+                    <div className="absolute top-2 left-4 right-4 z-20 flex justify-between items-center text-white font-bold text-lg" style={{ textShadow: '2px 2px 4px #000' }}>
                         <div>SCORE: {score}</div>
                         <div>LIVES: {lives}</div>
                         <Button variant="ghost" size="icon" onClick={() => setIsMuted(m => !m)} className="text-white hover:bg-white/10">
                             {isMuted ? <VolumeX /> : <Volume2 />}
                         </Button>
-                    </CardHeader>
+                    </div>
                     
                     {isCoachTipVisible && (
                         <div className="absolute bottom-20 left-4 right-4 p-4 bg-primary/80 text-primary-foreground border-2 border-white rounded-lg shadow-lg z-10 animate-in fade-in">
@@ -359,8 +363,8 @@ export default function BreakoutGamePage() {
                         </div>
                     )}
 
-                    <CardContent className="p-0 h-full w-full" onClick={handleStartClick}>
-                        {(currentGameState === 'start' || currentGameState === 'gameOver') && (
+                    <div className="w-full h-full relative" onClick={handleStartClick}>
+                         {(currentGameState === 'start' || currentGameState === 'gameOver') && (
                             <div className="absolute inset-0 bg-black/70 z-10 flex flex-col items-center justify-center p-4">
                                 {currentGameState === 'start' && <>
                                     <CardTitle className="text-3xl mb-4 flex items-center"><Gamepad2 className="inline h-8 w-8 mr-2 text-primary" />AI BREAKOUT</CardTitle>
@@ -368,16 +372,15 @@ export default function BreakoutGamePage() {
                                         Move mouse to control paddle.
                                         <br/><br/>Click to start a classic level.
                                     </CardDescription>
-                                    <div className="mt-6 flex flex-col items-center gap-4 w-full max-w-sm">
+                                    <div id="ai-controls" className="mt-6 flex flex-col items-center gap-4 w-full max-w-sm">
                                         <Input
                                             type="text"
                                             placeholder="Or describe a level (e.g., a pyramid)"
                                             value={levelPrompt}
                                             onChange={(e) => setLevelPrompt(e.target.value)}
-                                            onClick={(e) => e.stopPropagation()}
                                             className="bg-background/80 dark:bg-neutral-800/80 text-center"
                                         />
-                                        <Button size="lg" onClick={(e) => {e.stopPropagation(); handleGenerateLevel();}} disabled={isGenerating}>
+                                        <Button size="lg" onClick={handleGenerateLevel} disabled={isGenerating}>
                                             {isGenerating ? <><Loader2 className="mr-2 h-5 w-5 animate-spin" /> Generating...</> : <><Sparkles className="mr-2 h-5 w-5" /> Generate Level</>}
                                         </Button>
                                     </div>
@@ -390,7 +393,7 @@ export default function BreakoutGamePage() {
                             </div>
                         )}
                         <canvas ref={canvasRef} id="gameCanvas" className="w-full h-full" />
-                    </CardContent>
+                    </div>
                      <CardFooter className="p-4 border-t flex-wrap justify-center gap-4">
                          <Button size="lg" variant="outline" asChild>
                             <Link href="/games"><ArrowLeft className="mr-2 h-4 w-4" /> Back to Games</Link>
@@ -404,5 +407,3 @@ export default function BreakoutGamePage() {
         </div>
     );
 }
-
-    
