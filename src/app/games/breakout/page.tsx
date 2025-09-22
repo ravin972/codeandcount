@@ -87,6 +87,7 @@ export default function BreakoutGamePage() {
 
     const resetBallAndPaddle = useCallback(() => {
         const canvas = canvasRef.current!;
+        if (!canvas) return;
         gameDataRef.current.ballX = canvas.width / 2;
         gameDataRef.current.ballY = canvas.height - 100;
         gameDataRef.current.dx = ballSpeed * (Math.random() < 0.5 ? 1 : -1);
@@ -97,9 +98,9 @@ export default function BreakoutGamePage() {
 
     const resetGame = useCallback((brickPattern: number[][] | null) => {
         gameDataRef.current.score = 0;
-        gameDataRef.current.lives = 3;
         setScore(0);
         setLives(3);
+        gameDataRef.current.lives = 3;
         setAiEndGameMessage('');
         resetBallAndPaddle();
         initBricks(brickPattern);
@@ -173,6 +174,13 @@ export default function BreakoutGamePage() {
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+        // Ensure bricks are initialized before trying to draw them
+        if (!gameDataRef.current.bricks || gameDataRef.current.bricks.length === 0) {
+            if(currentGameState === 'playing') initBricks(gameDataRef.current.customBrickPattern);
+            requestAnimationFrame(draw);
+            return;
+        }
+
         // Draw Bricks
         for (let c = 0; c < brickColumnCount; c++) {
             for (let r = 0; r < brickRowCount; r++) {
@@ -216,8 +224,8 @@ export default function BreakoutGamePage() {
                             b.status = 0;
                             const newScore = gameDataRef.current.score + 10;
                             gameDataRef.current.score = newScore;
-                            gameDataRef.current.brickCount--;
                             setScore(newScore);
+                            gameDataRef.current.brickCount--;
                             if (gameDataRef.current.brickCount <= 0) {
                                 handleWin();
                             }
@@ -248,12 +256,12 @@ export default function BreakoutGamePage() {
             }
             if (gameDataRef.current.ballY + ballRadius > canvas.height) {
                 const newLives = gameDataRef.current.lives - 1;
+                gameDataRef.current.lives = newLives; // Update ref immediately
+                setLives(newLives);
+                
                 if (newLives <= 0) {
-                    setLives(0);
                     handleGameOver();
                 } else {
-                    setLives(newLives);
-                    gameDataRef.current.lives = newLives;
                     showCoachTip();
                     resetBallAndPaddle();
                 }
@@ -303,7 +311,7 @@ export default function BreakoutGamePage() {
     useEffect(() => {
         const resizeCanvas = () => {
             const canvas = canvasRef.current;
-            const container = gameContainerRef.current?.querySelector('.game-canvas-container');
+            const container = gameContainerRef.current;
             if (!canvas || !container) return;
             
             const aspectRatio = 4 / 5;
