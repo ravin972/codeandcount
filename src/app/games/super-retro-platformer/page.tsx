@@ -14,6 +14,7 @@ const GRAVITY = 0.6;
 const MOVE_SPEED = 0.3;
 const MAX_SPEED = 4.5;
 const FRICTION = 0.88;
+const JUMP_POWER = -12;
 let TILE_SIZE = 32;
 
 const levelMap = [

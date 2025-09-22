@@ -4,7 +4,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
-import { Rocket, Play, RefreshCw, Gamepad2, AlertTriangle, ArrowLeft, Maximize, RotateLeft, RotateRight, ArrowUp } from 'lucide-react';
+import { Rocket, Play, RefreshCw, Gamepad2, AlertTriangle, ArrowLeft, Maximize, RotateCcw, RotateCw, ArrowUp } from 'lucide-react';
 import Link from 'next/link';
 import { cn } from '@/lib/utils';
 
@@ -489,8 +489,8 @@ export default function AsteroidShooterPage() {
                      <CardFooter className={cn("absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex flex-col gap-4")}>
                        <div className={cn("w-full justify-between items-center", isTouchDevice ? "flex" : "hidden")}>
                             <div className="flex gap-2">
-                                <Button onTouchStart={() => handleRotate('left')} onTouchEnd={() => handleRotate('stop')} variant="outline" size="lg" className="h-16 w-16 text-3xl select-none"><RotateLeft /></Button>
-                                <Button onTouchStart={() => handleRotate('right')} onTouchEnd={() => handleRotate('stop')} variant="outline" size="lg" className="h-16 w-16 text-3xl select-none"><RotateRight /></Button>
+                                <Button onTouchStart={() => handleRotate('left')} onTouchEnd={() => handleRotate('stop')} variant="outline" size="lg" className="h-16 w-16 text-3xl select-none"><RotateCcw /></Button>
+                                <Button onTouchStart={() => handleRotate('right')} onTouchEnd={() => handleRotate('stop')} variant="outline" size="lg" className="h-16 w-16 text-3xl select-none"><RotateCw /></Button>
                             </div>
                              <div className="flex gap-2">
                                 <Button onTouchStart={() => handleThrust(true)} onTouchEnd={() => handleThrust(false)} variant="outline" size="lg" className="h-16 w-16 text-3xl select-none"><ArrowUp /></Button>
