@@ -1,19 +1,28 @@
 
 "use client";
 
+import React from 'react';
+import dynamic from 'next/dynamic';
 import { Header } from '@/components/layout/Header';
 import { Footer } from '@/components/layout/Footer';
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "@/components/ui/theme-provider";
-import CustomCursor from '@/components/effects/CustomCursor';
-import FloatingWhatsAppButton from '@/components/common/FloatingWhatsAppButton';
-import { BackToTopButton } from '@/components/layout/BackToTopButton';
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import DiwaliOffer from '@/components/common/DiwaliOffer';
-import FloatingGameZoneButton from '@/components/common/FloatingGameZoneButton';
 import { Flame } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { Skeleton } from '@/components/ui/skeleton';
+
+// Dynamically import components that are not critical for the initial render
+const CustomCursor = dynamic(() => import('@/components/effects/CustomCursor'), { ssr: false });
+const FloatingWhatsAppButton = dynamic(() => import('@/components/common/FloatingWhatsAppButton'), { ssr: false });
+const FloatingGameZoneButton = dynamic(() => import('@/components/common/FloatingGameZoneButton'), { ssr: false });
+const BackToTopButton = dynamic(() => import('@/components/layout/BackToTopButton').then(mod => mod.BackToTopButton), { ssr: false });
+const DiwaliOffer = dynamic(() => import('@/components/common/DiwaliOffer'), {
+  ssr: false,
+  loading: () => <Skeleton className="fixed bottom-8 left-8 h-16 w-16 rounded-full" />
+});
+
 
 const FloatingDiya = ({ side }: { side: 'left' | 'right' }) => (
   <div className={cn(
