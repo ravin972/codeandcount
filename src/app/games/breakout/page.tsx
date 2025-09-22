@@ -21,7 +21,6 @@ export default function BreakoutGamePage() {
     const { toast } = useToast();
 
     // Game state refs for logic that doesn't need to trigger re-renders
-    const gameStateRef = useRef<'start' | 'playing' | 'gameOver'>('start');
     const gameDataRef = useRef<any>({
         score: 0,
         lives: 3,
@@ -104,7 +103,6 @@ export default function BreakoutGamePage() {
         setAiEndGameMessage('');
         resetBallAndPaddle();
         initBricks(brickPattern);
-        gameStateRef.current = 'playing';
         setCurrentGameState('playing');
     }, [resetBallAndPaddle]);
 
@@ -158,111 +156,111 @@ export default function BreakoutGamePage() {
 
     // --- Game Over / Win Logic ---
     const handleWin = useCallback(() => {
-        gameStateRef.current = 'gameOver';
         setCurrentGameState('gameOver');
         showEndGameMessage(true);
     }, [showEndGameMessage]);
 
     const handleGameOver = useCallback(() => {
-        gameStateRef.current = 'gameOver';
         setCurrentGameState('gameOver');
         showEndGameMessage(false);
     }, [showEndGameMessage]);
 
     // --- Game Loop and Drawing ---
     const draw = useCallback(() => {
-        if (gameStateRef.current !== 'playing') return;
-
         const canvas = canvasRef.current;
         if (!canvas) return;
         const ctx = canvas.getContext('2d')!;
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        // Draw Bricks
-        for (let c = 0; c < brickColumnCount; c++) {
-            for (let r = 0; r < brickRowCount; r++) {
-                if (gameDataRef.current.bricks[c][r].status === 1) {
-                    const brickX = (c * (brickWidth + brickPadding)) + brickOffsetLeft;
-                    const brickY = (r * (brickHeight + brickPadding)) + brickOffsetTop;
-                    gameDataRef.current.bricks[c][r].x = brickX;
-                    gameDataRef.current.bricks[c][r].y = brickY;
-                    ctx.beginPath();
-                    ctx.rect(brickX, brickY, brickWidth, brickHeight);
-                    ctx.fillStyle = gameDataRef.current.bricks[c][r].color;
-                    ctx.fill();
-                    ctx.closePath();
+        if (currentGameState === 'playing') {
+            // Draw Bricks
+            for (let c = 0; c < brickColumnCount; c++) {
+                for (let r = 0; r < brickRowCount; r++) {
+                    if (gameDataRef.current.bricks[c][r].status === 1) {
+                        const brickX = (c * (brickWidth + brickPadding)) + brickOffsetLeft;
+                        const brickY = (r * (brickHeight + brickPadding)) + brickOffsetTop;
+                        gameDataRef.current.bricks[c][r].x = brickX;
+                        gameDataRef.current.bricks[c][r].y = brickY;
+                        ctx.beginPath();
+                        ctx.rect(brickX, brickY, brickWidth, brickHeight);
+                        ctx.fillStyle = gameDataRef.current.bricks[c][r].color;
+                        ctx.fill();
+                        ctx.closePath();
+                    }
                 }
             }
-        }
 
-        // Draw Ball
-        ctx.beginPath();
-        ctx.arc(gameDataRef.current.ballX, gameDataRef.current.ballY, ballRadius, 0, Math.PI * 2);
-        ctx.fillStyle = "#FFFFFF";
-        ctx.fill();
-        ctx.closePath();
+            // Draw Ball
+            ctx.beginPath();
+            ctx.arc(gameDataRef.current.ballX, gameDataRef.current.ballY, ballRadius, 0, Math.PI * 2);
+            ctx.fillStyle = "#FFFFFF";
+            ctx.fill();
+            ctx.closePath();
 
-        // Draw Paddle
-        ctx.beginPath();
-        ctx.rect(gameDataRef.current.paddleX, gameDataRef.current.paddleY, paddleWidth, paddleHeight);
-        ctx.fillStyle = "#0095DD";
-        ctx.fill();
-        ctx.closePath();
+            // Draw Paddle
+            ctx.beginPath();
+            ctx.rect(gameDataRef.current.paddleX, gameDataRef.current.paddleY, paddleWidth, paddleHeight);
+            ctx.fillStyle = "#0095DD";
+            ctx.fill();
+            ctx.closePath();
 
-        // Collision Detection
-        const { ballX, ballY, bricks, brickCount, paddleX, paddleY } = gameDataRef.current;
-        for (let c = 0; c < brickColumnCount; c++) {
-            for (let r = 0; r < brickRowCount; r++) {
-                const b = bricks[c][r];
-                if (b.status === 1) {
-                    if (ballX > b.x && ballX < b.x + brickWidth && ballY > b.y && ballY < b.y + brickHeight) {
-                        gameDataRef.current.dy = -gameDataRef.current.dy;
-                        b.status = 0;
-                        gameDataRef.current.score += 10;
-                        gameDataRef.current.brickCount--;
-                        setScore(s => s + 10);
-                        if (gameDataRef.current.brickCount <= 0) {
-                            handleWin();
+            // Collision Detection
+            const { ballX, ballY, bricks, paddleX, paddleY } = gameDataRef.current;
+            for (let c = 0; c < brickColumnCount; c++) {
+                for (let r = 0; r < brickRowCount; r++) {
+                    const b = bricks[c][r];
+                    if (b.status === 1) {
+                        if (ballX > b.x && ballX < b.x + brickWidth && ballY > b.y && ballY < b.y + brickHeight) {
+                            gameDataRef.current.dy = -gameDataRef.current.dy;
+                            b.status = 0;
+                            const newScore = gameDataRef.current.score + 10;
+                            gameDataRef.current.score = newScore;
+                            gameDataRef.current.brickCount--;
+                            setScore(newScore);
+                            if (gameDataRef.current.brickCount <= 0) {
+                                handleWin();
+                            }
                         }
                     }
                 }
             }
-        }
 
-        if (ballX > paddleX && ballX < paddleX + paddleWidth && ballY + ballRadius > paddleY && ballY < paddleY + paddleHeight) {
-            gameDataRef.current.ballY = paddleY - ballRadius;
-            let collidePoint = ballX - (paddleX + paddleWidth / 2);
-            collidePoint = collidePoint / (paddleWidth / 2);
-            let angleRad = collidePoint * (Math.PI / 3);
-            gameDataRef.current.dx = ballSpeed * Math.sin(angleRad);
-            gameDataRef.current.dy = -ballSpeed * Math.cos(angleRad);
-        }
+            if (ballX > paddleX && ballX < paddleX + paddleWidth && ballY + ballRadius > paddleY && ballY < paddleY + paddleHeight) {
+                gameDataRef.current.ballY = paddleY - ballRadius;
+                let collidePoint = ballX - (paddleX + paddleWidth / 2);
+                collidePoint = collidePoint / (paddleWidth / 2);
+                let angleRad = collidePoint * (Math.PI / 3);
+                gameDataRef.current.dx = ballSpeed * Math.sin(angleRad);
+                gameDataRef.current.dy = -ballSpeed * Math.cos(angleRad);
+            }
 
-        // Update Ball Position
-        gameDataRef.current.ballX += gameDataRef.current.dx;
-        gameDataRef.current.ballY += gameDataRef.current.dy;
+            // Update Ball Position
+            gameDataRef.current.ballX += gameDataRef.current.dx;
+            gameDataRef.current.ballY += gameDataRef.current.dy;
 
-        // Wall Collisions
-        if (gameDataRef.current.ballX + ballRadius > canvas.width || gameDataRef.current.ballX - ballRadius < 0) {
-            gameDataRef.current.dx = -gameDataRef.current.dx;
-        }
-        if (gameDataRef.current.ballY - ballRadius < 0) {
-            gameDataRef.current.dy = -gameDataRef.current.dy;
-        }
-        if (gameDataRef.current.ballY + ballRadius > canvas.height) {
-            gameDataRef.current.lives--;
-            setLives(l => l - 1);
-            if (gameDataRef.current.lives <= 0) {
-                handleGameOver();
-            } else {
-                showCoachTip();
-                resetBallAndPaddle();
+            // Wall Collisions
+            if (gameDataRef.current.ballX + ballRadius > canvas.width || gameDataRef.current.ballX - ballRadius < 0) {
+                gameDataRef.current.dx = -gameDataRef.current.dx;
+            }
+            if (gameDataRef.current.ballY - ballRadius < 0) {
+                gameDataRef.current.dy = -gameDataRef.current.dy;
+            }
+            if (gameDataRef.current.ballY + ballRadius > canvas.height) {
+                const newLives = gameDataRef.current.lives - 1;
+                gameDataRef.current.lives = newLives;
+                setLives(newLives);
+                if (newLives <= 0) {
+                    handleGameOver();
+                } else {
+                    showCoachTip();
+                    resetBallAndPaddle();
+                }
             }
         }
         
         requestAnimationFrame(draw);
-    }, [handleGameOver, handleWin, resetBallAndPaddle, showCoachTip]);
+    }, [currentGameState, handleGameOver, handleWin, resetBallAndPaddle, showCoachTip]);
 
     useEffect(() => {
         const animationFrameId = requestAnimationFrame(draw);
@@ -270,7 +268,7 @@ export default function BreakoutGamePage() {
     }, [draw]);
 
     const handleStartClick = () => {
-        if (gameStateRef.current === 'start' || gameStateRef.current === 'gameOver') {
+        if (currentGameState === 'start' || currentGameState === 'gameOver') {
             resetGame(null);
         }
     };
