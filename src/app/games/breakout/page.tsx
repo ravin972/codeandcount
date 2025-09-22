@@ -99,8 +99,8 @@ export default function BreakoutGamePage() {
     const resetGame = useCallback((brickPattern: number[][] | null) => {
         gameDataRef.current.score = 0;
         setScore(0);
-        setLives(3);
         gameDataRef.current.lives = 3;
+        setLives(3);
         setAiEndGameMessage('');
         resetBallAndPaddle();
         initBricks(brickPattern);
@@ -169,7 +169,10 @@ export default function BreakoutGamePage() {
     // --- Game Loop and Drawing ---
     const draw = useCallback(() => {
         const canvas = canvasRef.current;
-        if (!canvas) return;
+        if (!canvas) {
+          requestAnimationFrame(draw);
+          return;
+        }
         const ctx = canvas.getContext('2d')!;
 
         ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -184,7 +187,7 @@ export default function BreakoutGamePage() {
         // Draw Bricks
         for (let c = 0; c < brickColumnCount; c++) {
             for (let r = 0; r < brickRowCount; r++) {
-                if (gameDataRef.current.bricks[c][r].status === 1) {
+                if (gameDataRef.current.bricks[c] && gameDataRef.current.bricks[c][r]?.status === 1) {
                     const brickX = (c * (brickWidth + brickPadding)) + brickOffsetLeft;
                     const brickY = (r * (brickHeight + brickPadding)) + brickOffsetTop;
                     gameDataRef.current.bricks[c][r].x = brickX;
