@@ -37,7 +37,7 @@ const generateImageFlow = ai.defineFlow(
   },
   async (input: GenerateImageInput) => {
     const {media} = await ai.generate({
-      model: 'googleai/imagen-3.0-fast-generate-latest',
+      model: 'googleai/gemini-1.5-pro-latest',
       prompt: input.prompt,
     });
 
@@ -48,4 +48,3 @@ const generateImageFlow = ai.defineFlow(
     return { imageDataUri: media.url };
   }
 );
-
